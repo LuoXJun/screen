@@ -1,0 +1,17 @@
+// =============================================================
+// 工具层:通用工具类(只允许 lxj- 前缀,禁止触碰 el- *)
+// 令牌一律 var(--lxj-*),无需 @use
+// =============================================================
+
+// 布局
+.lxj-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lxj-flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

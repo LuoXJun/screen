@@ -1,0 +1,51 @@
+{
+    "name": "base-screen-template",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "packageManager": "pnpm@11.21.0",
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
+    "scripts": {
+        "preinstall": "node scripts/check-package-manager.cjs",
+        "dev": "vite",
+        "build": "vue-tsc -b && vite build",
+        "preview": "vite preview",
+        "lint": "eslint ./src && knip",
+        "knip": "knip",
+        "formatSrc": "prettier --write src/",
+        "format": "prettier --write .",
+        "analyze": "vue-mess-detector analyze ./src"
+    },
+    "dependencies": {
+        "axios": "^1.19.0",
+        "cesium": "~1.131.0",
+        "element-plus": "^2.14.4",
+        "pinia": "^4.0.3",
+        "qs": "^6.15.3",
+        "vue": "^3.5.40",
+        "vue-router": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^24.13.3",
+        "@types/qs": "^6.15.1",
+        "@vitejs/plugin-vue": "^6.0.8",
+        "@vue/eslint-config-prettier": "^10.2.0",
+        "@vue/eslint-config-typescript": "^14.9.0",
+        "@vue/tsconfig": "^0.9.1",
+        "eslint": "^10.8.1",
+        "eslint-plugin-vue": "^10.10.0",
+        "jiti": "^2.7.0",
+        "knip": "^6.32.2",
+        "prettier": "^3.9.6",
+        "sass": "^1.102.0",
+        "typescript": "~5.9.2",
+        "unplugin-auto-import": "^21.1.0",
+        "unplugin-vue-components": "^32.1.0",
+        "vite": "^8.2.0",
+        "vite-plugin-cesium": "^1.2.23",
+        "vue-mess-detector": "^0.68.1",
+        "vue-tsc": "^3.3.8"
+    }
+}

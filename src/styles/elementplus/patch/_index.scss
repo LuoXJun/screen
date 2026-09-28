@@ -1,0 +1,56 @@
+// =============================================================
+// 组件补丁层入口:按实际使用情况增减,保持一个组件一个文件
+// 目录分类(按样式维护视角,单目录文件数 ≤ 8):
+//   base/(按钮/图标/链接等基础) form/(表单) display/(数据展示)
+//   overlay/(teleport 浮层:dialog/tooltip/message 等,共享遮罩色与 z-index 定制) nav/(导航)
+//   —— 新增补丁:先查 EP 文档确认组件归属,浮层类一律入 overlay/;放入后在下方登记 @use
+// 现状:已按常用 EP 组件预置占位文件(仅注释、零 CSS 输出),需要定制时直接写入对应文件
+// 铁律(详见 docs/styles-规范.md):
+//  1. 能用 --el-* / --lxj-* CSS 变量解决的,不写属性规则
+//  2. 页面独有覆盖 → 留在组件内 scoped + :deep(),不放进本层
+//  3. !important 仅限补丁层,且必须同行注释业务原因
+//  4. 仅一端需要的定制 → 选择器挂 html[data-app='xxx'] 前缀(另一端零代码保持默认);
+//     禁止「全局定制 + 另一端还原」
+//  5. 定制作用域:组件自身 → 各子组件文件(全局生效);仅容器内/跨子组件统一(如表单)
+//     → 容器组件文件作用域(见 form/_form.scss 的 .el-form);页面独有 → 组件内 scoped
+// =============================================================
+
+// ---- base ----
+@use './base/button';
+@use './base/icon';
+@use './base/layout';
+@use './base/link';
+
+// ---- form ----
+@use './form/checkbox';
+@use './form/date-picker';
+@use './form/form';
+@use './form/input';
+@use './form/radio';
+@use './form/select';
+@use './form/switch';
+@use './form/tree-select';
+
+// ---- display ----
+@use './display/badge';
+@use './display/card';
+@use './display/empty';
+@use './display/pagination';
+@use './display/table';
+@use './display/tag';
+@use './display/tree';
+
+// ---- overlay ----
+@use './overlay/dialog';
+@use './overlay/drawer';
+@use './overlay/loading';
+@use './overlay/message';
+@use './overlay/message-box';
+@use './overlay/notification';
+@use './overlay/popover';
+@use './overlay/tooltip';
+
+// ---- nav ----
+@use './nav/dropdown';
+@use './nav/menu';
+@use './nav/tabs';

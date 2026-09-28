@@ -1,0 +1,5 @@
+{
+    "$schema": "https://unpkg.com/knip@6/schema.json",
+    "entry": ["src/cesium/index.ts", "src/api/**/*.ts", "src/utils/**/*.ts"],
+    "ignore": ["src/styles/**"]
+}

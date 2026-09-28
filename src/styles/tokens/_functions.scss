@@ -1,0 +1,21 @@
+// =============================================================
+// ★ 令牌工具函数(编译期;零 sass 值输出,只做数值换算)
+// 自适应基准 --screen-base(定义于 _screen.scss,默认 clamp(1600px,100vw,2560px)):
+//   base($design-px) —— 线性换算:设计稿 px × (--screen-base / 1920);
+//   font($design-px) —— 字号专用:base 基础上叠加可读性下限(默认 design×0.5+4px);
+//     上限不单独设,交给 --screen-base 的基准限幅统一控制——
+//     否则会出现「骨架已到 1.33 倍、字号被摁在 1.1 倍」的比例失衡;
+// 调用须传带单位的 px 值(如 base(80px));自定义属性内须插值:#{base(80px)};
+// 经 vite additionalData 全局注入,组件 scoped 样式内可直接裸调;
+// tokens/ 内 partial 不经注入,须自写 @use "./functions" as * 后同样裸调
+// =============================================================
+/* sass:math 必须位于文件顶部（Sass 模块规则约束） */
+@use 'sass:math';
+
+@function base($design-px) {
+    @return calc(var(--screen-base) * #{math.div($design-px, 1920px)});
+}
+
+@function font($design-px, $min-px: $design-px * 0.5 + 4px) {
+    @return max($min-px, calc(var(--screen-base) * #{math.div($design-px, 1920px)}));
+}

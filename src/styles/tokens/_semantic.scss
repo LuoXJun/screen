@@ -1,0 +1,92 @@
+// =============================================================
+// ★ 语义层 · 共享默认(注册在 :root)
+// 模式:「共享默认 + 差异端覆盖」——
+//   两端共用的语义在此写一份默认值;端级差异(取色不同、大屏 vw 换算)
+//   在 _admin.scss / _screen.scss 各自覆盖。
+//   仅单端消费的语义也放这里,待另一端需要时再补覆盖,避免令牌层出现空洞
+// 全 CSS 原生变量;组件/页面零 @use,var() 即用
+// =============================================================
+
+:root {
+    --lxj-color-primary: var(--color-blue-400);
+    --lxj-color-success: var(--color-green-500);
+    --lxj-color-warning: var(--color-orange-500);
+    --lxj-color-danger: var(--color-red-400);
+    --lxj-color-info: var(--color-gray-400);
+
+    // ---- 文字色(primary → disabled 逐级减淡) ----
+    --lxj-color-text-primary: var(--color-gray-900);
+    --lxj-color-text-regular: var(--color-gray-700);
+    --lxj-color-text-secondary: var(--color-gray-400);
+    --lxj-color-text-placeholder: var(--color-gray-500);
+    --lxj-color-text-disabled: var(--color-gray-300);
+
+    // ---- 背景 ----
+    --lxj-bg-sidebar: var(--color-gray-100);
+    --lxj-bg-page: var(--color-gray-100);
+    --lxj-bg-panel: var(--color-white);
+    --lxj-bg-overlay: var(--color-white);
+    --lxj-bg-hover: var(--color-gray-100);
+    --lxj-bg-active: color-mix(in srgb, var(--lxj-color-primary) 10%, var(--color-white));
+    --lxj-bg-mask: rgb(0 0 0 / 50%);
+
+    // ---- 填充(输入框等空白底) ----
+    --lxj-fill-blank: var(--color-white);
+
+    // ---- 阴影 ----
+    --lxj-shadow-panel: 0 1px 4px rgb(0 0 0 / 8%);
+    --lxj-shadow-overlay: 0 8px 24px rgb(0 0 0 / 12%);
+
+    // ---- 层级(业务自建浮层须 < 2000;2000+ 为 EP 弹层池,
+    //       --el-index-popper(2000) 起动态分配,EP 弹层天然在最上层) ----
+    --lxj-z-sticky: 100;
+    --lxj-z-dropdown: 1000;
+    --lxj-z-mask: 1100;
+    --lxj-z-modal: 1200;
+    --lxj-z-toast: 1300;
+    --lxj-z-loading: 1400;
+
+    // ---- 字号(px 默认;大屏 vw 覆盖见 _screen.scss) ----
+    --lxj-font-hero: var(--font-32);
+    --lxj-font-title: var(--font-24);
+    --lxj-font-subtitle: var(--font-18);
+    --lxj-font-section: var(--font-16); // 区块标题(面板/卡片/侧栏区块通用)
+    --lxj-font-body: var(--font-14);
+    --lxj-font-desc: var(--font-12);
+
+    // ---- 字体族(占位,待设计稿校准) ----
+    --lxj-font-family: var(--font-family-base);
+    --lxj-font-family-title: var(--font-family-base);
+    --lxj-font-family-num: var(--font-family-numeric);
+
+    // ---- 间距(px 默认;大屏 vw 覆盖见 _screen.scss) ----
+    --lxj-space-page: var(--space-16);
+    --lxj-space-panel: var(--space-16);
+    --lxj-space-overlay: var(--space-20);
+
+    --lxj-gap-little: var(--gap-4);
+    --lxj-gap-middle: var(--gap-8);
+    --lxj-gap-large: var(--gap-12);
+    --lxj-gap-oversize: var(--gap-16);
+
+    --lxj-letter-spacing-little: var(--letter-spacing-2);
+    --lxj-letter-spacing-middle: var(--letter-spacing-4);
+    --lxj-letter-spacing-large: var(--letter-spacing-6);
+    --lxj-letter-spacing-oversize: var(--letter-spacing-8);
+
+    // 布局组件尺寸
+    --lxj-header-height: 80px;
+    --lxj-footer-height: 40px;
+    --lxj-sidebar-width: 40px;
+
+    // ---- 边框 ----
+    --lxj-color-border: var(--color-gray-200);
+    --lxj-color-border-light: var(--color-gray-100);
+    --lxj-color-border-strong: var(--color-gray-300);
+
+    // ---- 圆角(px 默认;大屏 vw 覆盖见 _screen.scss) ----
+    --lxj-radius-small: var(--radius-4);
+    --lxj-radius-base: var(--radius-6);
+    --lxj-radius-round: var(--radius-20);
+    --lxj-radius-circle: var(--radius-half);
+}

@@ -1,0 +1,83 @@
+// =============================================================
+// ★ EP 主题绑定层(纯 CSS 变量,无 sass $ 值输出)
+// 加载位置必须在 EP 组件样式之后(index.scss 顺序保证):同优先级
+// :root 记录,后写者胜 —— 此处覆盖 EP 编译产物中的 :root 默认值
+//
+// 色阶口径与 EP 一致(light-N = 语义色混白 N×10%,dark-2 = 混黑 20%),
+// 用 color-mix() 运行时推导,色阶随语义令牌全量联动
+// 注:$el-colors 仅为编译期循环辅助,不产生任何 sass 值输出
+// =============================================================
+
+// EP 变量名 → 语义令牌名;error 为 EP 兼容别名(Message/Notification 内部消费)
+$el-colors: (
+    primary: primary,
+    success: success,
+    warning: warning,
+    danger: danger,
+    error: danger,
+    info: info
+);
+
+:root {
+    @each $name, $src in $el-colors {
+        --el-color-#{$name}: var(--lxj-color-#{$src});
+
+        // 百分比写成 #{100% - $n * 10%} 而非 #{100 - $n * 10}%:
+        // 后者 "}%" 相邻会让 VSCode 内置 SCSS 语言服务解析错位(整文件报红),
+        // 把 % 收进插值内部可绕开,编译产物完全一致
+        @for $n from 1 through 9 {
+            --el-color-#{$name}-light-#{$n}: color-mix(
+                in srgb,
+                var(--lxj-color-#{$src}) #{100% - $n * 10%},
+                #fff
+            );
+        }
+
+        --el-color-#{$name}-dark-2: color-mix(in srgb, var(--lxj-color-#{$src}) 80%, #000);
+    }
+
+    // ---- 全局主题值(圆角/背景/字体) ----
+    // small 档 EP 缺省 2px 过小(菜单弹层/取色面板消费);circle 档 100% 与 50% 视觉等价
+    // (slider/switch 圆钮消费),一并绑定以随令牌联动
+    --el-border-radius-base: var(--lxj-radius-base);
+    --el-border-radius-small: var(--lxj-radius-small);
+    --el-border-radius-round: var(--lxj-radius-round);
+    --el-border-radius-circle: var(--lxj-radius-circle);
+    --el-bg-color: var(--lxj-bg-panel);
+    --el-bg-color-page: var(--lxj-bg-page);
+    --el-bg-color-overlay: var(--lxj-bg-overlay);
+    // EP 部分组件(card/input 等)背景消费 fill-color-blank,须一并绑定才随端切换
+    --el-fill-color-blank: var(--lxj-fill-blank);
+    // 无后缀档:has-bg 按钮 hover / text 按钮 active / cascader 标签底——均属悬停底色语义
+    --el-fill-color: var(--lxj-bg-hover);
+    --el-fill-color-light: var(--lxj-bg-hover);
+    --el-font-size-base: var(--lxj-font-body);
+    // 字体族:EP 组件字体靠 inherit(产物零消费 var(--el-font-family)),实际生效见 base/;
+    //         此处绑定仅为语义对齐
+    --el-font-family: var(--lxj-font-family);
+
+    // ---- 文字色 ----
+    --el-text-color-primary: var(--lxj-color-text-primary);
+    --el-text-color-regular: var(--lxj-color-text-regular);
+    --el-text-color-secondary: var(--lxj-color-text-secondary);
+    --el-text-color-placeholder: var(--lxj-color-text-placeholder);
+    --el-text-color-disabled: var(--lxj-color-text-disabled);
+
+    // ---- 边框色(light/lighter/extra-light 三档暂并 border-light,dark/hover 沿用 EP 默认,待设计稿细分) ----
+    --el-border-color: var(--lxj-color-border);
+    --el-border-color-light: var(--lxj-color-border-light);
+    --el-border-color-lighter: var(--lxj-color-border-light);
+    --el-border-color-extra-light: var(--lxj-color-border-light);
+
+    // ---- 遮罩 / loading 蒙版 ----
+    --el-overlay-color: var(--lxj-bg-mask);
+    --el-overlay-color-light: var(--lxj-bg-mask);
+    --el-overlay-color-lighter: var(--lxj-bg-mask);
+    // loading 蒙版跟随面板底色(深色端防白雾)
+    --el-mask-color: color-mix(in srgb, var(--lxj-bg-panel) 90%, transparent);
+    --el-mask-color-extra-light: color-mix(in srgb, var(--lxj-bg-panel) 30%, transparent);
+
+    // ---- 阴影 ----
+    --el-box-shadow: var(--lxj-shadow-overlay);
+    --el-box-shadow-light: var(--lxj-shadow-panel);
+}

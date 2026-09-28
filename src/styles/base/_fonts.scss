@@ -1,0 +1,63 @@
+// =============================================================
+// ★ 全局基础层 · 字体资源:@font-face 声明
+// 字体文件位于 src/assets/font/(@ = vite 别名);
+// font-display: swap —— 字体加载期间先用回退字体渲染,避免文字不可见;
+// 浏览器按使用到的 font-weight 按需下载,未使用的字重不会产生请求;
+// 字体族令牌映射见 tokens/_primitive.scss(--font-family-*)
+// =============================================================
+
+// ---- 优设标题黑(标题/展示用) ----
+@font-face {
+    font-family: 'YouSheBiaoTiHei';
+    src: url('@/assets/font/YouSheBiaoTiHei-2.ttf') format('truetype');
+    font-display: swap;
+}
+
+// ---- 苹方(本地打包,Windows 等无苹方平台可用) ----
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Ultralight.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Thin.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    src: url('@/assets/font/PingFangSC/PingFangSC-Semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

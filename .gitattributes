@@ -1,0 +1,13 @@
+# 统一行尾符：仓库与工作区均为 LF,与 .prettierrc 的 endOfLine: 'lf' 对齐;
+# 避免 core.autocrlf 转换导致 format 后出现大批"假修改"（归一化后无差异）
+* text=auto eol=lf
+
+# 二进制资源不做行尾转换（双保险，防止字体等被误判为文本）
+*.ttf binary
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary

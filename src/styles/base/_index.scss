@@ -1,0 +1,111 @@
+// =============================================================
+// ★ 全局基础层:元素级默认样式(零类选择器,html/body/根继承)
+// 判据:全站生效的"底色"规则;组件级规则归 elementplus/,工具类归 utilities/
+// 归置:EP 不做全局 reset(其 base 仅含变量/过渡/图标),宿主侧在此补齐
+// 字体族:EP 组件字体靠 inherit(其产物零消费 var(--el-font-family)),
+//         根上一处设置,全站(含 teleport 到 body 的弹层)经继承生效
+// =============================================================
+
+@use './fonts';
+@use './root';
+
+// ---- 归置(元素级) ----
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// 应用外壳全屏(#app 为挂载点),滚动交给内部区块
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    background: var(--lxj-bg-page);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+// 标题白纸化:字号/字重全继承,业务显式挂 --lxj-font-* 令牌
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+// ---- 滚动条(webkit;颜色走令牌,随端切换) ----
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: var(--lxj-color-primary);
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.5) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.5) 75%,
+        transparent 75%,
+        transparent
+    );
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--lxj-color-text-disabled);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+    background: transparent;
+}

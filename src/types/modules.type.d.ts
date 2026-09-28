@@ -1,0 +1,22 @@
+/**操作类型*/
+type operationType =
+    | 'add'
+    | 'remove'
+    | 'apply'
+    | 'delete'
+    | 'edit'
+    | 'download'
+    | 'submit'
+    | 'preview'
+    | 'view'
+    | 'position'
+    | 'result'
+    | 'update'
+    | 'design'
+    | 'create'
+    | 'onChange'
+    | 'output'
+    | 'clear'
+    | 'unread'
+    | 'read'
+    | 'next';

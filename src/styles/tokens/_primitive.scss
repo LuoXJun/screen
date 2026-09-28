@@ -1,0 +1,84 @@
+// =============================================================
+// ★ 原始值层(纯色板与数值尺度,无任何语义)
+// 全 CSS 原生变量,零 sass $ 变量
+// 命名:--<类型>-<语义/数字>,数值量数字即 px
+// 注意:本层是"值仓库",不输出消费侧语义;语义映射去 _semantic.scss / _admin.scss / _screen.scss
+// =============================================================
+
+:root {
+    // ---- 色板(纯颜色,换品牌色只改这里) ----
+    --color-white: #ffffff;
+    --color-gray-100: #f2f3f5;
+    --color-gray-200: #dcdfe6;
+    --color-gray-300: #c0c4cc;
+    --color-gray-400: #909399;
+    --color-gray-500: #a8abb2;
+    --color-gray-700: #606266;
+    --color-gray-900: #303133;
+    --color-blue-400: #0266f0;
+    --color-green-500: #52c41a;
+    --color-orange-500: #faad14;
+    --color-red-400: #f25b5b;
+
+    // ---- 色板 · 大屏(占位,待设计图校准) ----
+    --color-cyan-400: #22d3ee;
+    --color-slate-100: #e2e8f0;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
+
+    // ---- 字体 ----
+    --font-12: 12px;
+    --font-14: 14px;
+    --font-16: 16px;
+    --font-18: 18px;
+    --font-24: 24px;
+    --font-32: 32px;
+    --font-48: 48px;
+
+    --font-weight-100: 100;
+    --font-weight-200: 200;
+    --font-weight-300: 300;
+    --font-weight-400: 400;
+    --font-weight-500: 500;
+    --font-weight-600: 600;
+
+    // ---- 字体族(苹方为全局默认;后续新增字体族在此扩展) ----
+    // 全局默认:本地打包苹方强制优先,系统栈仅作加载失败兜底(@font-face 见 base/_fonts.scss)
+    --font-family-base:
+        'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans GB',
+        'Microsoft YaHei', system-ui, sans-serif;
+    // 标题/展示字体(优设标题黑,回退至全局默认栈)
+    --font-family-display: 'YouSheBiaoTiHei', var(--font-family-base);
+    // 数字
+    --font-family-numeric: 'YouSheBiaoTiHei', var(--font-family-base);
+    // 代码、日志、ID、对齐数字
+    --font-family-mono: 'YouSheBiaoTiHei', var(--font-family-base);
+
+    // ---- 间距(4px 步进) ----
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-32: 32px;
+
+    --gap-4: 4px;
+    --gap-8: 8px;
+    --gap-12: 12px;
+    --gap-16: 16px;
+
+    --letter-spacing-2: 2px;
+    --letter-spacing-4: 4px;
+    --letter-spacing-6: 6px;
+    --letter-spacing-8: 8px;
+
+    // ---- 圆角 ----
+    --radius-4: 4px;
+    --radius-6: 6px;
+    --radius-8: 8px;
+    --radius-12: 12px;
+    --radius-20: 20px;
+    --radius-half: 50%;
+}

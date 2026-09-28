@@ -1,0 +1,38 @@
+// =============================================================
+// ★ 语义层 · 大屏专属(html[data-app="screen"])
+// 尺寸体系:大屏为「限幅基准 × 线性换算」自适应——
+//   基准 --screen-base 以 1920 为设计中心,在 [1600, 3840] 区间内跟随视口
+//   (覆盖 1080p/2K/4K),超出即触底/封顶:分辨率有出入时比例稳定,极端屏也不失控;
+//   base(80px) = 设计稿 px × (基准 / 1920);
+//   font(24px) = 在 base 上叠加可读性下限,上限交给基准统一控制(避免字与骨架失衡)。
+// 缩放判据——只缩放「版式骨架」,内容侧尺寸吃 _semantic.scss 的固定 px:
+//   小尺寸(栅格间距/圆角)等比缩放会打破 4px 栅格、收益为负,故不缩放
+// 结构:端级差异在此覆盖;当前仅基准值,颜色/阴影等待大屏设计图落地后补充
+// 注:颜色值/新增语义值为占位,待大屏设计图校准
+// EP 绑定层零改动:--el-* 均为 var(--lxj-*) 间接引用,运行时自动跟随
+// =============================================================
+// partial 不经 vite 注入,须自身匿名加载函数(匿名空间,裸调 base/font)
+@use './functions' as *;
+
+html[data-app='screen'] {
+    // ---- 自适应基准(被 base/font 换算消费;区间按实际部署屏宽调整) ----
+    --screen-base: clamp(1600px, 100vw, 3840px);
+
+    // ---- 版式骨架(跟随基准缩放;换算集中在令牌层,组件只引用令牌) ----
+    --lxj-header-height: #{base(80px)};
+    --lxj-footer-height: #{base(40px)};
+
+    // ---- 字号(跟随基准;小屏方向由 font() 的可读性下限兜住) ----
+    --lxj-font-hero: #{font(40px)};
+    --lxj-font-title: #{font(32px)};
+    --lxj-font-subtitle: #{font(24px)};
+    --lxj-font-section: #{font(18px)};
+    --lxj-font-body: #{font(16px)};
+    --lxj-font-desc: #{font(14px)};
+
+    // ---- 间距(仅中大档位跟随;4/8/12 保持固定——基准触底后会缩到 subpixel) ----
+    --lxj-gap-oversize: #{base(16px)};
+    --lxj-space-page: #{base(16px)};
+    --lxj-space-panel: #{base(16px)};
+    --lxj-space-overlay: #{base(20px)};
+}

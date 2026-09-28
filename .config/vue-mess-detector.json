@@ -1,0 +1,22 @@
+{
+    "level": "error",
+    "ignore": "globalStyle,singleNameComponent,scriptLength,elseCondition",
+    "exclude": "**/luckysheet,**/inspectionSetting,lucksheetComponent.vue,*.d.ts,src/utils/*",
+    "override": {
+        "maxExpressionLength": 40,
+        "maxComputedLength": 5,
+        "minimumConsonantCount": 3,
+        "maxPropsCount": 5,
+        "minVariableName": 4,
+        "maxParameterCount": 3,
+        "maxTabs": 5,
+        "maxVshowLines": 20,
+        "maxVifLines": 20,
+        "complexityModerate": 10,
+        "warningThreshold": 4,
+        "maxFunctionSize": 100,
+        "maxScriptLength": 150,
+        "maxFileSize": 300,
+        "topLevelElementOrder": "template-script-style"
+    }
+}

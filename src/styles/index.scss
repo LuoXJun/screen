@@ -1,0 +1,28 @@
+// =============================================================
+// 全局唯一 SCSS 入口 —— main.ts 只允许 import 这一个样式文件
+// 本文件只做 @use 编排,不写任何具体规则
+// 加载顺序即层叠优先级:越靠后越有权
+// @use 顺序 = CSS 输出顺序(同优先级规则后写者胜)
+// =============================================================
+
+// ① EP 组件样式(全量引入)
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+
+// ② 原始值层 + 语义层(--lxj-* 纯 CSS 变量,零 sass 变量)
+//    语义三作用域::root 通用(semantic) / html[data-app='admin'] / html[data-app='screen']
+@use './tokens/primitive';
+@use './tokens/semantic';
+@use './tokens/admin';
+@use './tokens/screen';
+
+// ③ 全局基础层:元素级默认样式(根上应用字体族等)
+@use './base';
+
+// ④ EP 主题绑定层:覆盖 EP 编译产物中的 :root 默认值(必须在 EP 之后)
+@use './elementplus/theme';
+
+// ⑤ 组件补丁层:变量绑定 + 属性规则(每个组件一个文件,改哪找哪)
+@use './elementplus/patch';
+
+// ⑥ 工具层:通用工具类(带 lxj- 前缀,不污染 el- 命名空间)
+@use './utilities';
