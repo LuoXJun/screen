@@ -1,3 +1,13 @@
-// =============================================================
-// 补丁占位 · el-menu / el-sub-menu / el-menu-item —— 断链变量在此绑定(--el-* ← var(--lxj-*)),核对后无断链仅保留本注释
-// =============================================================
+@use '../../../tokens/functions' as *;
+
+.el-menu {
+    // 自定义变量
+    --lxj-menu-active-bg-color: color-mix(in srgb, var(--lxj-color-primary) 5%, transparent);
+
+    --el-menu-bg-color: var(--lxj-bg-bar);
+    --el-menu-text-color: var(--lxj-color-text-primary);
+    --el-menu-active-color: var(--lxj-color-text-active);
+    --el-menu-hover-bg-color: var(--lxj-menu-active-bg-color);
+    --el-menu-item-height: #{base(56px)};
+    --el-menu-sub-item-height: #{base(56px)};
+}

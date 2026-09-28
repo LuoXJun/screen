@@ -50,7 +50,7 @@ pnpm build       # 类型检查 + 生产构建（产物在 dist/）
 | ------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Vue - Official (Volar)    | `Vue.volar`                         | 项目为 Vue 3 + TS + SFC，`.vue` 单文件组件的模板类型提示、跳转、补全全依赖它；类型检查链路 `vue-tsc` 也以它为语言服务底座。**不要安装已废弃的 Vetur**，两者共存会互相干扰。                                                               |
 | ESLint                    | `dbaeumer.vscode-eslint`            | 实时应用 `eslint.config.ts` 的团队硬性约束（`max-lines-per-function` 100 行、`max-depth` 3 层、`curly` 等），编辑器内即时报错，避免提交时批量返工。                                                                                       |
-| Prettier                  | `esbenp.prettier-vscode`            | 按 `.prettierrc.ts` 统一格式（4 空格缩进、单引号、100 列、LF）。安装后需设为默认格式化工具（右键 → 格式化文档 → 配置默认格式化程序）；配置文件是 TS 类型，靠项目内 `jiti` 加载，无需额外配置。                                            |
+| Prettier                  | `esbenp.prettier-vscode`            | 按 `.prettierrc.mjs` 统一格式（4 空格缩进、单引号、100 列、LF）。安装后需设为默认格式化工具（右键 → 格式化文档 → 配置默认格式化程序）。配置刻意用 `.mjs` 而非 `.ts`：TS 配置依赖 Node 22.18+ 的原生 TS 支持，而 VSCode 扩展跑在自带的 Electron Node 上、版本往往偏低，会导致格式化静默失效。 |
 | CSS Variable Autocomplete | `vunguyentuan.vscode-css-variables` | 本项目样式体系以 CSS 变量令牌驱动（`--lxj-*` 语义令牌、`--el-*` 绑定层），该扩展提供变量补全、颜色预览与 Ctrl+点击跳转定义。`.vscode/settings.json` 已为其配置：补全语言含 `vue`、扫描范围限定 `src/**`（排除 `dist` 避免命中压缩产物）。 |
 
 > `.vscode/extensions.json` 已内置 Vue / ESLint / Prettier 三项推荐，打开项目会自动提示；CSS Variable Autocomplete 需手动搜索安装。

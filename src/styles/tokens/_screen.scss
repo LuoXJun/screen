@@ -19,20 +19,25 @@ html[data-app='screen'] {
     --screen-base: clamp(1600px, 100vw, 3840px);
 
     // ---- 版式骨架(跟随基准缩放;换算集中在令牌层,组件只引用令牌) ----
-    --lxj-header-height: #{base(80px)};
-    --lxj-footer-height: #{base(40px)};
+    --lxj-header-height: #{base(52px)};
+    --lxj-sidebar-width: #{base(180px)};
 
     // ---- 字号(跟随基准;小屏方向由 font() 的可读性下限兜住) ----
     --lxj-font-hero: #{font(40px)};
     --lxj-font-title: #{font(32px)};
     --lxj-font-subtitle: #{font(24px)};
     --lxj-font-section: #{font(18px)};
-    --lxj-font-body: #{font(16px)};
-    --lxj-font-desc: #{font(14px)};
+    --lxj-font-panel-title: #{font(16px)};
+    --lxj-font-body: #{font(14px)};
+    --lxj-font-desc: #{font(12px)};
 
     // ---- 间距(仅中大档位跟随;4/8/12 保持固定——基准触底后会缩到 subpixel) ----
+    --lxj-gap: #{base(10px)};
     --lxj-gap-oversize: #{base(16px)};
-    --lxj-space-page: #{base(16px)};
-    --lxj-space-panel: #{base(16px)};
+
+    --lxj-space-page: #{base(10px)};
+    --lxj-space-panel: #{base(12px)};
     --lxj-space-overlay: #{base(20px)};
+
+    --lxj-aside-width: #{base(320px)};
 }

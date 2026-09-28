@@ -8,27 +8,28 @@
 // =============================================================
 
 :root {
-    --lxj-color-primary: var(--color-blue-400);
-    --lxj-color-success: var(--color-green-500);
-    --lxj-color-warning: var(--color-orange-500);
+    --lxj-color-primary: var(--color-cyan-400);
+    --lxj-color-success: var(--color-green-400);
+    --lxj-color-warning: var(--color-orange-400);
     --lxj-color-danger: var(--color-red-400);
     --lxj-color-info: var(--color-gray-400);
 
     // ---- 文字色(primary → disabled 逐级减淡) ----
-    --lxj-color-text-primary: var(--color-gray-900);
-    --lxj-color-text-regular: var(--color-gray-700);
-    --lxj-color-text-secondary: var(--color-gray-400);
+    --lxj-color-text-primary: var(--color-blue-300);
+    --lxj-color-text-desc: var(--color-white);
+    --lxj-color-text-active: var(--color-cyan-400);
     --lxj-color-text-placeholder: var(--color-gray-500);
     --lxj-color-text-disabled: var(--color-gray-300);
 
     // ---- 背景 ----
-    --lxj-bg-sidebar: var(--color-gray-100);
-    --lxj-bg-page: var(--color-gray-100);
+    --lxj-bg-bar: var(--color-blue-800);
+    --lxj-bg-page: var(--color-blue-800);
+    --lxj-bg-card: color-mix(in srgb, var(--color-blue-750) 40%, transparent);
     --lxj-bg-panel: var(--color-white);
     --lxj-bg-overlay: var(--color-white);
     --lxj-bg-hover: var(--color-gray-100);
     --lxj-bg-active: color-mix(in srgb, var(--lxj-color-primary) 10%, var(--color-white));
-    --lxj-bg-mask: rgb(0 0 0 / 50%);
+    --lxj-bg-mask: rgb(from var(--color-blue-900) r g b / 85%);
 
     // ---- 填充(输入框等空白底) ----
     --lxj-fill-blank: var(--color-white);
@@ -55,9 +56,12 @@
     --lxj-font-desc: var(--font-12);
 
     // ---- 字体族(占位,待设计稿校准) ----
-    --lxj-font-family: var(--font-family-base);
-    --lxj-font-family-title: var(--font-family-base);
-    --lxj-font-family-num: var(--font-family-numeric);
+    --lxj-font-family: var(--font-family-PingFang);
+    --lxj-font-family-title: var(--font-family-YouSheBiaoTiHei);
+    --lxj-font-family-num: var(--font-family-TCloud);
+
+    // 字体weight
+    --lxj-font-weight: var(--font-weight-400);
 
     // ---- 间距(px 默认;大屏 vw 覆盖见 _screen.scss) ----
     --lxj-space-page: var(--space-16);
@@ -75,13 +79,15 @@
     --lxj-letter-spacing-oversize: var(--letter-spacing-8);
 
     // 布局组件尺寸
-    --lxj-header-height: 80px;
+    --lxj-header-height: 50px;
     --lxj-footer-height: 40px;
-    --lxj-sidebar-width: 40px;
+    --lxj-sidebar-width: 180px;
 
     // ---- 边框 ----
     --lxj-color-border: var(--color-gray-200);
-    --lxj-color-border-light: var(--color-gray-100);
+    --lxj-color-border-primary: var(--lxj-color-primary);
+    --lxj-color-border-primary-light: color-mix(in srgb, var(--lxj-color-primary) 30%, transparent);
+    --lxj-color-border-light: color-mix(in srgb, var(--color-white) 40%, transparent);
     --lxj-color-border-strong: var(--color-gray-300);
 
     // ---- 圆角(px 默认;大屏 vw 覆盖见 _screen.scss) ----

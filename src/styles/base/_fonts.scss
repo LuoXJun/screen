@@ -61,3 +61,12 @@
     font-style: normal;
     font-display: swap;
 }
+
+// ---- TCloud Number(数值/数据展示;可变字体,wght 轴 300-700) ----
+@font-face {
+    font-family: 'TCloud Number';
+    src: url('@/assets/font/TCloudNumber/TCloudNumber-VariableVF.ttf') format('truetype');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
