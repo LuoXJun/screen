@@ -28,15 +28,16 @@ export function buildHazardOption(): EChartsCoreOption {
         series: [
             {
                 type: 'pie',
-                radius: ['56%', '92%'],
+                radius: ['71%', '98%'],
                 center: ['50%', '50%'],
+                /* 段间留空隙（设计稿样式），与各段自身的浅白描边叠加；单位为弧度，0.087 ≈ 5° */
+                padAngle: 5,
                 avoidLabelOverlap: false,
                 label: { show: false },
                 labelLine: { show: false },
                 itemStyle: {
-                    /* 透明描边在扇区间切出间隙，透出面板底色，不依赖具体背景色 */
-                    borderWidth: scalePx(2),
-                    borderColor: 'transparent'
+                    borderWidth: scalePx(1.5),
+                    // borderColor: 'rgba(255, 255, 255, 0.65)'
                 },
                 data: HAZARD_ITEMS.map((item) => ({
                     name: item.name,

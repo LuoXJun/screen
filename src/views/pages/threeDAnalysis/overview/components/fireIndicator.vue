@@ -33,6 +33,7 @@
             <div class="hazard-body">
                 <div class="hazard-chart-wrap">
                     <BaseChart ref="hazardChartRef" :option="hazardOption" />
+                    <img class="ring-core" src="@/assets/images/pie-circle.png" alt="" />
                 </div>
                 <ul class="hazard-legend">
                     <li v-for="item in HAZARD_ITEMS" :key="item.name" class="legend-row">
@@ -174,9 +175,21 @@ onBeforeUnmount(() => {
     margin-top: base(8px);
 
     .hazard-chart-wrap {
+        position: relative;
         width: base(120px);
         height: base(120px);
         flex-shrink: 0;
+
+        /* 环心球体：设计稿原图（边缘亮、中心暗），尺寸与环内径(65%)取齐 */
+        .ring-core {
+            position: absolute;
+            top: 17.5%;
+            left: 17.5%;
+            width: 65%;
+            height: 65%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
     }
 
     .hazard-legend {
@@ -198,7 +211,7 @@ onBeforeUnmount(() => {
                 display: flex;
                 align-items: center;
                 gap: base(6px);
-                color: var(--color-blue-500);
+                color: var(--color-blue-300);
                 font-size: var(--lxj-font-desc);
 
                 .legend-dot {
