@@ -1,14 +1,14 @@
 <template>
     <basePanelMask>
         <basePanelTitle title="场站信息" />
-        <baseCardList :list="list"></baseCardList>
+        <baseCardList class="card-list" :list="list"></baseCardList>
         <basePanelCard>
             <p class="people">应急联系人</p>
             <el-row class="text">
-                <el-col :span="12">李站长</el-col>
-                <el-col :span="12">138xxxxxxxx</el-col>
-                <el-col :span="12">消防队</el-col>
-                <el-col :span="12">119/xxxxxxx</el-col>
+                <el-col :span="8">李站长</el-col>
+                <el-col :span="16">138xxxxxxxx</el-col>
+                <el-col :span="8">消防队</el-col>
+                <el-col :span="16">119 / 139-XXXX-7702</el-col>
             </el-row>
         </basePanelCard>
     </basePanelMask>
@@ -22,7 +22,7 @@ import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import type { BaseCardListItem } from '@/components/baseCardList/baseCardList';
 
 const list = ref<BaseCardListItem[]>(
-    new Array(7).fill(1).map((_, index) => {
+    new Array(16).fill(1).map((_, index) => {
         return {
             imgName: 'station.png',
             name: '场站名称' + index,
@@ -41,9 +41,17 @@ const list = ref<BaseCardListItem[]>(
     color: #e8f4ff;
     .el-col {
         margin-bottom: base(5px);
+        &:nth-child(2n) {
+            text-align: right;
+            padding-right: base(4px);
+        }
     }
     .el-col:last-child {
         color: #e03030;
     }
+}
+.card-list {
+    max-height: base(200px);
+    overflow: auto;
 }
 </style>

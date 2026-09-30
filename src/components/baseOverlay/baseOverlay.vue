@@ -24,12 +24,16 @@
         width: var(--lxj-aside-width);
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         gap: var(--lxj-gap);
         pointer-events: all;
+        // overflow: auto;
     }
     .main {
         flex: 1;
         min-width: 0;
+        height: 100%;
+        overflow: hidden;
     }
 }
 </style>

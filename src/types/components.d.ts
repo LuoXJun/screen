@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     BaseCardList: typeof import('./../components/baseCardList/baseCardList.vue')['default']
     BaseCesium: typeof import('./../components/baseCesium/BaseCesium.vue')['default']
+    BaseChart: typeof import('./../components/baseChart/BaseChart.vue')['default']
     BaseMenu: typeof import('./../components/baseMenu/baseMenu.vue')['default']
     BaseMenuHorizontalAside: typeof import('./../components/baseMenu/baseMenuHorizontalAside.vue')['default']
     BaseMenuHorizontalHeader: typeof import('./../components/admin/baseMenuHorizontal/baseMenuHorizontalHeader.vue')['default']

@@ -16,7 +16,17 @@
 
 html[data-app='screen'] {
     // ---- 自适应基准(被 base/font 换算消费;区间按实际部署屏宽调整) ----
-    --screen-base: clamp(1600px, 100vw, 3840px);
+    // 边界值以无单位数字单列:echarts 等 canvas 渲染方不认 CSS 变量,
+    // 需在 JS 侧按同一区间复算缩放比(见 components/baseChart/screenScale.ts),
+    // 引用同一份来源,避免 1600/3840/1920 在 CSS 与 JS 两处各写一份
+    --screen-base-min: 1600;
+    --screen-base-max: 3840;
+    --screen-base-design: 1920;
+    --screen-base: clamp(
+        calc(var(--screen-base-min) * 1px),
+        100vw,
+        calc(var(--screen-base-max) * 1px)
+    );
 
     // ---- 版式骨架(跟随基准缩放;换算集中在令牌层,组件只引用令牌) ----
     --lxj-header-height: #{base(52px)};
