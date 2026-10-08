@@ -23,6 +23,10 @@
 import { onUnmounted } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
+import { createHandler, getViewer, toLonLat } from '@/cesium';
+import * as Cesium from 'cesium';
+import { showMapPopup } from '@/components/baseMapPopup/mapPopup';
+import PopupInfo from '@/components/baseMapPopup/PopupInfo.vue';
 
 /* 主题作用域同步到 html[data-app]：语义令牌层按端解析，
    teleport 到 body 的 EP 浮层同样命中，与管理端 admin 作用域互不干扰。
@@ -30,6 +34,26 @@ import baseMenu from '@/components/baseMenu/baseMenu.vue';
    父组件 onMounted，置于 mounted 会让首屏内联算基准的组件（如 scalePx）读不到
    --screen-base 而退回设计原值 */
 document.documentElement.dataset.app = 'screen';
+
+onMounted(() => {
+    const pickHandler = createHandler();
+    pickHandler.setInputAction((movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+        const picked = getViewer().scene.pick(movement.position);
+        if (!Cesium.defined(picked)) return;
+        const entity = picked.id instanceof Cesium.Entity ? picked.id : undefined;
+        if (!entity) return;
+        const position = entity.position?.getValue(getViewer().clock.currentTime);
+        if (!position) return;
+        showMapPopup({
+            position,
+            title: '实体信息',
+            width: '20vw',
+            height: '15vw',
+            content: h(PopupInfo, { lonlat: toLonLat(position) })
+        });
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+});
+
 onUnmounted(() => {
     delete document.documentElement.dataset.app;
 });

@@ -87,7 +87,7 @@ const list = ref<BaseCardListItem[]>(
                 // 字体渐变
                 display: inline-block;
                 /* 从上到下：白 → 绿 */
-                background-image: linear-gradient(to bottom, #ffffff 0%, #00feed 100%);
+                background-image: linear-gradient(to bottom, #ffffff 23.5%, #00feed 100%);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent; /* 标准写法 */
