@@ -13,3 +13,11 @@
 .el-button + .el-button {
     margin-left: base(4px);
 }
+
+.el-button.button-card {
+    --el-button-bg-color: var(--color-blue-750);
+    --el-button-text-color: var(--color-blue-500);
+    --el-button-border-color: color-mix(in srgb, var(--color-blue-300) 18%, transparent);
+    --el-button-hover-bg-color: unset;
+    --el-button-hover-border-color: color-mix(in srgb, var(--color-blue-300) 18%, transparent);
+}

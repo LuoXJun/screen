@@ -31,8 +31,11 @@
     --color-green-400: #00E080;
 
     --color-orange-400: #ffc840;
+    --color-orange-450: #f5a623;
+    --color-orange-500: #ff8904;
 
     --color-red-400: #ff6060;
+    --color-red-500: #e03030;
 
     --color-cyan-400: #00c8ff;
 
@@ -51,12 +54,14 @@
     --font-weight-400: 400;
     --font-weight-500: 500;
     --font-weight-600: 600;
+    --font-weight-700: 600;
 
     // ---- 字体族(苹方为全局默认;后续新增字体族在此扩展) ----
     // 全局默认:本地打包苹方强制优先,系统栈仅作加载失败兜底(@font-face 见 base/_fonts.scss)
     --font-family-PingFang: 'PingFang SC';
     --font-family-TCloud: 'TCloud Number';
     --font-family-YouSheBiaoTiHei: 'YouSheBiaoTiHei';
+    --font-family-DDIN: 'D-DIN';
 
     // ---- 间距(4px 步进) ----
     --space-4: 4px;

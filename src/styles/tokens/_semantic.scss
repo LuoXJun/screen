@@ -10,7 +10,7 @@
 :root {
     --lxj-color-primary: var(--color-cyan-400);
     --lxj-color-success: var(--color-green-400);
-    --lxj-color-warning: var(--color-orange-400);
+    --lxj-color-warning: var(--color-orange-500);
     --lxj-color-danger: var(--color-red-400);
     --lxj-color-info: var(--color-gray-400);
 
@@ -58,10 +58,13 @@
     // ---- 字体族(占位,待设计稿校准) ----
     --lxj-font-family: var(--font-family-PingFang);
     --lxj-font-family-title: var(--font-family-YouSheBiaoTiHei);
-    --lxj-font-family-num: var(--font-family-TCloud);
+    --lxj-font-family-num: var(--font-family-DDIN);
 
     // 字体weight
     --lxj-font-weight: var(--font-weight-400);
+    --lxj-font-weight-Medium: var(--font-weight-500);
+    --lxj-font-weight-Semibold: var(--font-weight-600);
+    --lxj-font-weight-bold: var(--font-weight-700);
 
     // ---- 间距(px 默认;大屏 vw 覆盖见 _screen.scss) ----
     --lxj-space-page: var(--space-16);

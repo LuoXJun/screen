@@ -1,6 +1,7 @@
 <template>
     <div class="basePanelTitle lxj-flex-between">
         <span class="title">{{ title }}</span>
+        <slot></slot>
     </div>
 </template>
 
@@ -13,7 +14,8 @@ defineProps<{
 <style scoped lang="scss">
 .basePanelTitle {
     background: url('@/assets/images/panel-title-bg.png');
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
     height: base(30px);
     padding-left: base(30px);
     color: #c3e2fa;

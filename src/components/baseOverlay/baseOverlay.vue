@@ -34,6 +34,7 @@
         min-width: 0;
         height: 100%;
         overflow: hidden;
+        position: relative;
     }
 }
 </style>

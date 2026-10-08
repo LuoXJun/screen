@@ -70,3 +70,20 @@
     font-style: normal;
     font-display: swap;
 }
+
+// ---- D-DIN(数字/英文;仅注册 Regular/Bold,目录内斜体与 Condensed/Exp 变体暂未启用) ----
+@font-face {
+    font-family: 'D-DIN';
+    src: url('@/assets/font/D-DIN/D-DIN.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'D-DIN';
+    src: url('@/assets/font/D-DIN/D-DIN-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

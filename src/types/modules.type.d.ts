@@ -19,4 +19,5 @@ type operationType =
     | 'clear'
     | 'unread'
     | 'read'
-    | 'next';
+    | 'next'
+    | 'handle';

@@ -1,3 +1,129 @@
 // =============================================================
-// 补丁占位 · el-table / el-table-column —— 断链变量在此绑定(--el-* ← var(--lxj-*)),核对后无断链仅保留本注释
+// 补丁范式 · el-table 变体类
+// 挂载方式:<baseTable variant="table-screen"> → el-table 根节点 class
+// 判断顺序同 base/_button.scss:变量绑定优先,EP 无变量覆盖的结构项才写属性规则
+// -------------------------------------------------------------
+// table-screen —— 大屏深色数据表(设计稿:洪家渡防火大屏 · 预警记录列表)
+//   骨架:底色全透(承 basePanelCard 底)、青系分隔线、33px 紧凑行高
+//   内容修饰(选中即用):.cell-link 编号链接色 / .cell-tag 等级标签(三色修饰类)
+//                      .cell-status 处置状态文字(三色修饰类) / .op-minor 次要操作按钮
 // =============================================================
+@use '../../../tokens/functions' as *;
+
+/* 可视高设计值:表总高 = 表头 + 表体,限高与行高三处共用,改一处联动 */
+$table-h: 165px;
+$head-h: 33px;
+
+.el-table.table-screen {
+    /* 限高走纯 CSS 而非 EP 的 maxHeight prop(JS 数值吃不到 --screen-base):
+       根限总高,滚动层限表体高,表头 wrapper 在滚动层外天然固定 */
+    max-height: base($table-h);
+
+    // ---- 骨架 · 变量绑定(EP 全量色板覆盖,键路径核对自 theme-chalk var.scss 的 $table) ----
+    --el-table-bg-color: transparent;
+    --el-table-tr-bg-color: transparent;
+    /* 设计稿 rgba(0,200,255,.04) */
+    --el-table-header-bg-color: color-mix(in srgb, var(--color-cyan-400) 4%, transparent);
+    --el-table-text-color: var(--color-blue-300);
+    --el-table-header-text-color: var(--color-blue-500);
+    /* 设计稿 rgba(0,150,220,.18),取主青 18% 近似 */
+    --el-table-border-color: color-mix(in srgb, var(--color-cyan-400) 18%, transparent);
+    --el-table-row-hover-bg-color: color-mix(in srgb, var(--color-cyan-400) 8%, transparent);
+
+    // ---- 骨架 · 结构(EP 无变量项) ----
+    // 行高 33px:内容区 26px 恰好容纳 26px 标签;文字行 20px 靠 flex 居中留白
+    th.el-table__cell,
+    td.el-table__cell {
+        box-sizing: border-box;
+        height: base($head-h);
+        padding: base(3px) 0;
+    }
+
+    // 表体滚动层(无 prop 时 EP 不介入,由本样式接管)
+    .el-table__body-wrapper .el-scrollbar__wrap {
+        max-height: base($table-h - $head-h);
+    }
+
+    // 单元格改 flex:标签/按钮/文字统一垂直居中;8px 水平留白对齐设计稿
+    .cell {
+        display: flex;
+        align-items: center;
+        padding: 0 base(8px);
+        line-height: base(20px);
+    }
+
+    // 表头字重 PingFang Medium(设计稿)
+    th.el-table__cell .cell {
+        font-weight: var(--font-weight-500);
+    }
+
+    // 设计稿末行不封底,行线只作行间分隔
+    tbody tr:last-child td.el-table__cell {
+        border-bottom: none;
+    }
+
+    // ---- 内容修饰 · 告警编号链接色 ----
+    .cell-link {
+        color: var(--color-cyan-400);
+    }
+
+    // ---- 内容修饰 · 等级标签(el-tag + 修饰类) ----
+    .cell-tag {
+        --el-tag-border-radius: var(--radius-4);
+        height: base(26px);
+        padding: 0 base(6px);
+        font-size: var(--lxj-font-body);
+
+        /* 紧急:底/框 red-500,字 red-400(设计稿 rgba(224,48,48,.2/.4) + #ff6060) */
+        &.is-urgent {
+            --el-tag-bg-color: color-mix(in srgb, var(--color-red-500) 20%, transparent);
+            --el-tag-border-color: color-mix(in srgb, var(--color-red-500) 40%, transparent);
+            --el-tag-text-color: var(--color-red-400);
+        }
+
+        /* 一般:设计稿未出样张,暂用 orange-500 单色,待确认 */
+        &.is-normal {
+            --el-tag-bg-color: color-mix(in srgb, var(--lxj-color-info) 20%, transparent);
+            --el-tag-border-color: color-mix(in srgb, var(--lxj-color-info) 40%, transparent);
+            --el-tag-text-color: var(--lxj-color-info);
+        }
+
+        /* 提示:底/框 orange-450,字 orange-400(设计稿 rgba(245,166,35,.2/.4) + #ffc840) */
+        &.is-hint {
+            --el-tag-bg-color: color-mix(in srgb, var(--color-orange-450) 20%, transparent);
+            --el-tag-border-color: color-mix(in srgb, var(--color-orange-450) 40%, transparent);
+            --el-tag-text-color: var(--color-orange-400);
+        }
+    }
+
+    // ---- 内容修饰 · 处置状态文字 ----
+    .cell-status {
+        &.is-pending {
+            color: var(--color-red-500);
+        }
+        &.is-handling {
+            color: var(--color-orange-450);
+        }
+        &.is-done {
+            color: var(--color-green-400);
+        }
+    }
+
+    // ---- 内容修饰 · 操作列 link 按钮 ----
+    // 压到文字高:默认 32px 高会撑开 33px 行
+    .el-button.is-link {
+        height: auto;
+        padding: 0;
+
+        /* 次要操作(配置侧 className):蓝灰起,hover 提亮为主色 */
+        &.op-minor {
+            --el-button-text-color: var(--color-blue-500);
+            --el-button-hover-link-text-color: var(--color-cyan-400);
+        }
+    }
+
+    // 设计稿按钮间距 6px(全局默认 4px)
+    .el-button + .el-button {
+        margin-left: base(6px);
+    }
+}

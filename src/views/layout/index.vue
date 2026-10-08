@@ -20,15 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
+import { onUnmounted } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 
 /* 主题作用域同步到 html[data-app]：语义令牌层按端解析，
-   teleport 到 body 的 EP 浮层同样命中，与管理端 admin 作用域互不干扰 */
-onMounted(() => {
-    document.documentElement.dataset.app = 'screen';
-});
+   teleport 到 body 的 EP 浮层同样命中，与管理端 admin 作用域互不干扰。
+   必须在 setup 阶段同步置位（而非 onMounted）：子组件 setup/mounted 均早于
+   父组件 onMounted，置于 mounted 会让首屏内联算基准的组件（如 scalePx）读不到
+   --screen-base 而退回设计原值 */
+document.documentElement.dataset.app = 'screen';
 onUnmounted(() => {
     delete document.documentElement.dataset.app;
 });
