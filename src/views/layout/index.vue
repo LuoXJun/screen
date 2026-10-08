@@ -28,7 +28,7 @@ import { onUnmounted } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
-import PopupInfo from '@/components/baseMapPopup/PopupInfo.vue';
+import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
 import { useMapEntities } from './composables/useMapEntities';
 import { useEntityPopup } from './composables/useEntityPopup';
 import { useLayerControl } from './composables/useLayerControl';

@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium';
 import { onMounted } from 'vue';
 import { createHandler, getViewer, toLonLat } from '@/cesium';
-import { showMapPopup, type ShowMapPopupOptions } from '@/components/baseMapPopup/mapPopup';
+import { showMapPopup, type ShowMapPopupOptions } from '@/components/screen/mapPopup/mapPopup';
 
 /** 弹窗上下文：命中实体、其世界坐标与经纬高 */
 export interface EntityPopupContext {
