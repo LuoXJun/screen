@@ -44,6 +44,11 @@ export default defineConfig({
         host: true,
         port: 3005,
         hmr: true,
+        // Windows 下 fs.watch 出现过静默失效(改动不生效、需重启 dev server),强制轮询兜底
+        watch: {
+            usePolling: true,
+            interval: 1000
+        },
         proxy: {
             '^/user': {
                 target: 'http://10.222.125.103:38081/',

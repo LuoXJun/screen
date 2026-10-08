@@ -1,5 +1,171 @@
 // =============================================================
-// 补丁范式 · el-dialog 全局统一视觉
-// 结构:①变量绑定(--el-* 纯净绑定,DevTools 入口)
-//       ②属性规则(EP 没有变量的结构项)
+// 补丁范式 · el-dialog 变体类
+// 挂载方式:<baseDialog> 内部固定 class="dialog-screen" → el-dialog 根节点 class
+// 判断顺序同 base/_button.scss:变量绑定优先,EP 无变量覆盖的结构项才写属性规则
+// -------------------------------------------------------------
+// dialog-screen —— 大屏磨砂弹窗(设计稿:洪家渡防火大屏 · 监控弹窗)
+//   骨架:磨砂深底 + 描边 + 四周内发光;顶部装饰线/右下角镶边为伪元素
+//   头部结构修饰(header 插槽内容):.header-deco 斜切装饰 / .header-title 标题 /
+//                                 .close-icon 自绘关闭键
 // =============================================================
+@use '../../../tokens/functions' as *;
+
+.el-dialog.dialog-screen {
+    // ---- 变量绑定 ----
+    --el-dialog-bg-color: transparent;
+    --el-dialog-padding-primary: 0;
+    --el-dialog-border-radius: 0;
+    --el-dialog-box-shadow: none;
+
+    // ---- 骨架(EP 无变量项) ----
+    display: flex;
+    flex-direction: column;
+    width: base(638px);
+    height: base(558px);
+    /* 设计稿取值:磨砂深底 + 描边 + 四周内发光 */
+    background: rgba(3, 31, 68, 0.5);
+    border: 1px solid #2d6099;
+    backdrop-filter: blur(base(10px));
+    box-shadow: inset 0 0 base(20px) #1458a3;
+
+    /* 顶部装饰线(悬于框外) */
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: base(-6px);
+        width: base(641px);
+        height: base(3px);
+        transform: translateX(-50%);
+        background: url('@/assets/images/dialog-top-line.svg') no-repeat center / 100% 100%;
+        pointer-events: none;
+    }
+
+    /* 右下角镶边(探出框外) */
+    &::after {
+        content: '';
+        position: absolute;
+        right: base(-1px);
+        bottom: base(-9px);
+        width: base(57px);
+        height: base(8px);
+        background: url('@/assets/images/dialog-corner.svg') no-repeat center / 100% 100%;
+        pointer-events: none;
+    }
+
+    // ---- 头部 ----
+    .el-dialog__header {
+        position: relative;
+        flex-shrink: 0;
+        height: base(50px);
+        margin: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #469ce4;
+        /* 设计稿取值:左浓右透蓝渐变 + 底槽实色 + 内发光 */
+        background:
+            linear-gradient(90deg, rgba(5, 102, 186, 0.83) 0%, rgba(2, 96, 160, 0) 100%),
+            #003865;
+        box-shadow:
+            inset 0 base(-5px) base(13.5px) rgba(46, 135, 213, 0.63),
+            inset 0 0 base(19.4px) rgba(5, 102, 186, 0.78);
+
+        .header-deco {
+            position: absolute;
+            left: base(-30px);
+            top: 0;
+            width: base(340px);
+            height: base(50px);
+            pointer-events: none;
+        }
+
+        .header-title {
+            position: absolute;
+            left: base(14px);
+            top: base(5px);
+            display: flex;
+            align-items: center;
+            gap: base(6px);
+
+            .title-icon {
+                width: base(42px);
+                height: base(42px);
+            }
+
+            .title-text {
+                color: #fcffff;
+                font-family: var(--lxj-font-family-title);
+                font-size: font(20px);
+            }
+        }
+
+        .close-icon {
+            position: absolute;
+            right: base(15px);
+            top: base(15px);
+            width: base(20px);
+            height: base(20px);
+            cursor: pointer;
+        }
+    }
+
+    // ---- 内容 / 底部 ----
+    .el-dialog__body {
+        flex: 1;
+        min-height: 0;
+        padding: base(14px);
+        overflow: hidden;
+    }
+
+    .el-dialog__footer {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        gap: base(20px);
+        padding: 0 0 base(18px);
+
+        /* 斜切双层按钮(设计稿:错位半透底板 + 主面板 + 斜切渐变字) */
+        .dialog-btn {
+            position: relative;
+            width: base(192px);
+            height: base(34px);
+            cursor: pointer;
+
+            .btn-layer {
+                position: absolute;
+                width: base(192px);
+                height: base(30px);
+                pointer-events: none;
+                cursor: pointer;
+
+                &.back {
+                    left: base(3px);
+                    top: base(4px);
+                }
+
+                &.front {
+                    left: 0;
+                    top: 0;
+                }
+            }
+
+            .btn-label {
+                position: absolute;
+                left: 50%;
+                top: base(15px);
+                transform: translate(-50%, -50%) skewX(-8deg);
+                font-family: var(--lxj-font-family);
+                font-size: var(--lxj-font-body);
+                font-weight: var(--lxj-font-weight-Medium);
+                white-space: nowrap;
+                /* 设计稿取值:左蓝亮 → 右白透(双层渐变裁剪到文字) */
+                background-image:
+                    linear-gradient(90deg, #a3cdff 0%, rgb(163 205 255 / 0) 100%),
+                    linear-gradient(90deg, #fff 0%, #fff 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+        }
+    }
+}

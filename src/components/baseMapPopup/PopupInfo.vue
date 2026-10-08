@@ -14,8 +14,8 @@ defineProps<{ lonlat: { lng: number; lat: number; height: number } }>();
 <style scoped lang="scss">
 .popup-info {
     font-size: font(16px);
-    /* 浅色卡内文字：与 basePanel 白底配套，独立于深色令牌体系 */
-    color: #000;
+    /* 与 popupPanel 深色磨砂底配套 */
+    color: var(--lxj-color-text-primary);
     line-height: 2;
 
     p {

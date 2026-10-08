@@ -1,6 +1,6 @@
 <template>
     <div v-show="visible" class="map-panel-popup">
-        <BasePanel
+        <PopupPanel
             v-model="visible"
             :title="title"
             :width="width"
@@ -10,17 +10,17 @@
             @on-confirm="emits('onConfirm')"
         >
             <component :is="content" />
-        </BasePanel>
+        </PopupPanel>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, type VNode } from 'vue';
-import BasePanel from './basePanel.vue';
+import PopupPanel from './popupPanel.vue';
 
 /**
  * 地图弹窗面板（内部组件，不直接使用，由 showMapPopup 挂载）
- * 复用 BasePanel 样式体系，整体上移、底部箭头指向锚点
+ * 复用 PopupPanel 样式体系，整体上移、底部箭头指向锚点
  */
 defineProps({
     title: {
@@ -67,8 +67,8 @@ defineExpose({ close });
     transform: translate(-50%, -100%);
     pointer-events: auto;
 
-    /* 覆盖 BasePanel 的 fixed 定位，改为随锚点移动 */
-    :deep(.base-panel) {
+    /* 覆盖 PopupPanel 的 fixed 定位，改为随锚点移动 */
+    :deep(.popup-panel) {
         position: absolute;
         right: unset;
         top: unset;
