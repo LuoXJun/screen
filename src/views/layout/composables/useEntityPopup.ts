@@ -1,32 +1,41 @@
 import * as Cesium from 'cesium';
 import { onMounted } from 'vue';
-import { createHandler, getViewer, toLonLat } from '@/cesium';
-import { showMapPopup, type ShowMapPopupOptions } from '@/components/screen/mapPopup/mapPopup';
+import { clearHandler, createHandler, getViewer, toLonLat } from '@/cesium';
 
-/** 弹窗上下文：命中实体、其世界坐标与经纬高 */
-export interface EntityPopupContext {
+/** 本模块当前活跃的点击监听（HMR 重建时用于幂等清理,避免叠加监听） */
+let activeHandler: Cesium.ScreenSpaceEventHandler | null = null;
+
+/** 实体点击上下文：命中实体、其世界坐标、经纬高与解包后的自定义属性 */
+export interface EntityClickContext {
     entity: Cesium.Entity;
     position: Cesium.Cartesian3;
     lonlat: { lng: number; lat: number; height: number };
+    /** entity.properties 解包结果（含 type 及各类型弹窗所需数据） */
+    props?: Record<string, unknown>;
 }
 
-/** 弹窗配置工厂：按实体类型返回除 position 外的弹窗配置（title/width/height/content） */
-export type EntityPopupFactory = (ctx: EntityPopupContext) => Omit<ShowMapPopupOptions, 'position'>;
+/** 实体点击处理器：自行决定展示方式（showMapPopup 锚点卡 / baseDialog 模态窗等） */
+export type EntityClickHandler = (ctx: EntityClickContext) => void;
 
 export interface UseEntityPopupOptions {
-    /** 实体类型 → 弹窗配置（类型取 entity.properties.type） */
-    contents?: Record<string, EntityPopupFactory>;
-    /** 未命中类型时的默认弹窗（缺省时不响应） */
-    fallback?: EntityPopupFactory;
+    /** 实体类型 → 点击处理器（类型取 entity.properties.type） */
+    contents?: Record<string, EntityClickHandler>;
+    /** 未命中类型时的默认处理器（缺省时不响应） */
+    fallback?: EntityClickHandler;
 }
 
 /**
- * 点击实体弹窗：按实体类型路由到不同弹窗内容，未命中时用 fallback，均无则不响应。
- * 实体类型约定写在 entity.properties.type（如 createXxx 时传入 { type: 'device' }）。
+ * 点击实体分发：按 entity.properties.type 路由到对应处理器，未命中时用 fallback。
+ * 弹窗形态由处理器决定：轻量信息用 showMapPopup 锚点卡,大内容（视频等）用 baseDialog。
  */
 export function useEntityPopup(options: UseEntityPopupOptions = {}): void {
     onMounted(() => {
+        /* HMR 重建时先清掉上一实例的监听（幂等,避免点击叠加触发） */
+        if (activeHandler) {
+            clearHandler(activeHandler);
+        }
         const pickHandler = createHandler();
+        activeHandler = pickHandler;
         pickHandler.setInputAction(
             (movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
                 const viewer = getViewer();
@@ -41,13 +50,8 @@ export function useEntityPopup(options: UseEntityPopupOptions = {}): void {
                     | Record<string, unknown>
                     | undefined;
                 const type = typeof props?.type === 'string' ? props.type : undefined;
-                const factory = (type ? options.contents?.[type] : undefined) ?? options.fallback;
-                if (!factory) return;
-
-                showMapPopup({
-                    position,
-                    ...factory({ entity, position, lonlat: toLonLat(position) })
-                });
+                const handler = (type ? options.contents?.[type] : undefined) ?? options.fallback;
+                handler?.({ entity, position, lonlat: toLonLat(position), props });
             },
             Cesium.ScreenSpaceEventType.LEFT_CLICK
         );

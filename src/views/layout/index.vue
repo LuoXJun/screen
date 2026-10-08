@@ -21,14 +21,25 @@
             </el-main>
         </el-container>
     </el-container>
+    <!-- 三类设备弹窗（点击地图点位弹出） -->
+    <CameraPopup v-if="cameraData" :data="cameraData" @close="cameraData = null" />
+    <FiberPopup v-if="fiberData" :data="fiberData" @close="fiberData = null" />
+    <NestPopup v-if="nestData" :data="nestData" @close="nestData = null" />
 </template>
 
 <script setup lang="ts">
-import { onUnmounted } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
 import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
+import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
+import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
+import NestPopup from '@/components/screen/popups/NestPopup.vue';
+import type { CameraData } from '@/components/screen/popups/CameraPopup';
+import type { FiberData } from '@/components/screen/popups/FiberPopup';
+import type { NestData } from '@/components/screen/popups/NestPopup';
+import { showMapPopup } from '@/components/screen/mapPopup/mapPopup';
 import { useMapEntities } from './composables/useMapEntities';
 import { useEntityPopup } from './composables/useEntityPopup';
 import { useLayerControl } from './composables/useLayerControl';
@@ -42,16 +53,35 @@ document.documentElement.dataset.app = 'screen';
 
 /* 地图业务编排（实现见 ./composables/） */
 useMapEntities();
+
+/** 三类设备弹窗数据（null=关闭；点击对应点位时填充） */
+const cameraData = ref<CameraData | null>(null);
+const fiberData = ref<FiberData | null>(null);
+const nestData = ref<NestData | null>(null);
+
 useEntityPopup({
-    /* 后续按实体类型分发弹窗：
-       contents: { device: ({ entity, lonlat }) => ({ title: '设备信息', content: h(XxxPopup, ...) }) }
-       （类型取 entity.properties.type，未命中时用 fallback） */
-    fallback: ({ lonlat }) => ({
-        title: '实体信息',
-        width: '20vw',
-        height: '15vw',
-        content: h(PopupInfo, { lonlat })
-    })
+    contents: {
+        /* 三类设备：各自的自包含弹窗（标题/按钮/内容由弹窗组件内置） */
+        camera: ({ props }) => {
+            cameraData.value = props as unknown as CameraData;
+        },
+        fiber: ({ props }) => {
+            fiberData.value = props as unknown as FiberData;
+        },
+        nest: ({ props }) => {
+            nestData.value = props as unknown as NestData;
+        }
+    },
+    /* 未注册类型：地图锚点信息卡兜底 */
+    fallback: ({ position, lonlat }) => {
+        showMapPopup({
+            position,
+            title: '实体信息',
+            width: '20vw',
+            height: '15vw',
+            content: h(PopupInfo, { lonlat })
+        });
+    }
 });
 const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 

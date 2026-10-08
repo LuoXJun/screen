@@ -14,6 +14,8 @@
             <div class="header-title">
                 <img v-if="icon" class="title-icon" :src="getImageWidthName(icon)" alt="" />
                 <span class="title-text">{{ title }}</span>
+                <!-- 标题右侧附加内容（如设备状态标签） -->
+                <slot name="header-extra"></slot>
             </div>
             <img class="close-icon" :src="closeIcon" alt="" @click="visible = false" />
         </template>
