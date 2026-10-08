@@ -25,7 +25,7 @@ import { getImageWidthName } from '@/utils/getAssets';
 
 const visible = defineModel<boolean>({ default: false });
 
-const emits = defineEmits(['onConfirm', 'onClose']);
+const emits = defineEmits(['close']);
 
 const props = defineProps({
     title: {
@@ -57,7 +57,7 @@ useDraggable(panelRef as Ref<HTMLElement>, triggerRef as Ref<HTMLElement>, drag)
 
 const onCancel = () => {
     visible.value = false;
-    emits('onClose');
+    emits('close');
 };
 
 /** 组件内置资产（复用 dialog 系装饰件,与其他浮层视觉统一） */
@@ -75,10 +75,9 @@ const closeIcon = getImageWidthName('dialog-close.svg');
     box-sizing: border-box;
     user-select: none;
     overflow: hidden;
-    /* 与其他浮层统一的深色磨砂（设计稿取值,同 dialog-screen） */
-    background: rgba(3, 31, 68, 0.5);
+    /* 设计稿取值:半透明深底 #031F4480(不做磨砂——地图弹窗随点移动,canvas 上 blur 开销大) */
+    background: #031f44;
     border: 1px solid #2d6099;
-    backdrop-filter: blur(base(10px));
     box-shadow: inset 0 0 base(20px) #1458a3;
 
     .popup-panel-header {

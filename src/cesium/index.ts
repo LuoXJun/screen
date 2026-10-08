@@ -54,6 +54,12 @@ export {
     createCircle,
     type LineStyle
 } from './core/entity';
+export {
+    renderLabelPinImage,
+    createLabelPinBillboard,
+    type LabelPinOptions,
+    type LabelPinBillboardOptions
+} from './core/labelPin';
 export { createHandler, clearHandler, clearHandlers } from './core/event';
 export { MapPopup } from './core/popup';
 export {

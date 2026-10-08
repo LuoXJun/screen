@@ -31,7 +31,8 @@ export class MapPopup {
             inset: '0',
             overflow: 'hidden',
             pointerEvents: 'none',
-            zIndex: '30'
+            /* 层级令牌:须盖过大屏 UI 面板(--lxj-z-sticky=100),低于下拉/遮罩等操作层 */
+            zIndex: 'var(--lxj-z-map-popup)'
         });
         this.host = document.createElement('div');
         Object.assign(this.host.style, {

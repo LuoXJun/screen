@@ -6,8 +6,7 @@
             :width="width"
             :height="height"
             :draggable="draggable"
-            @on-close="close"
-            @on-confirm="emits('onConfirm')"
+            @close="close"
         >
             <component :is="content" />
         </PopupPanel>
@@ -45,14 +44,14 @@ defineProps({
     }
 });
 
-const emits = defineEmits(['onConfirm', 'onClose']);
+const emits = defineEmits(['close']);
 
 const visible = ref(true);
 
 /** 关闭弹窗并通知服务层销毁 */
 const close = () => {
     visible.value = false;
-    emits('onClose');
+    emits('close');
 };
 
 defineExpose({ close });
