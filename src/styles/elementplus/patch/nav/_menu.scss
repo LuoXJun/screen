@@ -8,6 +8,19 @@
     --el-menu-text-color: var(--lxj-color-text-primary);
     --el-menu-active-color: var(--lxj-color-text-active);
     --el-menu-hover-bg-color: var(--lxj-menu-active-bg-color);
-    --el-menu-item-height: #{base(56px)};
-    --el-menu-sub-item-height: #{base(56px)};
+
+    /* 菜单项高度(设计稿:叶子 33 / 分类头 41)——变量 + 属性双写:
+       EP 部分项高的消费路径不经过变量,属性规则兜底 */
+    --el-menu-item-height: #{base(33px)};
+    --el-menu-sub-item-height: #{base(41px)};
+
+    .el-menu-item {
+        height: #{base(33px)};
+        line-height: #{base(33px)};
+    }
+
+    .el-sub-menu__title {
+        height: #{base(41px)};
+        line-height: #{base(41px)};
+    }
 }

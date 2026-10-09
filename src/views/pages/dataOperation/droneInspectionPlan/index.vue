@@ -1,5 +1,5 @@
 <template>
-    <div>预警定位</div>
+    <div>无人机巡检计划</div>
 </template>
 
 <script setup lang="ts"></script>

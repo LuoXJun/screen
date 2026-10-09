@@ -7,6 +7,8 @@
             <fireIndicator />
         </template>
         <records />
+        <!-- 图层管理--绝对定位 -->
+        <layerControl v-model="checkedLayers" class="layer-control" :list="LAYER_ITEMS" />
         <template #right>
             <eqOverview />
             <inspection />
@@ -21,6 +23,19 @@ import fireIndicator from './components/fireIndicator/fireIndicator.vue';
 import records from './components/records/records.vue';
 import eqOverview from './components/eqOverview.vue';
 import inspection from './components/inspection/inspection.vue';
+import layerControl from '@/components/screen/layerControl/layerControl.vue';
+import { useLayerControl } from './composables/useLayerControl.ts';
+
+const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+/* 图层管理：贴侧栏底部居中（菜单占满高度,不参与文档流） */
+.layer-control {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(20%);
+    z-index: var(--lxj-z-sticky);
+}
+</style>

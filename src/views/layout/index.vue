@@ -9,8 +9,6 @@
                 <baseMenu />
             </el-aside>
             <el-main class="content">
-                <!-- 图层管理 -->
-                <layerControl v-model="checkedLayers" class="layer-control" :list="LAYER_ITEMS" />
                 <!-- 全局地图层：路由切换不销毁，视角状态跨页面保留 -->
                 <div class="layout-map">
                     <BaseCesium />
@@ -31,7 +29,6 @@
 import { onUnmounted, ref } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
-import layerControl from '@/components/screen/layerControl/layerControl.vue';
 import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
 import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
 import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
@@ -42,7 +39,6 @@ import type { NestData } from '@/components/screen/popups/NestPopup';
 import { showMapPopup } from '@/components/screen/mapPopup/mapPopup';
 import { useMapEntities } from './composables/useMapEntities';
 import { useEntityPopup } from './composables/useEntityPopup';
-import { useLayerControl } from './composables/useLayerControl';
 
 /* 主题作用域同步到 html[data-app]：语义令牌层按端解析，
    teleport 到 body 的 EP 浮层同样命中，与管理端 admin 作用域互不干扰。
@@ -83,7 +79,6 @@ useEntityPopup({
         });
     }
 });
-const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 
 onUnmounted(() => {
     /* HMR 热更新会重建组件实例(新实例 setup 设置作用域后,旧实例再触发本钩子),
@@ -129,14 +124,6 @@ onUnmounted(() => {
 
         .content {
             position: relative;
-            /* 图层管理：贴侧栏底部居中（菜单占满高度,不参与文档流） */
-            .layer-control {
-                position: absolute;
-                left: var(--lxj-aside-width);
-                top: base(12px);
-                transform: translateX(20%);
-                z-index: var(--lxj-z-sticky);
-            }
             .layout-map {
                 position: absolute;
                 width: 100%;

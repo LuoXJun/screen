@@ -27,12 +27,12 @@ const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
         path: basePath,
         name: category.name,
         redirect: `${basePath}/${category.children[0].name}`,
-        meta: { title: category.title },
+        meta: { title: category.title, icon: category.icon },
         children: category.children.map((leaf) => ({
             path: `${basePath}/${leaf.name}`,
             name: leaf.name,
             component: resolvePage(category.name, leaf.name),
-            meta: { title: leaf.title }
+            meta: { title: leaf.title, icon: leaf.icon }
         }))
     };
 });
