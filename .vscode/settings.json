@@ -10,6 +10,9 @@
     // 组件名补全:kebab 输入(<el-butt)命中需要 always 系列强制候选集形态,
     // prefer 系列只影响补出形态、不改变输入匹配(实测 preferKebabCase 下 kebab 输入无提示)
     "vue.suggest.componentNameCasing": "alwaysKebabCase",
+    // snippet 建议强制置顶:组件标签 snippet(详见 vue.code-snippets)与同名普通补全
+    // 并存时,保证"打全名 + 回车"命中的是展开完整标签的 snippet 项
+    "editor.snippetSuggestions": "top",
     // CSS Variable Autocomplete 补全语言:
     // 该扩展不做 SFC 内区域识别,必须以 vue 注册才能覆盖 <style> 块——这是其能力上限。
     // 已排除的替代方案:①去掉 vue 改由 Volar 兜底——实测 Volar 3.x 无 CSS 变量补全

@@ -1,1052 +1,1052 @@
 {
-    "base-card-list": {
-        "scope": "vue",
-        "prefix": "base-card-list",
+    "baseCardList": {
+        "prefix": "baseCardList",
         "body": [
-            "<base-card-list>$0</base-card-list>"
-        ]
+            "<baseCardList>$0</baseCardList>"
+        ],
+        "description": "组件标签展开 <baseCardList>"
     },
-    "base-cesium": {
-        "scope": "vue",
-        "prefix": "base-cesium",
+    "baseCesium": {
+        "prefix": "baseCesium",
         "body": [
-            "<base-cesium>$0</base-cesium>"
-        ]
+            "<baseCesium>$0</baseCesium>"
+        ],
+        "description": "组件标签展开 <baseCesium>"
     },
-    "base-chart": {
-        "scope": "vue",
-        "prefix": "base-chart",
+    "baseChart": {
+        "prefix": "baseChart",
         "body": [
-            "<base-chart>$0</base-chart>"
-        ]
+            "<baseChart>$0</baseChart>"
+        ],
+        "description": "组件标签展开 <baseChart>"
     },
-    "base-dialog": {
-        "scope": "vue",
-        "prefix": "base-dialog",
+    "baseDialog": {
+        "prefix": "baseDialog",
         "body": [
-            "<base-dialog>$0</base-dialog>"
-        ]
+            "<baseDialog>$0</baseDialog>"
+        ],
+        "description": "组件标签展开 <baseDialog>"
     },
-    "base-menu": {
-        "scope": "vue",
-        "prefix": "base-menu",
+    "baseMenu": {
+        "prefix": "baseMenu",
         "body": [
-            "<base-menu>$0</base-menu>"
-        ]
+            "<baseMenu>$0</baseMenu>"
+        ],
+        "description": "组件标签展开 <baseMenu>"
     },
-    "base-menu-horizontal-aside": {
-        "scope": "vue",
-        "prefix": "base-menu-horizontal-aside",
+    "baseMenuHorizontalAside": {
+        "prefix": "baseMenuHorizontalAside",
         "body": [
-            "<base-menu-horizontal-aside>$0</base-menu-horizontal-aside>"
-        ]
+            "<baseMenuHorizontalAside>$0</baseMenuHorizontalAside>"
+        ],
+        "description": "组件标签展开 <baseMenuHorizontalAside>"
     },
-    "base-overlay": {
-        "scope": "vue",
-        "prefix": "base-overlay",
+    "baseOverlay": {
+        "prefix": "baseOverlay",
         "body": [
-            "<base-overlay>$0</base-overlay>"
-        ]
+            "<baseOverlay>$0</baseOverlay>"
+        ],
+        "description": "组件标签展开 <baseOverlay>"
     },
-    "base-pagination": {
-        "scope": "vue",
-        "prefix": "base-pagination",
+    "basePagination": {
+        "prefix": "basePagination",
         "body": [
-            "<base-pagination>$0</base-pagination>"
-        ]
+            "<basePagination>$0</basePagination>"
+        ],
+        "description": "组件标签展开 <basePagination>"
     },
-    "base-panel-card": {
-        "scope": "vue",
-        "prefix": "base-panel-card",
+    "basePanelCard": {
+        "prefix": "basePanelCard",
         "body": [
-            "<base-panel-card>$0</base-panel-card>"
-        ]
+            "<basePanelCard>$0</basePanelCard>"
+        ],
+        "description": "组件标签展开 <basePanelCard>"
     },
-    "base-panel-mask": {
-        "scope": "vue",
-        "prefix": "base-panel-mask",
+    "basePanelMask": {
+        "prefix": "basePanelMask",
         "body": [
-            "<base-panel-mask>$0</base-panel-mask>"
-        ]
+            "<basePanelMask>$0</basePanelMask>"
+        ],
+        "description": "组件标签展开 <basePanelMask>"
     },
-    "base-panel-title": {
-        "scope": "vue",
-        "prefix": "base-panel-title",
+    "basePanelTitle": {
+        "prefix": "basePanelTitle",
         "body": [
-            "<base-panel-title>$0</base-panel-title>"
-        ]
+            "<basePanelTitle>$0</basePanelTitle>"
+        ],
+        "description": "组件标签展开 <basePanelTitle>"
     },
-    "base-popover": {
-        "scope": "vue",
-        "prefix": "base-popover",
+    "basePopover": {
+        "prefix": "basePopover",
         "body": [
-            "<base-popover>$0</base-popover>"
-        ]
+            "<basePopover>$0</basePopover>"
+        ],
+        "description": "组件标签展开 <basePopover>"
     },
-    "base-section-title": {
-        "scope": "vue",
-        "prefix": "base-section-title",
+    "baseSectionTitle": {
+        "prefix": "baseSectionTitle",
         "body": [
-            "<base-section-title>$0</base-section-title>"
-        ]
+            "<baseSectionTitle>$0</baseSectionTitle>"
+        ],
+        "description": "组件标签展开 <baseSectionTitle>"
     },
-    "base-stat-list": {
-        "scope": "vue",
-        "prefix": "base-stat-list",
+    "baseStatList": {
+        "prefix": "baseStatList",
         "body": [
-            "<base-stat-list>$0</base-stat-list>"
-        ]
+            "<baseStatList>$0</baseStatList>"
+        ],
+        "description": "组件标签展开 <baseStatList>"
     },
-    "base-tab": {
-        "scope": "vue",
-        "prefix": "base-tab",
+    "baseTab": {
+        "prefix": "baseTab",
         "body": [
-            "<base-tab>$0</base-tab>"
-        ]
+            "<baseTab>$0</baseTab>"
+        ],
+        "description": "组件标签展开 <baseTab>"
     },
-    "base-table": {
-        "scope": "vue",
-        "prefix": "base-table",
+    "baseTable": {
+        "prefix": "baseTable",
         "body": [
-            "<base-table>$0</base-table>"
-        ]
+            "<baseTable>$0</baseTable>"
+        ],
+        "description": "组件标签展开 <baseTable>"
     },
-    "camera-popup": {
-        "scope": "vue",
-        "prefix": "camera-popup",
+    "cameraPopup": {
+        "prefix": "cameraPopup",
         "body": [
-            "<camera-popup>$0</camera-popup>"
-        ]
+            "<cameraPopup>$0</cameraPopup>"
+        ],
+        "description": "组件标签展开 <cameraPopup>"
     },
-    "confirm-box": {
-        "scope": "vue",
-        "prefix": "confirm-box",
+    "confirmBox": {
+        "prefix": "confirmBox",
         "body": [
-            "<confirm-box>$0</confirm-box>"
-        ]
+            "<confirmBox>$0</confirmBox>"
+        ],
+        "description": "组件标签展开 <confirmBox>"
     },
-    "device-info": {
-        "scope": "vue",
-        "prefix": "device-info",
+    "deviceInfo": {
+        "prefix": "deviceInfo",
         "body": [
-            "<device-info>$0</device-info>"
-        ]
+            "<deviceInfo>$0</deviceInfo>"
+        ],
+        "description": "组件标签展开 <deviceInfo>"
     },
-    "device-status-tag": {
-        "scope": "vue",
-        "prefix": "device-status-tag",
+    "deviceStatusTag": {
+        "prefix": "deviceStatusTag",
         "body": [
-            "<device-status-tag>$0</device-status-tag>"
-        ]
+            "<deviceStatusTag>$0</deviceStatusTag>"
+        ],
+        "description": "组件标签展开 <deviceStatusTag>"
     },
     "el-affix": {
-        "scope": "vue",
         "prefix": "el-affix",
         "body": [
             "<el-affix>$0</el-affix>"
-        ]
+        ],
+        "description": "组件标签展开 <el-affix>"
     },
     "el-alert": {
-        "scope": "vue",
         "prefix": "el-alert",
         "body": [
             "<el-alert>$0</el-alert>"
-        ]
+        ],
+        "description": "组件标签展开 <el-alert>"
     },
     "el-anchor": {
-        "scope": "vue",
         "prefix": "el-anchor",
         "body": [
             "<el-anchor>$0</el-anchor>"
-        ]
+        ],
+        "description": "组件标签展开 <el-anchor>"
     },
     "el-anchor-link": {
-        "scope": "vue",
         "prefix": "el-anchor-link",
         "body": [
             "<el-anchor-link>$0</el-anchor-link>"
-        ]
+        ],
+        "description": "组件标签展开 <el-anchor-link>"
     },
     "el-aside": {
-        "scope": "vue",
         "prefix": "el-aside",
         "body": [
             "<el-aside>$0</el-aside>"
-        ]
+        ],
+        "description": "组件标签展开 <el-aside>"
     },
     "el-autocomplete": {
-        "scope": "vue",
         "prefix": "el-autocomplete",
         "body": [
             "<el-autocomplete>$0</el-autocomplete>"
-        ]
+        ],
+        "description": "组件标签展开 <el-autocomplete>"
     },
     "el-avatar": {
-        "scope": "vue",
         "prefix": "el-avatar",
         "body": [
             "<el-avatar>$0</el-avatar>"
-        ]
+        ],
+        "description": "组件标签展开 <el-avatar>"
     },
     "el-avatar-group": {
-        "scope": "vue",
         "prefix": "el-avatar-group",
         "body": [
             "<el-avatar-group>$0</el-avatar-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-avatar-group>"
     },
     "el-backtop": {
-        "scope": "vue",
         "prefix": "el-backtop",
         "body": [
             "<el-backtop>$0</el-backtop>"
-        ]
+        ],
+        "description": "组件标签展开 <el-backtop>"
     },
     "el-badge": {
-        "scope": "vue",
         "prefix": "el-badge",
         "body": [
             "<el-badge>$0</el-badge>"
-        ]
+        ],
+        "description": "组件标签展开 <el-badge>"
     },
     "el-base": {
-        "scope": "vue",
         "prefix": "el-base",
         "body": [
             "<el-base>$0</el-base>"
-        ]
+        ],
+        "description": "组件标签展开 <el-base>"
     },
     "el-breadcrumb": {
-        "scope": "vue",
         "prefix": "el-breadcrumb",
         "body": [
             "<el-breadcrumb>$0</el-breadcrumb>"
-        ]
+        ],
+        "description": "组件标签展开 <el-breadcrumb>"
     },
     "el-breadcrumb-item": {
-        "scope": "vue",
         "prefix": "el-breadcrumb-item",
         "body": [
             "<el-breadcrumb-item>$0</el-breadcrumb-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-breadcrumb-item>"
     },
     "el-button": {
-        "scope": "vue",
         "prefix": "el-button",
         "body": [
             "<el-button>$0</el-button>"
-        ]
+        ],
+        "description": "组件标签展开 <el-button>"
     },
     "el-button-group": {
-        "scope": "vue",
         "prefix": "el-button-group",
         "body": [
             "<el-button-group>$0</el-button-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-button-group>"
     },
     "el-calendar": {
-        "scope": "vue",
         "prefix": "el-calendar",
         "body": [
             "<el-calendar>$0</el-calendar>"
-        ]
+        ],
+        "description": "组件标签展开 <el-calendar>"
     },
     "el-card": {
-        "scope": "vue",
         "prefix": "el-card",
         "body": [
             "<el-card>$0</el-card>"
-        ]
+        ],
+        "description": "组件标签展开 <el-card>"
     },
     "el-carousel": {
-        "scope": "vue",
         "prefix": "el-carousel",
         "body": [
             "<el-carousel>$0</el-carousel>"
-        ]
+        ],
+        "description": "组件标签展开 <el-carousel>"
     },
     "el-carousel-item": {
-        "scope": "vue",
         "prefix": "el-carousel-item",
         "body": [
             "<el-carousel-item>$0</el-carousel-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-carousel-item>"
     },
     "el-cascader": {
-        "scope": "vue",
         "prefix": "el-cascader",
         "body": [
             "<el-cascader>$0</el-cascader>"
-        ]
+        ],
+        "description": "组件标签展开 <el-cascader>"
     },
     "el-cascader-panel": {
-        "scope": "vue",
         "prefix": "el-cascader-panel",
         "body": [
             "<el-cascader-panel>$0</el-cascader-panel>"
-        ]
+        ],
+        "description": "组件标签展开 <el-cascader-panel>"
     },
     "el-check-tag": {
-        "scope": "vue",
         "prefix": "el-check-tag",
         "body": [
             "<el-check-tag>$0</el-check-tag>"
-        ]
+        ],
+        "description": "组件标签展开 <el-check-tag>"
     },
     "el-checkbox": {
-        "scope": "vue",
         "prefix": "el-checkbox",
         "body": [
             "<el-checkbox>$0</el-checkbox>"
-        ]
+        ],
+        "description": "组件标签展开 <el-checkbox>"
     },
     "el-checkbox-button": {
-        "scope": "vue",
         "prefix": "el-checkbox-button",
         "body": [
             "<el-checkbox-button>$0</el-checkbox-button>"
-        ]
+        ],
+        "description": "组件标签展开 <el-checkbox-button>"
     },
     "el-checkbox-group": {
-        "scope": "vue",
         "prefix": "el-checkbox-group",
         "body": [
             "<el-checkbox-group>$0</el-checkbox-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-checkbox-group>"
     },
     "el-col": {
-        "scope": "vue",
         "prefix": "el-col",
         "body": [
             "<el-col>$0</el-col>"
-        ]
+        ],
+        "description": "组件标签展开 <el-col>"
     },
     "el-collapse": {
-        "scope": "vue",
         "prefix": "el-collapse",
         "body": [
             "<el-collapse>$0</el-collapse>"
-        ]
+        ],
+        "description": "组件标签展开 <el-collapse>"
     },
     "el-collapse-item": {
-        "scope": "vue",
         "prefix": "el-collapse-item",
         "body": [
             "<el-collapse-item>$0</el-collapse-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-collapse-item>"
     },
     "el-collapse-transition": {
-        "scope": "vue",
         "prefix": "el-collapse-transition",
         "body": [
             "<el-collapse-transition>$0</el-collapse-transition>"
-        ]
+        ],
+        "description": "组件标签展开 <el-collapse-transition>"
     },
     "el-collection": {
-        "scope": "vue",
         "prefix": "el-collection",
         "body": [
             "<el-collection>$0</el-collection>"
-        ]
+        ],
+        "description": "组件标签展开 <el-collection>"
     },
     "el-color-picker": {
-        "scope": "vue",
         "prefix": "el-color-picker",
         "body": [
             "<el-color-picker>$0</el-color-picker>"
-        ]
+        ],
+        "description": "组件标签展开 <el-color-picker>"
     },
     "el-color-picker-panel": {
-        "scope": "vue",
         "prefix": "el-color-picker-panel",
         "body": [
             "<el-color-picker-panel>$0</el-color-picker-panel>"
-        ]
+        ],
+        "description": "组件标签展开 <el-color-picker-panel>"
     },
     "el-config-provider": {
-        "scope": "vue",
         "prefix": "el-config-provider",
         "body": [
             "<el-config-provider>$0</el-config-provider>"
-        ]
+        ],
+        "description": "组件标签展开 <el-config-provider>"
     },
     "el-container": {
-        "scope": "vue",
         "prefix": "el-container",
         "body": [
             "<el-container>$0</el-container>"
-        ]
+        ],
+        "description": "组件标签展开 <el-container>"
     },
     "el-countdown": {
-        "scope": "vue",
         "prefix": "el-countdown",
         "body": [
             "<el-countdown>$0</el-countdown>"
-        ]
+        ],
+        "description": "组件标签展开 <el-countdown>"
     },
     "el-date-picker": {
-        "scope": "vue",
         "prefix": "el-date-picker",
         "body": [
             "<el-date-picker>$0</el-date-picker>"
-        ]
+        ],
+        "description": "组件标签展开 <el-date-picker>"
     },
     "el-date-picker-panel": {
-        "scope": "vue",
         "prefix": "el-date-picker-panel",
         "body": [
             "<el-date-picker-panel>$0</el-date-picker-panel>"
-        ]
+        ],
+        "description": "组件标签展开 <el-date-picker-panel>"
     },
     "el-descriptions": {
-        "scope": "vue",
         "prefix": "el-descriptions",
         "body": [
             "<el-descriptions>$0</el-descriptions>"
-        ]
+        ],
+        "description": "组件标签展开 <el-descriptions>"
     },
     "el-descriptions-item": {
-        "scope": "vue",
         "prefix": "el-descriptions-item",
         "body": [
             "<el-descriptions-item>$0</el-descriptions-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-descriptions-item>"
     },
     "el-dialog": {
-        "scope": "vue",
         "prefix": "el-dialog",
         "body": [
             "<el-dialog>$0</el-dialog>"
-        ]
+        ],
+        "description": "组件标签展开 <el-dialog>"
     },
     "el-divider": {
-        "scope": "vue",
         "prefix": "el-divider",
         "body": [
             "<el-divider>$0</el-divider>"
-        ]
+        ],
+        "description": "组件标签展开 <el-divider>"
     },
     "el-drawer": {
-        "scope": "vue",
         "prefix": "el-drawer",
         "body": [
             "<el-drawer>$0</el-drawer>"
-        ]
+        ],
+        "description": "组件标签展开 <el-drawer>"
     },
     "el-dropdown": {
-        "scope": "vue",
         "prefix": "el-dropdown",
         "body": [
             "<el-dropdown>$0</el-dropdown>"
-        ]
+        ],
+        "description": "组件标签展开 <el-dropdown>"
     },
     "el-dropdown-item": {
-        "scope": "vue",
         "prefix": "el-dropdown-item",
         "body": [
             "<el-dropdown-item>$0</el-dropdown-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-dropdown-item>"
     },
     "el-dropdown-menu": {
-        "scope": "vue",
         "prefix": "el-dropdown-menu",
         "body": [
             "<el-dropdown-menu>$0</el-dropdown-menu>"
-        ]
+        ],
+        "description": "组件标签展开 <el-dropdown-menu>"
     },
     "el-empty": {
-        "scope": "vue",
         "prefix": "el-empty",
         "body": [
             "<el-empty>$0</el-empty>"
-        ]
+        ],
+        "description": "组件标签展开 <el-empty>"
     },
     "el-focus-trap": {
-        "scope": "vue",
         "prefix": "el-focus-trap",
         "body": [
             "<el-focus-trap>$0</el-focus-trap>"
-        ]
+        ],
+        "description": "组件标签展开 <el-focus-trap>"
     },
     "el-footer": {
-        "scope": "vue",
         "prefix": "el-footer",
         "body": [
             "<el-footer>$0</el-footer>"
-        ]
+        ],
+        "description": "组件标签展开 <el-footer>"
     },
     "el-form": {
-        "scope": "vue",
         "prefix": "el-form",
         "body": [
             "<el-form>$0</el-form>"
-        ]
+        ],
+        "description": "组件标签展开 <el-form>"
     },
     "el-form-item": {
-        "scope": "vue",
         "prefix": "el-form-item",
         "body": [
             "<el-form-item>$0</el-form-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-form-item>"
     },
     "el-header": {
-        "scope": "vue",
         "prefix": "el-header",
         "body": [
             "<el-header>$0</el-header>"
-        ]
+        ],
+        "description": "组件标签展开 <el-header>"
     },
     "el-icon": {
-        "scope": "vue",
         "prefix": "el-icon",
         "body": [
             "<el-icon>$0</el-icon>"
-        ]
+        ],
+        "description": "组件标签展开 <el-icon>"
     },
     "el-image": {
-        "scope": "vue",
         "prefix": "el-image",
         "body": [
             "<el-image>$0</el-image>"
-        ]
+        ],
+        "description": "组件标签展开 <el-image>"
     },
     "el-image-viewer": {
-        "scope": "vue",
         "prefix": "el-image-viewer",
         "body": [
             "<el-image-viewer>$0</el-image-viewer>"
-        ]
+        ],
+        "description": "组件标签展开 <el-image-viewer>"
     },
     "el-infinite-scroll": {
-        "scope": "vue",
         "prefix": "el-infinite-scroll",
         "body": [
             "<el-infinite-scroll>$0</el-infinite-scroll>"
-        ]
+        ],
+        "description": "组件标签展开 <el-infinite-scroll>"
     },
     "el-input": {
-        "scope": "vue",
         "prefix": "el-input",
         "body": [
             "<el-input>$0</el-input>"
-        ]
+        ],
+        "description": "组件标签展开 <el-input>"
     },
     "el-input-number": {
-        "scope": "vue",
         "prefix": "el-input-number",
         "body": [
             "<el-input-number>$0</el-input-number>"
-        ]
+        ],
+        "description": "组件标签展开 <el-input-number>"
     },
     "el-input-otp": {
-        "scope": "vue",
         "prefix": "el-input-otp",
         "body": [
             "<el-input-otp>$0</el-input-otp>"
-        ]
+        ],
+        "description": "组件标签展开 <el-input-otp>"
     },
     "el-input-tag": {
-        "scope": "vue",
         "prefix": "el-input-tag",
         "body": [
             "<el-input-tag>$0</el-input-tag>"
-        ]
+        ],
+        "description": "组件标签展开 <el-input-tag>"
     },
     "el-link": {
-        "scope": "vue",
         "prefix": "el-link",
         "body": [
             "<el-link>$0</el-link>"
-        ]
+        ],
+        "description": "组件标签展开 <el-link>"
     },
     "el-loading": {
-        "scope": "vue",
         "prefix": "el-loading",
         "body": [
             "<el-loading>$0</el-loading>"
-        ]
+        ],
+        "description": "组件标签展开 <el-loading>"
     },
     "el-main": {
-        "scope": "vue",
         "prefix": "el-main",
         "body": [
             "<el-main>$0</el-main>"
-        ]
+        ],
+        "description": "组件标签展开 <el-main>"
     },
     "el-mention": {
-        "scope": "vue",
         "prefix": "el-mention",
         "body": [
             "<el-mention>$0</el-mention>"
-        ]
+        ],
+        "description": "组件标签展开 <el-mention>"
     },
     "el-menu": {
-        "scope": "vue",
         "prefix": "el-menu",
         "body": [
             "<el-menu>$0</el-menu>"
-        ]
+        ],
+        "description": "组件标签展开 <el-menu>"
     },
     "el-menu-item": {
-        "scope": "vue",
         "prefix": "el-menu-item",
         "body": [
             "<el-menu-item>$0</el-menu-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-menu-item>"
     },
     "el-menu-item-group": {
-        "scope": "vue",
         "prefix": "el-menu-item-group",
         "body": [
             "<el-menu-item-group>$0</el-menu-item-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-menu-item-group>"
     },
     "el-message": {
-        "scope": "vue",
         "prefix": "el-message",
         "body": [
             "<el-message>$0</el-message>"
-        ]
+        ],
+        "description": "组件标签展开 <el-message>"
     },
     "el-message-box": {
-        "scope": "vue",
         "prefix": "el-message-box",
         "body": [
             "<el-message-box>$0</el-message-box>"
-        ]
+        ],
+        "description": "组件标签展开 <el-message-box>"
     },
     "el-notification": {
-        "scope": "vue",
         "prefix": "el-notification",
         "body": [
             "<el-notification>$0</el-notification>"
-        ]
+        ],
+        "description": "组件标签展开 <el-notification>"
     },
     "el-option": {
-        "scope": "vue",
         "prefix": "el-option",
         "body": [
             "<el-option>$0</el-option>"
-        ]
+        ],
+        "description": "组件标签展开 <el-option>"
     },
     "el-option-group": {
-        "scope": "vue",
         "prefix": "el-option-group",
         "body": [
             "<el-option-group>$0</el-option-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-option-group>"
     },
     "el-overlay": {
-        "scope": "vue",
         "prefix": "el-overlay",
         "body": [
             "<el-overlay>$0</el-overlay>"
-        ]
+        ],
+        "description": "组件标签展开 <el-overlay>"
     },
     "el-page-header": {
-        "scope": "vue",
         "prefix": "el-page-header",
         "body": [
             "<el-page-header>$0</el-page-header>"
-        ]
+        ],
+        "description": "组件标签展开 <el-page-header>"
     },
     "el-pagination": {
-        "scope": "vue",
         "prefix": "el-pagination",
         "body": [
             "<el-pagination>$0</el-pagination>"
-        ]
+        ],
+        "description": "组件标签展开 <el-pagination>"
     },
     "el-popconfirm": {
-        "scope": "vue",
         "prefix": "el-popconfirm",
         "body": [
             "<el-popconfirm>$0</el-popconfirm>"
-        ]
+        ],
+        "description": "组件标签展开 <el-popconfirm>"
     },
     "el-popover": {
-        "scope": "vue",
         "prefix": "el-popover",
         "body": [
             "<el-popover>$0</el-popover>"
-        ]
+        ],
+        "description": "组件标签展开 <el-popover>"
     },
     "el-popper": {
-        "scope": "vue",
         "prefix": "el-popper",
         "body": [
             "<el-popper>$0</el-popper>"
-        ]
+        ],
+        "description": "组件标签展开 <el-popper>"
     },
     "el-progress": {
-        "scope": "vue",
         "prefix": "el-progress",
         "body": [
             "<el-progress>$0</el-progress>"
-        ]
+        ],
+        "description": "组件标签展开 <el-progress>"
     },
     "el-radio": {
-        "scope": "vue",
         "prefix": "el-radio",
         "body": [
             "<el-radio>$0</el-radio>"
-        ]
+        ],
+        "description": "组件标签展开 <el-radio>"
     },
     "el-radio-button": {
-        "scope": "vue",
         "prefix": "el-radio-button",
         "body": [
             "<el-radio-button>$0</el-radio-button>"
-        ]
+        ],
+        "description": "组件标签展开 <el-radio-button>"
     },
     "el-radio-group": {
-        "scope": "vue",
         "prefix": "el-radio-group",
         "body": [
             "<el-radio-group>$0</el-radio-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-radio-group>"
     },
     "el-rate": {
-        "scope": "vue",
         "prefix": "el-rate",
         "body": [
             "<el-rate>$0</el-rate>"
-        ]
+        ],
+        "description": "组件标签展开 <el-rate>"
     },
     "el-result": {
-        "scope": "vue",
         "prefix": "el-result",
         "body": [
             "<el-result>$0</el-result>"
-        ]
+        ],
+        "description": "组件标签展开 <el-result>"
     },
     "el-roving-focus-group": {
-        "scope": "vue",
         "prefix": "el-roving-focus-group",
         "body": [
             "<el-roving-focus-group>$0</el-roving-focus-group>"
-        ]
+        ],
+        "description": "组件标签展开 <el-roving-focus-group>"
     },
     "el-row": {
-        "scope": "vue",
         "prefix": "el-row",
         "body": [
             "<el-row>$0</el-row>"
-        ]
+        ],
+        "description": "组件标签展开 <el-row>"
     },
     "el-scrollbar": {
-        "scope": "vue",
         "prefix": "el-scrollbar",
         "body": [
             "<el-scrollbar>$0</el-scrollbar>"
-        ]
+        ],
+        "description": "组件标签展开 <el-scrollbar>"
     },
     "el-segmented": {
-        "scope": "vue",
         "prefix": "el-segmented",
         "body": [
             "<el-segmented>$0</el-segmented>"
-        ]
+        ],
+        "description": "组件标签展开 <el-segmented>"
     },
     "el-select": {
-        "scope": "vue",
         "prefix": "el-select",
         "body": [
             "<el-select>$0</el-select>"
-        ]
+        ],
+        "description": "组件标签展开 <el-select>"
     },
     "el-select-v2": {
-        "scope": "vue",
         "prefix": "el-select-v2",
         "body": [
             "<el-select-v2>$0</el-select-v2>"
-        ]
+        ],
+        "description": "组件标签展开 <el-select-v2>"
     },
     "el-skeleton": {
-        "scope": "vue",
         "prefix": "el-skeleton",
         "body": [
             "<el-skeleton>$0</el-skeleton>"
-        ]
+        ],
+        "description": "组件标签展开 <el-skeleton>"
     },
     "el-skeleton-item": {
-        "scope": "vue",
         "prefix": "el-skeleton-item",
         "body": [
             "<el-skeleton-item>$0</el-skeleton-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-skeleton-item>"
     },
     "el-slider": {
-        "scope": "vue",
         "prefix": "el-slider",
         "body": [
             "<el-slider>$0</el-slider>"
-        ]
+        ],
+        "description": "组件标签展开 <el-slider>"
     },
     "el-slot": {
-        "scope": "vue",
         "prefix": "el-slot",
         "body": [
             "<el-slot>$0</el-slot>"
-        ]
+        ],
+        "description": "组件标签展开 <el-slot>"
     },
     "el-space": {
-        "scope": "vue",
         "prefix": "el-space",
         "body": [
             "<el-space>$0</el-space>"
-        ]
+        ],
+        "description": "组件标签展开 <el-space>"
     },
     "el-splitter": {
-        "scope": "vue",
         "prefix": "el-splitter",
         "body": [
             "<el-splitter>$0</el-splitter>"
-        ]
+        ],
+        "description": "组件标签展开 <el-splitter>"
     },
     "el-splitter-panel": {
-        "scope": "vue",
         "prefix": "el-splitter-panel",
         "body": [
             "<el-splitter-panel>$0</el-splitter-panel>"
-        ]
+        ],
+        "description": "组件标签展开 <el-splitter-panel>"
     },
     "el-statistic": {
-        "scope": "vue",
         "prefix": "el-statistic",
         "body": [
             "<el-statistic>$0</el-statistic>"
-        ]
+        ],
+        "description": "组件标签展开 <el-statistic>"
     },
     "el-step": {
-        "scope": "vue",
         "prefix": "el-step",
         "body": [
             "<el-step>$0</el-step>"
-        ]
+        ],
+        "description": "组件标签展开 <el-step>"
     },
     "el-steps": {
-        "scope": "vue",
         "prefix": "el-steps",
         "body": [
             "<el-steps>$0</el-steps>"
-        ]
+        ],
+        "description": "组件标签展开 <el-steps>"
     },
     "el-sub-menu": {
-        "scope": "vue",
         "prefix": "el-sub-menu",
         "body": [
             "<el-sub-menu>$0</el-sub-menu>"
-        ]
+        ],
+        "description": "组件标签展开 <el-sub-menu>"
     },
     "el-switch": {
-        "scope": "vue",
         "prefix": "el-switch",
         "body": [
             "<el-switch>$0</el-switch>"
-        ]
+        ],
+        "description": "组件标签展开 <el-switch>"
     },
     "el-tab-pane": {
-        "scope": "vue",
         "prefix": "el-tab-pane",
         "body": [
             "<el-tab-pane>$0</el-tab-pane>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tab-pane>"
     },
     "el-table": {
-        "scope": "vue",
         "prefix": "el-table",
         "body": [
             "<el-table>$0</el-table>"
-        ]
+        ],
+        "description": "组件标签展开 <el-table>"
     },
     "el-table-column": {
-        "scope": "vue",
         "prefix": "el-table-column",
         "body": [
             "<el-table-column>$0</el-table-column>"
-        ]
+        ],
+        "description": "组件标签展开 <el-table-column>"
     },
     "el-table-v2": {
-        "scope": "vue",
         "prefix": "el-table-v2",
         "body": [
             "<el-table-v2>$0</el-table-v2>"
-        ]
+        ],
+        "description": "组件标签展开 <el-table-v2>"
     },
     "el-tabs": {
-        "scope": "vue",
         "prefix": "el-tabs",
         "body": [
             "<el-tabs>$0</el-tabs>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tabs>"
     },
     "el-tag": {
-        "scope": "vue",
         "prefix": "el-tag",
         "body": [
             "<el-tag>$0</el-tag>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tag>"
     },
     "el-text": {
-        "scope": "vue",
         "prefix": "el-text",
         "body": [
             "<el-text>$0</el-text>"
-        ]
+        ],
+        "description": "组件标签展开 <el-text>"
     },
     "el-time-picker": {
-        "scope": "vue",
         "prefix": "el-time-picker",
         "body": [
             "<el-time-picker>$0</el-time-picker>"
-        ]
+        ],
+        "description": "组件标签展开 <el-time-picker>"
     },
     "el-time-select": {
-        "scope": "vue",
         "prefix": "el-time-select",
         "body": [
             "<el-time-select>$0</el-time-select>"
-        ]
+        ],
+        "description": "组件标签展开 <el-time-select>"
     },
     "el-timeline": {
-        "scope": "vue",
         "prefix": "el-timeline",
         "body": [
             "<el-timeline>$0</el-timeline>"
-        ]
+        ],
+        "description": "组件标签展开 <el-timeline>"
     },
     "el-timeline-item": {
-        "scope": "vue",
         "prefix": "el-timeline-item",
         "body": [
             "<el-timeline-item>$0</el-timeline-item>"
-        ]
+        ],
+        "description": "组件标签展开 <el-timeline-item>"
     },
     "el-tooltip": {
-        "scope": "vue",
         "prefix": "el-tooltip",
         "body": [
             "<el-tooltip>$0</el-tooltip>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tooltip>"
     },
     "el-tour": {
-        "scope": "vue",
         "prefix": "el-tour",
         "body": [
             "<el-tour>$0</el-tour>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tour>"
     },
     "el-tour-step": {
-        "scope": "vue",
         "prefix": "el-tour-step",
         "body": [
             "<el-tour-step>$0</el-tour-step>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tour-step>"
     },
     "el-transfer": {
-        "scope": "vue",
         "prefix": "el-transfer",
         "body": [
             "<el-transfer>$0</el-transfer>"
-        ]
+        ],
+        "description": "组件标签展开 <el-transfer>"
     },
     "el-tree": {
-        "scope": "vue",
         "prefix": "el-tree",
         "body": [
             "<el-tree>$0</el-tree>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tree>"
     },
     "el-tree-select": {
-        "scope": "vue",
         "prefix": "el-tree-select",
         "body": [
             "<el-tree-select>$0</el-tree-select>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tree-select>"
     },
     "el-tree-v2": {
-        "scope": "vue",
         "prefix": "el-tree-v2",
         "body": [
             "<el-tree-v2>$0</el-tree-v2>"
-        ]
+        ],
+        "description": "组件标签展开 <el-tree-v2>"
     },
     "el-upload": {
-        "scope": "vue",
         "prefix": "el-upload",
         "body": [
             "<el-upload>$0</el-upload>"
-        ]
+        ],
+        "description": "组件标签展开 <el-upload>"
     },
     "el-virtual-list": {
-        "scope": "vue",
         "prefix": "el-virtual-list",
         "body": [
             "<el-virtual-list>$0</el-virtual-list>"
-        ]
+        ],
+        "description": "组件标签展开 <el-virtual-list>"
     },
     "el-watermark": {
-        "scope": "vue",
         "prefix": "el-watermark",
         "body": [
             "<el-watermark>$0</el-watermark>"
-        ]
+        ],
+        "description": "组件标签展开 <el-watermark>"
     },
-    "fiber-popup": {
-        "scope": "vue",
-        "prefix": "fiber-popup",
+    "fiberPopup": {
+        "prefix": "fiberPopup",
         "body": [
-            "<fiber-popup>$0</fiber-popup>"
-        ]
+            "<fiberPopup>$0</fiberPopup>"
+        ],
+        "description": "组件标签展开 <fiberPopup>"
     },
-    "layer-control": {
-        "scope": "vue",
-        "prefix": "layer-control",
+    "layerControl": {
+        "prefix": "layerControl",
         "body": [
-            "<layer-control>$0</layer-control>"
-        ]
+            "<layerControl>$0</layerControl>"
+        ],
+        "description": "组件标签展开 <layerControl>"
     },
-    "map-popup-panel": {
-        "scope": "vue",
-        "prefix": "map-popup-panel",
+    "mapPopupPanel": {
+        "prefix": "mapPopupPanel",
         "body": [
-            "<map-popup-panel>$0</map-popup-panel>"
-        ]
+            "<mapPopupPanel>$0</mapPopupPanel>"
+        ],
+        "description": "组件标签展开 <mapPopupPanel>"
     },
-    "nest-popup": {
-        "scope": "vue",
-        "prefix": "nest-popup",
+    "nestPopup": {
+        "prefix": "nestPopup",
         "body": [
-            "<nest-popup>$0</nest-popup>"
-        ]
+            "<nestPopup>$0</nestPopup>"
+        ],
+        "description": "组件标签展开 <nestPopup>"
     },
-    "popup-info": {
-        "scope": "vue",
-        "prefix": "popup-info",
+    "popupInfo": {
+        "prefix": "popupInfo",
         "body": [
-            "<popup-info>$0</popup-info>"
-        ]
+            "<popupInfo>$0</popupInfo>"
+        ],
+        "description": "组件标签展开 <popupInfo>"
     },
-    "popup-panel": {
-        "scope": "vue",
-        "prefix": "popup-panel",
+    "popupPanel": {
+        "prefix": "popupPanel",
         "body": [
-            "<popup-panel>$0</popup-panel>"
-        ]
+            "<popupPanel>$0</popupPanel>"
+        ],
+        "description": "组件标签展开 <popupPanel>"
     },
-    "site-button": {
-        "scope": "vue",
-        "prefix": "site-button",
+    "siteButton": {
+        "prefix": "siteButton",
         "body": [
-            "<site-button>$0</site-button>"
-        ]
+            "<siteButton>$0</siteButton>"
+        ],
+        "description": "组件标签展开 <siteButton>"
     },
-    "site-switch": {
-        "scope": "vue",
-        "prefix": "site-switch",
+    "siteSwitch": {
+        "prefix": "siteSwitch",
         "body": [
-            "<site-switch>$0</site-switch>"
-        ]
+            "<siteSwitch>$0</siteSwitch>"
+        ],
+        "description": "组件标签展开 <siteSwitch>"
     }
 }
