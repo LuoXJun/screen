@@ -30,11 +30,12 @@ const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 </script>
 
 <style scoped lang="scss">
-/* 图层管理：贴侧栏底部居中（菜单占满高度,不参与文档流） */
+/* 图层管理：贴左栏右侧,上下与侧栏齐高（撑满主区高度,不参与文档流） */
 .layer-control {
     position: absolute;
     left: 0;
     top: 0;
+    bottom: 0;
     transform: translateX(20%);
     z-index: var(--lxj-z-sticky);
 }

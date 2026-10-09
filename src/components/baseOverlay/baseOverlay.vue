@@ -29,6 +29,11 @@
         pointer-events: all;
         // overflow: auto;
     }
+    // 侧栏顶部让位（如全局站点切换按钮;偏移值由布局注入,左右同时避让保持顶对齐）
+    .aside.left,
+    .aside.right {
+        padding-top: var(--lxj-aside-top-offset, 0);
+    }
     .main {
         flex: 1;
         min-width: 0;

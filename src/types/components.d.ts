@@ -68,5 +68,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScreenFooter: typeof import('./../components/screen/ScreenFooter.vue')['default']
     ScreenLayout: typeof import('./../components/screen/ScreenLayout.vue')['default']
+    SiteButton: typeof import('./../components/screen/siteSwitch/siteButton.vue')['default']
+    SiteSwitch: typeof import('./../components/screen/siteSwitch/siteSwitch.vue')['default']
   }
 }

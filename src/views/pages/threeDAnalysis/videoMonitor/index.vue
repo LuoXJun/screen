@@ -35,4 +35,10 @@ function onDetail(device: CameraDevice): void {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+/* 左右面板等高撑满各自侧栏（aside 为 space-around 分布,撑满以取齐） */
+.cameraList,
+.alarmCenter {
+    flex: 1;
+}
+</style>

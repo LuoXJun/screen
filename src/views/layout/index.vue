@@ -16,6 +16,8 @@
                 <div class="screen">
                     <RouterView />
                 </div>
+                <!-- 全局站点切换（每页展示,悬浮于左侧面板上方） -->
+                <siteSwitch v-model="activeSite" class="site-switch" />
             </el-main>
         </el-container>
     </el-container>
@@ -33,6 +35,8 @@ import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
 import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
 import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
 import NestPopup from '@/components/screen/popups/NestPopup.vue';
+import siteSwitch from '@/components/screen/siteSwitch/siteSwitch.vue';
+import type { SiteKey } from '@/components/screen/siteSwitch/siteSwitch.config';
 import type { CameraData } from '@/components/screen/popups/CameraPopup';
 import type { FiberData } from '@/components/screen/popups/FiberPopup';
 import type { NestData } from '@/components/screen/popups/NestPopup';
@@ -49,6 +53,9 @@ document.documentElement.dataset.app = 'screen';
 
 /* 地图业务编排（实现见 ./composables/） */
 useMapEntities();
+
+/** 当前站点（全局站点切换,列表数据联动待接口） */
+const activeSite = ref<SiteKey>('xianfeng');
 
 /** 三类设备弹窗数据（null=关闭；点击对应点位时填充） */
 const cameraData = ref<CameraData | null>(null);
@@ -136,7 +143,17 @@ onUnmounted(() => {
                 pointer-events: none;
                 z-index: var(--lxj-z-sticky);
                 padding: var(--lxj-space-page);
+                /* 页面左 aside 顶缘避让全局站点切换按钮（按钮高 32 + 间距 10） */
+                --lxj-aside-top-offset: #{base(42px)};
             }
+        }
+
+        /* 全局站点切换:与页面内容(左 aside)左/上缘对齐 */
+        .site-switch {
+            position: absolute;
+            top: var(--lxj-space-page);
+            left: var(--lxj-space-page);
+            z-index: var(--lxj-z-sticky);
         }
     }
 }
