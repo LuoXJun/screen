@@ -5,24 +5,19 @@
     // or a TypedArray ... but got undefined"），格式化静默失效；
     // 显式指向 ESM 入口(index.mjs)绕过该组合缺陷。命令行 pnpm format 不受影响。
     "prettier.prettierPath": "./node_modules/prettier/index.mjs",
-    // CSS Variable Autocomplete 补全语言：
-    // 该扩展按「宿主文档语言 ID」注册补全（selector 为 {scheme: file, language: <id>}），
-    // .vue 文件的语言 ID 是 vue，必须列出 vue，<style lang="scss"> 块内的变量补全才会生效；
-    // 若只留 scss/css 等，.vue 文件（含样式块）将完全收不到补全。
+    // TS 服务版本对齐到项目(typescript 5.9.2)
+    "typescript.tsdk": "node_modules/typescript/lib",
+    // 组件名补全:kebab 输入(<el-butt)命中需要 always 系列强制候选集形态,
+    // prefer 系列只影响补出形态、不改变输入匹配(实测 preferKebabCase 下 kebab 输入无提示)
+    "vue.suggest.componentNameCasing": "alwaysKebabCase",
+    // CSS Variable Autocomplete 补全语言:
+    // 该扩展不做 SFC 内区域识别,必须以 vue 注册才能覆盖 <style> 块——这是其能力上限。
+    // 已排除的替代方案:①去掉 vue 改由 Volar 兜底——实测 Volar 3.x 无 CSS 变量补全
+    // (addCSSVariable 仅为收集器)、且 manifest 只声明 vue 单一语言,旧版 vue-postcss/
+    // vue-html 虚拟语言 ID 机制已不存在,"仅 style 精准激活"无配置可达成;
+    // ②关 quickSuggestions/触发字符抑制 template 干扰——会连带废掉 Volar 组件补全。
+    // 故接受共存:template 输入时组件补全与变量项同列(组件前缀匹配通常居前)
     "cssVariables.languages": ["vue", "scss", "postcss", "less", "css"],
-    // 抑制 template 干扰(修订版):此前误关了 suggestOnTriggerCharacters——那只掐掉
-    // 触发字符路径(连 Volar 的 `<` 弹组件补全一并掐死),而 CSS 变量扩展在 template 里
-    // 的骚扰实际来自 quickSuggestions(普通字符自动弹窗,不做 .vue 内区域过滤)。
-    // 现改用:.vue 域关闭 quickSuggestions(切断变量列表的自动弹出通路),
-    // 触发字符恢复默认——`<` 输入即弹组件补全,且补全框活跃时输入 `-` 只是继续过滤
-    // 不会重开变量窗;style 块内需要变量补全时 Ctrl+Space 手动召唤。
-    "[vue]": {
-        "editor.quickSuggestions": {
-            "other": false,
-            "comments": false,
-            "strings": false
-        }
-    },
     // CSS 变量跳转(CSS Variable Autocomplete 扩展)的扫描范围:仅源码;
     // 排除 dist 构建产物——否则 ctrl+click 会命中压缩产物里的同名定义
     "cssVariables.lookupFiles": ["src/**/*.scss", "src/**/*.vue", "src/**/*.css"],

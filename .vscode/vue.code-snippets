@@ -1,0 +1,1052 @@
+{
+    "base-card-list": {
+        "scope": "vue",
+        "prefix": "base-card-list",
+        "body": [
+            "<base-card-list>$0</base-card-list>"
+        ]
+    },
+    "base-cesium": {
+        "scope": "vue",
+        "prefix": "base-cesium",
+        "body": [
+            "<base-cesium>$0</base-cesium>"
+        ]
+    },
+    "base-chart": {
+        "scope": "vue",
+        "prefix": "base-chart",
+        "body": [
+            "<base-chart>$0</base-chart>"
+        ]
+    },
+    "base-dialog": {
+        "scope": "vue",
+        "prefix": "base-dialog",
+        "body": [
+            "<base-dialog>$0</base-dialog>"
+        ]
+    },
+    "base-menu": {
+        "scope": "vue",
+        "prefix": "base-menu",
+        "body": [
+            "<base-menu>$0</base-menu>"
+        ]
+    },
+    "base-menu-horizontal-aside": {
+        "scope": "vue",
+        "prefix": "base-menu-horizontal-aside",
+        "body": [
+            "<base-menu-horizontal-aside>$0</base-menu-horizontal-aside>"
+        ]
+    },
+    "base-overlay": {
+        "scope": "vue",
+        "prefix": "base-overlay",
+        "body": [
+            "<base-overlay>$0</base-overlay>"
+        ]
+    },
+    "base-pagination": {
+        "scope": "vue",
+        "prefix": "base-pagination",
+        "body": [
+            "<base-pagination>$0</base-pagination>"
+        ]
+    },
+    "base-panel-card": {
+        "scope": "vue",
+        "prefix": "base-panel-card",
+        "body": [
+            "<base-panel-card>$0</base-panel-card>"
+        ]
+    },
+    "base-panel-mask": {
+        "scope": "vue",
+        "prefix": "base-panel-mask",
+        "body": [
+            "<base-panel-mask>$0</base-panel-mask>"
+        ]
+    },
+    "base-panel-title": {
+        "scope": "vue",
+        "prefix": "base-panel-title",
+        "body": [
+            "<base-panel-title>$0</base-panel-title>"
+        ]
+    },
+    "base-popover": {
+        "scope": "vue",
+        "prefix": "base-popover",
+        "body": [
+            "<base-popover>$0</base-popover>"
+        ]
+    },
+    "base-section-title": {
+        "scope": "vue",
+        "prefix": "base-section-title",
+        "body": [
+            "<base-section-title>$0</base-section-title>"
+        ]
+    },
+    "base-stat-list": {
+        "scope": "vue",
+        "prefix": "base-stat-list",
+        "body": [
+            "<base-stat-list>$0</base-stat-list>"
+        ]
+    },
+    "base-tab": {
+        "scope": "vue",
+        "prefix": "base-tab",
+        "body": [
+            "<base-tab>$0</base-tab>"
+        ]
+    },
+    "base-table": {
+        "scope": "vue",
+        "prefix": "base-table",
+        "body": [
+            "<base-table>$0</base-table>"
+        ]
+    },
+    "camera-popup": {
+        "scope": "vue",
+        "prefix": "camera-popup",
+        "body": [
+            "<camera-popup>$0</camera-popup>"
+        ]
+    },
+    "confirm-box": {
+        "scope": "vue",
+        "prefix": "confirm-box",
+        "body": [
+            "<confirm-box>$0</confirm-box>"
+        ]
+    },
+    "device-info": {
+        "scope": "vue",
+        "prefix": "device-info",
+        "body": [
+            "<device-info>$0</device-info>"
+        ]
+    },
+    "device-status-tag": {
+        "scope": "vue",
+        "prefix": "device-status-tag",
+        "body": [
+            "<device-status-tag>$0</device-status-tag>"
+        ]
+    },
+    "el-affix": {
+        "scope": "vue",
+        "prefix": "el-affix",
+        "body": [
+            "<el-affix>$0</el-affix>"
+        ]
+    },
+    "el-alert": {
+        "scope": "vue",
+        "prefix": "el-alert",
+        "body": [
+            "<el-alert>$0</el-alert>"
+        ]
+    },
+    "el-anchor": {
+        "scope": "vue",
+        "prefix": "el-anchor",
+        "body": [
+            "<el-anchor>$0</el-anchor>"
+        ]
+    },
+    "el-anchor-link": {
+        "scope": "vue",
+        "prefix": "el-anchor-link",
+        "body": [
+            "<el-anchor-link>$0</el-anchor-link>"
+        ]
+    },
+    "el-aside": {
+        "scope": "vue",
+        "prefix": "el-aside",
+        "body": [
+            "<el-aside>$0</el-aside>"
+        ]
+    },
+    "el-autocomplete": {
+        "scope": "vue",
+        "prefix": "el-autocomplete",
+        "body": [
+            "<el-autocomplete>$0</el-autocomplete>"
+        ]
+    },
+    "el-avatar": {
+        "scope": "vue",
+        "prefix": "el-avatar",
+        "body": [
+            "<el-avatar>$0</el-avatar>"
+        ]
+    },
+    "el-avatar-group": {
+        "scope": "vue",
+        "prefix": "el-avatar-group",
+        "body": [
+            "<el-avatar-group>$0</el-avatar-group>"
+        ]
+    },
+    "el-backtop": {
+        "scope": "vue",
+        "prefix": "el-backtop",
+        "body": [
+            "<el-backtop>$0</el-backtop>"
+        ]
+    },
+    "el-badge": {
+        "scope": "vue",
+        "prefix": "el-badge",
+        "body": [
+            "<el-badge>$0</el-badge>"
+        ]
+    },
+    "el-base": {
+        "scope": "vue",
+        "prefix": "el-base",
+        "body": [
+            "<el-base>$0</el-base>"
+        ]
+    },
+    "el-breadcrumb": {
+        "scope": "vue",
+        "prefix": "el-breadcrumb",
+        "body": [
+            "<el-breadcrumb>$0</el-breadcrumb>"
+        ]
+    },
+    "el-breadcrumb-item": {
+        "scope": "vue",
+        "prefix": "el-breadcrumb-item",
+        "body": [
+            "<el-breadcrumb-item>$0</el-breadcrumb-item>"
+        ]
+    },
+    "el-button": {
+        "scope": "vue",
+        "prefix": "el-button",
+        "body": [
+            "<el-button>$0</el-button>"
+        ]
+    },
+    "el-button-group": {
+        "scope": "vue",
+        "prefix": "el-button-group",
+        "body": [
+            "<el-button-group>$0</el-button-group>"
+        ]
+    },
+    "el-calendar": {
+        "scope": "vue",
+        "prefix": "el-calendar",
+        "body": [
+            "<el-calendar>$0</el-calendar>"
+        ]
+    },
+    "el-card": {
+        "scope": "vue",
+        "prefix": "el-card",
+        "body": [
+            "<el-card>$0</el-card>"
+        ]
+    },
+    "el-carousel": {
+        "scope": "vue",
+        "prefix": "el-carousel",
+        "body": [
+            "<el-carousel>$0</el-carousel>"
+        ]
+    },
+    "el-carousel-item": {
+        "scope": "vue",
+        "prefix": "el-carousel-item",
+        "body": [
+            "<el-carousel-item>$0</el-carousel-item>"
+        ]
+    },
+    "el-cascader": {
+        "scope": "vue",
+        "prefix": "el-cascader",
+        "body": [
+            "<el-cascader>$0</el-cascader>"
+        ]
+    },
+    "el-cascader-panel": {
+        "scope": "vue",
+        "prefix": "el-cascader-panel",
+        "body": [
+            "<el-cascader-panel>$0</el-cascader-panel>"
+        ]
+    },
+    "el-check-tag": {
+        "scope": "vue",
+        "prefix": "el-check-tag",
+        "body": [
+            "<el-check-tag>$0</el-check-tag>"
+        ]
+    },
+    "el-checkbox": {
+        "scope": "vue",
+        "prefix": "el-checkbox",
+        "body": [
+            "<el-checkbox>$0</el-checkbox>"
+        ]
+    },
+    "el-checkbox-button": {
+        "scope": "vue",
+        "prefix": "el-checkbox-button",
+        "body": [
+            "<el-checkbox-button>$0</el-checkbox-button>"
+        ]
+    },
+    "el-checkbox-group": {
+        "scope": "vue",
+        "prefix": "el-checkbox-group",
+        "body": [
+            "<el-checkbox-group>$0</el-checkbox-group>"
+        ]
+    },
+    "el-col": {
+        "scope": "vue",
+        "prefix": "el-col",
+        "body": [
+            "<el-col>$0</el-col>"
+        ]
+    },
+    "el-collapse": {
+        "scope": "vue",
+        "prefix": "el-collapse",
+        "body": [
+            "<el-collapse>$0</el-collapse>"
+        ]
+    },
+    "el-collapse-item": {
+        "scope": "vue",
+        "prefix": "el-collapse-item",
+        "body": [
+            "<el-collapse-item>$0</el-collapse-item>"
+        ]
+    },
+    "el-collapse-transition": {
+        "scope": "vue",
+        "prefix": "el-collapse-transition",
+        "body": [
+            "<el-collapse-transition>$0</el-collapse-transition>"
+        ]
+    },
+    "el-collection": {
+        "scope": "vue",
+        "prefix": "el-collection",
+        "body": [
+            "<el-collection>$0</el-collection>"
+        ]
+    },
+    "el-color-picker": {
+        "scope": "vue",
+        "prefix": "el-color-picker",
+        "body": [
+            "<el-color-picker>$0</el-color-picker>"
+        ]
+    },
+    "el-color-picker-panel": {
+        "scope": "vue",
+        "prefix": "el-color-picker-panel",
+        "body": [
+            "<el-color-picker-panel>$0</el-color-picker-panel>"
+        ]
+    },
+    "el-config-provider": {
+        "scope": "vue",
+        "prefix": "el-config-provider",
+        "body": [
+            "<el-config-provider>$0</el-config-provider>"
+        ]
+    },
+    "el-container": {
+        "scope": "vue",
+        "prefix": "el-container",
+        "body": [
+            "<el-container>$0</el-container>"
+        ]
+    },
+    "el-countdown": {
+        "scope": "vue",
+        "prefix": "el-countdown",
+        "body": [
+            "<el-countdown>$0</el-countdown>"
+        ]
+    },
+    "el-date-picker": {
+        "scope": "vue",
+        "prefix": "el-date-picker",
+        "body": [
+            "<el-date-picker>$0</el-date-picker>"
+        ]
+    },
+    "el-date-picker-panel": {
+        "scope": "vue",
+        "prefix": "el-date-picker-panel",
+        "body": [
+            "<el-date-picker-panel>$0</el-date-picker-panel>"
+        ]
+    },
+    "el-descriptions": {
+        "scope": "vue",
+        "prefix": "el-descriptions",
+        "body": [
+            "<el-descriptions>$0</el-descriptions>"
+        ]
+    },
+    "el-descriptions-item": {
+        "scope": "vue",
+        "prefix": "el-descriptions-item",
+        "body": [
+            "<el-descriptions-item>$0</el-descriptions-item>"
+        ]
+    },
+    "el-dialog": {
+        "scope": "vue",
+        "prefix": "el-dialog",
+        "body": [
+            "<el-dialog>$0</el-dialog>"
+        ]
+    },
+    "el-divider": {
+        "scope": "vue",
+        "prefix": "el-divider",
+        "body": [
+            "<el-divider>$0</el-divider>"
+        ]
+    },
+    "el-drawer": {
+        "scope": "vue",
+        "prefix": "el-drawer",
+        "body": [
+            "<el-drawer>$0</el-drawer>"
+        ]
+    },
+    "el-dropdown": {
+        "scope": "vue",
+        "prefix": "el-dropdown",
+        "body": [
+            "<el-dropdown>$0</el-dropdown>"
+        ]
+    },
+    "el-dropdown-item": {
+        "scope": "vue",
+        "prefix": "el-dropdown-item",
+        "body": [
+            "<el-dropdown-item>$0</el-dropdown-item>"
+        ]
+    },
+    "el-dropdown-menu": {
+        "scope": "vue",
+        "prefix": "el-dropdown-menu",
+        "body": [
+            "<el-dropdown-menu>$0</el-dropdown-menu>"
+        ]
+    },
+    "el-empty": {
+        "scope": "vue",
+        "prefix": "el-empty",
+        "body": [
+            "<el-empty>$0</el-empty>"
+        ]
+    },
+    "el-focus-trap": {
+        "scope": "vue",
+        "prefix": "el-focus-trap",
+        "body": [
+            "<el-focus-trap>$0</el-focus-trap>"
+        ]
+    },
+    "el-footer": {
+        "scope": "vue",
+        "prefix": "el-footer",
+        "body": [
+            "<el-footer>$0</el-footer>"
+        ]
+    },
+    "el-form": {
+        "scope": "vue",
+        "prefix": "el-form",
+        "body": [
+            "<el-form>$0</el-form>"
+        ]
+    },
+    "el-form-item": {
+        "scope": "vue",
+        "prefix": "el-form-item",
+        "body": [
+            "<el-form-item>$0</el-form-item>"
+        ]
+    },
+    "el-header": {
+        "scope": "vue",
+        "prefix": "el-header",
+        "body": [
+            "<el-header>$0</el-header>"
+        ]
+    },
+    "el-icon": {
+        "scope": "vue",
+        "prefix": "el-icon",
+        "body": [
+            "<el-icon>$0</el-icon>"
+        ]
+    },
+    "el-image": {
+        "scope": "vue",
+        "prefix": "el-image",
+        "body": [
+            "<el-image>$0</el-image>"
+        ]
+    },
+    "el-image-viewer": {
+        "scope": "vue",
+        "prefix": "el-image-viewer",
+        "body": [
+            "<el-image-viewer>$0</el-image-viewer>"
+        ]
+    },
+    "el-infinite-scroll": {
+        "scope": "vue",
+        "prefix": "el-infinite-scroll",
+        "body": [
+            "<el-infinite-scroll>$0</el-infinite-scroll>"
+        ]
+    },
+    "el-input": {
+        "scope": "vue",
+        "prefix": "el-input",
+        "body": [
+            "<el-input>$0</el-input>"
+        ]
+    },
+    "el-input-number": {
+        "scope": "vue",
+        "prefix": "el-input-number",
+        "body": [
+            "<el-input-number>$0</el-input-number>"
+        ]
+    },
+    "el-input-otp": {
+        "scope": "vue",
+        "prefix": "el-input-otp",
+        "body": [
+            "<el-input-otp>$0</el-input-otp>"
+        ]
+    },
+    "el-input-tag": {
+        "scope": "vue",
+        "prefix": "el-input-tag",
+        "body": [
+            "<el-input-tag>$0</el-input-tag>"
+        ]
+    },
+    "el-link": {
+        "scope": "vue",
+        "prefix": "el-link",
+        "body": [
+            "<el-link>$0</el-link>"
+        ]
+    },
+    "el-loading": {
+        "scope": "vue",
+        "prefix": "el-loading",
+        "body": [
+            "<el-loading>$0</el-loading>"
+        ]
+    },
+    "el-main": {
+        "scope": "vue",
+        "prefix": "el-main",
+        "body": [
+            "<el-main>$0</el-main>"
+        ]
+    },
+    "el-mention": {
+        "scope": "vue",
+        "prefix": "el-mention",
+        "body": [
+            "<el-mention>$0</el-mention>"
+        ]
+    },
+    "el-menu": {
+        "scope": "vue",
+        "prefix": "el-menu",
+        "body": [
+            "<el-menu>$0</el-menu>"
+        ]
+    },
+    "el-menu-item": {
+        "scope": "vue",
+        "prefix": "el-menu-item",
+        "body": [
+            "<el-menu-item>$0</el-menu-item>"
+        ]
+    },
+    "el-menu-item-group": {
+        "scope": "vue",
+        "prefix": "el-menu-item-group",
+        "body": [
+            "<el-menu-item-group>$0</el-menu-item-group>"
+        ]
+    },
+    "el-message": {
+        "scope": "vue",
+        "prefix": "el-message",
+        "body": [
+            "<el-message>$0</el-message>"
+        ]
+    },
+    "el-message-box": {
+        "scope": "vue",
+        "prefix": "el-message-box",
+        "body": [
+            "<el-message-box>$0</el-message-box>"
+        ]
+    },
+    "el-notification": {
+        "scope": "vue",
+        "prefix": "el-notification",
+        "body": [
+            "<el-notification>$0</el-notification>"
+        ]
+    },
+    "el-option": {
+        "scope": "vue",
+        "prefix": "el-option",
+        "body": [
+            "<el-option>$0</el-option>"
+        ]
+    },
+    "el-option-group": {
+        "scope": "vue",
+        "prefix": "el-option-group",
+        "body": [
+            "<el-option-group>$0</el-option-group>"
+        ]
+    },
+    "el-overlay": {
+        "scope": "vue",
+        "prefix": "el-overlay",
+        "body": [
+            "<el-overlay>$0</el-overlay>"
+        ]
+    },
+    "el-page-header": {
+        "scope": "vue",
+        "prefix": "el-page-header",
+        "body": [
+            "<el-page-header>$0</el-page-header>"
+        ]
+    },
+    "el-pagination": {
+        "scope": "vue",
+        "prefix": "el-pagination",
+        "body": [
+            "<el-pagination>$0</el-pagination>"
+        ]
+    },
+    "el-popconfirm": {
+        "scope": "vue",
+        "prefix": "el-popconfirm",
+        "body": [
+            "<el-popconfirm>$0</el-popconfirm>"
+        ]
+    },
+    "el-popover": {
+        "scope": "vue",
+        "prefix": "el-popover",
+        "body": [
+            "<el-popover>$0</el-popover>"
+        ]
+    },
+    "el-popper": {
+        "scope": "vue",
+        "prefix": "el-popper",
+        "body": [
+            "<el-popper>$0</el-popper>"
+        ]
+    },
+    "el-progress": {
+        "scope": "vue",
+        "prefix": "el-progress",
+        "body": [
+            "<el-progress>$0</el-progress>"
+        ]
+    },
+    "el-radio": {
+        "scope": "vue",
+        "prefix": "el-radio",
+        "body": [
+            "<el-radio>$0</el-radio>"
+        ]
+    },
+    "el-radio-button": {
+        "scope": "vue",
+        "prefix": "el-radio-button",
+        "body": [
+            "<el-radio-button>$0</el-radio-button>"
+        ]
+    },
+    "el-radio-group": {
+        "scope": "vue",
+        "prefix": "el-radio-group",
+        "body": [
+            "<el-radio-group>$0</el-radio-group>"
+        ]
+    },
+    "el-rate": {
+        "scope": "vue",
+        "prefix": "el-rate",
+        "body": [
+            "<el-rate>$0</el-rate>"
+        ]
+    },
+    "el-result": {
+        "scope": "vue",
+        "prefix": "el-result",
+        "body": [
+            "<el-result>$0</el-result>"
+        ]
+    },
+    "el-roving-focus-group": {
+        "scope": "vue",
+        "prefix": "el-roving-focus-group",
+        "body": [
+            "<el-roving-focus-group>$0</el-roving-focus-group>"
+        ]
+    },
+    "el-row": {
+        "scope": "vue",
+        "prefix": "el-row",
+        "body": [
+            "<el-row>$0</el-row>"
+        ]
+    },
+    "el-scrollbar": {
+        "scope": "vue",
+        "prefix": "el-scrollbar",
+        "body": [
+            "<el-scrollbar>$0</el-scrollbar>"
+        ]
+    },
+    "el-segmented": {
+        "scope": "vue",
+        "prefix": "el-segmented",
+        "body": [
+            "<el-segmented>$0</el-segmented>"
+        ]
+    },
+    "el-select": {
+        "scope": "vue",
+        "prefix": "el-select",
+        "body": [
+            "<el-select>$0</el-select>"
+        ]
+    },
+    "el-select-v2": {
+        "scope": "vue",
+        "prefix": "el-select-v2",
+        "body": [
+            "<el-select-v2>$0</el-select-v2>"
+        ]
+    },
+    "el-skeleton": {
+        "scope": "vue",
+        "prefix": "el-skeleton",
+        "body": [
+            "<el-skeleton>$0</el-skeleton>"
+        ]
+    },
+    "el-skeleton-item": {
+        "scope": "vue",
+        "prefix": "el-skeleton-item",
+        "body": [
+            "<el-skeleton-item>$0</el-skeleton-item>"
+        ]
+    },
+    "el-slider": {
+        "scope": "vue",
+        "prefix": "el-slider",
+        "body": [
+            "<el-slider>$0</el-slider>"
+        ]
+    },
+    "el-slot": {
+        "scope": "vue",
+        "prefix": "el-slot",
+        "body": [
+            "<el-slot>$0</el-slot>"
+        ]
+    },
+    "el-space": {
+        "scope": "vue",
+        "prefix": "el-space",
+        "body": [
+            "<el-space>$0</el-space>"
+        ]
+    },
+    "el-splitter": {
+        "scope": "vue",
+        "prefix": "el-splitter",
+        "body": [
+            "<el-splitter>$0</el-splitter>"
+        ]
+    },
+    "el-splitter-panel": {
+        "scope": "vue",
+        "prefix": "el-splitter-panel",
+        "body": [
+            "<el-splitter-panel>$0</el-splitter-panel>"
+        ]
+    },
+    "el-statistic": {
+        "scope": "vue",
+        "prefix": "el-statistic",
+        "body": [
+            "<el-statistic>$0</el-statistic>"
+        ]
+    },
+    "el-step": {
+        "scope": "vue",
+        "prefix": "el-step",
+        "body": [
+            "<el-step>$0</el-step>"
+        ]
+    },
+    "el-steps": {
+        "scope": "vue",
+        "prefix": "el-steps",
+        "body": [
+            "<el-steps>$0</el-steps>"
+        ]
+    },
+    "el-sub-menu": {
+        "scope": "vue",
+        "prefix": "el-sub-menu",
+        "body": [
+            "<el-sub-menu>$0</el-sub-menu>"
+        ]
+    },
+    "el-switch": {
+        "scope": "vue",
+        "prefix": "el-switch",
+        "body": [
+            "<el-switch>$0</el-switch>"
+        ]
+    },
+    "el-tab-pane": {
+        "scope": "vue",
+        "prefix": "el-tab-pane",
+        "body": [
+            "<el-tab-pane>$0</el-tab-pane>"
+        ]
+    },
+    "el-table": {
+        "scope": "vue",
+        "prefix": "el-table",
+        "body": [
+            "<el-table>$0</el-table>"
+        ]
+    },
+    "el-table-column": {
+        "scope": "vue",
+        "prefix": "el-table-column",
+        "body": [
+            "<el-table-column>$0</el-table-column>"
+        ]
+    },
+    "el-table-v2": {
+        "scope": "vue",
+        "prefix": "el-table-v2",
+        "body": [
+            "<el-table-v2>$0</el-table-v2>"
+        ]
+    },
+    "el-tabs": {
+        "scope": "vue",
+        "prefix": "el-tabs",
+        "body": [
+            "<el-tabs>$0</el-tabs>"
+        ]
+    },
+    "el-tag": {
+        "scope": "vue",
+        "prefix": "el-tag",
+        "body": [
+            "<el-tag>$0</el-tag>"
+        ]
+    },
+    "el-text": {
+        "scope": "vue",
+        "prefix": "el-text",
+        "body": [
+            "<el-text>$0</el-text>"
+        ]
+    },
+    "el-time-picker": {
+        "scope": "vue",
+        "prefix": "el-time-picker",
+        "body": [
+            "<el-time-picker>$0</el-time-picker>"
+        ]
+    },
+    "el-time-select": {
+        "scope": "vue",
+        "prefix": "el-time-select",
+        "body": [
+            "<el-time-select>$0</el-time-select>"
+        ]
+    },
+    "el-timeline": {
+        "scope": "vue",
+        "prefix": "el-timeline",
+        "body": [
+            "<el-timeline>$0</el-timeline>"
+        ]
+    },
+    "el-timeline-item": {
+        "scope": "vue",
+        "prefix": "el-timeline-item",
+        "body": [
+            "<el-timeline-item>$0</el-timeline-item>"
+        ]
+    },
+    "el-tooltip": {
+        "scope": "vue",
+        "prefix": "el-tooltip",
+        "body": [
+            "<el-tooltip>$0</el-tooltip>"
+        ]
+    },
+    "el-tour": {
+        "scope": "vue",
+        "prefix": "el-tour",
+        "body": [
+            "<el-tour>$0</el-tour>"
+        ]
+    },
+    "el-tour-step": {
+        "scope": "vue",
+        "prefix": "el-tour-step",
+        "body": [
+            "<el-tour-step>$0</el-tour-step>"
+        ]
+    },
+    "el-transfer": {
+        "scope": "vue",
+        "prefix": "el-transfer",
+        "body": [
+            "<el-transfer>$0</el-transfer>"
+        ]
+    },
+    "el-tree": {
+        "scope": "vue",
+        "prefix": "el-tree",
+        "body": [
+            "<el-tree>$0</el-tree>"
+        ]
+    },
+    "el-tree-select": {
+        "scope": "vue",
+        "prefix": "el-tree-select",
+        "body": [
+            "<el-tree-select>$0</el-tree-select>"
+        ]
+    },
+    "el-tree-v2": {
+        "scope": "vue",
+        "prefix": "el-tree-v2",
+        "body": [
+            "<el-tree-v2>$0</el-tree-v2>"
+        ]
+    },
+    "el-upload": {
+        "scope": "vue",
+        "prefix": "el-upload",
+        "body": [
+            "<el-upload>$0</el-upload>"
+        ]
+    },
+    "el-virtual-list": {
+        "scope": "vue",
+        "prefix": "el-virtual-list",
+        "body": [
+            "<el-virtual-list>$0</el-virtual-list>"
+        ]
+    },
+    "el-watermark": {
+        "scope": "vue",
+        "prefix": "el-watermark",
+        "body": [
+            "<el-watermark>$0</el-watermark>"
+        ]
+    },
+    "fiber-popup": {
+        "scope": "vue",
+        "prefix": "fiber-popup",
+        "body": [
+            "<fiber-popup>$0</fiber-popup>"
+        ]
+    },
+    "layer-control": {
+        "scope": "vue",
+        "prefix": "layer-control",
+        "body": [
+            "<layer-control>$0</layer-control>"
+        ]
+    },
+    "map-popup-panel": {
+        "scope": "vue",
+        "prefix": "map-popup-panel",
+        "body": [
+            "<map-popup-panel>$0</map-popup-panel>"
+        ]
+    },
+    "nest-popup": {
+        "scope": "vue",
+        "prefix": "nest-popup",
+        "body": [
+            "<nest-popup>$0</nest-popup>"
+        ]
+    },
+    "popup-info": {
+        "scope": "vue",
+        "prefix": "popup-info",
+        "body": [
+            "<popup-info>$0</popup-info>"
+        ]
+    },
+    "popup-panel": {
+        "scope": "vue",
+        "prefix": "popup-panel",
+        "body": [
+            "<popup-panel>$0</popup-panel>"
+        ]
+    },
+    "site-button": {
+        "scope": "vue",
+        "prefix": "site-button",
+        "body": [
+            "<site-button>$0</site-button>"
+        ]
+    },
+    "site-switch": {
+        "scope": "vue",
+        "prefix": "site-switch",
+        "body": [
+            "<site-switch>$0</site-switch>"
+        ]
+    }
+}

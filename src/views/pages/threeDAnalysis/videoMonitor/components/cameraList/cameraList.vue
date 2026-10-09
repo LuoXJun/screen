@@ -46,7 +46,7 @@ withDefaults(
         /** 当前选中设备（互斥单选:点击详情后由页面注入,对应卡片呈现「已选择」态） */
         selectedDevice?: CameraDevice;
     }>(),
-    { title: '监控摄像头列表' }
+    { title: '监控摄像头列表', selectedDevice: undefined }
 );
 
 const emits = defineEmits<{
