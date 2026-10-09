@@ -26,8 +26,6 @@
         flex-direction: column;
         justify-content: space-around;
         gap: var(--lxj-gap);
-        pointer-events: all;
-        // overflow: auto;
     }
     // 侧栏顶部让位（如全局站点切换按钮;偏移值由布局注入,左右同时避让保持顶对齐）
     .aside.left,

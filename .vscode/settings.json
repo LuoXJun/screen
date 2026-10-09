@@ -10,26 +10,33 @@
     // .vue 文件的语言 ID 是 vue，必须列出 vue，<style lang="scss"> 块内的变量补全才会生效；
     // 若只留 scss/css 等，.vue 文件（含样式块）将完全收不到补全。
     "cssVariables.languages": ["vue", "scss", "postcss", "less", "css"],
-    // 抑制 template 干扰:CSS Variable Autocomplete 扩展按宿主文档语言 ID 注册补全,
-    // 且服务端不做区域解析,无法只在 .vue 的 style 块激活;关掉触发字符自动弹窗后,
-    // 在 template 输入含 - 的内容(el-button / class="foo-bar")不再被 -- 变量列表截胡;
-    // 需要变量补全时 Ctrl+Space 手动召唤;
-    // 代价:本项目内所有「触发字符」自动补全均转为手动
-    "editor.suggestOnTriggerCharacters": false,
+    // 抑制 template 干扰(修订版):此前误关了 suggestOnTriggerCharacters——那只掐掉
+    // 触发字符路径(连 Volar 的 `<` 弹组件补全一并掐死),而 CSS 变量扩展在 template 里
+    // 的骚扰实际来自 quickSuggestions(普通字符自动弹窗,不做 .vue 内区域过滤)。
+    // 现改用:.vue 域关闭 quickSuggestions(切断变量列表的自动弹出通路),
+    // 触发字符恢复默认——`<` 输入即弹组件补全,且补全框活跃时输入 `-` 只是继续过滤
+    // 不会重开变量窗;style 块内需要变量补全时 Ctrl+Space 手动召唤。
+    "[vue]": {
+        "editor.quickSuggestions": {
+            "other": false,
+            "comments": false,
+            "strings": false
+        }
+    },
     // CSS 变量跳转(CSS Variable Autocomplete 扩展)的扫描范围:仅源码;
     // 排除 dist 构建产物——否则 ctrl+click 会命中压缩产物里的同名定义
     "cssVariables.lookupFiles": ["src/**/*.scss", "src/**/*.vue", "src/**/*.css"],
-    // 编辑器全局索引排除构建产物(dist 里有同名 --变量 定义,会截胡 ctrl+click 跳转):
-    // 上一条只管住扩展,VS Code 内置 CSS 语言服务按 findFiles 扫工作区、不读扩展设置,
-    // 只认 files.exclude;对象型设置为覆盖语义,须连带默认排除项一起列出
+    // 编辑器文件排除:仅留系统噪声项。dist 不再排除——隐藏构建产物会让
+    // 「构建失败/产物缺失」无从肉眼确认(曾被误认为打包未成功);
+    // 代价:内置 CSS 语言服务 findFiles 可能重新扫到 dist 内的同名 --变量,
+    // ctrl+click 跳转偶发命中压缩产物时再单独处理
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/dist": true
+        "**/Thumbs.db": true
     },
     // 搜索面板同步排除;dist 虽已在 .gitignore(搜索默认吃忽略文件),此处显式声明更稳
     "search.exclude": {

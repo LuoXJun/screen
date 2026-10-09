@@ -39,6 +39,7 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 | `scripts/dev.sh {op}`            | 开发服务器启停（start/stop/restart/status，日志落 `logs/dev.log`）    |
 | `scripts/format.sh {mode}`       | Prettier 格式化（src 源码（默认）/ all 全量 / check 仅检查）          |
 | `pnpm build`                     | `vue-tsc -b` 全量类型检查 + 生产构建                                  |
+| `pnpm typeCheck`                 | 仅全量类型检查（`vue-tsc -b`，即 build 的前半段）                     |
 | `pnpm preview`                   | 预览构建产物                                                          |
 | `pnpm lint`                      | ESLint 检查 + knip 死代码扫描                                         |
 | `pnpm knip`                      | 仅死代码扫描（unused 提示属正常，见「迁移的外部代码」章节说明）       |
@@ -129,7 +130,7 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 
 - 使用 vue-mess-detector 进行代码自检，可根据提示进行相应的代码调整
 - 配置文件为 `.config/vue-mess-detector.json`
-- 目前已忽略 else 条件审查（`elseCondition`）与 script 代码行数检查（`scriptLength`），script 行数约束由 ESLint 把关
+- 目前已忽略 else 条件审查（`elseCondition`）、script 代码行数检查（`scriptLength`）与 if 大括号检查（`ifWithoutCurlyBraces`）——VMD 的大括号规则不区分单行/多行且无参数可配；script 行数约束与 `curly: multi-line`（单行 if 豁免、多行强制）由 ESLint 把关
 
 ### 类型文件相关
 

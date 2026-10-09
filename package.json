@@ -11,6 +11,7 @@
         "preinstall": "node scripts/check-package-manager.cjs",
         "dev": "vite",
         "build": "vue-tsc -b && vite build",
+        "typeCheck": "vue-tsc -b",
         "preview": "vite preview",
         "lint": "eslint ./src && knip",
         "knip": "knip",
@@ -29,6 +30,7 @@
         "vue-router": "^5.2.0"
     },
     "devDependencies": {
+        "@types/geojson": "^7946.0.16",
         "@types/node": "^24.13.3",
         "@types/qs": "^6.15.1",
         "@vitejs/plugin-vue": "^6.0.8",

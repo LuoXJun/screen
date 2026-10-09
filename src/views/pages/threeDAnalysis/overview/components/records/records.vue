@@ -62,7 +62,6 @@ function onOperation(): void {
 
 <style scoped lang="scss">
 .records {
-    pointer-events: all;
     width: 98%;
     position: absolute;
     bottom: 0;

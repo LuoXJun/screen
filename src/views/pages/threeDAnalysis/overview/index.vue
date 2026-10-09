@@ -32,6 +32,7 @@ const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 <style scoped lang="scss">
 /* 图层管理：贴左栏右侧,上下与侧栏齐高（撑满主区高度,不参与文档流） */
 .layer-control {
+    height: fit-content;
     position: absolute;
     left: 0;
     top: 0;

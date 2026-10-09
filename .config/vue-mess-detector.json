@@ -1,6 +1,6 @@
 {
     "level": "error",
-    "ignore": "globalStyle,singleNameComponent,scriptLength,elseCondition",
+    "ignore": "globalStyle,singleNameComponent,scriptLength,elseCondition,ifWithoutCurlyBraces",
     "exclude": "**/luckysheet,**/inspectionSetting,lucksheetComponent.vue,*.d.ts,src/utils/*",
     "override": {
         "maxExpressionLength": 40,
