@@ -30,13 +30,12 @@ const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 </script>
 
 <style scoped lang="scss">
-/* 图层管理：贴左栏右侧,上下与侧栏齐高（撑满主区高度,不参与文档流） */
+/* 图层管理：贴左栏右侧,顶部与侧栏内容顶对齐
+   （避让值与左右 aside 同源：站点按钮占位 42px）,高度按内容撑开 */
 .layer-control {
-    height: fit-content;
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
+    top: var(--lxj-aside-top-offset, 0);
     transform: translateX(20%);
     z-index: var(--lxj-z-sticky);
 }
