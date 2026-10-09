@@ -38,7 +38,10 @@ export class LineEffect {
             console.warn('[cesiumTools] 流动线至少需要 2 个点');
             return;
         }
-        const geometry = new Cesium.GroundPolylineGeometry({ width: this.lineWidth, positions: points });
+        const geometry = new Cesium.GroundPolylineGeometry({
+            width: this.lineWidth,
+            positions: points
+        });
         const primitive = new Cesium.GroundPolylinePrimitive({
             geometryInstances: [new Cesium.GeometryInstance({ geometry })],
             appearance: new Cesium.MaterialAppearance({

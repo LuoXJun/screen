@@ -6,7 +6,10 @@ import { toCartesian3, toCartesian3List } from './utils/coordinate';
 const entityPool = new Map<string, Cesium.Entity>();
 
 /** 新增实体（同名自动替换旧实体，避免池引用与 viewer 实体不一致） */
-export function addEntity(name: string, options: Cesium.Entity.ConstructorOptions = {}): Cesium.Entity {
+export function addEntity(
+    name: string,
+    options: Cesium.Entity.ConstructorOptions = {}
+): Cesium.Entity {
     removeEntity(name);
     const entity = getViewer().entities.add({ name, ...options });
     entityPool.set(name, entity);

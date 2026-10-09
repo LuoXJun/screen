@@ -36,7 +36,7 @@ export function buildHazardOption(): EChartsCoreOption {
                 label: { show: false },
                 labelLine: { show: false },
                 itemStyle: {
-                    borderWidth: scalePx(1.5),
+                    borderWidth: scalePx(1.5)
                     // borderColor: 'rgba(255, 255, 255, 0.65)'
                 },
                 data: HAZARD_ITEMS.map((item) => ({

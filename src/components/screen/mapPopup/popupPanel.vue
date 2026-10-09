@@ -90,8 +90,7 @@ const closeIcon = getImageWidthName('dialog-close.svg');
         border-bottom: 1px solid #469ce4;
         /* 设计稿取值:左浓右透蓝渐变 + 底槽实色 + 内发光 */
         background:
-            linear-gradient(90deg, rgba(5, 102, 186, 0.83) 0%, rgba(2, 96, 160, 0) 100%),
-            #003865;
+            linear-gradient(90deg, rgba(5, 102, 186, 0.83) 0%, rgba(2, 96, 160, 0) 100%), #003865;
         box-shadow:
             inset 0 base(-5px) base(13.5px) rgba(46, 135, 213, 0.63),
             inset 0 0 base(19.4px) rgba(5, 102, 186, 0.78);

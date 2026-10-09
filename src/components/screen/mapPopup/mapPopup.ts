@@ -37,7 +37,10 @@ export function showMapPopup(options: ShowMapPopupOptions): MapPopupHandle {
         popup.destroy();
     };
 
-    const content = typeof options.content === 'string' ? h('span', options.content) : options.content ?? null;
+    const content =
+        typeof options.content === 'string'
+            ? h('span', options.content)
+            : (options.content ?? null);
 
     const vnode = createVNode(MapPopupPanel, {
         title: options.title,

@@ -1,4 +1,10 @@
 {
+    // Prettier 加载修复：Volar 3.3.12 注册的同步模块 hook（Module.registerHooks）
+    // 与扩展宿主的异步 hook 混用时，import() 加载本地 prettier 的 CJS 入口
+    // (index.cjs) 会触发 Node validateLoad 报错（"Expected a string, an ArrayBuffer,
+    // or a TypedArray ... but got undefined"），格式化静默失效；
+    // 显式指向 ESM 入口(index.mjs)绕过该组合缺陷。命令行 pnpm format 不受影响。
+    "prettier.prettierPath": "./node_modules/prettier/index.mjs",
     // CSS Variable Autocomplete 补全语言：
     // 该扩展按「宿主文档语言 ID」注册补全（selector 为 {scheme: file, language: <id>}），
     // .vue 文件的语言 ID 是 vue，必须列出 vue，<style lang="scss"> 块内的变量补全才会生效；

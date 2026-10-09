@@ -5,7 +5,7 @@
     "type": "module",
     "packageManager": "pnpm@11.21.0",
     "engines": {
-        "node": "^20.19.0 || >=22.12.0"
+        "node": ">=22.18.0"
     },
     "scripts": {
         "preinstall": "node scripts/check-package-manager.cjs",

@@ -109,5 +109,8 @@ export {
 } from './effects/GroundMaterialEffect';
 export { createCircleGeometry, createSquareGeometry } from './effects/groundGeometry';
 export { LineEffect, type LineEffectOptions } from './effects/LineEffect';
-export { PostProcessStageEffect, type PostProcessStageEffectOptions } from './effects/PostProcessStageEffect';
+export {
+    PostProcessStageEffect,
+    type PostProcessStageEffectOptions
+} from './effects/PostProcessStageEffect';
 export { RenderGeoJsonByGround } from './effects/RenderGeoJsonByGround';

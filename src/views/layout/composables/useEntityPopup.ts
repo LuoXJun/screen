@@ -36,24 +36,20 @@ export function useEntityPopup(options: UseEntityPopupOptions = {}): void {
         }
         const pickHandler = createHandler();
         activeHandler = pickHandler;
-        pickHandler.setInputAction(
-            (movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
-                const viewer = getViewer();
-                const picked = viewer.scene.pick(movement.position);
-                if (!Cesium.defined(picked)) return;
-                const entity = picked.id instanceof Cesium.Entity ? picked.id : undefined;
-                if (!entity) return;
-                const position = entity.position?.getValue(viewer.clock.currentTime);
-                if (!position) return;
+        pickHandler.setInputAction((movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+            const viewer = getViewer();
+            const picked = viewer.scene.pick(movement.position);
+            if (!Cesium.defined(picked)) return;
+            const entity = picked.id instanceof Cesium.Entity ? picked.id : undefined;
+            if (!entity) return;
+            const position = entity.position?.getValue(viewer.clock.currentTime);
+            if (!position) return;
 
-                const props = entity.properties?.getValue(viewer.clock.currentTime) as
-                    | Record<string, unknown>
-                    | undefined;
-                const type = typeof props?.type === 'string' ? props.type : undefined;
-                const handler = (type ? options.contents?.[type] : undefined) ?? options.fallback;
-                handler?.({ entity, position, lonlat: toLonLat(position), props });
-            },
-            Cesium.ScreenSpaceEventType.LEFT_CLICK
-        );
+            const props = entity.properties?.getValue(viewer.clock.currentTime) as
+                Record<string, unknown> | undefined;
+            const type = typeof props?.type === 'string' ? props.type : undefined;
+            const handler = (type ? options.contents?.[type] : undefined) ?? options.fallback;
+            handler?.({ entity, position, lonlat: toLonLat(position), props });
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     });
 }

@@ -22,7 +22,10 @@ let viewer: Cesium.Viewer | null = null;
 Cesium.Ion.defaultAccessToken = DEFAULT_ION_TOKEN;
 
 /** 初始化全局 Viewer（重复调用返回已存在实例） */
-export function initViewer(container: HTMLElement, options: Cesium.Viewer.ConstructorOptions = {}): Cesium.Viewer {
+export function initViewer(
+    container: HTMLElement,
+    options: Cesium.Viewer.ConstructorOptions = {}
+): Cesium.Viewer {
     if (hasViewer()) {
         console.warn('[cesium] Viewer 已初始化，忽略重复调用');
         return viewer!;

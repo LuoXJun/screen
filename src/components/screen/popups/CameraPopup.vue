@@ -38,10 +38,7 @@ const STATUS_MAP: Record<CameraStatus, string> = {
 };
 
 /** 底部操作按钮（设计稿取值） */
-const BUTTONS: BaseDialogButton[] = [
-    { label: '切换：可见光/热成像' },
-    { label: '查看详情' }
-];
+const BUTTONS: BaseDialogButton[] = [{ label: '切换：可见光/热成像' }, { label: '查看详情' }];
 
 const infoItems = computed<DeviceInfoItem[]>(() => [
     { icon: 'id', label: '设备编号', value: props.data.no },

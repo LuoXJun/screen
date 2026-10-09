@@ -1,7 +1,10 @@
 import * as Cesium from 'cesium';
 
 /** 以中心点与半径（米）生成地面圆几何（EllipseGeometry） */
-export function createCircleGeometry(center: Cesium.Cartesian3, radius: number): Cesium.EllipseGeometry {
+export function createCircleGeometry(
+    center: Cesium.Cartesian3,
+    radius: number
+): Cesium.EllipseGeometry {
     return new Cesium.EllipseGeometry({
         center,
         semiMajorAxis: radius,
@@ -10,7 +13,10 @@ export function createCircleGeometry(center: Cesium.Cartesian3, radius: number):
 }
 
 /** 以中心点与半径（米）生成地面方形几何（边长 = 2 × 半径） */
-export function createSquareGeometry(center: Cesium.Cartesian3, radius: number): Cesium.RectangleGeometry {
+export function createSquareGeometry(
+    center: Cesium.Cartesian3,
+    radius: number
+): Cesium.RectangleGeometry {
     return new Cesium.RectangleGeometry({ rectangle: squareBoundsFromCenter(center, radius) });
 }
 

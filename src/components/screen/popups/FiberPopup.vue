@@ -15,7 +15,8 @@
             <div class="temp-card">
                 <div class="temp-head">
                     <p class="temp-value" :class="`is-${data.tempStatus}`">
-                        {{ data.temperature }}<span class="temp-unit">°C</span>
+                        {{ data.temperature }}
+                        <span class="temp-unit">°C</span>
                     </p>
                     <span class="temp-tag" :class="`is-${data.tempStatus}`">
                         {{ TEMP_STATUS_TEXT[data.tempStatus] }}

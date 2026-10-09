@@ -11,7 +11,10 @@ function buildEntityId(layerName: string, itemId: string): string {
  * Entity 型图层公共基类：统一管理实体集合与层级显隐（图层级 × 条目级叠加）。
  * 子类只需实现 createEntity（按数据项生成实体配置）。
  */
-export abstract class EntityLayerBase<T, C extends LayerConfig<T> = LayerConfig<T>> implements ItemLayer<T> {
+export abstract class EntityLayerBase<
+    T,
+    C extends LayerConfig<T> = LayerConfig<T>
+> implements ItemLayer<T> {
     readonly name: string;
     readonly type: LayerType;
     protected readonly config: C;

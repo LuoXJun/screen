@@ -8,7 +8,8 @@
                 </div>
                 <div class="body">
                     <p class="value" :style="{ color: item.valueColor }">
-                        {{ item.value }}<span class="unit">{{ item.unit }}</span>
+                        {{ item.value }}
+                        <span class="unit">{{ item.unit }}</span>
                     </p>
                     <p v-if="item.note" class="note" :class="`is-${item.noteType}`">
                         <img

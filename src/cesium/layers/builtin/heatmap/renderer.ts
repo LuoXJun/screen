@@ -15,7 +15,9 @@ function parseColor(color: string): RGB {
         return [r, g, b];
     }
     if (/^[0-9a-fA-F]{6}$/.test(hex)) {
-        return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((c) => parseInt(c, 16)) as RGB;
+        return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((c) =>
+            parseInt(c, 16)
+        ) as RGB;
     }
     const match = color.match(/rgba?\(([^)]+)\)/);
     if (match) {
@@ -55,7 +57,13 @@ function sampleGradient(stops: ColorStop[], t: number): RGB {
 }
 
 /** 经纬度 → 画布像素坐标（等距投影，纵向按中纬度余弦修正防拉伸） */
-function project(lon: number, lat: number, options: HeatmapRenderOptions, width: number, height: number): [number, number] {
+function project(
+    lon: number,
+    lat: number,
+    options: HeatmapRenderOptions,
+    width: number,
+    height: number
+): [number, number] {
     const { west, south, east, north } = options.bounds;
     const x = ((lon - west) / (east - west)) * width;
     const y = ((north - lat) / (north - south)) * height;
@@ -89,7 +97,12 @@ function computeSize(options: HeatmapRenderOptions): [number, number] {
 }
 
 /** 多边形区域掩膜：实心填充后按 feather 宽度高斯模糊，得到边缘内外渐变的 alpha 场 */
-function buildMask(options: HeatmapRenderOptions, width: number, height: number, feather: number): Uint8ClampedArray | null {
+function buildMask(
+    options: HeatmapRenderOptions,
+    width: number,
+    height: number,
+    feather: number
+): Uint8ClampedArray | null {
     if (feather <= 0) return null;
     const maskCanvas = document.createElement('canvas');
     maskCanvas.width = width;

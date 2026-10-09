@@ -77,7 +77,10 @@ export class MapPopup {
     /** 每帧同步：世界坐标 → 屏幕坐标 */
     private sync(): void {
         if (!this.anchor) return;
-        const windowPos = Cesium.SceneTransforms.worldToWindowCoordinates(getViewer().scene, this.anchor);
+        const windowPos = Cesium.SceneTransforms.worldToWindowCoordinates(
+            getViewer().scene,
+            this.anchor
+        );
         if (!windowPos) {
             this.apply({ visible: false, x: 0, y: 0 });
             return;

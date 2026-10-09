@@ -57,7 +57,7 @@ defineProps<{
             left: 0;
             top: 0;
         }
-        .icon{
+        .icon {
             width: base(40px);
         }
     }

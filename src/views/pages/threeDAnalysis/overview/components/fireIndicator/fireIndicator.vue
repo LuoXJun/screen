@@ -144,15 +144,27 @@ onBeforeUnmount(() => {
             --el-button-border-color: color-mix(in srgb, var(--color-blue-500) 18%, transparent);
             --el-button-text-color: var(--color-blue-500);
             --el-button-hover-bg-color: color-mix(in srgb, var(--color-cyan-400) 10%, transparent);
-            --el-button-hover-border-color: color-mix(in srgb, var(--color-cyan-400) 30%, transparent);
+            --el-button-hover-border-color: color-mix(
+                in srgb,
+                var(--color-cyan-400) 30%,
+                transparent
+            );
             --el-button-hover-text-color: var(--color-cyan-400);
             --el-button-active-bg-color: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
-            --el-button-active-border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+            --el-button-active-border-color: color-mix(
+                in srgb,
+                var(--color-cyan-400) 40%,
+                transparent
+            );
             --el-button-active-text-color: var(--color-cyan-400);
 
             &.is-active {
                 --el-button-bg-color: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
-                --el-button-border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+                --el-button-border-color: color-mix(
+                    in srgb,
+                    var(--color-cyan-400) 40%,
+                    transparent
+                );
                 --el-button-text-color: var(--color-cyan-400);
             }
         }

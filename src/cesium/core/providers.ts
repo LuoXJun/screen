@@ -6,8 +6,7 @@ export function createAmapImagery(
 ): Cesium.UrlTemplateImageryProvider {
     const urls = {
         satellite: 'https://webst0{is}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
-        vector:
-            'https://webrd0{is}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
+        vector: 'https://webrd0{is}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
         road: 'https://webst0{is}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}'
     };
     return new Cesium.UrlTemplateImageryProvider({

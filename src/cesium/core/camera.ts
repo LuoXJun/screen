@@ -30,7 +30,12 @@ export interface LonLatViewOptions {
 }
 
 /** 相机飞行至经纬度（角度制参数） */
-export function flyToLonLat(lng: number, lat: number, height: number, options: LonLatViewOptions = {}): void {
+export function flyToLonLat(
+    lng: number,
+    lat: number,
+    height: number,
+    options: LonLatViewOptions = {}
+): void {
     const { heading = 0, pitch = -90, roll = 0, duration } = options;
     getViewer().camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(lng, lat, height),
@@ -44,7 +49,12 @@ export function flyToLonLat(lng: number, lat: number, height: number, options: L
 }
 
 /** 相机瞬移至经纬度（无飞行动画） */
-export function setViewLonLat(lng: number, lat: number, height: number, options: Omit<LonLatViewOptions, 'duration'> = {}): void {
+export function setViewLonLat(
+    lng: number,
+    lat: number,
+    height: number,
+    options: Omit<LonLatViewOptions, 'duration'> = {}
+): void {
     const { heading = 0, pitch = -90, roll = 0 } = options;
     getViewer().camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(lng, lat, height),
@@ -57,7 +67,13 @@ export function setViewLonLat(lng: number, lat: number, height: number, options:
 }
 
 /** 相机飞行至经纬度矩形范围 */
-export function flyToRectangle(west: number, south: number, east: number, north: number, duration?: number): void {
+export function flyToRectangle(
+    west: number,
+    south: number,
+    east: number,
+    north: number,
+    duration?: number
+): void {
     getViewer().camera.flyTo({
         destination: Cesium.Rectangle.fromDegrees(west, south, east, north),
         duration

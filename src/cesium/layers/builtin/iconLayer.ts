@@ -39,7 +39,13 @@ class IconLayer extends EntityLayerBase<IconItem, IconLayerConfig> {
             ? createBillboard(item.lng, item.lat, height, item.image, this.config.billboard)
             : createPoint(item.lng, item.lat, height, this.config.pointStyle);
         if (item.label) {
-            options.label = createLabel(item.lng, item.lat, height, item.label, this.config.labelStyle).label;
+            options.label = createLabel(
+                item.lng,
+                item.lat,
+                height,
+                item.label,
+                this.config.labelStyle
+            ).label;
         }
         return options;
     }

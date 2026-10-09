@@ -16,7 +16,10 @@ export interface HeatmapLayerConfig extends LayerConfig<HeatmapPoint>, HeatmapSt
  * 温度热力图图层：数据点 + 温度色条渲染成 canvas，
  * 经 SingleTileImageryProvider 贴到地球上（挂入影像池统一管理）。
  */
-export function createHeatmapLayer(name: string, config?: HeatmapLayerConfig): MapLayer<HeatmapPoint> {
+export function createHeatmapLayer(
+    name: string,
+    config?: HeatmapLayerConfig
+): MapLayer<HeatmapPoint> {
     if (!config?.polygon?.rings.length || !config.colors?.length) {
         throw new Error(`heatmap 图层「${name}」缺少 polygon 或 colors 配置`);
     }
@@ -54,7 +57,12 @@ class HeatmapLayer implements MapLayer<HeatmapPoint> {
             removeImageryLayer(this.name);
             return;
         }
-        const canvas = renderHeatmap({ points, bounds: this.bounds, polygon: this.polygon, ...this.style });
+        const canvas = renderHeatmap({
+            points,
+            bounds: this.bounds,
+            polygon: this.polygon,
+            ...this.style
+        });
         addImageryLayer(
             new Cesium.SingleTileImageryProvider({
                 url: canvas.toDataURL('image/png'),

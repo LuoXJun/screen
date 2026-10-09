@@ -1,5 +1,6 @@
-/** @type {import('prettier').Config} */
-const config = {
+import { type Config } from 'prettier';
+
+const config: Config = {
     // 一行最多 80 字符
     printWidth: 100,
     // 使用 4 个空格缩进

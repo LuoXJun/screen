@@ -83,7 +83,9 @@ export function hasDataSource(name: string): boolean {
 /** 移除数据源（支持按 name 或实例） */
 export function removeDataSource(nameOrDataSource: string | Cesium.DataSource): void {
     const dataSource =
-        typeof nameOrDataSource === 'string' ? dataSourcePool.get(nameOrDataSource) : nameOrDataSource;
+        typeof nameOrDataSource === 'string'
+            ? dataSourcePool.get(nameOrDataSource)
+            : nameOrDataSource;
     if (!dataSource) return;
     getViewer().dataSources.remove(dataSource, true);
     removeFromPool(dataSourcePool, nameOrDataSource);
@@ -119,7 +121,10 @@ export function loadKml(
 }
 
 /** 加载完成后自动挂载并注册到数据源池 */
-async function trackDataSource<T extends Cesium.DataSource>(name: string, loading: Promise<T>): Promise<T> {
+async function trackDataSource<T extends Cesium.DataSource>(
+    name: string,
+    loading: Promise<T>
+): Promise<T> {
     const dataSource = await loading;
     addDataSource(dataSource, name);
     return dataSource;
