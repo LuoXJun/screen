@@ -9,7 +9,7 @@ Vue 3 + TypeScript + Vite 基础大屏项目模板
 1. **Corepack 版本校验**：`package.json` 中的 `"packageManager": "pnpm@11.21.0"` 字段，Corepack 会校验 pnpm 版本是否一致
 2. **依赖安装拦截**：`preinstall` 钩子调用 `node scripts/check-package-manager.cjs`，使用 npm / yarn / bun 执行依赖安装时直接报错退出（不依赖网络）
 3. **pnpm 自身版本校验**：`.npmrc` 中的 `package-manager-strict=true`，pnpm 运行时校验 `packageManager` 字段，版本不匹配则拒绝执行
-4. **Node 版本约束**：`engines.node`（`^20.19.0 || >=22.12.0`，vite 8 的最低要求）+ `.npmrc` 中的 `engine-strict=true`，Node 版本不满足时拒绝安装
+4. **Node 版本约束**：`engines.node`（`>=22.18.0`——Node 原生 TS 支持，供 `.prettierrc.ts` 加载；vite 8 基础要求为 `^20.19.0 || >=22.12.0`，此处收紧）+ `.npmrc` 中的 `engine-strict=true`，Node 版本不满足时直接报错（拒绝安装/执行）而非静默失效
 
 > 注：`npm install --ignore-scripts` 可跳过 preinstall 钩子（包管理器设计如此，仓库侧无法阻止），如需彻底防止，请在 CI 中统一使用 pnpm 执行安装。
 
@@ -24,51 +24,53 @@ npm ≤ 11 不检查 `packageManager` 字段，且执行顺序为「先联网解
 ## 快速开始
 
 ```bash
-pnpm install     # 安装依赖（仅允许 pnpm，约束机制见上一章节）
-pnpm dev         # 启动开发服务器，默认 http://localhost:3005
-pnpm build       # 类型检查 + 生产构建（产物在 dist/）
+pnpm install                # 安装依赖（仅允许 pnpm，约束机制见上一章节）
+scripts/dev.sh start        # 启动开发服务器，默认 http://localhost:3005（日志落 logs/dev.log）
+scripts/dev.sh stop         # 停止（restart / status 同理）
+pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 ```
+
+> Run & Debug 一律经 `scripts/*.sh` 启停（日志统一落 `logs/`），不要直接挂 `pnpm dev` 后台进程。
 
 ## 常用命令
 
-| 命令             | 说明                                                                  |
-| ---------------- | --------------------------------------------------------------------- |
-| `pnpm dev`       | 启动 Vite 开发服务器（端口 3005，`/user` 前缀代理到后端）             |
-| `pnpm build`     | `vue-tsc -b` 全量类型检查 + 生产构建                                  |
-| `pnpm preview`   | 预览构建产物                                                          |
-| `pnpm lint`      | ESLint 检查 + knip 死代码扫描                                         |
-| `pnpm knip`      | 仅死代码扫描（unused 提示属正常，见「迁移的外部代码」章节说明）       |
-| `pnpm formatSrc` | Prettier 格式化 `src/`                                                |
-| `pnpm format`    | Prettier 格式化全项目                                                 |
-| `pnpm analyze`   | vue-mess-detector 代码自检（配置见 `.config/vue-mess-detector.json`） |
+| 命令                             | 说明                                                                  |
+| -------------------------------- | --------------------------------------------------------------------- |
+| `scripts/dev.sh {op}`            | 开发服务器启停（start/stop/restart/status，日志落 `logs/dev.log`）    |
+| `scripts/format.sh {mode}`       | Prettier 格式化（src 源码（默认）/ all 全量 / check 仅检查）          |
+| `pnpm build`                     | `vue-tsc -b` 全量类型检查 + 生产构建                                  |
+| `pnpm preview`                   | 预览构建产物                                                          |
+| `pnpm lint`                      | ESLint 检查 + knip 死代码扫描                                         |
+| `pnpm knip`                      | 仅死代码扫描（unused 提示属正常，见「迁移的外部代码」章节说明）       |
+| `pnpm formatSrc` / `pnpm format` | Prettier 格式化 `src/` / 全项目（等价于 `scripts/format.sh`）         |
+| `pnpm analyze`                   | vue-mess-detector 代码自检（配置见 `.config/vue-mess-detector.json`） |
 
 ## 编辑器插件（VSCode）
 
 以下扩展建议全部安装：
 
-| 插件                      | 扩展 ID                             | 作用与安装原因                                                                                                                                                                                                                            |
-| ------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Vue - Official (Volar)    | `Vue.volar`                         | 项目为 Vue 3 + TS + SFC，`.vue` 单文件组件的模板类型提示、跳转、补全全依赖它；类型检查链路 `vue-tsc` 也以它为语言服务底座。**不要安装已废弃的 Vetur**，两者共存会互相干扰。                                                               |
-| ESLint                    | `dbaeumer.vscode-eslint`            | 实时应用 `eslint.config.ts` 的团队硬性约束（`max-lines-per-function` 100 行、`max-depth` 3 层、`curly` 等），编辑器内即时报错，避免提交时批量返工。                                                                                       |
-| Prettier                  | `esbenp.prettier-vscode`            | 按 `.prettierrc.mjs` 统一格式（4 空格缩进、单引号、100 列、LF）。安装后需设为默认格式化工具（右键 → 格式化文档 → 配置默认格式化程序）。配置刻意用 `.mjs` 而非 `.ts`：TS 配置依赖 Node 22.18+ 的原生 TS 支持，而 VSCode 扩展跑在自带的 Electron Node 上、版本往往偏低，会导致格式化静默失效。 |
-| CSS Variable Autocomplete | `vunguyentuan.vscode-css-variables` | 本项目样式体系以 CSS 变量令牌驱动（`--lxj-*` 语义令牌、`--el-*` 绑定层），该扩展提供变量补全、颜色预览与 Ctrl+点击跳转定义。`.vscode/settings.json` 已为其配置：补全语言含 `vue`、扫描范围限定 `src/**`（排除 `dist` 避免命中压缩产物）。 |
+| 插件                      | 扩展 ID                             | 作用与安装原因                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Vue - Official (Volar)    | `Vue.volar`                         | 项目为 Vue 3 + TS + SFC，`.vue` 单文件组件的模板类型提示、跳转、补全全依赖它；类型检查链路 `vue-tsc` 也以它为语言服务底座。**不要安装已废弃的 Vetur**，两者共存会互相干扰。                                                                                                                                                                                                                                                                              |
+| ESLint                    | `dbaeumer.vscode-eslint`            | 实时应用 `eslint.config.ts` 的团队硬性约束（`max-lines-per-function` 100 行、`max-depth` 3 层、`curly` 等），编辑器内即时报错，避免提交时批量返工。                                                                                                                                                                                                                                                                                                      |
+| Prettier                  | `esbenp.prettier-vscode`            | 按 `.prettierrc.ts` 统一格式（4 空格缩进、单引号、100 列、LF）。安装后需设为默认格式化工具（右键 → 格式化文档 → 配置默认格式化程序）。`.vscode/settings.json` 已把 `prettier.prettierPath` 指向扩展的 ESM 入口（`index.mjs`）：Volar 3.3.12 注册的同步模块 hook 与扩展宿主异步 hook 混用时，Prettier 扩展加载 CJS 入口（`index.cjs`）会触发 Node `validateLoad` 报错、格式化静默失效，走 ESM 入口绕过该组合缺陷（命令行 `scripts/format.sh` 不受影响）。 |
+| CSS Variable Autocomplete | `vunguyentuan.vscode-css-variables` | 本项目样式体系以 CSS 变量令牌驱动（`--lxj-*` 语义令牌、`--el-*` 绑定层），该扩展提供变量补全、颜色预览与 Ctrl+点击跳转定义。`.vscode/settings.json` 已为其配置：补全语言含 `vue`、扫描范围限定 `src/**`（排除 `dist` 避免命中压缩产物）。                                                                                                                                                                                                                |
 
 > `.vscode/extensions.json` 已内置 Vue / ESLint / Prettier 三项推荐，打开项目会自动提示；CSS Variable Autocomplete 需手动搜索安装。
 > 除上表外无需其他样式类插件：SCSS 语法高亮为 VSCode 内置；`vue-mess-detector` 为 CLI 工具（`pnpm analyze`），不依赖编辑器扩展。
 
 ## 目录结构
 
-| 路径               | 职责                                                                                                 |
-| ------------------ | ---------------------------------------------------------------------------------------------------- |
-| `src/api/`         | 接口层：`fh2/` 为司空 2 OpenAPI 客户端（请求封装、拦截器、按域生成的类型）                           |
-| `src/cesium/`      | 地图引擎封装：`core/` 工具、`effects/` 效果、`layers/` 图层（含 builtin 内置实现）                   |
-| `src/components/`  | 对 UI 框架的二次封装：baseXxx 基础组件、`screen/` 大屏组件、`charts/` 图表、`layerControl/` 图层控制 |
-| `src/composables/` | 组合式函数                                                                                           |
-| `src/router/`      | 路由引擎：`route-admin.ts` / `route-screen.ts` 声明双端菜单，`rebuild.ts` 按模式动态注册             |
-| `src/stores/`      | Pinia 状态：`useMenuStore` 驱动菜单、路由重建与「管理端 ⇄ 大屏」切换                                 |
-| `src/styles/`      | 样式体系（令牌分层，见下节）                                                                         |
-| `src/utils/`       | 工具函数（`request/` 为请求封装）                                                                    |
-| `src/views/`       | 页面：`index.vue`（管理端布局）、`layout/`（大屏布局）、`pages/`（按端分目录），布局经动态路由挂载   |
+| 路径              | 职责                                                                                                                                                  |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/api/`        | 接口层（当前：`auth.ts` 认证接口；请求封装见 `src/utils/request/`）                                                                                   |
+| `src/cesium/`     | 地图引擎封装：`core/` 工具、`effects/` 效果、`layers/` 图层（含 builtin 内置实现）                                                                    |
+| `src/components/` | 对 UI 框架的二次封装与业务组件：`baseXxx` 基础组件、`baseChart` 图表、`baseCesium` 地图容器、`screen/` 大屏业务组件（图层控制、地图弹窗、设备弹窗等） |
+| `src/router/`     | 路由即菜单：`menu.ts` 声明大屏菜单树，`index.ts` 依树生成路由、经 `import.meta.glob` 解析页面组件                                                     |
+| `src/styles/`     | 样式体系（令牌分层，见下节）                                                                                                                          |
+| `src/types/`      | 类型声明：unplugin 自动生成（`autoImport.d.ts` / `components.d.ts`）+ 手工全局类型（`modules.type.d.ts` / `router.d.ts`）                             |
+| `src/utils/`      | 工具函数（`request/` 为请求封装）                                                                                                                     |
+| `src/views/`      | 页面：`login/`、`notFound.vue`、`layout/`（大屏布局）、`pages/`（业务页面，目录名与菜单 name 对应），业务路由经 menu.ts 动态挂载                      |
 
 ## 样式体系（令牌分层）
 
@@ -79,7 +81,7 @@ pnpm build       # 类型检查 + 生产构建（产物在 dist/）
 | 路径                      | 层                           | 放什么                                                                                                        |
 | ------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `tokens/_primitive.scss`  | 原始值层                     | 纯色板与数值尺度（"值仓库"，无消费语义）：新增品牌色、字号/间距档位放这里                                     |
-| `tokens/_semantic.scss`   | 语义层 · 共享默认（`:root`） | 两端同值的尺寸型语义：字号、间距、圆角、层级 `--lxj-z-*`                                                      |
+| `tokens/_semantic.scss`   | 语义层 · 共享默认（`:root`） | 两端同值的通用语义：success/warning/danger/info 等色彩、字号、间距、圆角、层级 `--lxj-z-*`                    |
 | `tokens/_admin.scss`      | 语义层 · 管理端              | `html[data-app="admin"]` 下管理端专属：颜色、背景、填充、阴影                                                 |
 | `tokens/_screen.scss`     | 语义层 · 大屏                | `html[data-app="screen"]` 下大屏专属：颜色类 + 尺寸语义的 vw 换算覆盖                                         |
 | `tokens/_functions.scss`  | 编译期函数                   | `base()` / `font()` 数值换算，经 vite `additionalData` 全局注入                                               |
@@ -92,12 +94,12 @@ pnpm build       # 类型检查 + 生产构建（产物在 dist/）
 
 ### 命名规则
 
-| 层        | 规则                                       | 示例                                                                                               |
-| --------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 原始值层  | 无前缀，数值即 px                          | `--color-blue-400`、`--font-16`、`--space-16`、`--radius-6`                                        |
-| 语义层    | `--lxj-<语义>`                             | `--lxj-color-primary`、`--lxj-bg-panel`、`--lxj-font-panel`、`--lxj-space-16`、`--lxj-radius-base` |
-| EP 绑定层 | 沿用 `--el-*`（业务不直接写，EP 内部消费） | `--el-color-primary`、`--el-bg-color`                                                              |
-| 工具类    | `.lxj-<名>`                                | `.lxj-flex-center`、`.lxj-flex-between`                                                            |
+| 层        | 规则                                       | 示例                                                                                                 |
+| --------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| 原始值层  | 无前缀，数值即 px                          | `--color-blue-400`、`--font-16`、`--space-16`、`--radius-6`                                          |
+| 语义层    | `--lxj-<语义>`                             | `--lxj-color-primary`、`--lxj-bg-panel`、`--lxj-font-body`、`--lxj-space-panel`、`--lxj-radius-base` |
+| EP 绑定层 | 沿用 `--el-*`（业务不直接写，EP 内部消费） | `--el-color-primary`、`--el-bg-color`                                                                |
+| 工具类    | `.lxj-<名>`                                | `.lxj-flex-center`、`.lxj-flex-between`                                                              |
 
 ### 应用硬约束
 
@@ -110,13 +112,13 @@ pnpm build       # 类型检查 + 生产构建（产物在 dist/）
 
 ### 主题作用域与切换
 
-- 语义层按 `html[data-app="admin" | "screen"]` 解析，两端各自完整声明颜色/背景类语义
-- 切换由布局组件挂载时设置（`views/index.vue` → `admin`，`views/layout/index.vue` → `screen`）；login 等无布局页自行设置
+- 语义层按 `html[data-app="admin" | "screen"]` 解析，两端各自独立声明颜色/背景类语义（`_admin.scss` 为管理端覆盖，当前大屏侧消费 `_screen.scss`）
+- 切换由布局组件挂载时设置（`views/layout/index.vue` → `screen`）；login 等无布局页落到 `:root` 共享默认
 - 挂在 `<html>` 而非布局根：EP 弹层 teleport 到 body 后依然命中，无需 body 类桥接
 
 ### 大屏自适应
 
-- 基准 `--screen-base`（默认 `100vw`，可按部署形态调整为 `min(100vw, 2560px)` 等封顶策略）
+- 基准 `--screen-base`：以 1920 为设计中心，`clamp(1600px, 100vw, 3840px)`——视口在此区间内等比跟随，超出则封顶（上下限为 `_screen.scss` 的 `--screen-base-min/max`）
 - `base(设计px)`：线性换算 = 设计稿 px × (基准 / 1920)，宽高等比缩放
 - `font(设计px)`：在 `base` 上叠加 `clamp` 限幅（默认下限 design×0.5+4px、上限 design×1.1），小屏保可读、大屏防臃肿
 - 函数经 vite `additionalData` 注入，组件 scoped 样式内直接裸调；`tokens/` 内 partial 需自写 `@use './functions' as *`
@@ -125,17 +127,15 @@ pnpm build       # 类型检查 + 生产构建（产物在 dist/）
 
 ### 代码自检
 
-- 使用vue-mess-detector进行代码自检，可根据提示进行相应的代码调整
-- 配置文件为.config/vue-mess-detector.json
-- 目前已忽略else的条件审查
-- 关闭script代码行数检查，使用eslint进行单页面的总代码行数检查
+- 使用 vue-mess-detector 进行代码自检，可根据提示进行相应的代码调整
+- 配置文件为 `.config/vue-mess-detector.json`
+- 目前已忽略 else 条件审查（`elseCondition`）与 script 代码行数检查（`scriptLength`），script 行数约束由 ESLint 把关
 
 ### 类型文件相关
 
-- 组件、工具函数等专用的类型文件可和文件放在同一文件夹下，其余放在types文件夹下
-- 后台数据相关的类型文件按照接口文档模块进行分类放在types/service文件夹下，以接口前缀为文件夹名
-- 全局类型写在window.global.d.ts中
-- 对elementplus类型的扩写写在elementplusType.type.d.ts中
+- 组件、工具函数等专用的类型文件可和文件放在同一文件夹下，其余放在 `types/` 目录下
+- 全局类型以 `<模块>.type.d.ts` 命名放 `types/` 目录下（如 `modules.type.d.ts`）；对 `vue-router` 等第三方模块的类型扩写放对应 `.d.ts`（如 `router.d.ts` 扩展 `RouteMeta`）
+- `src/types/` 中的 `autoImport.d.ts`、`components.d.ts` 由 unplugin 自动生成，勿手改
 
 ### vue常见问题
 

@@ -1,9 +1,6 @@
 <template>
     <basePanelMask class="layerControl">
-        <div class="layerControl-title">
-            <i class="title-bar"></i>
-            <span class="title-text">{{ title }}</span>
-        </div>
+        <baseSectionTitle :title="title" />
         <el-checkbox-group v-model="checked" class="layerControl-list">
             <el-checkbox v-for="item in list" :key="item.value" :value="item.value">
                 {{ item.label }}
@@ -14,6 +11,7 @@
 
 <script setup lang="ts">
 import basePanelMask from '@/components/basePanel/basePanelMask.vue';
+import baseSectionTitle from '@/components/baseSectionTitle/baseSectionTitle.vue';
 import type { LayerControlItem } from './layerControl';
 
 /** 选中图层标识列表 */
@@ -34,28 +32,6 @@ withDefaults(
 .layerControl {
     /* 覆写 basePanelMask 的默认内距（变量定义在元素上,直接覆盖 :root 继承值；设计稿 8px） */
     --lxj-space-panel: #{base(8px)};
-
-    .layerControl-title {
-        display: flex;
-        align-items: center;
-        gap: base(6px);
-
-        /* 设计稿取值:青色竖条 + 发光 */
-        .title-bar {
-            width: base(3px);
-            height: base(14px);
-            border-radius: base(2px);
-            background: var(--color-cyan-400);
-            box-shadow: 0 0 base(10px) color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
-        }
-
-        .title-text {
-            color: var(--color-cyan-400);
-            font-size: var(--lxj-font-body);
-            font-weight: var(--lxj-font-weight-Semibold);
-            letter-spacing: base(0.7px);
-        }
-    }
 
     .layerControl-list {
         display: flex;
