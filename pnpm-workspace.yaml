@@ -1,5 +1,6 @@
 allowBuilds:
     '@parcel/watcher': true
     protobufjs: true
+engineStrict: true
 overrides:
     '@zip.js/zip.js': 2.7.34

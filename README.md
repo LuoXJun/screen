@@ -1,6 +1,6 @@
-# base-screen-template
+# 洪家渡防火灾系统
 
-Vue 3 + TypeScript + Vite 基础大屏项目模板
+Vue 3 + TypeScript + Vite
 
 ## 包管理器（仅允许 pnpm）
 
@@ -9,7 +9,7 @@ Vue 3 + TypeScript + Vite 基础大屏项目模板
 1. **Corepack 版本校验**：`package.json` 中的 `"packageManager": "pnpm@11.21.0"` 字段，Corepack 会校验 pnpm 版本是否一致
 2. **依赖安装拦截**：`preinstall` 钩子调用 `node scripts/check-package-manager.cjs`，使用 npm / yarn / bun 执行依赖安装时直接报错退出（不依赖网络）
 3. **pnpm 自身版本校验**：`.npmrc` 中的 `package-manager-strict=true`，pnpm 运行时校验 `packageManager` 字段，版本不匹配则拒绝执行
-4. **Node 版本约束**：`engines.node`（`>=22.18.0`——Node 原生 TS 支持，供 `.prettierrc.ts` 加载；vite 8 基础要求为 `^20.19.0 || >=22.12.0`，此处收紧）+ `.npmrc` 中的 `engine-strict=true`，Node 版本不满足时直接报错（拒绝安装/执行）而非静默失效
+4. **Node 版本约束**：`engines.node`（`^22.22.2 || ^24.15.0 || >=26.0.0`——全链路约束的交集，逐条依据见下方「Node 版本区间的由来」）+ `pnpm-workspace.yaml` 中的 `engineStrict: true`，Node 版本不满足时 `pnpm install` 直接报错 `ERR_PNPM_UNSUPPORTED_ENGINE`（拒绝安装）而非静默失效。⚠️ `.npmrc` 的 `engine-strict=true` 在 pnpm 11 下已被忽略（实测：对 root 与依赖的 engines 均不生效），该键仅 npm 路径仍认；pnpm 侧强校验必须靠 `engineStrict`
 
 > 注：`npm install --ignore-scripts` 可跳过 preinstall 钩子（包管理器设计如此，仓库侧无法阻止），如需彻底防止，请在 CI 中统一使用 pnpm 执行安装。
 
@@ -17,9 +17,24 @@ Vue 3 + TypeScript + Vite 基础大屏项目模板
 
 npm ≤ 11 不检查 `packageManager` 字段，且执行顺序为「先联网解析依赖树 → 再执行 preinstall 拦截」，因此 `npm i` 会先长时间联网转圈（看起来像卡死），之后才被拦截报错；若本地 `node_modules` 由 pnpm 安装（`.pnpm/` 结构），npm 的 arborist 读不懂该布局，还会直接崩溃（`Cannot read properties of null`）。**请使用 `pnpm install` / `pnpm add`。**
 
-在 **npm 12+** 中，root `preinstall` 已提前到依赖安装之前执行，`npm i` 会在联网解析前被拦截脚本直接报错退出（实测约 2 秒）。环境要求：Node `^22.22.2 || ^24.15.0 || >=26.0.0` + `npm install -g npm@12`（nvm-windows 下每个 Node 版本的全局 npm / pnpm 相互独立，切换 Node 后需重新安装：`npm install -g npm@12 pnpm@11.21.0`）。
+在 **npm 12+** 中，root `preinstall` 已提前到依赖安装之前执行，`npm i` 会在联网解析前被拦截脚本直接报错退出（实测约 2 秒）。环境要求：Node 落在项目 `engines.node` 区间内（见下）+ `npm install -g npm@12`（nvm-windows 下每个 Node 版本的全局 npm / pnpm 相互独立，切换 Node 后需重新安装：`npm install -g npm@12 pnpm@11.21.0`）。
 
 > 注：`.npmrc` 中的 `package-manager-strict` 为 pnpm 专属配置（校验 `packageManager` 版本），npm 会提示 unknown config 警告，不影响使用。
+
+### Node 版本区间的由来
+
+`engines.node`（`^22.22.2 || ^24.15.0 || >=26.0.0`）取的是全链路约束的**交集**，各条约束由紧到松：
+
+| 约束来源                           | Node 要求                               | 排除项                                |
+| ---------------------------------- | --------------------------------------- | ------------------------------------- |
+| npm 12（最紧）                     | `^22.22.2 \|\| ^24.15.0 \|\| >=26.0.0`  | 22.18~22.22.1、23.x、24.0~24.14、25.x |
+| vue-router 5 传递依赖 `@babel/*@8` | `^22.18.0 \|\| >=24.11.0`               | 23.x、24.0~24.10                      |
+| ESLint 10                          | `^20.19.0 \|\| ^22.13.0 \|\| >=24`      | 23.x                                  |
+| pnpm 11.21 / vite 8                | `>=22.13` / `^20.19.0 \|\| >=22.12.0`   | —                                     |
+
+因此看似更宽松的 `>=22.18.0` 并不会真的放宽可用范围，只会放行 23.x、24.0~24.14 等随后被依赖链拒绝的版本、让校验「谎报通过」；故 `engines` 直接采用与 npm 12 一致的表达式（恰为全链路交集），并把 23.x / 25.x 这类非 LTS（奇数）版本一并排除。区间自带 Node 原生 TS 支持（供 `.prettierrc.ts` 加载）。
+
+> 注：pnpm 11 **已不读取 `.npmrc` 的 `engine-strict`**（实测三组对照：无配置时仅 `WARN Unsupported engine` 后照常安装；`.npmrc` 设 `engine-strict=true` 后连警告都被吞掉、静默通过；仅 `pnpm-workspace.yaml` 的 `engineStrict: true` 会硬拦 `ERR_PNPM_UNSUPPORTED_ENGINE`）。故 `.npmrc` 保留该键仅服务 npm 路径（npm 对 root/依赖 engines 的强校验仍认它），pnpm 侧的强校验（root 与依赖的 engines 一并校验）统一由 `pnpm-workspace.yaml` 的 `engineStrict: true` 承担。
 
 ## 快速开始
 
