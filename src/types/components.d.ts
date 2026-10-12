@@ -62,5 +62,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SiteButton: typeof import('./../components/screen/siteSwitch/siteButton.vue')['default']
     SiteSwitch: typeof import('./../components/screen/siteSwitch/siteSwitch.vue')['default']
+    ToolsBar: typeof import('./../components/baseCesium/toolsBar.vue')['default']
   }
 }

@@ -68,6 +68,8 @@ export {
     toLonLat,
     distanceInMeters,
     forEachFeature,
+    removeHeightFromGeoJSON,
+    extractBoundariesAsGeoJSON,
     type LeafGeometry
 } from './core/utils';
 
@@ -108,9 +110,19 @@ export {
     type GroundMaterialEffectOptions
 } from './effects/GroundMaterialEffect';
 export { createCircleGeometry, createSquareGeometry } from './effects/groundGeometry';
+export { createPolygonPrimitives, type GroundPolygonStyle } from './effects/polygonPrimitive';
 export { LineEffect, type LineEffectOptions } from './effects/LineEffect';
 export {
     PostProcessStageEffect,
     type PostProcessStageEffectOptions
 } from './effects/PostProcessStageEffect';
-export { RenderGeoJsonByGround } from './effects/RenderGeoJsonByGround';
+export { RenderGeoJsonByGround, type GeoJsonRenderStyle } from './effects/RenderGeoJsonByGround';
+
+// 交互绘制
+export {
+    DrawGeometry,
+    isDrawingActive,
+    entity2Geojson,
+    type DrawGeometryStyle,
+    type GeometryType
+} from './draw';

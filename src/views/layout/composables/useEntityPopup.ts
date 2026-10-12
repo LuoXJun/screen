@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium';
 import { onMounted } from 'vue';
-import { clearHandler, createHandler, getViewer, toLonLat } from '@/cesium';
+import { clearHandler, createHandler, getViewer, isDrawingActive, toLonLat } from '@/cesium';
 
 /** 本模块当前活跃的点击监听（HMR 重建时用于幂等清理,避免叠加监听） */
 let activeHandler: Cesium.ScreenSpaceEventHandler | null = null;
@@ -37,6 +37,8 @@ export function useEntityPopup(options: UseEntityPopupOptions = {}): void {
         const pickHandler = createHandler();
         activeHandler = pickHandler;
         pickHandler.setInputAction((movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+            /* 绘制工具激活时地图点击属于绘制操作，不参与实体弹窗分发 */
+            if (isDrawingActive()) return;
             const viewer = getViewer();
             const picked = viewer.scene.pick(movement.position);
             if (!Cesium.defined(picked)) return;

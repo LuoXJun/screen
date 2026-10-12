@@ -43,6 +43,9 @@ export const createFormData = <T extends Record<string, string | File | Blob>>(
     return formData;
 };
 
+// 克隆时跳过原型链相关键，防止不可信数据借赋值触发原型污染
+const PROTO_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 export const useDeepClone = (target: any) => {
     const targetType = getType(target);
     let result: any;
@@ -53,7 +56,9 @@ export const useDeepClone = (target: any) => {
     } else {
         return target;
     }
-    for (const key in target) {
+    // Object.keys 只取自有属性，避免 for...in 带上原型链上被污染的可枚举属性
+    for (const key of Object.keys(target)) {
+        if (PROTO_KEYS.has(key)) continue;
         const value = target[key];
         const valueType = getType(value);
         if (valueType === 'Object' || valueType === 'Array') {
