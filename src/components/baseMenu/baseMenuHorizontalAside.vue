@@ -84,7 +84,7 @@ function iconStyle(icon?: unknown): Record<string, string> {
 
     /* 分类头图标:固定青色亮显(设计稿) */
     :deep(.el-sub-menu__title) .menu-icon {
-        background: var(--color-cyan-400);
+        background: var(--lxj-color-primary);
         opacity: 1;
     }
 }

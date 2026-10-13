@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
         }
 
         &.isActive {
-            background: color-mix(in srgb, var(--color-cyan-400) 30%, transparent);
+            background: color-mix(in srgb, var(--lxj-color-primary) 30%, transparent);
         }
 
         > img {

@@ -1,15 +1,12 @@
 <template>
-    <basePanelMask class="records">
+    <basePanelMask class="records" collapsible>
         <div class="record-type">
             <p>
-                当前预警记录
+                当前预警数量
                 <span>{{ pageInfo.total }}</span>
                 条
             </p>
-            <el-button v-for="it in 4" :key="it" class="button-card">
-                <span>{{ it + 1 }}</span>
-                温度异常
-            </el-button>
+            <alarmTypeFilter v-model="selectedTypes" :types="ALARM_TYPES" />
         </div>
         <basePanelCard class="panel-card">
             <basePanelTitle class="panel-title" title="预警记录列表" />
@@ -50,8 +47,10 @@ import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import baseTable from '@/components/baseTable/baseTable.vue';
 import basePagination from '@/components/base-pagination/base-pagination.vue';
+import alarmTypeFilter from './alarmTypeFilter.vue';
 import { usePageTable } from '@/hooks/usePageTable';
 import {
+    ALARM_TYPES,
     LEVEL_MAP,
     RECORD_LIST,
     STATUS_MAP,
@@ -59,18 +58,26 @@ import {
     type AlarmRecord
 } from './records.config';
 
+/** 预警类型筛选，多选（空数组 = 全部；筛选参数接入后由 fetchFn 消费） */
+const selectedTypes = ref<string[]>([]);
+
 /**
  * 表格 + 分页组合：fetchFn 按入参 pageInfo 取当前页，
  * 分页组件翻页/改页容量后触发 getPage 重新取数
  */
-const { pageInfo, tableData, getPage } = usePageTable<AlarmRecord>(async (page) => {
-    /* 模拟分页请求（等接口接入后替换为真实请求） */
+const { pageInfo, tableData, getPage, resetPage } = usePageTable<AlarmRecord>(async (page) => {
+    /* 模拟分页请求（等接口接入后替换为真实请求；类型筛选参数：selectedTypes.value） */
     const start = (page.pageNum - 1) * page.pageSize;
     return {
         records: RECORD_LIST.slice(start, start + page.pageSize),
         // total: RECORD_LIST.length
         total: 1000
     };
+});
+
+/** 筛选变化 → 回首页重新查询 */
+watch(selectedTypes, () => {
+    resetPage();
 });
 
 /** 操作列：详情 / 处置流程（待设计确认后接入业务） */
@@ -89,18 +96,13 @@ function onOperation(): void {
     .record-type {
         display: flex;
         align-items: center;
-        gap: base(4px);
-        margin-bottom: base(4px);
+        gap: base(8px); /* 设计稿:文案与首项间距 8px */
+        margin-bottom: base(8px);
         > p {
             color: var(--lxj-color-text-primary);
             span {
                 color: var(--lxj-color-primary);
-            }
-        }
-        .el-button {
-            span {
-                color: var(--lxj-color-warning);
-                margin-right: base(4px);
+                font-weight: var(--lxj-font-weight-Semibold); /* 设计稿计数 Semibold */
             }
         }
     }

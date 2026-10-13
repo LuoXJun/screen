@@ -27,12 +27,12 @@ defineProps<{
         width: base(3px);
         height: base(14px);
         border-radius: base(2px);
-        background: var(--color-cyan-400);
-        box-shadow: 0 0 base(10px) color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+        background: var(--lxj-color-primary);
+        box-shadow: 0 0 base(10px) color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
     }
 
     .title-text {
-        color: var(--color-cyan-400);
+        color: var(--lxj-color-primary);
         font-size: var(--lxj-font-body);
         font-weight: var(--lxj-font-weight-Semibold);
         letter-spacing: base(0.7px);

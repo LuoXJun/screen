@@ -12,6 +12,8 @@
 //   变体缺口:size=small/large 档平台有该维度(EP size prop → --small/--large 修饰类),
 //             设计稿未出样张,待出后按同结构补 .el-pagination--small.pagination-screen
 // =============================================================
+/* partial 不经 vite 注入,须自写 @use 才能用 base()(未知函数会被 sass 原样输出,静默失效) */
+@use '../../../tokens/functions' as *;
 
 .el-pagination.pagination-screen {
     // ---- ① 变量绑定 ----
@@ -32,6 +34,9 @@
     /* hover/active 文字色不覆盖:EP 默认链 --el-color-primary → --lxj-color-primary */
     --el-pagination-item-gap: var(--lxj-gap-middle); /* 16 → 8 */
     --el-pagination-border-radius: var(--lxj-radius-base); /* 2 → 6(箭头容器) */
+    /* 箭头 32×32 与页码项 min-width(EP 默认 32px,设计稿同值) */
+    --el-pagination-button-width: #{base(32px)};
+    --el-pagination-button-height: #{base(32px)};
 
     // ---- ② 属性规则 ----
     // 分组间距统一 8px:flex gap 接管,EP 各处 margin-left 一并清零
@@ -57,10 +62,10 @@
 
     // 页码项:28px 高、1px 青描边(设计稿 rgba(0,150,220,.18),取主青 18% 近似,口径同 _table.scss)
     .el-pager li.number {
-        height: 28px;
-        line-height: 22px;
-        padding: 0 9px;
-        border: 1px solid color-mix(in srgb, var(--color-cyan-400) 18%, transparent);
+        height: base(28px);
+        line-height: base(22px);
+        padding: 0 base(9px);
+        border: 1px solid color-mix(in srgb, var(--lxj-color-primary) 18%, transparent);
         border-radius: var(--lxj-radius-small);
         color: color-mix(in srgb, var(--color-white) 45%, transparent);
 
@@ -68,15 +73,15 @@
            鼠标快速划过一排页码时行内布局轻微跳动。禁用项(整表禁用)不出悬浮态 */
         &:hover:not(.is-disabled) {
             color: var(--lxj-color-primary);
-            background: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
-            border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+            background: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
+            border-color: color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
         }
 
         /* 选中:底 rgba(0,200,255,.15) / 框 rgba(0,200,255,.4);文字 primary(EP 默认 active 色被本块基础色压过,须显式);bold 走 EP 默认 */
         &.is-active {
             color: var(--lxj-color-primary);
-            background: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
-            border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+            background: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
+            border-color: color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
         }
     }
 
@@ -89,8 +94,8 @@
 
         &::before {
             content: '';
-            width: 12px;
-            height: 12px;
+            width: base(12px);
+            height: base(12px);
             background: currentColor;
         }
     }
@@ -116,8 +121,8 @@
 
         &::before {
             content: '';
-            width: 12px;
-            height: 12px;
+            width: base(12px);
+            height: base(12px);
             background: currentColor;
             -webkit-mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
             mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
@@ -148,7 +153,12 @@
         .el-select__wrapper {
             background: transparent;
             box-shadow: none; /* hover/focus/disabled 边框均为 box-shadow,一并擦除 */
-            padding: 0 11px; /* 设计稿 .Select Item padding-inline 11 */
+            padding: 0 base(11px); /* 设计稿 .Select Item padding-inline 11 */
+            /* EP 编译期写死值 → 随大屏基准缩放(4K 下与 base 化控件失衡) */
+            font-size: var(--lxj-font-body);
+            min-height: base(32px);
+            line-height: base(24px);
+            gap: base(6px); /* 文本与 caret 间距 */
         }
 
         /* EP 默认 placeholder 绝对定位(垫于输入层之下),收缩宽度时不贡献内容宽 ——
@@ -161,8 +171,8 @@
         }
 
         .el-select__caret {
-            width: 12px;
-            height: 12px;
+            width: base(12px);
+            height: base(12px);
             color: color-mix(in srgb, var(--color-white) 25%, transparent);
             background: currentColor;
             -webkit-mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center / contain;
@@ -187,16 +197,35 @@
     --el-border-color-light: var(--lxj-color-border-primary-light);
     --el-text-color-regular: color-mix(in srgb, var(--color-white) 65%, transparent);
     /* 选项悬浮底:与页码 hover/active 同款青 15% */
-    --el-fill-color-light: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+    --el-fill-color-light: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
 
     /* 面板 min-width 由 EP inline 锁到 select 宽(≈82px),宽度随选项内容自然撑开(实测≈89px);
        默认 item 内边距(左 20 右 32)在收缩宽下会截断「10 / 页」,左缩进改为 11 对齐 select 文本 */
     .el-select-dropdown__item {
-        /* 右侧 32px 保留选中对勾位(EP 自带,primary 色) */
-        padding-left: 11px;
+        /* EP 编译期固定值 → 随大屏基准缩放(4K 下行高 34 与缩放字号失衡) */
+        height: base(34px);
+        line-height: base(34px);
+        /* 左侧 base(11px) 对齐 select 文本;右侧 32px 保留选中对勾位(EP 自带,primary 色) */
+        padding-left: base(11px);
+        padding-right: base(32px);
+
+        /* 选中对勾:EP 固定 12×12、右移 20 */
+        &.is-selected::after {
+            width: base(12px);
+            height: base(12px);
+            right: base(20px);
+        }
 
         &.is-hovering {
             color: var(--lxj-color-primary);
         }
+    }
+
+    .el-select-dropdown__wrap {
+        max-height: base(274px);
+    }
+
+    .el-select-dropdown__list {
+        padding: base(6px) 0;
     }
 }

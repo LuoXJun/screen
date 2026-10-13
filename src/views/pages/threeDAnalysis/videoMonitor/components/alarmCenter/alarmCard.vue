@@ -130,13 +130,13 @@ const toneVars = computed(() => {
         border-radius: base(3px);
         --el-button-bg-color: rgba(0, 200, 255, 0.1);
         --el-button-border-color: rgba(0, 200, 255, 0.3);
-        --el-button-text-color: var(--color-cyan-400);
+        --el-button-text-color: var(--lxj-color-primary);
         --el-button-hover-bg-color: rgba(0, 200, 255, 0.2);
-        --el-button-hover-border-color: var(--color-cyan-400);
-        --el-button-hover-text-color: var(--color-cyan-400);
+        --el-button-hover-border-color: var(--lxj-color-primary);
+        --el-button-hover-text-color: var(--lxj-color-primary);
         --el-button-active-bg-color: rgba(0, 200, 255, 0.24);
-        --el-button-active-border-color: var(--color-cyan-400);
-        --el-button-active-text-color: var(--color-cyan-400);
+        --el-button-active-border-color: var(--lxj-color-primary);
+        --el-button-active-text-color: var(--lxj-color-primary);
     }
 }
 </style>

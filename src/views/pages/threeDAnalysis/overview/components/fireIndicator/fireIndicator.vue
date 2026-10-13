@@ -118,12 +118,12 @@ onBeforeUnmount(() => {
             width: base(3px);
             height: base(14px);
             border-radius: base(2px);
-            background: var(--color-cyan-400);
-            box-shadow: 0 0 base(10px) color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+            background: var(--lxj-color-primary);
+            box-shadow: 0 0 base(10px) color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
         }
 
         .title-text {
-            color: var(--color-cyan-400);
+            color: var(--lxj-color-primary);
             font-size: var(--lxj-font-desc);
             font-weight: var(--font-weight-600);
             letter-spacing: 0.05em;
@@ -143,29 +143,29 @@ onBeforeUnmount(() => {
             --el-button-bg-color: transparent;
             --el-button-border-color: color-mix(in srgb, var(--color-blue-500) 18%, transparent);
             --el-button-text-color: var(--color-blue-500);
-            --el-button-hover-bg-color: color-mix(in srgb, var(--color-cyan-400) 10%, transparent);
+            --el-button-hover-bg-color: color-mix(in srgb, var(--lxj-color-primary) 10%, transparent);
             --el-button-hover-border-color: color-mix(
                 in srgb,
-                var(--color-cyan-400) 30%,
+                var(--lxj-color-primary) 30%,
                 transparent
             );
-            --el-button-hover-text-color: var(--color-cyan-400);
-            --el-button-active-bg-color: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+            --el-button-hover-text-color: var(--lxj-color-primary);
+            --el-button-active-bg-color: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
             --el-button-active-border-color: color-mix(
                 in srgb,
-                var(--color-cyan-400) 40%,
+                var(--lxj-color-primary) 40%,
                 transparent
             );
-            --el-button-active-text-color: var(--color-cyan-400);
+            --el-button-active-text-color: var(--lxj-color-primary);
 
             &.is-active {
-                --el-button-bg-color: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+                --el-button-bg-color: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
                 --el-button-border-color: color-mix(
                     in srgb,
-                    var(--color-cyan-400) 40%,
+                    var(--lxj-color-primary) 40%,
                     transparent
                 );
-                --el-button-text-color: var(--color-cyan-400);
+                --el-button-text-color: var(--lxj-color-primary);
             }
         }
     }

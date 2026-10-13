@@ -41,10 +41,11 @@ html[data-app='screen'] {
     --lxj-font-body: #{font(14px)};
     --lxj-font-desc: #{font(12px)};
 
-    // ---- 间距(仅中大档位跟随;4/8/12 保持固定——基准触底后会缩到 subpixel) ----
+    // ---- 间距 ----
     --lxj-gap: #{base(10px)};
     --lxj-gap-oversize: #{base(16px)};
 
+    --lxj-space-top: #{base(8px)};
     --lxj-space-page: #{base(10px)};
     --lxj-space-panel: #{base(12px)};
     --lxj-space-overlay: #{base(20px)};

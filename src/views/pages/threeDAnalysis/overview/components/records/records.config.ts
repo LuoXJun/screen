@@ -34,6 +34,25 @@ export const STATUS_MAP: Record<HandleStatus, { label: string; className: string
     done: { label: '处置完成', className: 'is-done' }
 };
 
+/** 预警类型筛选项（多选；计数为设计稿样本值，待接口接入） */
+export interface AlarmTypeOption {
+    /** 类型标识（筛选参数值） */
+    value: string;
+    /** 显示名称 */
+    label: string;
+    /** 当前计数 */
+    count: number;
+}
+
+export const ALARM_TYPES: AlarmTypeOption[] = [
+    { value: 'temp', label: '温度异常', count: 3 },
+    { value: 'pv', label: '光伏缺陷', count: 2 },
+    { value: 'line', label: '架空线路缺陷', count: 2 },
+    { value: 'fire', label: '火情', count: 1 },
+    { value: 'plant', label: '植被隐患', count: 0 },
+    { value: 'other', label: '其他隐患', count: 1 }
+];
+
 /** 预警记录列表（设计稿数据，待接接口） */
 export const RECORD_LIST: AlarmRecord[] = [
     {

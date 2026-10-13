@@ -23,12 +23,12 @@ $head-h: 33px;
     --el-table-bg-color: transparent;
     --el-table-tr-bg-color: transparent;
     /* 设计稿 rgba(0,200,255,.04) */
-    --el-table-header-bg-color: color-mix(in srgb, var(--color-cyan-400) 4%, transparent);
+    --el-table-header-bg-color: color-mix(in srgb, var(--lxj-color-primary) 4%, transparent);
     --el-table-text-color: var(--color-blue-300);
     --el-table-header-text-color: var(--color-blue-500);
     /* 设计稿 rgba(0,150,220,.18),取主青 18% 近似 */
-    --el-table-border-color: color-mix(in srgb, var(--color-cyan-400) 18%, transparent);
-    --el-table-row-hover-bg-color: color-mix(in srgb, var(--color-cyan-400) 8%, transparent);
+    --el-table-border-color: color-mix(in srgb, var(--lxj-color-primary) 18%, transparent);
+    --el-table-row-hover-bg-color: color-mix(in srgb, var(--lxj-color-primary) 8%, transparent);
 
     // ---- 骨架 · 结构(EP 无变量项) ----
     // 行高 33px:内容区 26px 恰好容纳 26px 标签;文字行 20px 靠 flex 居中留白
@@ -70,7 +70,7 @@ $head-h: 33px;
 
     // ---- 内容修饰 · 告警编号链接色 ----
     .cell-link {
-        color: var(--color-cyan-400);
+        color: var(--lxj-color-primary);
     }
 
     // ---- 内容修饰 · 等级标签(el-tag + 修饰类) ----
@@ -124,7 +124,7 @@ $head-h: 33px;
         /* 次要操作(配置侧 className):蓝灰起,hover 提亮为主色 */
         &.op-minor {
             --el-button-text-color: var(--color-blue-500);
-            --el-button-hover-link-text-color: var(--color-cyan-400);
+            --el-button-hover-link-text-color: var(--lxj-color-primary);
         }
     }
 

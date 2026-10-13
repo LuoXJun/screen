@@ -20,6 +20,7 @@ declare module 'vue' {
     BaseOverlay: typeof import('./../components/baseOverlay/baseOverlay.vue')['default']
     BasePagination: typeof import('./../components/base-pagination/base-pagination.vue')['default']
     BasePanelCard: typeof import('./../components/basePanel/basePanelCard.vue')['default']
+    BasePanelHandle: typeof import('./../components/basePanel/basePanelHandle.vue')['default']
     BasePanelMask: typeof import('./../components/basePanel/basePanelMask.vue')['default']
     BasePanelTitle: typeof import('./../components/basePanel/basePanelTitle.vue')['default']
     BasePopover: typeof import('./../components/basePopover/basePopover.vue')['default']

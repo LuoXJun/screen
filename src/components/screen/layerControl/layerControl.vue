@@ -52,11 +52,11 @@ withDefaults(
             --el-checkbox-font-weight: var(--font-weight-400);
             --el-checkbox-checked-bg-color: color-mix(
                 in srgb,
-                var(--color-cyan-400) 30%,
+                var(--lxj-color-primary) 30%,
                 transparent
             );
-            --el-checkbox-checked-input-border-color: var(--color-cyan-400);
-            --el-checkbox-checked-text-color: var(--color-cyan-400);
+            --el-checkbox-checked-input-border-color: var(--lxj-color-primary);
+            --el-checkbox-checked-text-color: var(--lxj-color-primary);
 
             & + .el-checkbox {
                 margin-top: base(4px);
@@ -77,7 +77,7 @@ withDefaults(
             margin-top: calc(#{base(6px)} / -2);
             border: none;
             border-radius: base(1px);
-            background: var(--color-cyan-400);
+            background: var(--lxj-color-primary);
             transform: scale(0);
         }
 

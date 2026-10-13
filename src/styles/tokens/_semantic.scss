@@ -70,7 +70,9 @@
 
     // ---- 间距(px 默认;大屏 vw 覆盖见 _screen.scss) ----
     --lxj-space-page: var(--space-16);
-    --lxj-space-panel: var(--space-16);
+    --lxj-space-panel: var(--space-8);
+    // 面板上下内衬(与左右分离,大屏端更紧凑):管理端共享默认,大屏覆盖见 _screen.scss
+    --lxj-space-top: var(--space-8);
     --lxj-space-overlay: var(--space-20);
 
     --lxj-gap-little: var(--gap-4);

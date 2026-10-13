@@ -198,12 +198,12 @@ const statusCells = computed<StatusCell[]>(() => [
             font-size: font(16px);
 
             .task-no {
-                color: var(--color-cyan-400);
+                color: var(--lxj-color-primary);
             }
         }
 
         .task-percent {
-            color: var(--color-cyan-400);
+            color: var(--lxj-color-primary);
             font-size: font(16px);
             font-weight: var(--lxj-font-weight-Semibold);
         }
