@@ -1,3 +1,202 @@
 // =============================================================
-// 补丁占位 · el-pagination —— 断链变量在此绑定(--el-* ← var(--lxj-*)),核对后无断链仅保留本注释
+// 补丁 · el-pagination 变体类
+// 挂载方式:<basePagination variant="pagination-screen"> → el-pagination 根节点 class
+// 判断顺序同 base/_button.scss:变量绑定优先,EP 无变量覆盖的结构项才写属性规则
+// -------------------------------------------------------------
+// pagination-screen —— 大屏深色分页(设计稿:Figma · Pagination 帧 865:7024)
+//   骨架:total 左置 + 控件组右置 —— 由 layout 的 '->' 分隔符实现(见 base-pagination)
+//   状态:default / hover / active / disabled 全覆盖;hover 主色由 EP 默认链
+//         (--el-color-primary → --lxj-color-primary)承接
+//   图标:src/assets/images/pagination-*.svg(设计稿原路径,归一化为纯黑 mask 源,
+//         颜色随 currentColor 走各状态)
+//   变体缺口:size=small/large 档平台有该维度(EP size prop → --small/--large 修饰类),
+//             设计稿未出样张,待出后按同结构补 .el-pagination--small.pagination-screen
 // =============================================================
+
+.el-pagination.pagination-screen {
+    // ---- ① 变量绑定 ----
+    --el-pagination-font-size: var(--lxj-font-body);
+
+    /* 擦掉 EP 默认 fill-color-blank 白底 */
+    --el-pagination-bg-color: transparent;
+    --el-pagination-button-disabled-bg-color: transparent;
+
+    /* 箭头图标色(设计稿 Outlined/right fill-opacity .65;disabled 样本 .25) */
+    --el-pagination-button-color: color-mix(in srgb, var(--color-white) 65%, transparent);
+    --el-pagination-button-disabled-color: color-mix(
+        in srgb,
+        var(--color-white) 25%,
+        transparent
+    );
+
+    /* hover/active 文字色不覆盖:EP 默认链 --el-color-primary → --lxj-color-primary */
+    --el-pagination-item-gap: var(--lxj-gap-middle); /* 16 → 8 */
+    --el-pagination-border-radius: var(--lxj-radius-base); /* 2 → 6(箭头容器) */
+
+    // ---- ② 属性规则 ----
+    // 分组间距统一 8px:flex gap 接管,EP 各处 margin-left 一并清零
+    justify-content: flex-end;
+    gap: var(--lxj-gap-middle);
+
+    .el-pagination__rightwrapper,
+    .el-pager {
+        gap: var(--lxj-gap-middle);
+    }
+
+    .btn-prev,
+    .el-pagination__sizes,
+    .el-pagination__jump {
+        margin-left: 0;
+    }
+
+    // 文本区白 65%(设计稿「共计 85 条」「10 / 页」)
+    .el-pagination__total,
+    .el-pagination__jump {
+        color: color-mix(in srgb, var(--color-white) 65%, transparent);
+    }
+
+    // 页码项:28px 高、1px 青描边(设计稿 rgba(0,150,220,.18),取主青 18% 近似,口径同 _table.scss)
+    .el-pager li.number {
+        height: 28px;
+        line-height: 22px;
+        padding: 0 9px;
+        border: 1px solid color-mix(in srgb, var(--color-cyan-400) 18%, transparent);
+        border-radius: var(--lxj-radius-small);
+        color: color-mix(in srgb, var(--color-white) 45%, transparent);
+
+        /* 悬浮与选中视觉一致(底/框/字三件套同款);字重不加:加粗会让双位页码(如 50)宽 1px+,
+           鼠标快速划过一排页码时行内布局轻微跳动。禁用项(整表禁用)不出悬浮态 */
+        &:hover:not(.is-disabled) {
+            color: var(--lxj-color-primary);
+            background: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+            border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+        }
+
+        /* 选中:底 rgba(0,200,255,.15) / 框 rgba(0,200,255,.4);文字 primary(EP 默认 active 色被本块基础色压过,须显式);bold 走 EP 默认 */
+        &.is-active {
+            color: var(--lxj-color-primary);
+            background: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+            border-color: color-mix(in srgb, var(--color-cyan-400) 40%, transparent);
+        }
+    }
+
+    // 箭头:EP 默认 ArrowLeft/Right(带尾)与设计稿 chevron 形状不符,mask 替换(色随 currentColor 走状态)
+    .btn-prev,
+    .btn-next {
+        .el-icon {
+            display: none;
+        }
+
+        &::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: currentColor;
+        }
+    }
+
+    .btn-prev::before {
+        -webkit-mask: url('../../../../assets/images/pagination-arrow-left.svg') no-repeat center / contain;
+        mask: url('../../../../assets/images/pagination-arrow-left.svg') no-repeat center / contain;
+    }
+
+    .btn-next::before {
+        -webkit-mask: url('../../../../assets/images/pagination-arrow-right.svg') no-repeat center / contain;
+        mask: url('../../../../assets/images/pagination-arrow-right.svg') no-repeat center / contain;
+    }
+
+    // 省略号:默认 •••(白 25%),hover/focus 换 » 图标(设计稿 More 双态;前置项用镜像 «)
+    .el-pager li.more {
+        color: color-mix(in srgb, var(--color-white) 25%, transparent);
+
+        /* 藏 EP 的 MoreFilled / DArrowX 组件图标,统一走 mask */
+        > svg {
+            display: none;
+        }
+
+        &::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: currentColor;
+            -webkit-mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
+            mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
+        }
+
+        &.btn-quicknext:not(.is-disabled) {
+            &:hover::before,
+            &:focus-visible::before {
+                -webkit-mask-image: url('../../../../assets/images/pagination-double-right.svg');
+                mask-image: url('../../../../assets/images/pagination-double-right.svg');
+            }
+        }
+
+        &.btn-quickprev:not(.is-disabled) {
+            &:hover::before,
+            &:focus-visible::before {
+                -webkit-mask-image: url('../../../../assets/images/pagination-double-right.svg');
+                mask-image: url('../../../../assets/images/pagination-double-right.svg');
+                transform: scaleX(-1);
+            }
+        }
+    }
+
+    // 每页条数:无框透明 select(设计稿 .Select);128px 固定宽 → 内容自适应(实例宽 ≈ 82px)
+    .el-pagination__sizes .el-select {
+        width: auto;
+
+        .el-select__wrapper {
+            background: transparent;
+            box-shadow: none; /* hover/focus/disabled 边框均为 box-shadow,一并擦除 */
+            padding: 0 11px; /* 设计稿 .Select Item padding-inline 11 */
+        }
+
+        /* EP 默认 placeholder 绝对定位(垫于输入层之下),收缩宽度时不贡献内容宽 ——
+           分页 sizes 无 filterable 输入层,放回常规流撑出内容宽(≈设计稿 82px) */
+        .el-select__placeholder {
+            position: static;
+            width: auto;
+            transform: none;
+            color: color-mix(in srgb, var(--color-white) 65%, transparent);
+        }
+
+        .el-select__caret {
+            width: 12px;
+            height: 12px;
+            color: color-mix(in srgb, var(--color-white) 25%, transparent);
+            background: currentColor;
+            -webkit-mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center / contain;
+            mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center / contain;
+
+            svg {
+                display: none;
+            }
+        }
+    }
+}
+
+// =============================================================
+// 下拉面板 · pagination-screen-popper
+// 面板 teleport 至 body,不在变体块子树内,故独立成块;
+// 类名由 base-pagination 按 variant 派生(:popper-class 透传)
+// 设计稿未出面板样张 —— 按分页视觉语言推导:暗色浮层 + 青系高亮
+// =============================================================
+.pagination-screen-popper {
+    /* 浮层底比页面底(blue-800)亮一档;边框/文字承接分页与面板卡片语言 */
+    --el-bg-color-overlay: var(--color-blue-750);
+    --el-border-color-light: var(--lxj-color-border-primary-light);
+    --el-text-color-regular: color-mix(in srgb, var(--color-white) 65%, transparent);
+    /* 选项悬浮底:与页码 hover/active 同款青 15% */
+    --el-fill-color-light: color-mix(in srgb, var(--color-cyan-400) 15%, transparent);
+
+    /* 面板 min-width 由 EP inline 锁到 select 宽(≈82px),宽度随选项内容自然撑开(实测≈89px);
+       默认 item 内边距(左 20 右 32)在收缩宽下会截断「10 / 页」,左缩进改为 11 对齐 select 文本 */
+    .el-select-dropdown__item {
+        /* 右侧 32px 保留选中对勾位(EP 自带,primary 色) */
+        padding-left: 11px;
+
+        &.is-hovering {
+            color: var(--lxj-color-primary);
+        }
+    }
+}

@@ -3,7 +3,7 @@
         <div class="record-type">
             <p>
                 当前预警记录
-                <span>9</span>
+                <span>{{ pageInfo.total }}</span>
                 条
             </p>
             <el-button v-for="it in 4" :key="it" class="button-card">
@@ -14,9 +14,10 @@
         <basePanelCard class="panel-card">
             <basePanelTitle class="panel-title" title="预警记录列表" />
             <baseTable
-                v-model="recordList"
+                v-model="tableData"
                 class="record-table"
                 :table-column="TABLE_COLUMNS"
+                :page-info="pageInfo"
                 variant="table-screen"
                 @operation="onOperation"
             >
@@ -35,15 +36,21 @@
                 </template>
             </baseTable>
         </basePanelCard>
+        <basePagination
+            v-model="pageInfo"
+            variant="pagination-screen"
+            @handle-change="getPage"
+        ></basePagination>
     </basePanelMask>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import baseTable from '@/components/baseTable/baseTable.vue';
+import basePagination from '@/components/base-pagination/base-pagination.vue';
+import { usePageTable } from '@/hooks/usePageTable';
 import {
     LEVEL_MAP,
     RECORD_LIST,
@@ -52,7 +59,19 @@ import {
     type AlarmRecord
 } from './records.config';
 
-const recordList = ref<AlarmRecord[]>(RECORD_LIST);
+/**
+ * 表格 + 分页组合：fetchFn 按入参 pageInfo 取当前页，
+ * 分页组件翻页/改页容量后触发 getPage 重新取数
+ */
+const { pageInfo, tableData, getPage } = usePageTable<AlarmRecord>(async (page) => {
+    /* 模拟分页请求（等接口接入后替换为真实请求） */
+    const start = (page.pageNum - 1) * page.pageSize;
+    return {
+        records: RECORD_LIST.slice(start, start + page.pageSize),
+        // total: RECORD_LIST.length
+        total: 1000
+    };
+});
 
 /** 操作列：详情 / 处置流程（待设计确认后接入业务） */
 function onOperation(): void {

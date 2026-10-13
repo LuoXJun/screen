@@ -11,7 +11,7 @@
 @use '../../../tokens/functions' as *;
 
 /* 可视高设计值:表总高 = 表头 + 表体,限高与行高三处共用,改一处联动 */
-$table-h: 165px;
+$table-h: 160px;
 $head-h: 33px;
 
 .el-table.table-screen {
@@ -60,6 +60,12 @@ $head-h: 33px;
     // 设计稿末行不封底,行线只作行间分隔
     tbody tr:last-child td.el-table__cell {
         border-bottom: none;
+    }
+
+    // 表格根底 1px 线(EP 挂在 __inner-wrapper::before)不封底:
+    // 表格嵌在带边框的面板卡片内时,再封底会与卡片边框形成双线
+    .el-table__inner-wrapper::before {
+        display: none;
     }
 
     // ---- 内容修饰 · 告警编号链接色 ----

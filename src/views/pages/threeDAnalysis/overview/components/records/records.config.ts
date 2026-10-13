@@ -61,11 +61,11 @@ export const RECORD_LIST: AlarmRecord[] = [
         status: 'done'
     },
     {
-        alarmNo: 'ALM-20250617-015',
-        alarmTime: '06-17 10:41',
-        monitorPoint: '摄像头 / 方阵A-023',
-        content: '设备掉线 5 分钟',
-        level: 'hint',
+        alarmNo: 'ALM-20250617-011',
+        alarmTime: '06-17 08:26',
+        monitorPoint: '红外测温 / 箱变#09低压侧',
+        content: '温度 79.1℃（上限 75℃）',
+        level: 'normal',
         status: 'done'
     },
     {
@@ -74,6 +74,62 @@ export const RECORD_LIST: AlarmRecord[] = [
         monitorPoint: '机巢 / JC-03',
         content: '环境湿度 92%（上限 90%）',
         level: 'hint',
+        status: 'pending'
+    },
+    {
+        alarmNo: 'ALM-20250616-004',
+        alarmTime: '06-16 08:47',
+        monitorPoint: '光纤测温 / 箱变#07低压侧',
+        content: '温升 +2.1℃/min（上限 2.0℃/min）',
+        level: 'normal',
+        status: 'handling'
+    },
+    {
+        alarmNo: 'ALM-20250615-011',
+        alarmTime: '06-15 21:33',
+        monitorPoint: '红外测温 / 升压站2#主变',
+        content: '温度 82.7℃（上限 75℃）',
+        level: 'urgent',
+        status: 'pending'
+    },
+    {
+        alarmNo: 'ALM-20250615-006',
+        alarmTime: '06-15 16:20',
+        monitorPoint: '无人机 / WR-02 巡检航线',
+        content: '航线偏离 12m',
+        level: 'hint',
+        status: 'done'
+    },
+    {
+        alarmNo: 'ALM-20250615-002',
+        alarmTime: '06-15 09:58',
+        monitorPoint: '机巢 / JC-01',
+        content: '舱门开合异常',
+        level: 'normal',
+        status: 'handling'
+    },
+    {
+        alarmNo: 'ALM-20250614-009',
+        alarmTime: '06-14 19:44',
+        monitorPoint: '摄像头 / 方阵C-011',
+        content: '画面遮挡',
+        level: 'hint',
+        status: 'pending'
+    },
+    {
+        alarmNo: 'ALM-20250614-003',
+        alarmTime: '06-14 11:26',
+        monitorPoint: '光纤测温 / 光伏阵列#3 电缆沟',
+        content: '温度 91.5℃（上限 85℃）',
+        level: 'urgent',
+        status: 'done'
+    },
+    {
+        alarmNo: 'ALM-20250613-007',
+        alarmTime: '06-13 15:12',
+        monitorPoint: '红外测温 / 箱变#12高压侧',
+        content: '温度 77.9℃（上限 75℃）',
+        level: 'normal',
         status: 'pending'
     }
 ];
