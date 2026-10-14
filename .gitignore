@@ -25,3 +25,4 @@ dist-ssr
 # FH2 生成管线：官方文档与中间产物（可重拉/重生成）
 scripts/fh2
 discuss
+public/bim模型
