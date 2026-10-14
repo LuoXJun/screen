@@ -1,10 +1,25 @@
 import * as Cesium from 'cesium';
-import { getViewer } from '@/cesium/core/viewer';
+import { getViewer, requestRenderWithNextFrame } from '@/cesium/core/viewer';
 import type { LayerConfig, LayerItemBrief, LayerType, ItemLayer } from '../types';
 
 /** 实体 id 约定：{图层名}::{设备 id}，保证全局唯一 */
 function buildEntityId(layerName: string, itemId: string): string {
     return `${layerName}::${itemId}`;
+}
+
+/** 收集实体的空间采样点：点（position）/ 线（polyline.positions）/ 面（polygon.hierarchy） */
+function collectEntityPositions(
+    entity: Cesium.Entity,
+    time: Cesium.JulianDate,
+    out: Cesium.Cartesian3[]
+): void {
+    const anchor = entity.position?.getValue(time);
+    if (anchor) out.push(anchor);
+    const vertices = entity.polyline?.positions?.getValue(time) as Cesium.Cartesian3[] | undefined;
+    if (vertices) out.push(...vertices);
+    const hierarchy = entity.polygon?.hierarchy?.getValue(time) as
+        Cesium.PolygonHierarchy | undefined;
+    if (hierarchy) out.push(...hierarchy.positions);
 }
 
 /**
@@ -35,7 +50,7 @@ export abstract class EntityLayerBase<
     setVisible(visible: boolean): void {
         this.visible = visible;
         this.applyVisibility();
-        this.requestRenderWithNextFrame();
+        requestRenderWithNextFrame();
     }
 
     isVisible(): boolean {
@@ -47,7 +62,7 @@ export abstract class EntityLayerBase<
         this.itemVisible.set(itemId, visible);
         const entity = this.entities.get(itemId);
         if (entity) entity.show = this.visible && visible;
-        this.requestRenderWithNextFrame();
+        requestRenderWithNextFrame();
     }
 
     isItemVisible(itemId: string): boolean {
@@ -60,6 +75,14 @@ export abstract class EntityLayerBase<
             id,
             label: (item as { label?: string }).label ?? id
         }));
+    }
+
+    /** 图层范围：全量实体采样点的外接矩形（空图层返回 undefined） */
+    getBounds(): Cesium.Rectangle | undefined {
+        const time = getViewer().clock.currentTime;
+        const positions: Cesium.Cartesian3[] = [];
+        this.entities.forEach((entity) => collectEntityPositions(entity, time, positions));
+        return positions.length > 0 ? Cesium.Rectangle.fromCartesianArray(positions) : undefined;
     }
 
     setData(items: T[]): void {
@@ -76,29 +99,16 @@ export abstract class EntityLayerBase<
             this.entities.set(itemId, getViewer().entities.add(options));
         });
         this.applyVisibility();
-        this.requestRenderWithNextFrame();
+        requestRenderWithNextFrame();
     }
 
     clear(): void {
         this.clearItems();
-        this.requestRenderWithNextFrame();
+        requestRenderWithNextFrame();
     }
 
     destroy(): void {
         this.clearItems();
-    }
-
-    /**
-     * requestRenderMode 下请求渲染，并在当前帧渲染后请求下一帧：
-     * billboard 纹理上传发生在 afterRender 阶段，需下一帧才能真正显示。
-     */
-    private requestRenderWithNextFrame(): void {
-        const scene = getViewer().scene;
-        scene.requestRender();
-        const remove = scene.postRender.addEventListener(() => {
-            remove();
-            scene.requestRender();
-        }, this);
     }
 
     /** 子类按数据项生成实体配置（id 由基类统一注入） */

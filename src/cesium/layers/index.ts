@@ -7,6 +7,7 @@ export {
     removeLayer,
     removeAllLayers,
     setLayerVisible,
+    focusLayer,
     getLayers
 } from './manager';
 export type { LayerType, MapLayer, ItemLayer, LayerConfig, LayerItemBrief } from './types';
@@ -15,6 +16,16 @@ export { isItemLayer } from './types';
 export { createIconLayer, type IconLayerConfig, type IconItem } from './builtin/iconLayer';
 export { createImageryLayer, type ImageryLayerConfig } from './builtin/imageryLayer';
 export { createHeatmapLayer, type HeatmapLayerConfig } from './builtin/heatmapLayer';
+export {
+    createGeoJsonLayer,
+    type GeoJsonLayerConfig,
+    type GeoJsonItem
+} from './builtin/geoJsonLayer';
+export {
+    createTilesetLayer,
+    type TilesetLayer,
+    type TilesetLayerConfig
+} from './builtin/tilesetLayer';
 export type {
     HeatmapPoint,
     HeatmapBounds,

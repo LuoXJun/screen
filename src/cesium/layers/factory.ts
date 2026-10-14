@@ -2,6 +2,8 @@ import type { LayerConfig, LayerType, MapLayer } from './types';
 import { createIconLayer } from './builtin/iconLayer';
 import { createImageryLayer } from './builtin/imageryLayer';
 import { createHeatmapLayer } from './builtin/heatmapLayer';
+import { createGeoJsonLayer } from './builtin/geoJsonLayer';
+import { createTilesetLayer } from './builtin/tilesetLayer';
 
 /** 图层工厂：接收图层名与类型化配置，返回图层实例 */
 export type LayerFactory<C extends LayerConfig = LayerConfig> = (
@@ -33,7 +35,9 @@ export function createLayer<T = unknown>(
     return factory(name, config as never) as MapLayer<T>;
 }
 
-// 内置图层注册：图标设备（条目级显隐）、影像底图（整层显隐）、温度热力图
+// 内置图层注册：图标设备（条目级显隐）、影像底图、温度热力图、GeoJSON 矢量、倾斜摄影
 registerLayerFactory('icon', createIconLayer);
 registerLayerFactory('imagery', createImageryLayer);
 registerLayerFactory('heatmap', createHeatmapLayer);
+registerLayerFactory('geoJson', createGeoJsonLayer);
+registerLayerFactory('tileset', createTilesetLayer);

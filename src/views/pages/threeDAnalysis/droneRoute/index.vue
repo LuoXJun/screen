@@ -6,6 +6,9 @@
 
 <script setup lang="ts">
 import toolsBar from '@/components/baseCesium/toolsBar.vue';
+import { useBimModel } from './composables/useBimModel';
+
+useBimModel();
 </script>
 
 <style scoped lang="scss">

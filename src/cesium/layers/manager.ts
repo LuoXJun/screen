@@ -1,3 +1,5 @@
+import * as Cesium from 'cesium';
+import { getViewer } from '@/cesium/core/viewer';
 import { createLayer } from './factory';
 import type { LayerConfig, LayerType, MapLayer } from './types';
 
@@ -45,6 +47,30 @@ export function removeAllLayers(): void {
 
 export function setLayerVisible(name: string, visible: boolean): void {
     layerPool.get(name)?.setVisible(visible);
+}
+
+/** 定位最小跨度（度）：单点/极小范围图层按中心扩展，避免相机贴地 */
+const MIN_SPAN = Cesium.Math.toRadians(0.005);
+
+/** 定位到图层内容范围（无内容/无范围语义的图层静默跳过） */
+export function focusLayer(name: string, duration?: number): void {
+    const bounds = layerPool.get(name)?.getBounds();
+    if (!bounds) return;
+    getViewer().camera.flyTo({ destination: padBounds(bounds), duration });
+}
+
+/** 过小范围以中心扩展至最小跨度（单点图层定位高度≈数百米） */
+function padBounds(rect: Cesium.Rectangle): Cesium.Rectangle {
+    if (rect.width >= MIN_SPAN && rect.height >= MIN_SPAN) return rect;
+    const center = Cesium.Rectangle.center(rect);
+    const halfLon = Math.max(rect.width / 2, MIN_SPAN / 2);
+    const halfLat = Math.max(rect.height / 2, MIN_SPAN / 2);
+    return new Cesium.Rectangle(
+        center.longitude - halfLon,
+        center.latitude - halfLat,
+        center.longitude + halfLon,
+        center.latitude + halfLat
+    );
 }
 
 /** 全部图层列表（图层管理面板按需取用） */

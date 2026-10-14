@@ -1,5 +1,7 @@
+import type { Rectangle } from 'cesium';
+
 /** 图层类型标识：内置类型 + 任意自定义类型（工厂注册制扩展） */
-export type LayerType = 'icon' | 'imagery' | (string & {});
+export type LayerType = 'icon' | 'imagery' | 'heatmap' | 'geoJson' | 'tileset' | (string & {});
 
 /** 图层内设备条目的简要信息（设备层展开用） */
 export interface LayerItemBrief {
@@ -9,7 +11,7 @@ export interface LayerItemBrief {
 }
 
 /**
- * 图层契约：显隐 + 数据 + 生命周期。
+ * 图层契约：显隐 + 数据 + 范围 + 生命周期。
  * 实体层（设备/矢量）与底图层（影像/地形）均可实现；
  * 需要条目级（设备级）显隐控制的图层另实现 ItemLayer。
  */
@@ -19,6 +21,8 @@ export interface MapLayer<T = unknown> {
     /** 整层显隐 */
     setVisible(visible: boolean): void;
     isVisible(): boolean;
+    /** 图层内容的经纬范围（供 focusLayer 定位）；无内容或无范围语义的图层返回 undefined */
+    getBounds(): Rectangle | undefined;
     /** 全量替换图层数据（内部重建元素）；无数据语义的图层（如影像）可忽略 */
     setData(items: T[]): void;
     /** 清空图层内全部元素 */

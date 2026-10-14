@@ -90,11 +90,14 @@ export {
     removeLayer,
     removeAllLayers,
     setLayerVisible,
+    focusLayer,
     getLayers,
     isItemLayer,
     createIconLayer,
     createImageryLayer,
     createHeatmapLayer,
+    createGeoJsonLayer,
+    createTilesetLayer,
     type LayerFactory,
     type LayerType,
     type MapLayer,
@@ -108,7 +111,11 @@ export {
     type HeatmapPoint,
     type HeatmapBounds,
     type HeatmapPolygon,
-    type HeatmapStyle
+    type HeatmapStyle,
+    type GeoJsonItem,
+    type GeoJsonLayerConfig,
+    type TilesetLayer,
+    type TilesetLayerConfig
 } from './layers';
 
 // 效果工具层

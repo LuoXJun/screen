@@ -39,6 +39,12 @@ export class RenderGeoJsonByGround {
         forEachFeature(geoJson, (feature, geometry) => this.renderGeometry(feature, geometry));
     }
 
+    /** 批量显隐渲染内容（图层级显隐控制用） */
+    setVisible(visible: boolean): void {
+        this.entities.forEach((entity) => (entity.show = visible));
+        this.primitives.forEach((primitive) => (primitive.show = visible));
+    }
+
     /** 移除所有已渲染内容 */
     clear(): void {
         const viewer = getViewer();

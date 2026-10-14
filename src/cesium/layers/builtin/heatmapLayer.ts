@@ -93,6 +93,16 @@ class HeatmapLayer implements MapLayer<HeatmapPoint> {
         return getImageryLayer(this.name)?.show ?? true;
     }
 
+    /** 图层范围：热力区域 bbox */
+    getBounds(): Cesium.Rectangle | undefined {
+        return Cesium.Rectangle.fromDegrees(
+            this.bounds.west,
+            this.bounds.south,
+            this.bounds.east,
+            this.bounds.north
+        );
+    }
+
     clear(): void {
         this.points = [];
         removeImageryLayer(this.name);

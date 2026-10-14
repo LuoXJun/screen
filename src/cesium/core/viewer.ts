@@ -61,6 +61,20 @@ export function requestRender(): void {
     getViewer().scene.requestRender();
 }
 
+/**
+ * requestRenderMode 下请求渲染，并在当前帧渲染后追加请求下一帧：
+ * 纹理上传（billboard 图片）与异步几何（GroundPrimitive）在首帧之后才就绪，
+ * 仅请求一帧会出现「已就绪但画面未出现」的空窗。
+ */
+export function requestRenderWithNextFrame(): void {
+    const scene = getViewer().scene;
+    scene.requestRender();
+    const remove = scene.postRender.addEventListener(() => {
+        remove();
+        scene.requestRender();
+    });
+}
+
 /** 大屏净空场景：关闭星空/大气/太阳/月亮/雾，纯黑背景 */
 export function setCleanScene(clean: boolean): void {
     const scene = getViewer().scene;

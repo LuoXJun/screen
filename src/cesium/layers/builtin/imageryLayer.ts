@@ -38,6 +38,11 @@ class ImageryLayer implements MapLayer {
         return getImageryLayer(this.name)?.show ?? true;
     }
 
+    /** 图层范围：取影像源自带覆盖矩形（provider 无矩形时返回 undefined） */
+    getBounds(): Cesium.Rectangle | undefined {
+        return getImageryLayer(this.name)?.imageryProvider?.rectangle ?? undefined;
+    }
+
     setData(): void {
         // 影像层无数据语义，忽略
     }
