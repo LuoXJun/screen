@@ -31,11 +31,11 @@ export interface MapLayer<T = unknown> {
 export interface ItemLayer<T = unknown> extends MapLayer<T> {
     setItemVisible(itemId: string, visible: boolean): void;
     isItemVisible(itemId: string): boolean;
-    /** 条目列表（树面板挂设备节点用） */
+    /** 条目列表（供面板展开设备级控制） */
     getItemBriefs(): LayerItemBrief[];
 }
 
-/** 是否支持条目级显隐控制（树面板据此决定设备节点如何切换） */
+/** 是否支持条目级显隐控制（面板据此决定是否提供设备级开关） */
 export function isItemLayer(layer: MapLayer): layer is ItemLayer {
     return typeof (layer as ItemLayer).setItemVisible === 'function';
 }

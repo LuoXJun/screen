@@ -11,7 +11,7 @@ export interface ImageryLayerConfig extends LayerConfig {
 
 /**
  * 影像底图图层：把 core/layer 的影像池包装成 MapLayer 契约，
- * 使影像/地形等底图层可挂入图层树统一控制显隐。
+ * 使影像/地形等底图层以 MapLayer 契约挂入图层池统一控制显隐。
  * config 可选仅为兼容工厂签名，provider 缺省时直接报错。
  */
 export function createImageryLayer(name: string, config?: ImageryLayerConfig): MapLayer {

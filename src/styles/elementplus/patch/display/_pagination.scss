@@ -25,11 +25,7 @@
 
     /* 箭头图标色(设计稿 Outlined/right fill-opacity .65;disabled 样本 .25) */
     --el-pagination-button-color: color-mix(in srgb, var(--color-white) 65%, transparent);
-    --el-pagination-button-disabled-color: color-mix(
-        in srgb,
-        var(--color-white) 25%,
-        transparent
-    );
+    --el-pagination-button-disabled-color: color-mix(in srgb, var(--color-white) 25%, transparent);
 
     /* hover/active 文字色不覆盖:EP 默认链 --el-color-primary → --lxj-color-primary */
     --el-pagination-item-gap: var(--lxj-gap-middle); /* 16 → 8 */
@@ -101,12 +97,14 @@
     }
 
     .btn-prev::before {
-        -webkit-mask: url('../../../../assets/images/pagination-arrow-left.svg') no-repeat center / contain;
+        -webkit-mask: url('../../../../assets/images/pagination-arrow-left.svg') no-repeat center /
+            contain;
         mask: url('../../../../assets/images/pagination-arrow-left.svg') no-repeat center / contain;
     }
 
     .btn-next::before {
-        -webkit-mask: url('../../../../assets/images/pagination-arrow-right.svg') no-repeat center / contain;
+        -webkit-mask: url('../../../../assets/images/pagination-arrow-right.svg') no-repeat center /
+            contain;
         mask: url('../../../../assets/images/pagination-arrow-right.svg') no-repeat center / contain;
     }
 
@@ -124,7 +122,8 @@
             width: base(12px);
             height: base(12px);
             background: currentColor;
-            -webkit-mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
+            -webkit-mask: url('../../../../assets/images/pagination-more.svg') no-repeat center /
+                contain;
             mask: url('../../../../assets/images/pagination-more.svg') no-repeat center / contain;
         }
 
@@ -175,8 +174,10 @@
             height: base(12px);
             color: color-mix(in srgb, var(--color-white) 25%, transparent);
             background: currentColor;
-            -webkit-mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center / contain;
-            mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center / contain;
+            -webkit-mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat
+                center / contain;
+            mask: url('../../../../assets/images/pagination-arrow-down.svg') no-repeat center /
+                contain;
 
             svg {
                 display: none;

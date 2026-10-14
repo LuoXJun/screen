@@ -1,4 +1,4 @@
-// 图层管理架子：工厂注册制扩展，图层树（layerControl）统一控制显隐
+// 图层管理架子：工厂注册制扩展，图层管理面板（layerControl）统一控制显隐
 export { registerLayerFactory, createLayer, type LayerFactory } from './factory';
 export {
     addLayer,

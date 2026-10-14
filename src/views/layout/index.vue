@@ -18,6 +18,8 @@
                 </div>
                 <!-- 全局站点切换（每页展示,悬浮于左侧面板上方） -->
                 <siteSwitch v-model="activeSite" class="site-switch" />
+                <!-- 全局图层管理（每页展示,贴左栏右侧） -->
+                <layerControl v-model="checkedLayers" class="layer-control" :list="LAYER_ITEMS" />
             </el-main>
         </el-container>
     </el-container>
@@ -31,6 +33,7 @@
 import { onUnmounted, ref } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
+import layerControl from '@/components/screen/layerControl/layerControl.vue';
 import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
 import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
 import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
@@ -43,6 +46,7 @@ import type { NestData } from '@/components/screen/popups/NestPopup';
 import { showMapPopup } from '@/components/screen/mapPopup/mapPopup';
 import { useMapEntities } from './composables/useMapEntities';
 import { useEntityPopup } from './composables/useEntityPopup';
+import { useLayerControl } from './composables/useLayerControl';
 
 /* 主题作用域同步到 html[data-app]：语义令牌层按端解析，
    teleport 到 body 的 EP 浮层同样命中，与管理端 admin 作用域互不干扰。
@@ -56,6 +60,9 @@ useMapEntities();
 
 /** 当前站点（全局站点切换,列表数据联动待接口） */
 const activeSite = ref<SiteKey>('xianfeng');
+
+/** 图层管理（全局,每页可见；勾选联动地图图层显隐,状态跨路由保留） */
+const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 
 /** 三类设备弹窗数据（null=关闭；点击对应点位时填充） */
 const cameraData = ref<CameraData | null>(null);
@@ -131,6 +138,9 @@ onUnmounted(() => {
 
         .content {
             position: relative;
+            /* 页面侧栏顶缘避让全局站点切换按钮（按钮高 32 + 间距 10）；
+               定义在使用方（screen 内页面侧栏 / 站点切换 / 图层管理）的共同祖先上 */
+            --lxj-aside-top-offset: #{base(42px)};
             .layout-map {
                 position: absolute;
                 width: 100%;
@@ -143,8 +153,6 @@ onUnmounted(() => {
                 pointer-events: none;
                 z-index: var(--lxj-z-sticky);
                 padding: var(--lxj-space-page);
-                /* 页面左 aside 顶缘避让全局站点切换按钮（按钮高 32 + 间距 10） */
-                --lxj-aside-top-offset: #{base(42px)};
             }
         }
 
@@ -153,6 +161,16 @@ onUnmounted(() => {
             position: absolute;
             top: var(--lxj-space-page);
             left: var(--lxj-space-page);
+            z-index: var(--lxj-z-sticky);
+        }
+
+        /* 全局图层管理:贴左栏右侧、顶部与侧栏内容顶对齐
+           （左缘=内容左缘+侧栏宽;顶缘=内容顶缘+侧栏避让;再右移自身宽 20%） */
+        .layer-control {
+            position: absolute;
+            left: calc(var(--lxj-space-page) + var(--lxj-aside-width));
+            top: calc(var(--lxj-space-page) + var(--lxj-aside-top-offset));
+            transform: translateX(20%);
             z-index: var(--lxj-z-sticky);
         }
     }

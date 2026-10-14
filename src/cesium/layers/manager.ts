@@ -47,7 +47,7 @@ export function setLayerVisible(name: string, visible: boolean): void {
     layerPool.get(name)?.setVisible(visible);
 }
 
-/** 全部图层列表（图层树面板按需取用） */
+/** 全部图层列表（图层管理面板按需取用） */
 export function getLayers(): MapLayer<unknown>[] {
     return [...layerPool.values()];
 }

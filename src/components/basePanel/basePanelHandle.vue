@@ -47,10 +47,7 @@
                     <mask :id="chevronMaskId" fill="white">
                         <path d="M14.8025 35.404L9.63249 40.575L14.8025 45.745" />
                     </mask>
-                    <path
-                        class="bodyFill"
-                        d="M14.8025 35.404L9.63249 40.575L14.8025 45.745"
-                    />
+                    <path class="bodyFill" d="M14.8025 35.404L9.63249 40.575L14.8025 45.745" />
                     <path
                         class="chevronStroke"
                         d="M9.63249 40.575L8.92531 39.868L8.21834 40.5751L8.92538 41.2821L9.63249 40.575ZM14.8025 35.404L14.0953 34.697L8.92531 39.868L9.63249 40.575L10.3397 41.2821L15.5097 36.111L14.8025 35.404ZM9.63249 40.575L8.92538 41.2821L14.0954 46.4521L14.8025 45.745L15.5096 45.0379L10.3396 39.8679L9.63249 40.575Z"
@@ -92,8 +89,7 @@ $handle-h: 24.385px;
        偏移量 = 把手高 + 面板边框宽(1px) + 面板上下内衬(--lxj-panel-space-y,单一数据源
        定义于 basePanelMask,调间距自动跟随);末尾 margin-bottom 回补同值:
        margin box 净占位为 0,后续内容仍从内容区顶开始 */
-    margin:
-        calc(-1 * (base($handle-h) + 1px + var(--lxj-panel-space-y))) auto
+    margin: calc(-1 * (base($handle-h) + 1px + var(--lxj-panel-space-y))) auto
         calc(1px + var(--lxj-panel-space-y));
 
     .handleShape {

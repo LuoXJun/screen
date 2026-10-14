@@ -59,7 +59,7 @@ import {
 } from './records.config';
 
 /** 预警类型筛选，多选（空数组 = 全部；筛选参数接入后由 fetchFn 消费） */
-const selectedTypes = ref<string[]>([]);
+const selectedTypes = ref<string[]>(['temp']);
 
 /**
  * 表格 + 分页组合：fetchFn 按入参 pageInfo 取当前页，
