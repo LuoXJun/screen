@@ -55,6 +55,13 @@ export {
     type LineStyle
 } from './core/entity';
 export {
+    getSiteContainer,
+    getSiteEntities,
+    addSiteEntity,
+    clearSiteEntities,
+    activateSite
+} from './core/siteContainer';
+export {
     renderLabelPinImage,
     createLabelPinBillboard,
     type LabelPinOptions,
@@ -122,6 +129,7 @@ export { RenderGeoJsonByGround, type GeoJsonRenderStyle } from './effects/Render
 export {
     DrawGeometry,
     isDrawingActive,
+    stopAllDrawings,
     entity2Geojson,
     type DrawGeometryStyle,
     type GeometryType

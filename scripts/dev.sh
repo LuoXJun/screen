@@ -15,6 +15,22 @@ is_running() {
     [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null
 }
 
+# 兜底清理：pid 文件记录的是 wrapper 进程，真实 node 可能残留并占用端口
+# （Windows/Git Bash 下曾出现 stop "成功"但 server 仍监听、新实例端口漂移）
+cleanup_stale_node() {
+    local port pid image
+    for port in 3005 3006; do
+        while read -r pid; do
+            [[ -z "$pid" ]] && continue
+            image="$(tasklist //FI "PID eq $pid" //FO CSV //NH 2>/dev/null | head -1 | cut -d',' -f1 | tr -d '"')"
+            if [[ "$image" == "node.exe" ]]; then
+                echo "清理端口 $port 上的残留 node 进程 (PID $pid)"
+                taskkill //F //PID "$pid" >/dev/null 2>&1 || true
+            fi
+        done < <(netstat -ano 2>/dev/null | grep "LISTENING" | grep -E ":$port " | awk '{print $NF}' | sort -u)
+    done
+}
+
 start() {
     if is_running; then
         echo "dev server 已在运行 (PID $(cat "$PID_FILE"))"
@@ -35,6 +51,7 @@ stop() {
     if ! is_running; then
         echo "dev server 未在运行"
         rm -f "$PID_FILE"
+        cleanup_stale_node
         return 0
     fi
     local pid
@@ -44,6 +61,7 @@ stop() {
     kill -9 "$pid" 2>/dev/null || true
     rm -f "$PID_FILE"
     echo "dev server 已停止 (PID $pid)"
+    cleanup_stale_node
 }
 
 status() {

@@ -14,7 +14,8 @@
                     <BaseCesium />
                 </div>
                 <div class="screen">
-                    <RouterView />
+                    <!-- 站点切换时重建页面组件（切换即初始化,不保留筛选等页面状态） -->
+                    <RouterView :key="activeSite" />
                 </div>
                 <!-- 全局站点切换（每页展示,悬浮于左侧面板上方） -->
                 <siteSwitch v-model="activeSite" class="site-switch" />
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue';
+import { computed, onUnmounted, ref, watch } from 'vue';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
@@ -39,12 +40,13 @@ import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
 import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
 import NestPopup from '@/components/screen/popups/NestPopup.vue';
 import siteSwitch from '@/components/screen/siteSwitch/siteSwitch.vue';
-import type { SiteKey } from '@/components/screen/siteSwitch/siteSwitch.config';
 import type { CameraData } from '@/components/screen/popups/CameraPopup';
 import type { FiberData } from '@/components/screen/popups/FiberPopup';
 import type { NestData } from '@/components/screen/popups/NestPopup';
-import { showMapPopup } from '@/components/screen/mapPopup/mapPopup';
+import { showMapPopup, type MapPopupHandle } from '@/components/screen/mapPopup/mapPopup';
+import { useSiteStore } from '@/stores/site';
 import { useMapEntities } from './composables/useMapEntities';
+import { useSiteSwitch } from './composables/useSiteSwitch';
 import { useEntityPopup } from './composables/useEntityPopup';
 import { useLayerControl } from './composables/useLayerControl';
 
@@ -57,9 +59,14 @@ document.documentElement.dataset.app = 'screen';
 
 /* 地图业务编排（实现见 ./composables/） */
 useMapEntities();
+useSiteSwitch();
 
-/** 当前站点（全局站点切换,列表数据联动待接口） */
-const activeSite = ref<SiteKey>('xianfeng');
+/** 当前站点（写入口径统一走 store.switchSite,以携带切换纪元） */
+const siteStore = useSiteStore();
+const activeSite = computed({
+    get: () => siteStore.activeSite,
+    set: (key) => siteStore.switchSite(key)
+});
 
 /** 图层管理（全局,每页可见；勾选联动地图图层显隐,状态跨路由保留） */
 const { LAYER_ITEMS, checkedLayers } = useLayerControl();
@@ -68,6 +75,9 @@ const { LAYER_ITEMS, checkedLayers } = useLayerControl();
 const cameraData = ref<CameraData | null>(null);
 const fiberData = ref<FiberData | null>(null);
 const nestData = ref<NestData | null>(null);
+
+/** 兜底地图弹窗句柄（命令式创建,切换站点时统一关闭） */
+let fallbackPopup: MapPopupHandle | null = null;
 
 useEntityPopup({
     contents: {
@@ -84,14 +94,26 @@ useEntityPopup({
     },
     /* 未注册类型：地图锚点信息卡兜底 */
     fallback: ({ position, lonlat }) => {
-        showMapPopup({
+        fallbackPopup?.close();
+        fallbackPopup = showMapPopup({
             position,
             title: '实体信息',
             width: '20vw',
             height: '15vw',
-            content: h(PopupInfo, { lonlat })
+            content: h(PopupInfo, { lonlat }),
+            onClose: () => {
+                fallbackPopup = null;
+            }
         });
     }
+});
+
+/** 切换站点时关闭全部弹窗,避免旧站点数据残留（设备弹窗为 v-if 状态,兜底弹窗为命令式句柄） */
+watch(activeSite, () => {
+    cameraData.value = null;
+    fiberData.value = null;
+    nestData.value = null;
+    fallbackPopup?.close();
 });
 
 onUnmounted(() => {

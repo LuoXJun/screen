@@ -34,6 +34,11 @@ export function isDrawingActive(): boolean {
     return activeDrawings.size > 0;
 }
 
+/** 停止全部激活中的绘制（保留已完成图形；站点切换等全局场景调用） */
+export function stopAllDrawings(): void {
+    [...activeDrawings].forEach((drawing) => drawing.stop());
+}
+
 /**
  * 交互式几何绘制。
  * 交互约定：点（连续单击落点）；线/多边形（左键加点，右键结束）；矩形（两次左键对角定点）。

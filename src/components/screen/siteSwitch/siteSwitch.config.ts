@@ -1,21 +1,7 @@
 /**
- * 站点切换配置（设计稿 251-985）。
+ * 站点按钮装饰配置（设计稿 251-985）。
+ * 站点列表与站点维度业务配置见 @/config/site。
  */
-
-/** 站点标识 */
-export type SiteKey = 'xianfeng' | 'tuanqing';
-
-/** 站点按钮项 */
-export interface SiteItem {
-    key: SiteKey;
-    label: string;
-}
-
-/** 站点列表（设计稿样本,待接口） */
-export const SITE_LIST: SiteItem[] = [
-    { key: 'xianfeng', label: '先锋站' },
-    { key: 'tuanqing', label: '团箐站' }
-];
 
 /** 按钮装饰层资产名（激活/未激活双套光晕;定位见 siteButton 样式,与设计稿逐层对应） */
 export const SITE_BTN_DECOS = {
