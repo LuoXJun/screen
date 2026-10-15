@@ -8,6 +8,8 @@ import {
     listCameraDevices,
     type CameraDevice
 } from '@/config/devices';
+import type { SiteKey } from '@/config/site';
+import { SITE_ENTITIES_RELOADED } from '@/views/layout/composables/useMapEntities';
 import { CAMERA_FOCUS_VIEW } from '../config';
 
 /**
@@ -44,7 +46,17 @@ export function useCameraMarkers() {
         lookAtLonLat(device.lng, device.lat, CAMERA_FOCUS_VIEW);
     }
 
+    /** 点位整体重建（分辨率变化）后重绑选中态:实体已替换,重新高亮并刷新流光几何（不重新飞行） */
+    function rebindFocus(reloadedSite: SiteKey): void {
+        if (reloadedSite !== siteKey || !currentDevice) return;
+        focusedEntity = markerOf(currentDevice);
+        setLabelPinHighlight(focusedEntity, true);
+    }
+
+    const offReloaded = SITE_ENTITIES_RELOADED.addEventListener(rebindFocus);
+
     onBeforeUnmount(() => {
+        offReloaded();
         /* 标牌全局保活,本页只清高亮与流光 */
         setLabelPinHighlight(focusedEntity, false);
         focusedEntity = undefined;

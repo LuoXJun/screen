@@ -1,3 +1,4 @@
+import * as Cesium from 'cesium';
 import { onBeforeUnmount, onMounted } from 'vue';
 import { addLabelPinSiteEntity, clearSiteEntities, getSiteEntities } from '@/cesium';
 import { DEVICE_POINTS_BY_SITE } from '@/config/devices';
@@ -5,6 +6,12 @@ import type { SiteKey } from '@/config/site';
 
 /** 已加载站点（避免切换时重复构建;窗口尺寸变化时整体重建） */
 const loadedSites = new Set<SiteKey>();
+
+/**
+ * 站点设备点位重建完成事件（参数 siteKey;含分辨率变化触发的强制重建）:
+ * 重建后实体对象被整体替换,持有实体引用的页面（如选中高亮/流光）据此重新绑定。
+ */
+export const SITE_ENTITIES_RELOADED = new Cesium.Event<(siteKey: SiteKey) => void>();
 
 /**
  * 加载站点设备点位到对应容器（已加载且容器内确有实体才跳过——viewer 销毁重建后
@@ -29,6 +36,7 @@ export async function loadSiteEntities(siteKey: SiteKey, force = false): Promise
         )
     );
     loadedSites.add(siteKey);
+    SITE_ENTITIES_RELOADED.raiseEvent(siteKey);
 }
 
 /**
