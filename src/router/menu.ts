@@ -1,7 +1,8 @@
 /**
- * 大屏菜单树（与设计稿对齐：3 分类 21 项，单一事实来源）。
- * 路由由本文件生成（见 index.ts），菜单组件再从生成结果的路由 meta.title 派生。
+ * 应用菜单树（双端，与设计稿对齐：3 分类 21 项，单一事实来源）。
+ * 路由由本文件生成（见 index.ts），菜单组件再从生成结果的路由 meta 派生。
  * name 即页面目录名：src/views/pages/<分类 name>/<叶子 name>/index.vue，改动须同步目录。
+ * app 即所属端：大屏分类挂大屏布局，管理端分类挂管理端布局（管理端菜单不含大屏分类）。
  */
 
 interface MenuLeaf {
@@ -14,6 +15,8 @@ interface MenuLeaf {
 }
 
 export interface MenuCategory extends MenuLeaf {
+    /** 所属端 */
+    app: 'screen' | 'admin';
     children: MenuLeaf[];
 }
 
@@ -22,6 +25,7 @@ export const menuTree: MenuCategory[] = [
         name: 'threeDAnalysis',
         title: '三维分析大屏',
         icon: 'menu-threeDAnalysis.svg',
+        app: 'screen',
         children: [
             { name: 'overview', title: '总览大屏', icon: 'menu-overview.svg' },
             { name: 'videoMonitor', title: '监控视频', icon: 'menu-videoMonitor.svg' },
@@ -45,6 +49,7 @@ export const menuTree: MenuCategory[] = [
         name: 'dataMonitor',
         title: '数据监控',
         icon: 'menu-dataMonitor.svg',
+        app: 'admin',
         children: [
             { name: 'fiberTemp', title: '光纤测温', icon: 'menu-fiberTemp.svg' },
             { name: 'infraredTemp', title: '红外测温', icon: 'menu-infraredTemp.svg' },
@@ -60,6 +65,7 @@ export const menuTree: MenuCategory[] = [
         name: 'dataOperation',
         title: '数据运营',
         icon: 'menu-dataOperation.svg',
+        app: 'admin',
         children: [
             { name: 'alarmRecord', title: '告警记录', icon: 'menu-alarmRecord.svg' },
             { name: 'alarmHandle', title: '告警处理', icon: 'menu-alarmHandle.svg' },

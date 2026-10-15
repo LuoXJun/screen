@@ -4,9 +4,9 @@ import type { Component } from 'vue';
 import { menuTree } from './menu';
 
 /**
- * 路由即菜单：布局路由(meta.isHidden 未设)的 children 中带 meta.title 的项自动成为菜单条目。
- * 大屏菜单树由 menu.ts 生成，两级——分类仅作分组(无组件，redirect 到首个子项)，叶子挂页面组件。
- * 子路由一律写绝对路径，便于一眼看清完整地址，也让菜单组件免去拼接前缀。
+ * 路由即菜单（双端）：布局按"端"挂在分类路由上——大屏分类挂大屏布局、
+ * 管理端分类挂管理端布局；URL 一律绝对路径、无端级前缀（既有地址不变）。
+ * 菜单组件按当前端过滤 menuRoutes 渲染（见 baseMenu）。
  */
 
 /** 页面组件表：Vite 须静态分析，glob 用字面量，不能拼变量路径 */
@@ -21,13 +21,21 @@ function resolvePage(categoryName: string, leafName: string): () => Promise<Comp
     return component;
 }
 
-const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
+/** 端级布局组件（常量引用：同端跨分类切换时布局按组件复用不重建） */
+const layouts = {
+    screen: () => import('@/views/layout/index.vue'),
+    admin: () => import('@/views/layout/admin/index.vue')
+} as const;
+
+/** 分类路由（导出供菜单按端过滤渲染）：children 一律绝对路径 */
+export const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
     const basePath = `/${category.name}`;
     return {
         path: basePath,
         name: category.name,
         redirect: `${basePath}/${category.children[0].name}`,
-        meta: { title: category.title, icon: category.icon },
+        component: layouts[category.app],
+        meta: { title: category.title, icon: category.icon, app: category.app },
         children: category.children.map((leaf) => ({
             path: `${basePath}/${leaf.name}`,
             name: leaf.name,
@@ -36,6 +44,16 @@ const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
         }))
     };
 });
+
+/** 首页并入大屏分类记录（URL /home 不变；与三维分析页同记录，布局复用行为同改造前） */
+menuRoutes
+    .find((record) => record.meta?.app === 'screen')
+    ?.children?.unshift({
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/pages/index.vue'),
+        meta: { title: '首页', isHidden: true }
+    });
 
 /** 应用落地页取菜单树首项 */
 const defaultPath = (() => {
@@ -60,18 +78,9 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'index',
-        redirect: defaultPath,
-        component: () => import('@/views/layout/index.vue'),
-        children: [
-            {
-                path: '/home',
-                name: 'home',
-                component: () => import('@/views/pages/index.vue'),
-                meta: { title: '首页', isHidden: true }
-            },
-            ...menuRoutes
-        ]
-    }
+        redirect: defaultPath
+    },
+    ...menuRoutes
 ];
 
 const router = createRouter({

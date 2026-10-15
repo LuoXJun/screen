@@ -103,6 +103,7 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 | `tokens/_admin.scss`      | 语义层 · 管理端              | `html[data-app="admin"]` 下管理端专属：颜色、背景、填充、阴影                                                 |
 | `tokens/_screen.scss`     | 语义层 · 大屏                | `html[data-app="screen"]` 下大屏专属：颜色类 + 尺寸语义的 vw 换算覆盖                                         |
 | `tokens/_functions.scss`  | 编译期函数                   | `base()` / `font()` 数值换算，经 vite `additionalData` 全局注入                                               |
+| `tokens/_adaptive.scss`   | 编译期 mixin                 | 双端共享的自适应骨架（基准/版式骨架/字号/间距），`_screen` / `_admin` 各自 `@include`                          |
 | `base/`                   | 全局基础层                   | 元素级归置（reset）与 `@font-face` 字体声明，零类选择器                                                       |
 | `elementplus/_theme.scss` | EP 绑定层                    | `--el-*: var(--lxj-*)` 全量绑定，EP 色阶用 `color-mix()` 运行时推导                                           |
 | `elementplus/patch/`      | 组件补丁层                   | 一个组件一个文件，按样式维护视角分类：`base/` `form/` `display/` `overlay/` `nav/`（浮层类统一归 `overlay/`） |
@@ -134,11 +135,13 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 - 切换由布局组件挂载时设置（`views/layout/index.vue` → `screen`）；login 等无布局页落到 `:root` 共享默认
 - 挂在 `<html>` 而非布局根：EP 弹层 teleport 到 body 后依然命中，无需 body 类桥接
 
-### 大屏自适应
+### 双端自适应（大屏 / 管理端共用）
 
-- 基准 `--screen-base`：以 1920 为设计中心，`clamp(1600px, 100vw, 3840px)`——视口在此区间内等比跟随，超出则封顶（上下限为 `_screen.scss` 的 `--screen-base-min/max`）
+- 自适应骨架由 `tokens/_adaptive.scss` 的 mixin 统一提供，`_screen.scss` / `_admin.scss` 分别在 `html[data-app]` 作用域 `@include`——**两端同一曲线、单源维护**（需按端分化时给 mixin 加参数）
+- 基准 `--screen-base`：以 1920 为设计中心，`clamp(1600px, 100vw, 3840px)`——视口在此区间内等比跟随，超出则封顶（上下限 `--screen-base-min/max`，JS 侧 `screenScale.ts` 引用同一来源）
 - `base(设计px)`：线性换算 = 设计稿 px × (基准 / 1920)，宽高等比缩放
 - `font(设计px)`：在 `base` 上叠加 `clamp` 限幅（默认下限 design×0.5+4px、上限 design×1.1），小屏保可读、大屏防臃肿
+- EP 组件经 `--el-* → --lxj-*` 绑定链自动跟随基准缩放（补丁层两端同源生效），无需逐组件适配
 - 函数经 vite `additionalData` 注入，组件 scoped 样式内直接裸调；`tokens/` 内 partial 需自写 `@use './functions' as *`
 
 ## 迁移的外部代码一律不计入检查范围

@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted } from 'vue';
-import { addLabelPinSiteEntity, clearSiteEntities } from '@/cesium';
+import { addLabelPinSiteEntity, clearSiteEntities, getSiteEntities } from '@/cesium';
 import { DEVICE_POINTS_BY_SITE } from '@/config/devices';
 import type { SiteKey } from '@/config/site';
 
@@ -7,12 +7,13 @@ import type { SiteKey } from '@/config/site';
 const loadedSites = new Set<SiteKey>();
 
 /**
- * 加载站点设备点位到对应容器（已加载则跳过;force 用于重建,如窗口尺寸变化后重烘焙标签牌）。
+ * 加载站点设备点位到对应容器（已加载且容器内确有实体才跳过——viewer 销毁重建后
+ * 容器会被换新,须重载;force 用于重建,如窗口尺寸变化后重烘焙标签牌）。
  * 设备点位为全局数据（config/devices 站点设备注册表）,与页面生命周期无关;
  * 各页面的交互状态（如高亮）由页面自行清理,实体本层保活。
  */
 export async function loadSiteEntities(siteKey: SiteKey, force = false): Promise<void> {
-    if (loadedSites.has(siteKey) && !force) return;
+    if (loadedSites.has(siteKey) && !force && getSiteEntities(siteKey).values.length > 0) return;
     clearSiteEntities(siteKey);
     await Promise.all(
         DEVICE_POINTS_BY_SITE[siteKey].map((point) =>

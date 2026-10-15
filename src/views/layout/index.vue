@@ -32,6 +32,7 @@
 
 <script setup lang="ts">
 import { computed, onUnmounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
@@ -44,6 +45,13 @@ import type { CameraData } from '@/components/screen/popups/CameraPopup';
 import type { FiberData } from '@/components/screen/popups/FiberPopup';
 import type { NestData } from '@/components/screen/popups/NestPopup';
 import { showMapPopup, type MapPopupHandle } from '@/components/screen/mapPopup/mapPopup';
+import {
+    clearHandlers,
+    destroyViewer,
+    removeAllDataSources,
+    removeAllEntities,
+    removeAllLayers
+} from '@/cesium';
 import { useSiteStore } from '@/stores/site';
 import { useMapEntities } from './composables/useMapEntities';
 import { useSiteSwitch } from './composables/useSiteSwitch';
@@ -60,6 +68,8 @@ document.documentElement.dataset.app = 'screen';
 /* 地图业务编排（实现见 ./composables/） */
 useMapEntities();
 useSiteSwitch();
+
+const router = useRouter();
 
 /** 当前站点（写入口径统一走 store.switchSite,以携带切换纪元） */
 const siteStore = useSiteStore();
@@ -119,9 +129,19 @@ watch(activeSite, () => {
 onUnmounted(() => {
     /* HMR 热更新会重建组件实例(新实例 setup 设置作用域后,旧实例再触发本钩子),
        若此处直接删除会把新实例刚设置的值清掉——dev 下跳过,生产环境正常清理 */
-    if (!import.meta.hot) {
+    if (!import.meta.hot && document.documentElement.dataset.app === 'screen') {
         delete document.documentElement.dataset.app;
     }
+
+    /* 跨端离场(切到管理端/退出登录)时销毁 Cesium 会话:
+       dev 下 BaseCesium 的 HMR 防御不会清理,但真实跨端切换必须清理,
+       否则 Viewer 随容器卸载悬空(切回大屏将无地图);HMR 重建时当前路由仍属本端,跳过 */
+    if (router.currentRoute.value.matched[0]?.meta?.app === 'screen') return;
+    clearHandlers();
+    removeAllLayers();
+    removeAllDataSources();
+    removeAllEntities();
+    destroyViewer();
 });
 </script>
 

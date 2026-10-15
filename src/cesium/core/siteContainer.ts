@@ -10,24 +10,32 @@ import { getViewer } from './viewer';
  * Promise.then 延迟入集合，add 后同步查询（length/getByName/contains）均不可见，
  * 不能作为创建/复用判据（同一同步执行流内会重复创建）。缓存未命中时从 viewer
  * 认领同名容器（覆盖模块重载等缓存丢失场景），并顺带清理历史多余容器。
+ * 缓存条目绑定所属 viewer：viewer 销毁重建（如跨端切换）后条目自动失效并按新
+ * viewer 重建（配套：useMapEntities 的已加载标记以"容器内确有实体"为准）。
  */
 const CONTAINER_PREFIX = 'site-';
 
+/** 站点容器缓存条目：绑定所属 viewer（viewer 销毁重建后自动失效） */
+interface SiteContainerEntry {
+    viewer: Cesium.Viewer;
+    container: Cesium.CustomDataSource;
+}
+
 /** 站点容器缓存（同步事实源，key 为 siteKey） */
-const containerCache = new Map<string, Cesium.CustomDataSource>();
+const containerCache = new Map<string, SiteContainerEntry>();
 
 /** 从 viewer 认领已存在的站点容器（同名保留首见，其余清理） */
-function claimFromViewer(): void {
-    const viewer = getViewer();
+function claimFromViewer(viewer: Cesium.Viewer): void {
     const duplicates: Cesium.DataSource[] = [];
     for (let i = 0; i < viewer.dataSources.length; i++) {
         const dataSource = viewer.dataSources.get(i);
         const name = dataSource.name;
         if (!name?.startsWith(CONTAINER_PREFIX)) continue;
         const key = name.slice(CONTAINER_PREFIX.length);
-        if (!containerCache.has(key)) {
-            containerCache.set(key, dataSource as Cesium.CustomDataSource);
-        } else if (containerCache.get(key) !== dataSource) {
+        const entry = containerCache.get(key);
+        if (!entry || entry.viewer !== viewer) {
+            containerCache.set(key, { viewer, container: dataSource as Cesium.CustomDataSource });
+        } else if (entry.container !== dataSource) {
             duplicates.push(dataSource);
         }
     }
@@ -36,18 +44,25 @@ function claimFromViewer(): void {
 
 /** 获取站点容器（懒创建，初始隐藏） */
 export function getSiteContainer(siteKey: string): Cesium.CustomDataSource {
-    let container = containerCache.get(siteKey);
-    if (!container) {
-        claimFromViewer();
-        container = containerCache.get(siteKey);
+    const viewer = getViewer();
+    let entry = containerCache.get(siteKey);
+    if (entry && entry.viewer !== viewer) {
+        /* viewer 已销毁重建：缓存失效，按新 viewer 重新认领/创建 */
+        containerCache.delete(siteKey);
+        entry = undefined;
     }
-    if (!container) {
-        container = new Cesium.CustomDataSource(`${CONTAINER_PREFIX}${siteKey}`);
+    if (!entry) {
+        claimFromViewer(viewer);
+        entry = containerCache.get(siteKey);
+    }
+    if (!entry) {
+        const container = new Cesium.CustomDataSource(`${CONTAINER_PREFIX}${siteKey}`);
         container.show = false;
-        containerCache.set(siteKey, container);
-        getViewer().dataSources.add(container);
+        entry = { viewer, container };
+        containerCache.set(siteKey, entry);
+        viewer.dataSources.add(container);
     }
-    return container;
+    return entry.container;
 }
 
 /** 获取站点实体集合 */
@@ -86,9 +101,15 @@ export function clearSiteEntities(siteKey: string): void {
 
 /** 激活站点：目标容器显示、其余站点容器隐藏（目标未创建时懒创建） */
 export function activateSite(siteKey: string): void {
+    const viewer = getViewer();
     getSiteContainer(siteKey);
-    containerCache.forEach((container, key) => {
-        container.show = key === siteKey;
+    containerCache.forEach((entry, key) => {
+        /* 顺手清掉其他 viewer 遗留的陈旧条目（仅销毁重建场景存在） */
+        if (entry.viewer !== viewer) {
+            containerCache.delete(key);
+            return;
+        }
+        entry.container.show = key === siteKey;
     });
-    getViewer().scene.requestRender();
+    viewer.scene.requestRender();
 }

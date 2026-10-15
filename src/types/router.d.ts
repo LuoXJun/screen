@@ -8,5 +8,7 @@ declare module 'vue-router' {
         icon?: string;
         /** 从菜单中隐藏（登录页、详情页、兜底页等） */
         isHidden?: boolean;
+        /** 所属端：布局与菜单按端划分（screen=大屏 / admin=管理端） */
+        app?: 'screen' | 'admin';
     }
 }

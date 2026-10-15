@@ -11,11 +11,18 @@ export function createHandler(): Cesium.ScreenSpaceEventHandler {
 }
 
 export function clearHandler(handler: Cesium.ScreenSpaceEventHandler): void {
-    handler.destroy();
+    /* 幂等：跨端切换等场景下 handler 可能已被 clearHandlers 统一销毁,二次 destroy 会抛错 */
+    if (!handler.isDestroyed()) {
+        handler.destroy();
+    }
     handlers.delete(handler);
 }
 
 export function clearHandlers(): void {
-    handlers.forEach((handler) => handler.destroy());
+    handlers.forEach((handler) => {
+        if (!handler.isDestroyed()) {
+            handler.destroy();
+        }
+    });
     handlers.clear();
 }

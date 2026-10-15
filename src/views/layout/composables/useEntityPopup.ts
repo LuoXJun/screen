@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { clearHandler, createHandler, getViewer, isDrawingActive, toLonLat } from '@/cesium';
 
 /** 本模块当前活跃的点击监听（HMR 重建时用于幂等清理,避免叠加监听） */
@@ -53,5 +53,14 @@ export function useEntityPopup(options: UseEntityPopupOptions = {}): void {
             const handler = (type ? options.contents?.[type] : undefined) ?? options.fallback;
             handler?.({ entity, position, lonlat: toLonLat(position), props });
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    });
+
+    onUnmounted(() => {
+        /* 卸载即清理并置空引用：跨端切换（如大屏→管理端）时监听不随组件存活,
+           且避免下次 mounted 对已被统一清理的 handler 二次销毁 */
+        if (activeHandler) {
+            clearHandler(activeHandler);
+            activeHandler = null;
+        }
     });
 }
