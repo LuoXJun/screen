@@ -6,7 +6,7 @@
         </basePanelTitle>
         <!-- 三格统计 -->
         <alarmStats class="alarm-stats" />
-        <div class="alarm-body">
+        <basePanelCard class="alarm-body">
             <!-- 级别筛选页签 -->
             <div class="alarm-tabs">
                 <div
@@ -29,7 +29,7 @@
                     @handle="onHandle"
                 />
             </div>
-        </div>
+        </basePanelCard>
     </basePanelMask>
 </template>
 
@@ -39,6 +39,7 @@ import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import alarmStats from './alarmStats.vue';
 import alarmCard from './alarmCard.vue';
+import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import { ALARM_LIST, ALARM_TABS, ALARM_UNDONE_TEXT, type AlarmTabKey } from './alarmCenter.config';
 
 /** 当前级别筛选 */
@@ -94,6 +95,7 @@ function onHandle(): void {
         min-height: 0;
         flex-direction: column;
         padding: base(13px) base(13px) 0;
+        margin-top: base(6px);
     }
 
     .alarm-tabs {

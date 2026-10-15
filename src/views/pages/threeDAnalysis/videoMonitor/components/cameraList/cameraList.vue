@@ -6,7 +6,7 @@
         <cameraStats class="camera-stats" :rows="CAMERA_STATS" />
         <!-- 分组列表 -->
         <div class="camera-groups">
-            <div v-for="group in CAMERA_GROUPS" :key="group.title" class="camera-group">
+            <div v-for="group in groups" :key="group.title" class="camera-group">
                 <baseSectionTitle
                     class="group-head"
                     :title="group.title"
@@ -22,7 +22,6 @@
                             :device="device"
                             :selected="device === selectedDevice"
                             @select="emits('select', $event)"
-                            @detail="emits('detail', $event)"
                         />
                     </div>
                 </div>
@@ -35,25 +34,26 @@
 import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import baseSectionTitle from '@/components/baseSectionTitle/baseSectionTitle.vue';
+import type { CameraDevice, CameraGroup } from '@/config/devices';
 import cameraStats from './cameraStats.vue';
 import cameraCard from './cameraCard.vue';
-import { CAMERA_GROUPS, CAMERA_STATS, type CameraDevice } from './cameraList.config';
+import { CAMERA_STATS } from './cameraList.config';
 
 withDefaults(
     defineProps<{
+        /** 分组列表（按当前站点由页面注入） */
+        groups: CameraGroup[];
         /** 面板标题 */
         title?: string;
-        /** 当前选中设备（互斥单选:点击详情后由页面注入,对应卡片呈现「已选择」态） */
+        /** 当前选中设备（互斥单选;卡片选中态 + 底部面板 + 地图定位高亮同一来源） */
         selectedDevice?: CameraDevice;
     }>(),
     { title: '监控摄像头列表', selectedDevice: undefined }
 );
 
 const emits = defineEmits<{
-    /** 卡片点击（切主画面） */
+    /** 卡片/详情点击（选中该设备） */
     select: [device: CameraDevice];
-    /** 详情点击（弹监控弹窗） */
-    detail: [device: CameraDevice];
 }>();
 </script>
 

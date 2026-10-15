@@ -2,11 +2,8 @@
  * 监控画面面板配置（设计稿 251-838,样本数据待接接口）。
  * 位置体系：与 overview 的 records 一致——主区底部居中常驻面板,非模态弹窗。
  */
-import {
-    CAMERA_STATUS_MAP,
-    CAMERA_STATUS_TONE,
-    type CameraDevice
-} from '../cameraList/cameraList.config';
+import type { CameraDevice } from '@/config/devices';
+import { CAMERA_STATUS_MAP, CAMERA_STATUS_TONE } from '../cameraList/cameraList.config';
 
 /** 画面模式（可见光 / 红外） */
 export interface MonitorMode {

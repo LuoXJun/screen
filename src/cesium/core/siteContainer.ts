@@ -69,6 +69,15 @@ export function addSiteEntity(
     return entities.add({ name, ...options, id: name });
 }
 
+/** 移除站点内单个实体（不存在时静默跳过） */
+export function removeSiteEntity(siteKey: string, name: string): void {
+    const entities = getSiteEntities(siteKey);
+    const entity = entities.getById(name);
+    if (entity) {
+        entities.remove(entity);
+    }
+}
+
 /** 清空站点实体（保留容器） */
 export function clearSiteEntities(siteKey: string): void {
     getSiteContainer(siteKey).entities.removeAll();

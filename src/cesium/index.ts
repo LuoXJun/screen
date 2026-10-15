@@ -13,10 +13,12 @@ export {
     setView,
     setViewLonLat,
     flyToRectangle,
+    lookAtLonLat,
     pickLonLat,
     getCameraLonLat,
     type FlyTarget,
-    type LonLatViewOptions
+    type LonLatViewOptions,
+    type LookAtLonLatOptions
 } from './core/camera';
 export {
     addImageryLayer,
@@ -58,15 +60,16 @@ export {
     getSiteContainer,
     getSiteEntities,
     addSiteEntity,
+    removeSiteEntity,
     clearSiteEntities,
     activateSite
 } from './core/siteContainer';
 export {
     renderLabelPinImage,
-    createLabelPinBillboard,
     type LabelPinOptions,
     type LabelPinBillboardOptions
-} from './core/labelPin';
+} from './core/labelPinDraw';
+export { addLabelPinSiteEntity, setLabelPinHighlight } from './core/labelPin';
 export { createHandler, clearHandler, clearHandlers } from './core/event';
 export { MapPopup } from './core/popup';
 export {

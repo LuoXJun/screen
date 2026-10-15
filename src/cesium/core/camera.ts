@@ -80,6 +80,33 @@ export function flyToRectangle(
     });
 }
 
+export interface LookAtLonLatOptions {
+    /** 相机方位角（度，0=从正北侧看向点位；缺省 0） */
+    heading?: number;
+    /** 俯仰角（度，负值斜下俯视；缺省 -40） */
+    pitch?: number;
+    /** 相机与点位的距离（米，缺省 500） */
+    range?: number;
+    /** 飞行时长（秒） */
+    duration?: number;
+}
+
+/** 相机斜视飞向经纬度点（绕点定位;单点/小目标近景观察用） */
+export function lookAtLonLat(lng: number, lat: number, options: LookAtLonLatOptions = {}): void {
+    const { heading = 0, pitch = -40, range = 500, duration } = options;
+    getViewer().camera.flyToBoundingSphere(
+        new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(lng, lat, 0), 1),
+        {
+            offset: new Cesium.HeadingPitchRange(
+                Cesium.Math.toRadians(heading),
+                Cesium.Math.toRadians(pitch),
+                range
+            ),
+            duration
+        }
+    );
+}
+
 /** 拾取屏幕坐标对应的经纬度（无地表交点时返回 null） */
 export function pickLonLat(
     screenPosition: Cesium.Cartesian2

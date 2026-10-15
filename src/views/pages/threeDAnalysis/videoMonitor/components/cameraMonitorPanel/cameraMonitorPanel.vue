@@ -23,7 +23,7 @@ import monitorPlayer from './monitorPlayer.vue';
 import deviceInfoPanel from './deviceInfoPanel.vue';
 import ptzControl from './ptzControl.vue';
 import { buildMonitorPanelData } from './cameraMonitorPanel.config';
-import type { CameraDevice } from '../cameraList/cameraList.config';
+import type { CameraDevice } from '@/config/devices';
 
 const props = defineProps<{
     /** 详情设备（点击列表「详情」传入,切换设备即刷新面板） */

@@ -1,11 +1,11 @@
 <template>
     <baseOverlay>
         <template #left>
-            <!-- 监控摄像头列表（「详情」= 选中该设备,互斥;主区底部面板展示其监控画面） -->
-            <cameraList :selected-device="detailDevice" @select="onSelect" @detail="onDetail" />
+            <!-- 监控摄像头列表（点击卡片/详情=选中该设备:底部面板展示 + 地图定位高亮） -->
+            <cameraList :groups="groups" :selected-device="selectedDevice" @select="onSelect" />
         </template>
         <!-- 监控画面面板（主区底部,位置体系同 overview 的 records） -->
-        <cameraMonitorPanel v-if="detailDevice" :device="detailDevice" />
+        <cameraMonitorPanel v-if="selectedDevice" :device="selectedDevice" />
         <template #right>
             <!-- 视频监控警报中心 -->
             <alarmCenter />
@@ -19,18 +19,18 @@ import baseOverlay from '@/components/baseOverlay/baseOverlay.vue';
 import cameraList from './components/cameraList/cameraList.vue';
 import cameraMonitorPanel from './components/cameraMonitorPanel/cameraMonitorPanel.vue';
 import alarmCenter from './components/alarmCenter/alarmCenter.vue';
-import type { CameraDevice } from './components/cameraList/cameraList.config';
+import { useCameraMarkers } from './composables/useCameraMarkers';
+import type { CameraDevice } from '@/config/devices';
 
-/** 详情设备（null=未选中,面板不显示;shallowRef 保住对象引用,卡片据此做互斥选中比较） */
-const detailDevice = shallowRef<CameraDevice>();
+/** 摄像头交互编排（选中设备 → 地图定位高亮;点位为全局加载,本层不管理其生死） */
+const { groups, focusDevice } = useCameraMarkers();
 
-/** 卡片点击：切换主画面（待接视频流） */
-function onSelect(): void {
-    /* 主画面切换待接入 */
-}
+/** 选中设备（null=未选中;底部面板展示 + 卡片选中态;shallowRef 保住对象引用供卡片比较） */
+const selectedDevice = shallowRef<CameraDevice>();
 
-/** 详情点击：在底部面板查看监控画面 */
-function onDetail(device: CameraDevice): void {
-    detailDevice.value = device;
+/** 选中设备（点卡片或详情同一动作）：底部面板展示 + 地图定位高亮 */
+function onSelect(device: CameraDevice): void {
+    selectedDevice.value = device;
+    focusDevice(device);
 }
 </script>

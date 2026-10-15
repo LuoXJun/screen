@@ -16,25 +16,24 @@
             </p>
         </div>
         <span v-if="selected" class="card-selected">已选择</span>
-        <el-button v-else class="card-detail" @click.stop="emits('detail', device)">详情</el-button>
+        <el-button v-else class="card-detail" @click.stop="emits('select', device)">详情</el-button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { CAMERA_STATUS_MAP, CAMERA_STATUS_TONE, type CameraDevice } from './cameraList.config';
+import type { CameraDevice } from '@/config/devices';
+import { CAMERA_STATUS_MAP, CAMERA_STATUS_TONE } from './cameraList.config';
 
-/** 摄像头设备卡：状态点 + 编号/类型 + 详情（或选中态） */
+/** 摄像头设备卡：状态点 + 编号/类型 + 详情（或选中态）;点卡片与点详情同为选中动作 */
 defineProps<{
     device: CameraDevice;
-    /** 当前选中（主画面设备;「已选择」标签与「详情」按钮互斥显示） */
+    /** 当前选中（面板展示 + 地图定位高亮;「已选择」标签与「详情」按钮互斥显示） */
     selected?: boolean;
 }>();
 
 const emits = defineEmits<{
-    /** 卡片点击（切主画面） */
+    /** 卡片/详情点击（选中该设备） */
     select: [device: CameraDevice];
-    /** 详情点击（弹监控弹窗） */
-    detail: [device: CameraDevice];
 }>();
 </script>
 
@@ -54,9 +53,10 @@ const emits = defineEmits<{
 
     /* --status-color 由内联样式注入（CAMERA_STATUS_TONE,状态点与状态词共用） */
 
-    /* 选中态(当前主画面) */
+    /* 选中态(底部面板展示 + 地图定位高亮):实底 + 光晕 */
     &.is-selected {
         background: var(--color-blue-750);
+        box-shadow: 0 0 10px rgb(0 200 255 / 40%);
     }
 
     .status-dot {
