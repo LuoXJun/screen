@@ -1,6 +1,12 @@
 import * as Cesium from 'cesium';
 import { onBeforeUnmount, onMounted } from 'vue';
-import { addLabelPinSiteEntity, clearSiteEntities, getSiteEntities } from '@/cesium';
+import {
+    addLabelPinSiteEntity,
+    clearSiteEntities,
+    getSiteEntities,
+    sampleGroundHeights,
+    TERRAIN_READY
+} from '@/cesium';
 import { DEVICE_POINTS_BY_SITE } from '@/config/devices';
 import type { SiteKey } from '@/config/site';
 
@@ -22,14 +28,18 @@ export const SITE_ENTITIES_RELOADED = new Cesium.Event<(siteKey: SiteKey) => voi
 export async function loadSiteEntities(siteKey: SiteKey, force = false): Promise<void> {
     if (loadedSites.has(siteKey) && !force && getSiteEntities(siteKey).values.length > 0) return;
     clearSiteEntities(siteKey);
+    const points = DEVICE_POINTS_BY_SITE[siteKey];
+    /* 点位高度取地形采样（无地形时 0）：实体位置即贴地坐标，
+       弹窗/流光等按 position 取坐标的消费方随之自动对齐 */
+    const heights = await sampleGroundHeights(points);
     await Promise.all(
-        DEVICE_POINTS_BY_SITE[siteKey].map((point) =>
+        points.map((point, index) =>
             addLabelPinSiteEntity(
                 siteKey,
                 point.id,
                 point.lng,
                 point.lat,
-                0,
+                heights[index],
                 { text: point.text },
                 { type: point.type, ...point.data }
             )
@@ -58,12 +68,23 @@ function onResize(): void {
 
 /** 站点设备点位加载（全局,挂载于 layout;点位数据见 config/devices） */
 export function useMapEntities(): void {
+    /* 地形就绪晚于首次点位加载（网络异步）:就绪后重建已加载站点，让点位贴上地形 */
+    let removeTerrainListener: (() => void) | undefined;
+
     onMounted(() => {
         window.addEventListener('resize', onResize);
+        removeTerrainListener = TERRAIN_READY.addEventListener(() => {
+            loadedSites.forEach((siteKey) => {
+                loadSiteEntities(siteKey, true).catch((err: unknown) => {
+                    console.error(`[site] ${siteKey} 地形就绪后点位重建失败`, err);
+                });
+            });
+        });
     });
 
     onBeforeUnmount(() => {
         window.clearTimeout(resizeTimer);
         window.removeEventListener('resize', onResize);
+        removeTerrainListener?.();
     });
 }

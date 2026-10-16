@@ -80,7 +80,7 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 | 路径              | 职责                                                                                                                                                  |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/api/`        | 接口层（当前：`auth.ts` 认证接口；请求封装见 `src/utils/request/`）                                                                                   |
-| `src/cesium/`     | 地图引擎封装：`core/` 工具、`effects/` 效果、`layers/` 图层（含 builtin 内置实现）                                                                    |
+| `src/cesium/`     | 地图引擎封装：`core/` 工具、`effects/` 效果、`layers/` 图层（含 builtin 内置实现）、`basemap/` 底图（影像/注记/地形预设配置）                          |
 | `src/components/` | 对 UI 框架的二次封装与业务组件：`baseXxx` 基础组件、`baseChart` 图表、`baseCesium` 地图容器、`screen/` 大屏业务组件（图层控制、地图弹窗、设备弹窗等） |
 | `src/config/`     | 全局横切配置（`site.ts` 站点注册表：站点列表、地球视点、默认站点）                                                                                    |
 | `src/router/`     | 路由即菜单：`menu.ts` 声明大屏菜单树，`index.ts` 依树生成路由、经 `import.meta.glob` 解析页面组件                                                     |

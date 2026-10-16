@@ -19,6 +19,14 @@ const pinRecords = new WeakMap<Cesium.Entity, PinRecord>();
 let flowingEntity: Cesium.Entity | undefined;
 
 /**
+ * 标牌可见距离上限（米）:相机与点位距离超出后标牌隐藏。
+ * billboard 为屏幕空间恒等尺寸,远视角下全站点位标牌等大堆叠糊屏;
+ * 初始站点视角高 3.2km（点位距离约 3~4km）须全覆盖,故取约 3 倍余量,
+ * 拉到 10km 高度时标牌已挤成一团,恰为隐藏时机。
+ */
+export const LABEL_PIN_MAX_DISTANCE = 10000;
+
+/**
  * 在站点容器创建标签牌点位实体（异步:等待两版纹理绘制就绪）。
  * billboard 以引针尖端为锚点（verticalOrigin=BOTTOM）,即地理坐标落在针尖处;
  * properties 为实体点击弹窗数据。创建后经 setLabelPinHighlight 切换选中高亮。
@@ -42,6 +50,7 @@ export async function addLabelPinSiteEntity(
     const graphics: Cesium.BillboardGraphics.ConstructorOptions = {
         image: base,
         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, LABEL_PIN_MAX_DISTANCE),
         ...billboard
     };
     const entity = addSiteEntity(siteKey, name, {
@@ -83,6 +92,8 @@ function flowTo(entity: Cesium.Entity, record: PinRecord): void {
             y: (-layout.canvasHeight + layout.pad) * s
         },
         width: layout.barWidth * s,
-        height: layout.barHeight * s
+        height: layout.barHeight * s,
+        /* 与标牌 billboard 的远裁剪同源:标牌隐藏后流光不能独留成幽灵框 */
+        maxDistance: LABEL_PIN_MAX_DISTANCE
     });
 }

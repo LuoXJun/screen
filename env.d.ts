@@ -19,6 +19,8 @@ interface ImportMetaEnv {
     readonly VITE_API_URL: string;
     readonly VITE_SC_CODE: Array<number | string>;
     readonly VITE_CESIUM_ION_TOKEN?: string;
+    /** 天地图服务密钥 tk（console.tianditu.gov.cn 申请，未配置时底图回退 ArcGIS 预设） */
+    readonly VITE_TIANDITU_TOKEN?: string;
     /** 司空 2 私有化平台地址 */
     readonly VITE_FH2_API_URL?: string;
     /** 司空 2 组织密钥（JWT），控制台「组织设置 → OpenAPI」复制 */

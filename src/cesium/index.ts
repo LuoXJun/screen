@@ -40,8 +40,20 @@ export {
     createAmapImagery,
     createOSMImagery,
     createArcGisImagery,
+    createArcGisLabelImagery,
+    createWorldTerrain,
+    sampleGroundHeights,
     createTianDiTuImagery
 } from './core/providers';
+export { applyBaseMap, TERRAIN_READY } from './basemap';
+export {
+    BASE_MAP_PRESET,
+    BASE_MAP_PRESETS,
+    BASE_TERRAIN,
+    type BaseMapPreset,
+    type BaseMapPresetKey,
+    type TerrainSource
+} from './basemap/config';
 export {
     addEntity,
     getEntity,

@@ -89,13 +89,20 @@ export interface LookAtLonLatOptions {
     range?: number;
     /** 飞行时长（秒） */
     duration?: number;
+    /** 目标点高度（米;缺省取已加载地形高度,无地形/未加载时回退椭球面） */
+    height?: number;
 }
 
 /** 相机斜视飞向经纬度点（绕点定位;单点/小目标近景观察用） */
 export function lookAtLonLat(lng: number, lat: number, options: LookAtLonLatOptions = {}): void {
-    const { heading = 0, pitch = -40, range = 500, duration } = options;
-    getViewer().camera.flyToBoundingSphere(
-        new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(lng, lat, 0), 1),
+    const { heading = 0, pitch = -40, range = 500, duration, height } = options;
+    const viewer = getViewer();
+    /* 贴地目标:未显式给高度时取已加载地形高度（地形异步加载,未就绪时回退椭球面）,
+       否则球心落在椭球面/山体内部,相机定位会被地形遮挡 */
+    const targetHeight =
+        height ?? viewer.scene.globe.getHeight(Cesium.Cartographic.fromDegrees(lng, lat)) ?? 0;
+    viewer.camera.flyToBoundingSphere(
+        new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(lng, lat, targetHeight), 1),
         {
             offset: new Cesium.HeadingPitchRange(
                 Cesium.Math.toRadians(heading),

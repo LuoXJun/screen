@@ -5,8 +5,11 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import {
+    applyBaseMap,
     clearHandlers,
     destroyViewer,
+    getViewer,
+    hasViewer,
     initViewer,
     removeAllDataSources,
     removeAllEntities,
@@ -17,7 +20,17 @@ const containerEl = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
     if (!containerEl.value) return;
+    /* HMR/组件重建会换上新容器，旧 Viewer 的 canvas 悬空在已卸载的旧容器上（白屏）：
+       容器更换时必须清理重建；容器未变（纯脚本热更新）则复用，保住地图状态 */
+    if (hasViewer() && getViewer().container !== containerEl.value) {
+        clearHandlers();
+        removeAllLayers();
+        removeAllDataSources();
+        removeAllEntities();
+        destroyViewer();
+    }
     initViewer(containerEl.value);
+    applyBaseMap();
 });
 
 onBeforeUnmount(() => {

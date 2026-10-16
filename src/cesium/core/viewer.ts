@@ -6,6 +6,8 @@ const DEFAULT_ION_TOKEN = import.meta.env.VITE_CESIUM_ION_TOKEN ?? '';
 const DEFAULT_VIEWER_OPTIONS: Cesium.Viewer.ConstructorOptions = {
     animation: false,
     timeline: false,
+    /* 不自建 Ion 默认底图：底图由 basemap 模块统一配置（见 cesium/basemap） */
+    baseLayer: false,
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,

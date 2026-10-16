@@ -207,12 +207,12 @@ onUnmounted(() => {
         }
 
         /* 全局图层管理:贴左栏右侧、顶部与侧栏内容顶对齐
-           （左缘=内容左缘+侧栏宽;顶缘=内容顶缘+侧栏避让;再右移自身宽 20%） */
+           （左缘=内容左缘+侧栏宽;顶缘=内容顶缘+侧栏避让） */
         .layer-control {
             position: absolute;
             left: calc(var(--lxj-space-page) + var(--lxj-aside-width));
             top: calc(var(--lxj-space-page) + var(--lxj-aside-top-offset));
-            transform: translateX(20%);
+            transform: translateX(10%);
             z-index: var(--lxj-z-sticky);
         }
     }

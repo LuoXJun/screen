@@ -1,4 +1,4 @@
-import type * as Cesium from 'cesium';
+import * as Cesium from 'cesium';
 import { getViewer } from './viewer';
 
 /**
@@ -26,6 +26,8 @@ export interface LabelPinFlowTarget {
     /** 条形尺寸 */
     width: number;
     height: number;
+    /** 可见距离上限（米;与标牌 billboard 的 distanceDisplayCondition 同源） */
+    maxDistance: number;
 }
 
 /** 基础样式（流光 keyframes 随几何在 show 时重建） */
@@ -87,6 +89,13 @@ function ensureLayer(): HTMLDivElement {
  */
 function syncPosition(target: LabelPinFlowTarget, el: HTMLElement): void {
     const viewer = getViewer();
+    /* 超出标牌可见距离时一并隐藏（billboard 已不渲染,流光须同步退场） */
+    if (
+        Cesium.Cartesian3.distance(viewer.camera.positionWC, target.position) > target.maxDistance
+    ) {
+        el.style.opacity = '0';
+        return;
+    }
     const xy = viewer.scene.cartesianToCanvasCoordinates(target.position);
     if (!xy) {
         el.style.opacity = '0';
