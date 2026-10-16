@@ -48,7 +48,10 @@ export const createInterceptors = (instance: AxiosInstance): IbaseRequestConfig 
 
             if (status === 401) {
                 return handleUnauthorizedError(err, instance).catch((refreshError) => {
-                    ElMessage.error(errorMessages[status]);
+                    /* 登录页的 401 多为账号密码错误,由登录页自行提示,不弹全局"登录过期" */
+                    if (!location.hash.includes('login')) {
+                        ElMessage.error(errorMessages[status]);
+                    }
                     return Promise.reject(refreshError);
                 });
             }

@@ -45,22 +45,22 @@ export const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
     };
 });
 
-/** 首页并入大屏分类记录（URL /home 不变；与三维分析页同记录，布局复用行为同改造前） */
+/** 应用落地页取菜单树首项（须先于 /home 重定向目标计算） */
+const defaultPath = (() => {
+    const category = menuTree.at(0);
+    const leaf = category?.children.at(0);
+    return category && leaf ? `/${category.name}/${leaf.name}` : '/login';
+})();
+
+/** 首页并入大屏分类记录（URL /home 保留,直接重定向到落地页；与三维分析页同记录，布局复用行为同改造前） */
 menuRoutes
     .find((record) => record.meta?.app === 'screen')
     ?.children?.unshift({
         path: '/home',
         name: 'home',
-        component: () => import('@/views/pages/index.vue'),
+        redirect: defaultPath,
         meta: { title: '首页', isHidden: true }
     });
-
-/** 应用落地页取菜单树首项 */
-const defaultPath = (() => {
-    const category = menuTree.at(0);
-    const leaf = category?.children.at(0);
-    return category && leaf ? `/${category.name}/${leaf.name}` : '/home';
-})();
 
 const routes: RouteRecordRaw[] = [
     {
