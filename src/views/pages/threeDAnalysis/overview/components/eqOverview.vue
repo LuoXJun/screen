@@ -41,6 +41,8 @@ const list = ref<BaseCardListItem[]>(
 
 <style scoped lang="scss">
 .eq-overview {
+    /* 高度由内容决定,不参与侧栏剩余空间分配(巡检面板变高时不被挤压) */
+    flex-shrink: 0;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -70,9 +72,8 @@ const list = ref<BaseCardListItem[]>(
         flex-direction: column;
         min-height: 0;
         .card-list {
-            flex: 1;
-            min-height: 0;
-            overflow: auto;
+            height: base(202px);
+            overflow-y: scroll;
         }
         .num {
             color: #aacdf3;

@@ -24,7 +24,9 @@
         width: var(--lxj-aside-width);
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        /* 侧栏锁在容器高度内,超出部分由面板内部滚动,不倒灌到页面滚动区 */
+        min-height: 0;
+        // justify-content: space-around;
         gap: var(--lxj-gap);
     }
     // 侧栏顶部让位（如全局站点切换按钮;偏移值由布局注入,左右同时避让保持顶对齐）

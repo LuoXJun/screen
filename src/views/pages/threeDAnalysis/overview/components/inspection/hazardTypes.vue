@@ -62,6 +62,9 @@ const barDots: Record<HazardTone, string> = {
     flex-direction: column;
     gap: base(11px);
     width: 100%;
+    /* 条末端圆点(16px)中心压在 4px 条上,下探 6px;由内容区自行包容,
+       否则绝对定位溢出会计入滚动高度,在富余高度下也撑出滚动条 */
+    padding-bottom: base(6px);
 
     .group-head {
         position: relative;
