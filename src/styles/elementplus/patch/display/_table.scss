@@ -133,3 +133,97 @@ $head-h: 33px;
         margin-left: base(6px);
     }
 }
+
+// =============================================================
+// table-vegetation-zone —— 植被隐患 · 分区植被统计(设计稿 node 1168:945)
+//   骨架:表头 32px / 数据行 34px,居中,细青线;高亮行整行深蓝底+描边+圆角
+// =============================================================
+.el-table.table-vegetation-zone {
+    --el-table-bg-color: transparent;
+    --el-table-tr-bg-color: transparent;
+    --el-table-header-bg-color: color-mix(in srgb, var(--lxj-color-primary) 4%, transparent);
+    --el-table-text-color: var(--color-blue-300);
+    --el-table-header-text-color: var(--color-blue-500);
+    --el-table-border-color: rgba(0, 150, 220, 0.1);
+    --el-table-row-hover-bg-color: transparent;
+
+    font-size: var(--lxj-font-body);
+
+    // 溢出滚动画在表格内部：外层撑满卡片剩余高度,表头固定、表体滚动
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .el-table__inner-wrapper {
+        display: flex;
+        min-height: 0;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .el-table__header-wrapper {
+        flex-shrink: 0;
+    }
+
+    .el-table__body-wrapper {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .el-scrollbar {
+        height: 100%;
+    }
+
+    .el-scrollbar__wrap {
+        overflow-y: auto;
+    }
+
+    th.el-table__cell {
+        height: base(32px);
+        padding: 0;
+        font-weight: var(--lxj-font-weight);
+    }
+
+    td.el-table__cell {
+        height: base(34px);
+        padding: 0;
+    }
+
+    .cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        line-height: base(21px);
+    }
+
+    // 表格根底 1px 线(EP 挂在 __inner-wrapper::before)与外层卡片边框重复
+    .el-table__inner-wrapper::before {
+        display: none;
+    }
+
+    // 设计稿每行都有底边线(含末行)
+    tbody tr:last-child td.el-table__cell {
+        border-bottom: 1px solid var(--el-table-border-color);
+    }
+
+    // 当前行:复用 el-table highlight-current-row 交互态,覆盖为设计稿样式
+    .el-table__row.current-row > td.el-table__cell,
+    .el-table__row.current-row:hover > td.el-table__cell {
+        border-top: 1px solid rgba(0, 200, 255, 0.2);
+        border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+        background: var(--color-blue-750);
+        color: var(--color-white);
+    }
+
+    .el-table__row.current-row > td.el-table__cell:first-child {
+        border-left: 1px solid rgba(0, 200, 255, 0.2);
+        border-radius: base(4px) 0 0 base(4px);
+    }
+
+    .el-table__row.current-row > td.el-table__cell:last-child {
+        border-right: 1px solid rgba(0, 200, 255, 0.2);
+        border-radius: 0 base(4px) base(4px) 0;
+    }
+}

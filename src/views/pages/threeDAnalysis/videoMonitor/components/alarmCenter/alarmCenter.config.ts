@@ -53,15 +53,15 @@ export const ALARM_UNDONE_TEXT = '7条未处理';
 export type AlarmTabKey = 'all' | AlarmLevel;
 
 export interface AlarmTab {
-    key: AlarmTabKey;
+    value: AlarmTabKey;
     label: string;
 }
 
 export const ALARM_TABS: AlarmTab[] = [
-    { key: 'all', label: '全部' },
-    { key: 'urgent', label: '紧急' },
-    { key: 'warning', label: '警告' },
-    { key: 'done', label: '已处理' }
+    { value: 'all', label: '全部' },
+    { value: 'urgent', label: '紧急' },
+    { value: 'warning', label: '警告' },
+    { value: 'done', label: '已处理' }
 ];
 
 /** 统计格（数值色见 color,图标为 assets 文件名） */

@@ -12,6 +12,8 @@ interface MenuLeaf {
     title: string;
     /** 菜单图标（assets/images 下文件名） */
     icon?: string;
+    /** 页面左栏设计稿宽度（px；全局默认 320），用于左栏与全局悬浮面板定位 */
+    asideWidth?: number;
 }
 
 export interface MenuCategory extends MenuLeaf {
@@ -30,7 +32,12 @@ export const menuTree: MenuCategory[] = [
             { name: 'overview', title: '总览大屏', icon: 'menu-overview.svg' },
             { name: 'videoMonitor', title: '监控视频', icon: 'menu-videoMonitor.svg' },
             { name: 'droneRoute', title: '无人机巡检路线', icon: 'menu-droneRoute.svg' },
-            { name: 'vegetationHazard', title: '植被隐患', icon: 'menu-vegetationHazard.svg' },
+            {
+                name: 'vegetationHazard',
+                title: '植被隐患',
+                icon: 'menu-vegetationHazard.svg',
+                asideWidth: 390
+            },
             {
                 name: 'boxTransformerTemp',
                 title: '箱变测温',

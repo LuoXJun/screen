@@ -40,7 +40,11 @@ export const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
             path: `${basePath}/${leaf.name}`,
             name: leaf.name,
             component: resolvePage(category.name, leaf.name),
-            meta: { title: leaf.title, icon: leaf.icon }
+            meta: {
+                title: leaf.title,
+                icon: leaf.icon,
+                asideWidth: leaf.asideWidth
+            }
         }))
     };
 });

@@ -8,17 +8,7 @@
         <alarmStats class="alarm-stats" />
         <basePanelCard class="alarm-body">
             <!-- 级别筛选页签 -->
-            <div class="alarm-tabs">
-                <div
-                    v-for="tab in ALARM_TABS"
-                    :key="tab.key"
-                    class="alarm-tab"
-                    :class="{ 'is-active': tab.key === activeTab }"
-                    @click="activeTab = tab.key"
-                >
-                    {{ tab.label }}
-                </div>
-            </div>
+            <baseTabs v-model="activeTab" :items="ALARM_TABS" class="alarm-tabs" />
             <!-- 警报列表(超出滚动,页签固定) -->
             <div class="alarm-list">
                 <alarmCard
@@ -37,6 +27,7 @@
 import { computed, ref } from 'vue';
 import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
+import baseTabs from '@/components/baseTabs/baseTabs.vue';
 import alarmStats from './alarmStats.vue';
 import alarmCard from './alarmCard.vue';
 import basePanelCard from '@/components/basePanel/basePanelCard.vue';
@@ -99,43 +90,7 @@ function onHandle(): void {
     }
 
     .alarm-tabs {
-        display: flex;
         flex-shrink: 0;
-        gap: base(12px);
-    }
-
-    /* 页签:未激活灰条+半透白字,激活渐变底+亮青条+白字(资产随设计稿) */
-    .alarm-tab {
-        position: relative;
-        width: base(50px);
-        height: base(25px);
-        color: var(--color-white);
-        font-size: var(--lxj-font-body);
-        line-height: base(21px);
-        text-align: center;
-        letter-spacing: base(0.33px);
-        opacity: 0.5;
-        cursor: pointer;
-
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: base(3px);
-            background: url('@/assets/images/alarm-tab-bar.svg') no-repeat center / 100% 100%;
-        }
-
-        &.is-active {
-            font-weight: var(--lxj-font-weight-Semibold);
-            opacity: 1;
-            background: url('@/assets/images/alarm-tab-bg-active.svg') no-repeat center / 100% 100%;
-
-            &::after {
-                background-image: url('@/assets/images/alarm-tab-bar-active.svg');
-            }
-        }
     }
 
     .alarm-list {

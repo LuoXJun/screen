@@ -8,7 +8,7 @@
             <el-aside class="side-bar">
                 <baseMenu />
             </el-aside>
-            <el-main class="content">
+            <el-main class="content" :style="pageAsideStyle">
                 <!-- 全局地图层：路由切换不销毁，视角状态跨页面保留 -->
                 <div class="layout-map">
                     <BaseCesium />
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { computed, onUnmounted, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
@@ -70,6 +70,15 @@ useMapEntities();
 useSiteSwitch();
 
 const router = useRouter();
+const route = useRoute();
+
+/** 页面左栏宽度变量：路由 meta 按设计稿 px 声明时覆盖全局默认 320（供左栏与全局悬浮面板共用） */
+const pageAsideStyle = computed(() => {
+    const asideWidth = route.meta.asideWidth;
+    return typeof asideWidth === 'number'
+        ? { '--lxj-page-aside-width': `calc(var(--screen-base) * ${asideWidth} / 1920)` }
+        : undefined;
+});
 
 /** 当前站点（写入口径统一走 store.switchSite,以携带切换纪元） */
 const siteStore = useSiteStore();
@@ -210,7 +219,7 @@ onUnmounted(() => {
            （左缘=内容左缘+侧栏宽;顶缘=内容顶缘+侧栏避让） */
         .layer-control {
             position: absolute;
-            left: calc(var(--lxj-space-page) + var(--lxj-aside-width));
+            left: calc(var(--lxj-space-page) + var(--lxj-page-aside-width, var(--lxj-aside-width)));
             top: calc(var(--lxj-space-page) + var(--lxj-aside-top-offset));
             transform: translateX(10%);
             z-index: var(--lxj-z-sticky);
