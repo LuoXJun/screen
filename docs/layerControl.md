@@ -33,6 +33,7 @@ cesium/layers/                              ← 图层池与契约
 ```ts
 /** views/layout/composables/useLayerControl.ts */
 const LAYER_ITEMS: LayerControlItem[] = [
+    { label: '天地图影像', value: 'tianditu-imagery' }, // 底图开关，非图层显隐
     { label: '红线范围', value: 'redline' },
     { label: '升压站', value: 'station' },
     { label: '分区情况', value: 'zone' }
@@ -57,6 +58,7 @@ export interface LayerControlItem {
 - **受控组件**：`v-model`（string[] 勾选值）与 `list` 均由使用方传入，组件自身零状态。
 - **单向同步**：勾选态是唯一事实来源，`watch` 勾选变化 → 逐项 `setLayerVisible(name, values.includes(name))`，不做反向同步。
 - **未注册静默跳过**：`layerPool.get(name)?.setVisible(...)`，业务图层未注册时开关不报错，注册后自动生效——面板可先于图层接入上线。
+- **底图开关特判**：`tianditu-imagery` 不参与 `setLayerVisible`，由独立 `watch` 调 `setTianDiTuImagery(enabled)` 切换底图源——**默认关闭**（启动即默认影像：Ion 全球影像）；勾选=天地图影像（中文注记），取消=回退默认影像；切换不触及地形。未配置 `VITE_TIANDITU_TOKEN` 时该项不渲染。
 
 ## 定位能力（图层级）
 
@@ -86,6 +88,7 @@ export interface LayerControlItem {
 | 定位能力   | 图层级预埋        | `MapLayer.getBounds()` + 图层池 `focusLayer`（取范围 → 相机 flyTo）先就位；面板 UI 后置，设备级定位待 ItemLayer 扩展 |
 | 刷新持久化 | 不做              | 配置驱动场景刷新 = 重置为配置默认值是合理语义；需要时再加 localStorage（持久化 > 配置默认，key 失效静默忽略） |
 | 配置位置   | 跟随使用方        | 面板清单配置放使用方目录（布局 → `views/layout/composables/`），避免多页面配置堆叠在全局目录                  |
+| 天地图影像开关 | 图层管理项    | 默认关闭（启动用稳定默认影像）；勾选态经独立 watch 切底图源（不走图层池显隐），无 tk 时隐藏该项                |
 
 ## 踩坑记录
 

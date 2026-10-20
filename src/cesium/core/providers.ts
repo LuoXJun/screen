@@ -43,6 +43,11 @@ export function createArcGisLabelImagery(): Cesium.UrlTemplateImageryProvider {
     });
 }
 
+/** Cesium Ion 全球影像（项目原始默认底图，无注记；依赖 VITE_CESIUM_ION_TOKEN 有效） */
+export function createIonImagery(): Promise<Cesium.IonImageryProvider> {
+    return Cesium.IonImageryProvider.fromAssetId(2);
+}
+
 /** Cesium Ion 全球地形（含水面效果；依赖 VITE_CESIUM_ION_TOKEN 有效） */
 export function createWorldTerrain(): Promise<Cesium.TerrainProvider> {
     return Cesium.createWorldTerrainAsync();

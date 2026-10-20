@@ -45,11 +45,12 @@ export {
     sampleGroundHeights,
     createTianDiTuImagery
 } from './core/providers';
-export { applyBaseMap, TERRAIN_READY } from './basemap';
+export { applyBaseMap, setTianDiTuImagery, TERRAIN_READY } from './basemap';
 export {
-    BASE_MAP_PRESET,
     BASE_MAP_PRESETS,
     BASE_TERRAIN,
+    DEFAULT_BASE_MAP_PRESET,
+    TIAN_DI_TU_TOKEN,
     type BaseMapPreset,
     type BaseMapPresetKey,
     type TerrainSource

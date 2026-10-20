@@ -1,13 +1,14 @@
 import * as Cesium from 'cesium';
-import { addImageryLayer, setBaseImagery } from '../core/layer';
+import { addImageryLayer, removeImageryLayer, setBaseImagery } from '../core/layer';
 import { createWorldTerrain } from '../core/providers';
 import { getViewer, hasViewer, requestRender } from '../core/viewer';
 import {
-    BASE_MAP_PRESET,
     BASE_MAP_PRESETS,
     BASE_TERRAIN,
+    DEFAULT_BASE_MAP_PRESET,
     TIAN_DI_TU_TOKEN,
-    type BaseMapPreset
+    type BaseMapPreset,
+    type BaseMapPresetKey
 } from './config';
 
 /** 注记层的注册名（便于按名查询/替换） */
@@ -19,15 +20,39 @@ const LABEL_LAYER_NAME = 'base-label';
  */
 export const TERRAIN_READY = new Cesium.Event<() => void>();
 
-/** 解析当前预设：天地图未配置 token 时回退 arcgis（避免发起无效瓦片请求） */
-function resolvePreset(): BaseMapPreset {
-    if (BASE_MAP_PRESET === 'tianditu' && !TIAN_DI_TU_TOKEN) {
+/** 解析预设：天地图未配置 token 时回退默认影像（避免发起无效瓦片请求） */
+function resolvePreset(key: BaseMapPresetKey): BaseMapPreset {
+    if (key === 'tianditu' && !TIAN_DI_TU_TOKEN) {
         console.warn(
-            '[cesium] 未配置 VITE_TIANDITU_TOKEN（申请：https://console.tianditu.gov.cn），底图回退为 ArcGIS 预设'
+            '[cesium] 未配置 VITE_TIANDITU_TOKEN（申请：https://console.tianditu.gov.cn），底图回退为默认影像'
         );
-        return BASE_MAP_PRESETS.arcgis;
+        return BASE_MAP_PRESETS[DEFAULT_BASE_MAP_PRESET];
     }
-    return BASE_MAP_PRESETS[BASE_MAP_PRESET];
+    return BASE_MAP_PRESETS[key];
+}
+
+/** 切换序号：异步 provider 就绪期间用户再次切换时，只让最后一次生效 */
+let applyToken = 0;
+
+/** 应用预设的影像与注记（不触及地形，运行时切底图复用） */
+async function applyPreset(preset: BaseMapPreset): Promise<void> {
+    const token = ++applyToken;
+    const [imagery, label] = await Promise.all([preset.imagery(), preset.label?.()]);
+    /* 等待期间 Viewer 已销毁或已有更新的切换请求 */
+    if (token !== applyToken || !hasViewer()) return;
+    setBaseImagery(imagery);
+    removeImageryLayer(LABEL_LAYER_NAME);
+    if (label) addImageryLayer(label, LABEL_LAYER_NAME);
+    requestRender();
+}
+
+/**
+ * 启用/关闭天地图影像（图层管理开关）：
+ * 关闭时切回默认影像（Ion 全球影像），地形不受影响。
+ */
+export async function setTianDiTuImagery(enabled: boolean): Promise<void> {
+    if (!hasViewer()) return;
+    await applyPreset(resolvePreset(enabled ? 'tianditu' : DEFAULT_BASE_MAP_PRESET));
 }
 
 /**
@@ -36,10 +61,7 @@ function resolvePreset(): BaseMapPreset {
  */
 export async function applyBaseMap(): Promise<void> {
     if (!hasViewer()) return;
-    const preset = resolvePreset();
-    setBaseImagery(preset.imagery());
-    if (preset.label) addImageryLayer(preset.label(), LABEL_LAYER_NAME);
-    requestRender();
+    await applyPreset(resolvePreset(DEFAULT_BASE_MAP_PRESET));
     if (BASE_TERRAIN === 'none') return;
     await applyWorldTerrain();
 }
