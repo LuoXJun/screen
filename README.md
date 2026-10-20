@@ -90,6 +90,17 @@ pnpm build                  # 类型检查 + 生产构建（产物在 dist/）
 | `src/utils/`      | 工具函数（`request/` 为请求封装）                                                                                                                     |
 | `src/views/`      | 页面：`login/`、`notFound.vue`、`layout/`（大屏布局）、`pages/`（业务页面，目录名与菜单 name 对应），业务路由经 menu.ts 动态挂载                      |
 
+## AI 协作规范
+
+| 文件 | 作用 |
+| --- | --- |
+| `AGENTS.md` | 编码代理约定：命令、目录职责、红线、页面交付协议 |
+| `CLAUDE.md` | Claude Code 会话启动入口，自动加载下列规范 |
+| `docs/COMPONENTS.md` | 组件词表：可复用组件、关键 props、使用约束 |
+| `docs/DESIGN.md` | 设计令牌字典：颜色/间距/圆角/字号语义名与取值 |
+
+> 页面交付后按 `AGENTS.md` 第 5 条同步更新上述规范，只更新现有文件、不新建。
+
 ## 样式体系（令牌分层）
 
 样式全部收敛在 `src/styles/`，`main.ts` 只引入 `styles/index.scss` 唯一入口：EP 组件样式（SCSS 源）→ 令牌 → 基础层 → EP 绑定层 → 补丁层 → 工具层依次串联，**加载顺序即层叠优先级**。
