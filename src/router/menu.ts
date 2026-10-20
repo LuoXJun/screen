@@ -14,6 +14,8 @@ interface MenuLeaf {
     icon?: string;
     /** 页面左栏设计稿宽度（px；全局默认 320），用于左栏与全局悬浮面板定位 */
     asideWidth?: number;
+    /** 页面自管相机视角：跳过站点默认飞行，由页面进入时直接定位目标 */
+    ownView?: boolean;
 }
 
 export interface MenuCategory extends MenuLeaf {
@@ -41,7 +43,9 @@ export const menuTree: MenuCategory[] = [
             {
                 name: 'boxTransformerTemp',
                 title: '箱变测温',
-                icon: 'menu-boxTransformerTemp.svg'
+                icon: 'menu-boxTransformerTemp.svg',
+                asideWidth: 390,
+                ownView: true
             },
             {
                 name: 'boosterStationTemp',

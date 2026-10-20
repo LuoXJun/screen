@@ -5,11 +5,14 @@
  */
 
 import type { SiteKey } from '@/config/site';
+import { buildBoxTransformerPoints } from './boxTransformer';
 import { buildCameraPoints } from './camera';
 import { SAMPLE_POINTS_BY_SITE } from './samplePoints';
 import type { DevicePoint } from './types';
 
 export type {
+    BoxTransformerDevice,
+    BoxTransformerStatus,
     CameraDevice,
     CameraDeviceStatus,
     CameraGroup,
@@ -26,9 +29,18 @@ export {
     buildCameraPopupData,
     listCameraDevices
 } from './camera';
+export { boxTransformerMarkerName, listBoxTransformers } from './boxTransformer';
 
-/** 站点设备点位全量（摄像头设备展平 + 光纤/机巢样本点;加载器按此建实体） */
+/** 站点设备点位全量（摄像头展平 + 箱变 + 光纤/机巢样本点;加载器按此建实体） */
 export const DEVICE_POINTS_BY_SITE: Record<SiteKey, DevicePoint[]> = {
-    xianfeng: [...buildCameraPoints('xianfeng'), ...SAMPLE_POINTS_BY_SITE.xianfeng],
-    tuanqing: [...buildCameraPoints('tuanqing'), ...SAMPLE_POINTS_BY_SITE.tuanqing]
+    xianfeng: [
+        ...buildCameraPoints('xianfeng'),
+        ...buildBoxTransformerPoints('xianfeng'),
+        ...SAMPLE_POINTS_BY_SITE.xianfeng
+    ],
+    tuanqing: [
+        ...buildCameraPoints('tuanqing'),
+        ...buildBoxTransformerPoints('tuanqing'),
+        ...SAMPLE_POINTS_BY_SITE.tuanqing
+    ]
 };

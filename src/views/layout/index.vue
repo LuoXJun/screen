@@ -109,6 +109,10 @@ useEntityPopup({
         },
         nest: ({ props }) => {
             nestData.value = props as unknown as NestData;
+        },
+        /* 箱变：点位点击由箱变测温页内联动选中；此处吞掉,避免落到兜底信息卡 */
+        boxTransformer: () => {
+            /* 联动见 boxTransformerTemp 页面 */
         }
     },
     /* 未注册类型：地图锚点信息卡兜底 */

@@ -2,6 +2,7 @@
     <el-dialog
         v-model="visible"
         class="dialog-screen"
+        :class="{ 'is-compact': variant === 'compact' }"
         align-center
         append-to-body
         draggable
@@ -52,6 +53,8 @@ defineProps<{
     icon?: string;
     /** 底部操作按钮（渲染于 #footer 插槽默认内容,插槽存在时以插槽优先） */
     buttons?: BaseDialogButton[];
+    /** 视觉变体：default = 标准大屏弹窗；compact = 小尺寸表单弹窗 */
+    variant?: 'default' | 'compact';
 }>();
 
 const emits = defineEmits<{

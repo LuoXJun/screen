@@ -43,7 +43,8 @@ export const menuRoutes: RouteRecordRaw[] = menuTree.map((category) => {
             meta: {
                 title: leaf.title,
                 icon: leaf.icon,
-                asideWidth: leaf.asideWidth
+                asideWidth: leaf.asideWidth,
+                ownView: leaf.ownView
             }
         }))
     };

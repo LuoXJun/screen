@@ -1,0 +1,278 @@
+/**
+ * 箱变温度详情（右侧栏）配置（设计稿 node 1191:7105）。
+ * 每台箱变 9 路测温点（状态混合）；单路 48h 曲线与极值为按点位种子生成的示例数据，待接接口。
+ */
+
+import type { EChartsCoreOption } from '@/components/baseChart/echarts';
+import { scalePx } from '@/components/baseChart/screenScale';
+import type { TempStatus } from './config';
+
+export interface TempPointDetail {
+    id: string;
+    name: string;
+    channel: string;
+    /** 基准温度（历史/极值按此派生；离线点位仅用于历史展示） */
+    base: number;
+    status: TempStatus;
+}
+
+export interface BoxDetailData {
+    deviceNo: string;
+    updatedAt: string;
+    points: TempPointDetail[];
+}
+
+const POINT_NAMES = [
+    '高压侧A相触点',
+    '高压侧B相触点',
+    '高压侧C相触点',
+    '高压侧A接头',
+    '高压侧B接头',
+    '高压侧C接头',
+    '低压侧A接触点',
+    '低压侧B接触点',
+    '低压侧C接触点'
+];
+
+function pointsOf(statuses: TempStatus[], bases: number[]): TempPointDetail[] {
+    return POINT_NAMES.map((name, index) => ({
+        id: `p${index + 1}`,
+        name,
+        channel: `CH${index + 1}`,
+        base: bases[index],
+        status: statuses[index]
+    }));
+}
+
+/** 四台箱变的 9 路明细（状态混合，最差点与箱变总状态一致） */
+const BOX_DETAILS: Record<string, BoxDetailData> = {
+    'box-1': {
+        deviceNo: '光纤测温装置DTS-01',
+        updatedAt: '09:59:12',
+        points: pointsOf(
+            ['overheat', 'overheat', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'normal'],
+            [91.2, 89.8, 82.4, 64.5, 58.2, 79.6, 61.3, 55.8, 68.4]
+        )
+    },
+    'box-2': {
+        deviceNo: '光纤测温装置DTS-02',
+        updatedAt: '09:58:47',
+        points: pointsOf(
+            ['near', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'near', 'normal'],
+            [83.6, 79.2, 63.4, 58.7, 78.4, 61.9, 56.3, 80.1, 64.8]
+        )
+    },
+    'box-3': {
+        deviceNo: '光纤测温装置DTS-03',
+        updatedAt: '09:59:03',
+        points: pointsOf(
+            ['normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal'],
+            [62.5, 58.9, 55.2, 71.4, 66.8, 60.3, 57.6, 63.2, 59.4]
+        )
+    },
+    'box-4': {
+        deviceNo: '光纤测温装置DTS-04',
+        updatedAt: '09:41:26',
+        points: pointsOf(
+            ['offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline'],
+            [60.2, 57.4, 55.8, 65.1, 62.3, 59.7, 56.5, 61.8, 58.6]
+        )
+    }
+};
+
+export function getBoxDetail(deviceId: string): BoxDetailData {
+    return BOX_DETAILS[deviceId] ?? BOX_DETAILS['box-1'];
+}
+
+export interface ExtremeRecord {
+    type: 'high' | 'low';
+    label: string;
+    value: string;
+    time: string;
+}
+
+/** 曲线形状（设计稿走势的归一化偏差，共 25 点 / 48h） */
+const CURVE_SHAPE = [
+    -6, -4, -2, 0, 2, 1, -1, -3, -4, -2, 0, 3, 5, 3, 1, -1, -3, -5, -7, -9, -6, -2, -4, -1, 0
+];
+
+const HIGH_DATES = [
+    '2026-07-21 14:35',
+    '2026-08-04 13:12',
+    '2026-07-30 15:48',
+    '2026-06-18 12:26',
+    '2026-08-11 16:03'
+];
+
+const LOW_DATES = [
+    '2026-01-12 06:40',
+    '2026-02-03 05:58',
+    '2026-01-27 07:12',
+    '2026-02-14 06:05',
+    '2026-01-19 05:32'
+];
+
+/** 单路 48 小时曲线（seed 混入箱变/点位序号，保证每路走势不同） */
+export function buildPointHistory(base: number, seed: number): number[] {
+    return CURVE_SHAPE.map((delta, index) =>
+        +(base + delta + Math.sin((index + seed) * 0.8) * 1.2).toFixed(1)
+    );
+}
+
+/** 单路历史极值（按基准温度与种子派生） */
+export function buildPointExtremes(base: number, seed: number): ExtremeRecord[] {
+    const high = (base + 9.6 + (seed % 4) * 0.8).toFixed(1);
+    const low = (base - 30.4 - (seed % 6) * 0.9).toFixed(1);
+    return [
+        {
+            type: 'high',
+            label: '历史最高温度',
+            value: `${high}°C`,
+            time: HIGH_DATES[seed % HIGH_DATES.length]
+        },
+        {
+            type: 'low',
+            label: '历史最低温度',
+            value: `${low}°C`,
+            time: LOW_DATES[seed % LOW_DATES.length]
+        }
+    ];
+}
+
+/** 曲线说明（当前选中路） */
+export function pointHistoryNote(point: TempPointDetail): string {
+    return `${point.channel} ${point.name}·虚线为阈值`;
+}
+
+const HISTORY_LABELS = ['-48h', '-36h', '-24h', '-12h', '现在'];
+
+export interface ThresholdSettings {
+    /** 预警阈值（接近） */
+    warn: number;
+    /** 告警阈值（超温） */
+    alert: number;
+}
+
+/** 默认阈值（设计稿值） */
+export const DEFAULT_THRESHOLDS: ThresholdSettings = {
+    warn: 75,
+    alert: 85
+};
+
+/** 曲线走 canvas，状态色按用户给定值保留 */
+const CHART_STATUS_COLORS: Record<TempStatus, string> = {
+    overheat: '#ff4059',
+    near: '#ff7a22',
+    normal: '#00d889',
+    offline: '#718096'
+};
+
+function withAlpha(hex: string, alpha: number): string {
+    const value = parseInt(hex.slice(1), 16);
+    const r = (value >> 16) & 255;
+    const g = (value >> 8) & 255;
+    const b = value & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/** 构建单路 48 小时曲线（状态色/数据/阈值随选中与设置变化） */
+export function buildHistoryOption(
+    status: TempStatus,
+    values: number[],
+    thresholds: ThresholdSettings = DEFAULT_THRESHOLDS
+): EChartsCoreOption {
+    const color = CHART_STATUS_COLORS[status];
+    const axisFont = scalePx(10);
+
+    return {
+        animation: false,
+        grid: {
+            left: scalePx(28),
+            right: scalePx(14),
+            top: scalePx(14),
+            bottom: scalePx(26)
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: values.map((_, index) => index),
+            axisTick: { show: false },
+            axisLine: { show: false },
+            axisLabel: {
+                color: '#4a7a9b',
+                fontSize: scalePx(14),
+                interval: (index: number) => index % 6 === 0,
+                formatter: (value: number) => HISTORY_LABELS[value / 6]
+            }
+        },
+        yAxis: {
+            type: 'value',
+            min: 20,
+            max: 100,
+            interval: 20,
+            axisTick: { show: false },
+            axisLine: { show: false },
+            axisLabel: { color: '#55758d', fontSize: axisFont },
+            splitLine: {
+                lineStyle: { color: 'rgba(85, 117, 141, 0.2)', type: 'dashed' }
+            }
+        },
+        series: [
+            {
+                type: 'line',
+                data: values,
+                showSymbol: false,
+                lineStyle: { color, width: scalePx(1.5) },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [
+                            { offset: 0, color: withAlpha(color, 0.18) },
+                            { offset: 1, color: withAlpha(color, 0) }
+                        ]
+                    }
+                },
+                markLine: {
+                    silent: true,
+                    symbol: 'none',
+                    data: [
+                        {
+                            yAxis: thresholds.alert,
+                            lineStyle: {
+                                color: '#ff4058',
+                                type: 'dashed',
+                                width: scalePx(1)
+                            },
+                            label: {
+                                show: true,
+                                position: 'insideEndTop',
+                                formatter: `告警 ${thresholds.alert}°C`,
+                                color: '#ff4058',
+                                fontSize: axisFont
+                            }
+                        },
+                        {
+                            yAxis: thresholds.warn,
+                            lineStyle: {
+                                color: '#ff9b2f',
+                                type: 'dashed',
+                                width: scalePx(1)
+                            },
+                            label: {
+                                show: true,
+                                position: 'insideEndTop',
+                                formatter: `预警 ${thresholds.warn}°C`,
+                                color: '#ff9b2f',
+                                fontSize: axisFont
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    };
+}

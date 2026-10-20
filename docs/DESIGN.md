@@ -29,6 +29,7 @@
 | `--color-gray-300` | `#c0c4cc` |     | `--color-blue-250`  | `#aacdf3` |
 | `--color-gray-400` | `#909399` |     | `--color-blue-300`  | `#7ab8d4` |
 | `--color-gray-500` | `#a8abb2` |     | `--color-blue-400`  | `#0266f0` |
+| `--color-gray-600` | `#718096` |     |                     |           |
 | `--color-gray-700` | `#606266` |     | `--color-blue-450`  | `#1060b0` |
 | `--color-gray-900` | `#303133` |     | `--color-blue-500`  | `#4a7a9b` |
 | `--color-green-350` | `#37f2a8` |    | `--color-blue-550`  | `#395170` |
@@ -72,6 +73,7 @@
 | `--lxj-color-risk-high`                 | `var(--color-orange-350)` → `#ff7a22`            |
 | `--lxj-color-risk-serious`              | `var(--color-red-450)` → `#ff4058`               |
 | `--lxj-color-risk-manmade`              | `var(--color-purple-400)` → `#c26cff`            |
+| `--lxj-color-risk-offline`              | `var(--color-gray-600)` → `#718096`              |
 | `--lxj-bg-bar`                          | `var(--color-blue-800)` → `#081940`              |
 | `--lxj-bg-page`                         | `var(--color-blue-800)` → `#081940`              |
 | `--lxj-bg-card`                         | `color-mix(in srgb, var(--color-blue-750) 40%, transparent)` |

@@ -168,3 +168,76 @@
         }
     }
 }
+
+// -------------------------------------------------------------
+// is-compact —— 小尺寸表单弹窗(设计稿:箱变温度阈值设置 390×327)
+//   独立骨架:紧凑头部 + 16px 内衬;内容与底部按钮由消费方插槽承担
+// -------------------------------------------------------------
+.el-dialog.dialog-screen.is-compact {
+    width: base(390px);
+    height: auto;
+    padding: base(16px);
+    /* 设计稿取值:近实底深蓝 + 青描边 + 外投影 */
+    background: rgba(5, 24, 52, 0.99);
+    border: 1px solid rgba(0, 224, 255, 0.52);
+    border-radius: var(--lxj-radius-small);
+    box-shadow: 0 base(14px) base(34px) rgba(0, 5, 20, 0.55);
+
+    /* 紧凑态不挂顶部装饰线与右下角镶边 */
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    .el-dialog__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: base(30px);
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        border: none;
+        background: none;
+        box-shadow: none;
+
+        .header-deco {
+            display: none;
+        }
+
+        .header-title {
+            position: static;
+            inset: auto;
+            height: base(24px);
+            gap: 0;
+
+            /* 嵌套到 header-title,压过基线的标题字体/字号规则 */
+            .title-text {
+                color: var(--lxj-color-text-desc);
+                font-family: var(--lxj-font-family);
+                font-size: font(17px);
+                font-weight: var(--lxj-font-weight-Semibold);
+                line-height: base(24px);
+            }
+        }
+
+        .close-icon {
+            position: static;
+            inset: auto;
+            width: base(20px);
+            height: base(20px);
+        }
+    }
+
+    .el-dialog__body {
+        flex: none;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .el-dialog__footer {
+        justify-content: flex-end;
+        gap: base(10px);
+        padding: base(20px) 0 0;
+    }
+}

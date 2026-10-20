@@ -41,8 +41,24 @@ export interface CameraGroup {
     subgroups: CameraSubgroup[];
 }
 
+/** 箱变测温状态（4 态） */
+export type BoxTransformerStatus = 'overheat' | 'near' | 'normal' | 'offline';
+
+/** 箱变设备（全局设备注册表;列表与点位同源） */
+export interface BoxTransformerDevice {
+    /** 设备标识（列表 key / 选中联动） */
+    id: string;
+    /** 展示名（1#箱变） */
+    name: string;
+    /** 所属分区 */
+    zone: string;
+    status: BoxTransformerStatus;
+    lng: number;
+    lat: number;
+}
+
 /** 设备类别（弹窗经 entity.properties.type 按此分发） */
-export type DeviceKind = 'camera' | 'fiber' | 'nest';
+export type DeviceKind = 'camera' | 'fiber' | 'nest' | 'boxTransformer';
 
 /** 设备类型展示名（站点数据文件共用） */
 export const DEVICE_TYPE_GUN = '固定枪机测温摄像头';

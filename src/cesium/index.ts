@@ -82,7 +82,13 @@ export {
     type LabelPinBillboardOptions
 } from './core/labelPin/labelPinDraw';
 export { addLabelPinSiteEntity, setLabelPinHighlight } from './core/labelPin/labelPin';
-export { createHandler, clearHandler, clearHandlers } from './core/event';
+export {
+    createHandler,
+    clearHandler,
+    clearHandlers,
+    pickEntity,
+    onLeftClick
+} from './core/event';
 export { MapPopup } from './core/popup';
 export {
     toCartesian3,

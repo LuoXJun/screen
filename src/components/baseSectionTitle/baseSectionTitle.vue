@@ -1,5 +1,5 @@
 <template>
-    <div class="baseSectionTitle" :class="{ 'is-desc': size === 'desc' }">
+    <div class="baseSectionTitle" :class="{ 'is-desc': size === 'desc', 'is-lg': size === 'lg' }">
         <i class="title-bar"></i>
         <span class="title-text">{{ title }}</span>
         <span v-if="extra" class="title-extra">{{ extra }}</span>
@@ -13,8 +13,8 @@ defineProps<{
     title: string;
     /** 右侧附加文本（橙色） */
     extra?: string;
-    /** 字号档位：默认 body / desc 紧凑（设计稿 12px） */
-    size?: 'desc';
+    /** 字号档位：默认 body / desc 紧凑（12px）/ lg 大号（16px） */
+    size?: 'desc' | 'lg';
 }>();
 </script>
 
@@ -52,6 +52,11 @@ defineProps<{
     &.is-desc .title-text {
         font-size: var(--lxj-font-desc);
         letter-spacing: 0.05em;
+    }
+
+    /* 大号档：设计稿 16px（详情面板区块标题） */
+    &.is-lg .title-text {
+        font-size: font(16px);
     }
 }
 </style>
