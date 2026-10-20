@@ -3,7 +3,7 @@
         <basePanelTitle class="panel-title" title="无人机拍摄影像" />
 
         <div class="drone-body">
-            <div class="drone-frame">
+            <div v-if="item" class="drone-frame">
                 <div class="scene">
                     <div class="stripes">
                         <i v-for="index in STRIPE_COUNT" :key="index" class="stripe"></i>
@@ -23,6 +23,15 @@
                         ● {{ DRONE_IMAGERY.online ? '在线' : '离线' }}
                     </span>
                 </div>
+            </div>
+
+            <!-- 未选中隐患点位:虚线占位 -->
+            <div v-else class="drone-empty">
+                <span class="empty-icon">
+                    <img src="@/assets/images/drone-empty.svg" alt="" />
+                </span>
+                <p class="empty-title">暂未选择隐患点位</p>
+                <p class="empty-desc">请在地图、隐患清单或右侧列表中选择一条记录</p>
             </div>
         </div>
     </basePanelMask>
@@ -73,6 +82,46 @@ const levelColor = computed(() =>
     overflow: hidden;
     border: 1px solid rgba(0, 150, 220, 0.18);
     background: linear-gradient(157.29deg, #225b75 6.17%, #3b7090 45.62%, #28546b 93.83%);
+}
+
+.drone-empty {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: base(8px);
+    border: 1px dashed rgba(0, 200, 255, 0.25);
+    background:
+        radial-gradient(ellipse at center, rgba(0, 200, 255, 0.06) 0%, rgba(0, 200, 255, 0) 58%),
+        rgba(2, 16, 36, 0.46);
+
+    .empty-icon {
+        display: flex;
+        width: base(54px);
+        height: base(54px);
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 200, 255, 0.28);
+        border-radius: 50%;
+        background: rgba(0, 200, 255, 0.06);
+
+        img {
+            width: base(25px);
+            height: base(25px);
+        }
+    }
+
+    .empty-title {
+        color: var(--color-blue-300);
+        font-size: font(18px);
+        font-weight: var(--lxj-font-weight-Semibold);
+    }
+
+    .empty-desc {
+        color: var(--color-blue-500);
+        font-size: var(--lxj-font-body);
+    }
 }
 
 .scene {

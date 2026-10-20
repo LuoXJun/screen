@@ -50,22 +50,23 @@ import {
 /** 当前筛选类型 */
 const activeType = ref<ChecklistType>('dry');
 
-/** 当前选中行（设计稿默认首行高亮） */
-const activeIndex = ref(0);
+/** 当前选中行（-1 = 未选择,进入页面不默认选中） */
+const activeIndex = ref(-1);
 
 const { selectedItem } = useHazardSelection();
 
-/* 默认与清单首行保持联动 */
-selectedItem.value = CHECKLIST_ITEMS[0] ?? null;
+/* 进入页面清空跨页残留的选中态 */
+selectedItem.value = null;
 
 const filteredItems = computed(() =>
     CHECKLIST_ITEMS.filter((item) => item.type === activeType.value)
 );
 
-/* 切换筛选后回到首行,并同步右侧列表与影像 */
+/* 切换筛选仅改变清单视图,保留右侧/影像的选中;当前视图能匹配到则恢复行高亮 */
 watch(activeType, () => {
-    activeIndex.value = 0;
-    selectedItem.value = CHECKLIST_ITEMS.find((item) => item.type === activeType.value) ?? null;
+    activeIndex.value = selectedItem.value
+        ? filteredItems.value.findIndex((item) => item.id === selectedItem.value?.id)
+        : -1;
 });
 
 /** 选中清单项 → 联动火灾隐患列表与无人机影像 */
