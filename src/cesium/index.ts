@@ -5,6 +5,7 @@ export {
     hasViewer,
     destroyViewer,
     requestRender,
+    requestRenderWithNextFrame,
     setCleanScene
 } from './core/viewer';
 export {

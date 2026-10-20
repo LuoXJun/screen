@@ -66,7 +66,7 @@ const props = defineProps<{
     device: BoxTransformerDevice;
 }>();
 
-const detail = computed(() => getBoxDetail(props.device.id));
+const detail = computed(() => getBoxDetail(props.device.id, props.device.status));
 
 const selectedPointId = ref('');
 

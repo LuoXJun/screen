@@ -5,7 +5,7 @@
 
 import type { EChartsCoreOption } from '@/components/baseChart/echarts';
 import { scalePx } from '@/components/baseChart/screenScale';
-import type { TempStatus } from './config';
+import { TEMP_STATUS_COLORS, type TempStatus } from './config';
 
 export interface TempPointDetail {
     id: string;
@@ -34,54 +34,64 @@ const POINT_NAMES = [
     '低压侧C接触点'
 ];
 
-function pointsOf(statuses: TempStatus[], bases: number[]): TempPointDetail[] {
+interface PointProfile {
+    statuses: TempStatus[];
+    bases: number[];
+}
+
+/** 各总状态对应的 9 路分布（最差点与箱变总状态一致） */
+const POINT_PROFILES: Record<TempStatus, PointProfile> = {
+    overheat: {
+        statuses: ['overheat', 'overheat', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'normal'],
+        bases: [91.2, 89.8, 82.4, 64.5, 58.2, 79.6, 61.3, 55.8, 68.4]
+    },
+    near: {
+        statuses: ['near', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'near', 'normal'],
+        bases: [83.6, 79.2, 63.4, 58.7, 78.4, 61.9, 56.3, 80.1, 64.8]
+    },
+    normal: {
+        statuses: ['normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal'],
+        bases: [62.5, 58.9, 55.2, 71.4, 66.8, 60.3, 57.6, 63.2, 59.4]
+    },
+    offline: {
+        statuses: ['offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline'],
+        bases: [60.2, 57.4, 55.8, 65.1, 62.3, 59.7, 56.5, 61.8, 58.6]
+    }
+};
+
+const UPDATED_TIMES = [
+    '09:59:12',
+    '09:58:47',
+    '09:59:03',
+    '09:57:36',
+    '09:58:21',
+    '09:41:26',
+    '09:59:44',
+    '09:58:05',
+    '09:57:52',
+    '09:59:18'
+];
+
+function pointsOf(profile: PointProfile, boxNo: number): TempPointDetail[] {
+    /* 同状态箱变之间做 ±0.6°C 偏移，避免 9 路数值完全重复 */
+    const offset = ((boxNo % 3) - 1) * 0.6;
     return POINT_NAMES.map((name, index) => ({
         id: `p${index + 1}`,
         name,
         channel: `CH${index + 1}`,
-        base: bases[index],
-        status: statuses[index]
+        base: Number((profile.bases[index] + offset).toFixed(1)),
+        status: profile.statuses[index]
     }));
 }
 
-/** 四台箱变的 9 路明细（状态混合，最差点与箱变总状态一致） */
-const BOX_DETAILS: Record<string, BoxDetailData> = {
-    'box-1': {
-        deviceNo: '光纤测温装置DTS-01',
-        updatedAt: '09:59:12',
-        points: pointsOf(
-            ['overheat', 'overheat', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'normal'],
-            [91.2, 89.8, 82.4, 64.5, 58.2, 79.6, 61.3, 55.8, 68.4]
-        )
-    },
-    'box-2': {
-        deviceNo: '光纤测温装置DTS-02',
-        updatedAt: '09:58:47',
-        points: pointsOf(
-            ['near', 'near', 'normal', 'normal', 'near', 'normal', 'normal', 'near', 'normal'],
-            [83.6, 79.2, 63.4, 58.7, 78.4, 61.9, 56.3, 80.1, 64.8]
-        )
-    },
-    'box-3': {
-        deviceNo: '光纤测温装置DTS-03',
-        updatedAt: '09:59:03',
-        points: pointsOf(
-            ['normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal', 'normal'],
-            [62.5, 58.9, 55.2, 71.4, 66.8, 60.3, 57.6, 63.2, 59.4]
-        )
-    },
-    'box-4': {
-        deviceNo: '光纤测温装置DTS-04',
-        updatedAt: '09:41:26',
-        points: pointsOf(
-            ['offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline', 'offline'],
-            [60.2, 57.4, 55.8, 65.1, 62.3, 59.7, 56.5, 61.8, 58.6]
-        )
-    }
-};
-
-export function getBoxDetail(deviceId: string): BoxDetailData {
-    return BOX_DETAILS[deviceId] ?? BOX_DETAILS['box-1'];
+/** 按箱变状态与编号生成 9 路明细（编号决定设备号/更新时间/数值偏移） */
+export function getBoxDetail(deviceId: string, status: TempStatus): BoxDetailData {
+    const boxNo = Number(deviceId.replace(/\D/g, '')) || 1;
+    return {
+        deviceNo: `光纤测温装置DTS-${String(boxNo).padStart(2, '0')}`,
+        updatedAt: UPDATED_TIMES[(boxNo - 1) % UPDATED_TIMES.length],
+        points: pointsOf(POINT_PROFILES[status], boxNo)
+    };
 }
 
 export interface ExtremeRecord {
@@ -159,14 +169,6 @@ export const DEFAULT_THRESHOLDS: ThresholdSettings = {
     alert: 85
 };
 
-/** 曲线走 canvas，状态色按用户给定值保留 */
-const CHART_STATUS_COLORS: Record<TempStatus, string> = {
-    overheat: '#ff4059',
-    near: '#ff7a22',
-    normal: '#00d889',
-    offline: '#718096'
-};
-
 function withAlpha(hex: string, alpha: number): string {
     const value = parseInt(hex.slice(1), 16);
     const r = (value >> 16) & 255;
@@ -181,7 +183,7 @@ export function buildHistoryOption(
     values: number[],
     thresholds: ThresholdSettings = DEFAULT_THRESHOLDS
 ): EChartsCoreOption {
-    const color = CHART_STATUS_COLORS[status];
+    const color = TEMP_STATUS_COLORS[status];
     const axisFont = scalePx(10);
 
     return {

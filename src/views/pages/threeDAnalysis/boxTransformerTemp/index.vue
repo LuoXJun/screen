@@ -35,6 +35,7 @@ import { useSiteStore } from '@/stores/site';
 import deviceStats from './components/left/deviceStats.vue';
 import temperatureList from './components/left/temperatureList.vue';
 import detailPanel from './components/right/detailPanel.vue';
+import { useBoxTransformerAreas } from './composables/useBoxTransformerAreas';
 import { useBoxTransformerFocus } from './composables/useBoxTransformerFocus';
 import { BOX_VIEW } from './config';
 
@@ -51,13 +52,11 @@ const selectedDevice = computed(
 /** 进入视角是否已接管（含列表聚焦；避免迟到的进入视角覆盖用户聚焦） */
 let viewTaken = false;
 
-const { focus: focusDevice, sync: syncDevice } = useBoxTransformerFocus(
-    siteStore.activeSite,
-    devices,
-    () => {
-        viewTaken = true;
-    }
-);
+useBoxTransformerAreas(devices);
+
+const { focus: focusDevice, sync: syncDevice } = useBoxTransformerFocus(devices, () => {
+    viewTaken = true;
+});
 
 /** 列表点击：选中 + 相机聚焦 + 标牌高亮 */
 function onListSelect(device: BoxTransformerDevice): void {

@@ -71,7 +71,13 @@ export function setLabelPinHighlight(entity: Cesium.Entity | undefined, active: 
     entity.billboard.image = new Cesium.ConstantProperty(active ? record.active : record.base);
     entity.billboard.scale = new Cesium.ConstantProperty(active ? ACTIVE.scale : 1);
     if (active) {
-        flowTo(entity, record);
+        /* 实体被图层隐藏时只记录选中态，流光随显隐同步（见 setLabelPinVisibility） */
+        flowingEntity = entity;
+        if (entity.show !== false) {
+            flowTo(entity, record);
+        } else {
+            hideLabelPinFlow();
+        }
     } else if (flowingEntity === entity) {
         flowingEntity = undefined;
         hideLabelPinFlow();

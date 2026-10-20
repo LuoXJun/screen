@@ -23,6 +23,14 @@ export const TEMP_STATUS_META: Record<TempStatus, TempStatusMeta> = {
     offline: { label: '设备离线', color: 'var(--lxj-color-risk-offline)' }
 };
 
+/** 状态原色（Cesium 范围面与曲线 canvas 共用;两者都不消费 CSS 变量） */
+export const TEMP_STATUS_COLORS: Record<TempStatus, string> = {
+    overheat: '#ff4059',
+    near: '#ff7a22',
+    normal: '#00d889',
+    offline: '#718096'
+};
+
 /** 进入箱变测温页时的相机视角（箱变集群斜视） */
 export const BOX_VIEW: LookAtLonLatOptions = {
     heading: 0,
