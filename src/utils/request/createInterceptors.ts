@@ -1,13 +1,12 @@
-import router from '@/router';
 import { ElMessage } from 'element-plus';
-import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { errorMessages, getErrorMessage, handleUnauthorizedError } from './errorCatch';
 
 const scCode = import.meta.env.VITE_SC_CODE;
 
 export const createInterceptors = (instance: AxiosInstance): IbaseRequestConfig => {
     return {
-        requestIntercepter: (config: InternalAxiosRequestConfig<any>) => {
+        requestIntercepter: (config: InternalAxiosRequestConfig) => {
             if (config.url?.includes('token')) {
                 config.headers.Authorization = '';
             }
@@ -37,10 +36,10 @@ export const createInterceptors = (instance: AxiosInstance): IbaseRequestConfig 
                 return res;
             }
             if (res.data.msg && res.data.msg.includes('flushToken过期')) {
-                router.push('/login');
+                window.location.hash = '#/login';
             }
             ElMessage.warning(res.data.message ?? res.data.msg ?? res.data);
-            return Promise.reject(res) as any as AxiosResponse<ResponseDataType<any>>;
+            return Promise.reject(res);
         },
 
         responseIntercepterCatch: async (err) => {

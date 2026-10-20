@@ -5,7 +5,7 @@
 
 import type { SiteKey } from '@/config/site';
 import { SITE_CONFIG_MAP } from '@/config/site';
-import type { CameraData, CameraStatus } from '@/components/screen/popups/CameraPopup';
+import type { CameraData, CameraStatus } from '@/components/screen/popups/camera/CameraPopup';
 import { XIANFENG_CAMERA_GROUPS } from './camera-xianfeng';
 import { TUANQING_CAMERA_GROUPS } from './camera-tuanqing';
 import type { CameraDevice, CameraDeviceStatus, CameraGroup, DevicePoint } from './types';

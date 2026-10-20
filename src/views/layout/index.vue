@@ -37,13 +37,13 @@ import BaseCesium from '@/components/baseCesium/BaseCesium.vue';
 import baseMenu from '@/components/baseMenu/baseMenu.vue';
 import layerControl from '@/components/screen/layerControl/layerControl.vue';
 import PopupInfo from '@/components/screen/popups/PopupInfo.vue';
-import CameraPopup from '@/components/screen/popups/CameraPopup.vue';
-import FiberPopup from '@/components/screen/popups/FiberPopup.vue';
-import NestPopup from '@/components/screen/popups/NestPopup.vue';
+import CameraPopup from '@/components/screen/popups/camera/CameraPopup.vue';
+import FiberPopup from '@/components/screen/popups/fiber/FiberPopup.vue';
+import NestPopup from '@/components/screen/popups/nest/NestPopup.vue';
 import siteSwitch from '@/components/screen/siteSwitch/siteSwitch.vue';
-import type { CameraData } from '@/components/screen/popups/CameraPopup';
-import type { FiberData } from '@/components/screen/popups/FiberPopup';
-import type { NestData } from '@/components/screen/popups/NestPopup';
+import type { CameraData } from '@/components/screen/popups/camera/CameraPopup';
+import type { FiberData } from '@/components/screen/popups/fiber/FiberPopup';
+import type { NestData } from '@/components/screen/popups/nest/NestPopup';
 import { showMapPopup, type MapPopupHandle } from '@/components/screen/mapPopup/mapPopup';
 import {
     clearHandlers,

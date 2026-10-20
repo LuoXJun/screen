@@ -22,27 +22,27 @@ export interface AlarmTone {
 export const ALARM_LEVEL_MAP: Record<AlarmLevel, AlarmTone> = {
     urgent: {
         label: '紧急',
-        bg: 'rgba(255, 96, 96, 0.1)',
-        border: 'rgba(255, 96, 96, 0.4)',
-        title: 'var(--color-red-400)',
-        tagBg: 'rgba(224, 48, 48, 0.2)',
-        tagBorder: 'rgba(224, 48, 48, 0.4)'
+        bg: 'color-mix(in srgb, var(--lxj-color-danger) 10%, transparent)',
+        border: 'color-mix(in srgb, var(--lxj-color-danger) 40%, transparent)',
+        title: 'var(--lxj-color-danger)',
+        tagBg: 'color-mix(in srgb, var(--color-red-500) 20%, transparent)',
+        tagBorder: 'color-mix(in srgb, var(--color-red-500) 40%, transparent)'
     },
     warning: {
         label: '警告',
-        bg: 'rgba(255, 200, 64, 0.1)',
-        border: 'rgba(255, 200, 64, 0.4)',
+        bg: 'color-mix(in srgb, var(--color-orange-400) 10%, transparent)',
+        border: 'color-mix(in srgb, var(--color-orange-400) 40%, transparent)',
         title: 'var(--color-orange-400)',
-        tagBg: 'rgba(245, 166, 35, 0.15)',
-        tagBorder: 'rgba(245, 166, 35, 0.3)'
+        tagBg: 'color-mix(in srgb, var(--lxj-color-accent-orange) 15%, transparent)',
+        tagBorder: 'color-mix(in srgb, var(--lxj-color-accent-orange) 30%, transparent)'
     },
     done: {
         label: '已处理',
-        bg: 'rgba(0, 224, 128, 0.1)',
-        border: 'rgba(0, 224, 128, 0.4)',
-        title: 'var(--color-green-400)',
-        tagBg: 'rgba(0, 224, 128, 0.15)',
-        tagBorder: 'rgba(0, 224, 128, 0.3)'
+        bg: 'color-mix(in srgb, var(--lxj-color-success) 10%, transparent)',
+        border: 'color-mix(in srgb, var(--lxj-color-success) 40%, transparent)',
+        title: 'var(--lxj-color-success)',
+        tagBg: 'color-mix(in srgb, var(--lxj-color-success) 15%, transparent)',
+        tagBorder: 'color-mix(in srgb, var(--lxj-color-success) 30%, transparent)'
     }
 };
 
@@ -80,6 +80,7 @@ export const ALARM_STATS: AlarmStat[] = [
         label: '紧急',
         value: 259,
         icon: 'alarm-stat-urgent.svg',
+        // 设计稿取值：red-500 无对应语义档位
         color: 'var(--color-red-500)'
     },
     {
@@ -87,14 +88,14 @@ export const ALARM_STATS: AlarmStat[] = [
         label: '警告',
         value: 68,
         icon: 'alarm-stat-warning.svg',
-        color: 'var(--color-orange-450)'
+        color: 'var(--lxj-color-accent-orange)'
     },
     {
         key: 'done',
         label: '已处理',
         value: 7,
         icon: 'alarm-stat-done.svg',
-        color: 'var(--color-green-400)'
+        color: 'var(--lxj-color-success)'
     }
 ];
 

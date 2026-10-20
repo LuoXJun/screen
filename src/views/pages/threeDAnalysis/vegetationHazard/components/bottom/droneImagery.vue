@@ -52,7 +52,7 @@ const props = defineProps<{
 const zoneText = computed(() => props.item?.zone ?? '--');
 const levelText = computed(() => props.item?.level ?? '--');
 const levelColor = computed(() =>
-    props.item ? HAZARD_LEVEL_COLORS[props.item.level] : 'var(--color-blue-500)'
+    props.item ? HAZARD_LEVEL_COLORS[props.item.level] : 'var(--lxj-color-text-secondary)'
 );
 </script>
 
@@ -80,7 +80,8 @@ const levelColor = computed(() =>
     position: relative;
     height: 100%;
     overflow: hidden;
-    border: 1px solid rgba(0, 150, 220, 0.18);
+    border: 1px solid var(--lxj-color-border-divider);
+    /* 设计稿取值:无人机画面底色渐变（无对应语义色，按原值保留） */
     background: linear-gradient(157.29deg, #225b75 6.17%, #3b7090 45.62%, #28546b 93.83%);
 }
 
@@ -91,9 +92,14 @@ const levelColor = computed(() =>
     align-items: center;
     justify-content: center;
     gap: base(8px);
-    border: 1px dashed rgba(0, 200, 255, 0.25);
+    border: 1px dashed color-mix(in srgb, var(--lxj-color-primary) 25%, transparent);
     background:
-        radial-gradient(ellipse at center, rgba(0, 200, 255, 0.06) 0%, rgba(0, 200, 255, 0) 58%),
+        radial-gradient(
+            ellipse at center,
+            color-mix(in srgb, var(--lxj-color-primary) 6%, transparent) 0%,
+            color-mix(in srgb, var(--lxj-color-primary) 0%, transparent) 58%
+        ),
+        /* 设计稿取值:画面暗底（无对应语义色，按原值保留） */
         rgba(2, 16, 36, 0.46);
 
     .empty-icon {
@@ -102,9 +108,9 @@ const levelColor = computed(() =>
         height: base(54px);
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(0, 200, 255, 0.28);
-        border-radius: 50%;
-        background: rgba(0, 200, 255, 0.06);
+        border: 1px solid color-mix(in srgb, var(--lxj-color-primary) 28%, transparent);
+        border-radius: var(--lxj-radius-circle);
+        background: color-mix(in srgb, var(--lxj-color-primary) 6%, transparent);
 
         img {
             width: base(25px);
@@ -113,13 +119,13 @@ const levelColor = computed(() =>
     }
 
     .empty-title {
-        color: var(--color-blue-300);
+        color: var(--lxj-color-text-primary);
         font-size: font(18px);
         font-weight: var(--lxj-font-weight-Semibold);
     }
 
     .empty-desc {
-        color: var(--color-blue-500);
+        color: var(--lxj-color-text-secondary);
         font-size: var(--lxj-font-body);
     }
 }
@@ -146,6 +152,7 @@ const levelColor = computed(() =>
         flex-shrink: 0;
         width: base(7px);
         height: 130%;
+        /* 设计稿取值:条带深底/描边（无对应语义色，按原值保留） */
         background: #071c32;
         box-shadow: 0 0 0 #{base(2px)} rgba(116, 187, 220, 0.2);
         transform: rotate(4.05deg);
@@ -157,7 +164,8 @@ const levelColor = computed(() =>
     position: absolute;
     width: base(110px);
     height: base(81px);
-    border-radius: 50%;
+    border-radius: var(--lxj-radius-circle);
+    /* 设计稿取值:热成像黄绿色带（无对应语义色，按原值保留） */
     background: radial-gradient(
         ellipse at center,
         rgba(255, 229, 99, 1) 0%,
@@ -193,6 +201,7 @@ const levelColor = computed(() =>
     display: flex;
     justify-content: space-between;
     padding: base(5px) base(8px);
+    /* 设计稿取值:画面信息条暗底（无对应语义色，按原值保留） */
     background: rgba(5, 20, 45, 0.68);
     font-size: var(--lxj-font-body);
     line-height: base(21px);
@@ -206,7 +215,7 @@ const levelColor = computed(() =>
     }
 
     .bar-zone {
-        color: var(--color-white);
+        color: var(--lxj-color-text-desc);
         font-weight: var(--lxj-font-weight-Semibold);
     }
 
@@ -215,15 +224,15 @@ const levelColor = computed(() =>
     }
 
     .bar-camera {
-        color: var(--color-blue-300);
+        color: var(--lxj-color-text-primary);
     }
 
     .bar-online {
-        color: var(--color-green-400);
+        color: var(--lxj-color-success);
         font-weight: var(--lxj-font-weight-Medium);
 
         &.is-offline {
-            color: var(--color-blue-500);
+            color: var(--lxj-color-text-secondary);
         }
     }
 }

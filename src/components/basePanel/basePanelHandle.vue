@@ -101,7 +101,7 @@ $handle-h: 24.385px;
 
     /* 把手底/边框:设计稿取值即面板同款令牌(#071428/85% 底 + #00C8FF/30% 描边) */
     .bodyFill {
-        fill: var(--lxj-bg-mask);
+        fill: var(--lxj-panel-bg);
     }
 
     .bodyStroke {

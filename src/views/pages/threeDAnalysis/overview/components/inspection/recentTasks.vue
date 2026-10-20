@@ -42,10 +42,9 @@ const cornerIcon = getImageWidthName('task-corner.svg');
 
     .task-item {
         padding: base(8px);
-        /* 设计稿取值 */
-        background: rgba(0, 200, 255, 0.04);
-        border: 1px solid rgba(0, 150, 220, 0.18);
-        border-radius: var(--radius-4);
+        background: color-mix(in srgb, var(--lxj-color-primary) 4%, transparent);
+        border: 1px solid var(--lxj-color-border-divider);
+        border-radius: var(--lxj-radius-small);
 
         .task-head {
             display: flex;
@@ -69,15 +68,16 @@ const cornerIcon = getImageWidthName('task-corner.svg');
                 width: base(100px);
                 height: base(17px);
                 border-radius: base(2px);
+                /* 设计稿取值:编号底纹（无对应语义色，按原值保留） */
                 background: rgba(43, 136, 221, 0.1);
             }
 
             .no-text {
                 position: relative;
-                color: #dce9f7;
+                color: var(--lxj-color-text-soft);
                 font-size: var(--lxj-font-body);
                 line-height: base(21px);
-                text-shadow: 0 0.5px 1px rgb(0 0 0 / 25%);
+                text-shadow: 0 0.5px 1px rgb(from var(--color-black) r g b / 25%);
             }
 
             .corner {
@@ -112,7 +112,7 @@ const cornerIcon = getImageWidthName('task-corner.svg');
 
         .task-status {
             padding: base(2px) base(6px);
-            border-radius: var(--radius-4);
+            border-radius: var(--lxj-radius-small);
             font-size: var(--lxj-font-body);
 
             /* 设计稿取值 */
@@ -132,7 +132,7 @@ const cornerIcon = getImageWidthName('task-corner.svg');
         .task-name {
             margin: 0;
             padding-top: base(2px);
-            color: #7ab8d4;
+            color: var(--lxj-color-text-primary);
             font-size: var(--lxj-font-body);
             line-height: base(21px);
         }
@@ -142,7 +142,7 @@ const cornerIcon = getImageWidthName('task-corner.svg');
             gap: base(4px);
             margin: 0;
             padding-top: base(2px);
-            color: #aacdf3;
+            color: var(--lxj-color-text-muted);
             font-size: var(--lxj-font-body);
             line-height: base(21px);
         }

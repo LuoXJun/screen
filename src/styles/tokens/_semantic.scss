@@ -14,12 +14,32 @@
     --lxj-color-danger: var(--color-red-400);
     --lxj-color-info: var(--color-gray-400);
 
-    // ---- 文字色(primary → disabled 逐级减淡) ----
+    // ---- 文字色(strong → disabled 逐级减淡) ----
+    --lxj-color-text-strong: var(--color-blue-50);
+    --lxj-color-text-soft: var(--color-blue-150);
+    --lxj-color-text-muted: var(--color-blue-250);
     --lxj-color-text-primary: var(--color-blue-300);
+    --lxj-color-text-secondary: var(--color-blue-500);
     --lxj-color-text-desc: var(--color-white);
     --lxj-color-text-active: var(--color-cyan-400);
     --lxj-color-text-placeholder: var(--color-gray-500);
     --lxj-color-text-disabled: var(--color-gray-300);
+
+    // ---- 状态色(弹窗/标签的在线离线语义) ----
+    --lxj-color-status-online: var(--color-green-350);
+    --lxj-color-status-offline: var(--color-red-500);
+
+    // ---- 强调色(设计稿专属橙/青) ----
+    --lxj-color-accent-orange: var(--color-orange-450);
+    --lxj-color-accent-cyan: var(--color-cyan-300);
+    --lxj-color-danger-soft: var(--color-red-350);
+
+    // ---- 植被风险等级色(设计稿专属语义色) ----
+    --lxj-color-risk-safe: var(--color-green-450);
+    --lxj-color-risk-normal: var(--color-yellow-400);
+    --lxj-color-risk-high: var(--color-orange-350);
+    --lxj-color-risk-serious: var(--color-red-450);
+    --lxj-color-risk-manmade: var(--color-purple-400);
 
     // ---- 背景 ----
     --lxj-bg-bar: var(--color-blue-800);
@@ -30,6 +50,22 @@
     --lxj-bg-hover: var(--color-gray-100);
     --lxj-bg-active: color-mix(in srgb, var(--lxj-color-primary) 10%, var(--color-white));
     --lxj-bg-mask: rgb(from var(--color-blue-900) r g b / 85%);
+    /* 面板/悬浮控件底色(与遮罩同值但语义独立) */
+    --lxj-panel-bg: rgb(from var(--color-blue-900) r g b / 85%);
+    /* 统计卡片底纹(设计稿双层深蓝渐变) */
+    --lxj-bg-card-strong:
+        linear-gradient(
+            270deg,
+            rgb(from var(--color-blue-650) r g b / 0) 0%,
+            var(--color-blue-650) 100%
+        ),
+        linear-gradient(
+            270deg,
+            rgb(from var(--color-blue-850) r g b / 20%) 0%,
+            var(--color-blue-850) 100%
+        );
+    /* 菜单激活/悬停底(原定义在 patch 层,上移至语义层供业务组件引用) */
+    --lxj-menu-active-bg-color: color-mix(in srgb, var(--lxj-color-primary) 5%, transparent);
 
     // ---- 填充(输入框等空白底) ----
     --lxj-fill-blank: var(--color-white);
@@ -96,6 +132,13 @@
     --lxj-color-border-primary-light: color-mix(in srgb, var(--lxj-color-primary) 30%, transparent);
     --lxj-color-border-light: color-mix(in srgb, var(--color-white) 40%, transparent);
     --lxj-color-border-strong: var(--color-gray-300);
+    /* 面板内分隔线(设计稿 rgba(0,150,220,.18/.12),取主青近似) */
+    --lxj-color-border-divider: color-mix(in srgb, var(--lxj-color-primary) 18%, transparent);
+    --lxj-color-border-divider-soft: color-mix(in srgb, var(--lxj-color-primary) 12%, transparent);
+    /* 统计卡片描边(设计稿 #395170) */
+    --lxj-color-border-card: var(--color-blue-550);
+    /* 渐变数字亮端(设计稿 #00feed) */
+    --lxj-color-num-cyan: var(--color-cyan-350);
 
     // ---- 圆角(px 默认;大屏 vw 覆盖见 _screen.scss) ----
     --lxj-radius-small: var(--radius-4);

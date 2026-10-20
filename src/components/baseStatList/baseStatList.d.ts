@@ -2,8 +2,8 @@
 export interface BaseStatListItem {
     /** 指标名 */
     label: string;
-    /** 图标文件名（assets/images 下，组件内经 getImageWidthName 解析） */
-    icon: string;
+    /** 图标文件名（assets/images 下，组件内经 getImageWidthName 解析；缺省不渲染图标） */
+    icon?: string;
     /** 数值 */
     value: number;
     /** 数值单位 */

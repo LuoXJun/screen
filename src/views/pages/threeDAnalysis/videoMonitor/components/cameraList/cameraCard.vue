@@ -16,7 +16,13 @@
             </p>
         </div>
         <span v-if="selected" class="card-selected">已选择</span>
-        <el-button v-else class="card-detail" @click.stop="emits('select', device)">详情</el-button>
+        <el-button
+            v-else
+            class="card-detail btn-cyan-ghost"
+            @click.stop="emits('select', device)"
+        >
+            详情
+        </el-button>
     </div>
 </template>
 
@@ -45,10 +51,9 @@ const emits = defineEmits<{
     /* 点右缘 → 文字左缘（设计稿像素实测 ≈4px） */
     gap: base(4px);
     padding: base(8px) base(12px);
-    /* 设计稿取值:深蓝半透明卡 + 微青描边 */
-    background: rgba(13, 36, 88, 0.2);
-    border: 1px solid rgba(0, 200, 255, 0.2);
-    border-radius: var(--radius-4);
+    background: color-mix(in srgb, var(--color-blue-750) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--lxj-color-primary) 20%, transparent);
+    border-radius: var(--lxj-radius-small);
     cursor: pointer;
 
     /* --status-color 由内联样式注入（CAMERA_STATUS_TONE,状态点与状态词共用） */
@@ -56,7 +61,8 @@ const emits = defineEmits<{
     /* 选中态(底部面板展示 + 地图定位高亮):实底 + 光晕 */
     &.is-selected {
         background: var(--color-blue-750);
-        box-shadow: 0 0 10px rgb(0 200 255 / 40%);
+        box-shadow: 0 0 base(10px)
+            color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
     }
 
     .status-dot {
@@ -74,7 +80,7 @@ const emits = defineEmits<{
         .card-name {
             margin: 0;
             overflow: hidden;
-            color: #e8f4ff;
+            color: var(--lxj-color-text-strong);
             font-size: var(--lxj-font-body);
             line-height: base(21px);
             text-overflow: ellipsis;
@@ -83,7 +89,7 @@ const emits = defineEmits<{
 
         .card-desc {
             margin: 0;
-            color: #4a7a9b;
+            color: var(--lxj-color-text-secondary);
             font-size: var(--lxj-font-body);
             line-height: base(21px);
 
@@ -101,28 +107,13 @@ const emits = defineEmits<{
         color: var(--lxj-color-primary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
-        background: rgba(0, 200, 255, 0.2);
+        background: color-mix(in srgb, var(--lxj-color-primary) 20%, transparent);
         border: 1px solid var(--lxj-color-primary);
         border-radius: base(3px);
     }
 
-    /* 详情按钮:青底描边小按钮(hover/active 随变量联动) */
     .card-detail {
         flex-shrink: 0;
-        height: auto;
-        padding: base(2px) base(8px);
-        font-size: var(--lxj-font-body);
-        line-height: base(21px);
-        border-radius: base(3px);
-        --el-button-bg-color: rgba(0, 200, 255, 0.12);
-        --el-button-border-color: rgba(0, 200, 255, 0.3);
-        --el-button-text-color: var(--lxj-color-primary);
-        --el-button-hover-bg-color: rgba(0, 200, 255, 0.2);
-        --el-button-hover-border-color: var(--lxj-color-primary);
-        --el-button-hover-text-color: var(--lxj-color-primary);
-        --el-button-active-bg-color: rgba(0, 200, 255, 0.24);
-        --el-button-active-border-color: var(--lxj-color-primary);
-        --el-button-active-text-color: var(--lxj-color-primary);
     }
 }
 </style>

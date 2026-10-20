@@ -3,12 +3,14 @@ export type DeviceInfoIcon = 'id' | 'model' | 'location' | 'date' | 'status' | '
 
 /** 设备信息项 */
 export interface DeviceInfoItem {
-    /** 图标 */
-    icon: DeviceInfoIcon;
+    /** 图标（缺省不渲染） */
+    icon?: DeviceInfoIcon;
     /** 标签（渲染为「标签:」） */
     label: string;
     /** 值 */
     value: string;
-    /** 值配色修饰类（is-online=绿 / is-offline=红，见组件样式） */
+    /** 值配色修饰类（is-online=绿 / is-offline=红 / is-strong=加粗） */
     valueClass?: string;
+    /** 值内联色（优先于修饰类） */
+    valueColor?: string;
 }

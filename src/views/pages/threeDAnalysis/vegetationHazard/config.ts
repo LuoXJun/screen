@@ -44,13 +44,13 @@ export interface VegetationLevel {
 /** 总面积卡 */
 export const TOTAL_AREA = { label: '总面积', value: '43.2', unit: '万㎡' };
 
-/** 植被风险色板（设计稿专属语义色，非通用色板） */
+/** 植被风险色板（设计稿专属语义色，统一走语义令牌） */
 export const TONE = {
-    safe: '#00d889',
-    normal: '#e8c629',
-    high: '#ff7a22',
-    serious: '#ff4058',
-    manmade: '#c26cff'
+    safe: 'var(--lxj-color-risk-safe)',
+    normal: 'var(--lxj-color-risk-normal)',
+    high: 'var(--lxj-color-risk-high)',
+    serious: 'var(--lxj-color-risk-serious)',
+    manmade: 'var(--lxj-color-risk-manmade)'
 } as const;
 
 /** 四色等级卡 */

@@ -10,7 +10,7 @@ export interface HazardItem {
     color: string;
 }
 
-/** 「隐患类型占比」数据（待接接口） */
+/** 「隐患类型占比」数据（待接接口）；echarts canvas 不消费 CSS 变量，设计稿色按原值保留 */
 export const HAZARD_ITEMS: HazardItem[] = [
     { name: '箱变温度异常', value: 35, color: '#f07020' },
     { name: '升压站温度异常', value: 23, color: '#f5a623' },

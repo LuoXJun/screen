@@ -71,6 +71,7 @@ const barDots: Record<HazardTone, string> = {
         display: flex;
         align-items: center;
         height: base(26px);
+        /* 设计稿取值:分组底线（无对应语义色，按原值保留） */
         border-bottom: 1px solid #19618e;
         overflow: hidden;
 
@@ -103,6 +104,7 @@ const barDots: Record<HazardTone, string> = {
 
         .group-name {
             margin-left: base(6px);
+            /* 设计稿取值:分组名（无对应语义色，按原值保留） */
             color: #b3cdeb;
             font-size: var(--lxj-font-body);
         }
@@ -115,8 +117,16 @@ const barDots: Record<HazardTone, string> = {
             /* 双层渐变数字:垂直白渐隐 + 水平主色,背景裁剪到文字 */
             .total-num {
                 background-image:
-                    linear-gradient(180deg, rgb(254 255 245) 23.5%, rgb(254 255 245 / 0) 58.77%),
-                    linear-gradient(90deg, #00feed 0%, #00feed 100%);
+                    linear-gradient(
+                        180deg,
+                        rgb(from var(--color-white) r g b) 23.5%,
+                        rgb(from var(--color-white) r g b / 0) 58.77%
+                    ),
+                    linear-gradient(
+                        90deg,
+                        var(--lxj-color-num-cyan) 0%,
+                        var(--lxj-color-num-cyan) 100%
+                    );
                 background-clip: text;
                 -webkit-background-clip: text;
                 color: transparent;
@@ -127,7 +137,7 @@ const barDots: Record<HazardTone, string> = {
             }
 
             .total-unit {
-                color: #aacdf3;
+                color: var(--lxj-color-text-muted);
                 font-family: var(--lxj-font-family);
                 font-size: font(9px);
                 font-weight: var(--lxj-font-weight-Medium);
@@ -146,13 +156,19 @@ const barDots: Record<HazardTone, string> = {
             justify-content: space-between;
 
             .item-name {
+                /* 设计稿取值:指标名（无对应语义色，按原值保留） */
                 color: #a4b6cc;
                 font-size: font(13px);
             }
 
             .item-value {
                 background-image:
-                    linear-gradient(180deg, rgb(254 255 245) 23.5%, rgb(254 255 245 / 0) 58.77%),
+                    linear-gradient(
+                        180deg,
+                        rgb(from var(--color-white) r g b) 23.5%,
+                        rgb(from var(--color-white) r g b / 0) 58.77%
+                    ),
+                    /* 设计稿取值:数值蓝（无对应语义色，按原值保留） */
                     linear-gradient(90deg, #a3d0fe 0%, #a3d0fe 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
@@ -165,6 +181,7 @@ const barDots: Record<HazardTone, string> = {
         .item-bar {
             position: relative;
             height: base(4px);
+            /* 设计稿取值:进度槽（无对应语义色，按原值保留） */
             background: #172a42;
 
             /* 条长由行内样式按 value/total 给出 */

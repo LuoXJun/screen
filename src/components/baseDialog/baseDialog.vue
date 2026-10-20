@@ -7,6 +7,7 @@
         draggable
         :show-close="false"
         v-bind="$attrs"
+        @closed="emits('close')"
     >
         <template #header>
             <!-- 左端斜切装饰 -->
@@ -56,6 +57,8 @@ defineProps<{
 const emits = defineEmits<{
     /** 操作按钮点击（回传按钮配置与其下标） */
     action: [button: BaseDialogButton, index: number];
+    /** 弹窗关闭完成（父级据此清理弹窗数据） */
+    close: [];
 }>();
 
 /** 组件内置资产（经 getAssets 解析，同项目图片引用约定；顶部装饰线与右下角镶边见 _dialog.scss 伪元素） */

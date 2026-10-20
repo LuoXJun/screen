@@ -9,6 +9,7 @@
 3. EP 组件二次封装要素：类型化 props、`v-bind="$attrs"` 透传、业务默认值、样式覆盖只写在封装内（详见 `styles-规范.md`）。
 4. 组件内置图片统一经 `getImageWidthName()`（`@/utils/getAssets`）解析，参数为 `src/assets/images/` 下文件名。
 5. 禁止在页面直接使用 `el-table` / `el-tabs` / `ElMessageBox.confirm`。
+6. 青底描边小按钮统一加 `.btn-cyan-ghost` 变体类，不再逐页复制 `--el-button-*`。
 
 ## 通用组件
 
@@ -16,16 +17,16 @@
 | ----------------- | ----------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | baseTable         | `src/components/baseTable/baseTable.vue`        | 配置驱动表格               | `v-model` 数据；`tableColumn`；`options`；`pageInfo`；`selection`；`index`；`variant`；`rowKey`；`highlightCurrentRow` | 操作列 `filed` 必须为 `'operation'`；单元格插槽名 = 列 `filed`；操作按钮支持 `confirm.mode: 'popover' \| 'messageBox'`；禁止页面裸写 `el-table` |
 | basePagination    | `src/components/base-pagination/base-pagination.vue` | 分页                  | `v-model` = `PageInfo`；`pageSizes`（默认 `[10,20,30,50]`）；`layout`；`variant`；`size`；`background`；`disabled` | `pageInfo` 必须含 `pageNum` / `pageSize` / `total`；事件 `handleChange(type, value)`；与 `usePageTable` 配合 |
-| baseTabs          | `src/components/baseTabs/baseTabs.vue`          | 页签 / 筛选项              | `v-model` 当前值；`items: { label, value }[]`；`variant?: 'underline'`             | 禁止使用 `el-tabs`；`value` 为选中标识                                   |
-| baseDialog        | `src/components/baseDialog/baseDialog.vue`      | 大屏弹窗                   | `v-model` 显隐；`title`；`icon`（图片文件名）；`buttons`                           | 内置头部与关闭按钮（`show-close=false`）；`#footer` 插槽存在时优先于 `buttons`；按钮点击抛 `action(button, index)` |
+| baseTabs          | `src/components/baseTabs/baseTabs.vue`          | 页签 / 筛选项              | `v-model` 当前值；`items: { label, value }[]`；`variant?: 'underline' \| 'panel' \| 'overlay'` | 禁止使用 `el-tabs`；`panel` = 巡检面板渐变页签，`overlay` = 视频画面贴底页签；`value` 为选中标识 |
+| baseDialog        | `src/components/baseDialog/baseDialog.vue`      | 大屏弹窗                   | `v-model` 显隐；`title`；`icon`（图片文件名）；`buttons`                           | 内置头部与关闭按钮（`show-close=false`）；`#footer` 插槽存在时优先于 `buttons`；按钮点击抛 `action(button, index)`；关闭完成抛 `close` |
 | messageBox        | `src/components/baseMessageBox/index.ts`        | 命令式确认框               | `messageBox(options): Promise<void>`                                              | 取消时 Promise **reject**，调用方需 `try/catch`；禁止 `ElMessageBox.confirm` |
 | basePopover       | `src/components/basePopover/basePopover.vue`    | 气泡确认                   | `v-model` 显隐；`content`；`title`；`type`；`placement`；事件 `on-confirm`         | 面板尺寸固定 352×124；用于表格操作列等轻确认场景                         |
 | baseOverlay       | `src/components/baseOverlay/baseOverlay.vue`    | 大屏三栏布局               | 插槽 `#left` / 默认（主区）/ `#right`                                             | 侧栏宽 `--lxj-aside-width`；页面可用 `--lxj-page-aside-width` 覆盖左栏宽  |
 | BaseChart         | `src/components/baseChart/BaseChart.vue`        | ECharts 容器               | `option`（初始化）；`autoResize`（默认 `true`）；`initOptions`；暴露 `getChart` / `setOption(option, replace)` / `resize` | 后续更新用 `setOption`，不要重建组件；echarts 已按需注册（`echarts.ts`） |
 | BaseCesium        | `src/components/baseCesium/BaseCesium.vue`      | Cesium 地球容器            | 无 props                                                                          | 容器宽高 100%，父级负责尺寸；组件自动初始化/清理 Viewer，HMR 下保留状态  |
 | baseCardList      | `src/components/baseCardList/baseCardList.vue`  | 图标卡片列表               | `list: BaseCardListItem[]`（`name` / `imgName` / `text`）                         | 图片名传 assets 文件名；默认插槽可替换描述文本                           |
-| baseStatList      | `src/components/baseStatList/baseStatList.vue`  | 统计指标条                 | `list: BaseStatListItem[]`（`label` / `icon` / `value` / `unit` / `valueColor` / `note` / `noteType`） | `noteType: 'trend'` 时显示上升箭头（`'todo'` 为待办样式）                |
-| baseSectionTitle  | `src/components/baseSectionTitle/baseSectionTitle.vue` | 区块标题（青色竖条） | `title`；`extra?`                                                                 | `extra` 为右侧橙色附加文本（如「总计 5」）                               |
+| baseStatList      | `src/components/baseStatList/baseStatList.vue`  | 统计指标条                 | `list?` / `rows?`：`BaseStatListItem[]`（`label` / `icon?` / `value` / `unit` / `valueColor` / `note` / `noteType`）；`variant?: 'grid'`；`divider?`（分隔图文件名） | 单行用 `list`，多行/两排用 `rows` + `variant="grid"`；`icon` 缺省不渲染；`noteType: 'trend'` 时显示上升箭头（`'todo'` 为待办样式） |
+| baseSectionTitle  | `src/components/baseSectionTitle/baseSectionTitle.vue` | 区块标题（青色竖条） | `title`；`extra?`；`size?: 'desc'`                                                 | `extra` 为右侧橙色附加文本（如「总计 5」）；`size="desc"` 为 12px 紧凑档 |
 | basePanelCard     | `src/components/basePanel/basePanelCard.vue`    | 面板卡片容器               | 默认插槽                                                                          | 背景 `--lxj-bg-card`、描边 `--lxj-color-border-primary-light`，勿在页面重复实现 |
 
 ## 面板与菜单
@@ -48,11 +49,11 @@
 | showMapPopup       | `screen/mapPopup/mapPopup.ts`                     | 命令式地图弹窗           | `position`（经纬高或 Cartesian3）；`title`；`width`；`height`；`draggable`；`content`（VNode 或文本）；`onConfirm`；`onClose`；返回 `{ close() }` | 轻量信息用本函数；大内容（视频等）用 baseDialog；弹窗锚点随相机联动      |
 | popupPanel         | `screen/mapPopup/popupPanel.vue`                  | 通用弹窗面板             | `v-model` 显隐；`title`；`width`；`height`；`draggable`；事件 `close`；默认 + `#footer` 插槽 | 默认 fixed 定位；地图场景请用 showMapPopup，不要直接实例化               |
 | MapPopupPanel      | `screen/mapPopup/MapPopupPanel.vue`               | 地图锚点弹窗（内部）     | `title`；`width`；`height`；`draggable`；`content`    | 内部组件，由 showMapPopup 挂载，不直接使用                               |
-| DeviceInfo         | `screen/popups/DeviceInfo.vue`                    | 设备信息双列网格         | `items: DeviceInfoItem[]`（`icon` / `label` / `value` / `valueClass`） | 设备弹窗通用信息区；图标集固定为 id/model/location/date/status/alarm      |
-| DeviceStatusTag    | `screen/popups/DeviceStatusTag.vue`               | 在线/离线状态标签        | `status: 'online' \| 'offline'`                       | 放在 baseDialog 的 `#header-extra` 插槽                                   |
-| CameraPopup        | `screen/popups/CameraPopup.vue`                   | 监控设备弹窗             | `data: CameraData`；事件 `close`                      | 由 `useEntityPopup` 按实体类型调度，页面不直接实例化                      |
-| FiberPopup         | `screen/popups/FiberPopup.vue`                    | 光纤测温弹窗             | `data: FiberData`；事件 `close`                       | 含温度卡 + 趋势图；同样经 `useEntityPopup` 调度                           |
-| NestPopup          | `screen/popups/NestPopup.vue`                     | 无人机巢弹窗             | `data: NestData`；事件 `close`                        | 含状态六宫格 + 任务进度；经 `useEntityPopup` 调度                         |
+| DeviceInfo         | `screen/popups/device/DeviceInfo.vue`             | 设备信息双列网格         | `items: DeviceInfoItem[]`（`icon?` / `label` / `value` / `valueClass` / `valueColor`）；`showIcon?`；`variant?: 'grid'` | 设备弹窗通用信息区；`variant="grid"` + `showIcon=false` 用于面板内紧凑信息区 |
+| DeviceStatusTag    | `screen/popups/device/DeviceStatusTag.vue`        | 在线/离线状态标签        | `status: 'online' \| 'offline'`                       | 放在 baseDialog 的 `#header-extra` 插槽                                   |
+| CameraPopup        | `screen/popups/camera/CameraPopup.vue`            | 监控设备弹窗             | `data: CameraData`；事件 `close`                      | 由 `useEntityPopup` 按实体类型调度，页面不直接实例化                      |
+| FiberPopup         | `screen/popups/fiber/FiberPopup.vue`              | 光纤测温弹窗             | `data: FiberData`；事件 `close`                       | 含温度卡 + 趋势图；同样经 `useEntityPopup` 调度                           |
+| NestPopup          | `screen/popups/nest/NestPopup.vue`                | 无人机巢弹窗             | `data: NestData`；事件 `close`                        | 含状态六宫格 + 任务进度；经 `useEntityPopup` 调度                         |
 
 ## 实体弹窗调度
 

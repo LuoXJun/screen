@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium';
-import { toCartesian3 } from './utils/coordinate';
-import { addSiteEntity } from './siteContainer';
-import { requestRenderWithNextFrame } from './viewer';
+import { toCartesian3 } from '../utils/coordinate';
+import { addSiteEntity } from '../siteContainer';
+import { requestRenderWithNextFrame } from '../viewer';
 import { ACTIVE, renderPin, type LabelPinBillboardOptions, type PinLayout } from './labelPinDraw';
 import { hideLabelPinFlow, showLabelPinFlow } from './labelPinFlow';
 

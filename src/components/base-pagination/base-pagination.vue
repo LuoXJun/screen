@@ -83,6 +83,6 @@ const handleCurrentChange = (val: number) => {
 <style scoped lang="scss">
 .basePagination {
     /* el-pagination 撑满整行(补丁层已设 justify-content:flex-end,右对齐不依赖外层收缩) */
-    margin-top: 12px;
+    margin-top: base(12px);
 }
 </style>

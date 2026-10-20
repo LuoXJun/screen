@@ -62,7 +62,7 @@ function onMenuClose(index: string): void {
         background-color: var(--lxj-menu-active-bg-color);
     }
     :deep(.el-sub-menu__title) {
-        --el-menu-text-color: var(--color-blue-50);
+        --el-menu-text-color: var(--lxj-color-text-strong);
     }
 }
 </style>

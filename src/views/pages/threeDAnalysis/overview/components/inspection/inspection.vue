@@ -7,7 +7,7 @@
             <baseStatList :list="INSPECT_STATS" />
         </basePanelCard>
         <basePanelCard class="task-card">
-            <baseTab v-model="activeTab" :list="TASK_TABS" />
+            <baseTabs v-model="activeTab" :items="TASK_TABS" variant="panel" />
             <div class="task-card-body">
                 <recentTasks v-if="activeTab === 'recent'" />
                 <hazardTypes v-else />
@@ -22,7 +22,7 @@ import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import baseStatList from '@/components/baseStatList/baseStatList.vue';
-import baseTab from '@/components/baseTab/baseTab.vue';
+import baseTabs from '@/components/baseTabs/baseTabs.vue';
 import recentTasks from './recentTasks.vue';
 import hazardTypes from './hazardTypes.vue';
 import { INSPECT_STATS, TASK_TABS } from './inspection.config';
@@ -46,7 +46,7 @@ const activeTab = ref('recent');
     }
 
     .date {
-        color: var(--color-blue-500);
+        color: var(--lxj-color-text-secondary);
         font-family: var(--lxj-font-family);
         font-size: var(--lxj-font-body);
     }
@@ -67,7 +67,7 @@ const activeTab = ref('recent');
         margin-top: base(6px);
 
         /* 页签高度固定,内容区吸收剩余高度并按需滚动(勿用 scroll:会常驻滚动条) */
-        > .baseTab {
+        > .baseTabs {
             flex-shrink: 0;
         }
 

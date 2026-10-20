@@ -29,7 +29,7 @@ import { RISK_LEGEND } from './bottomPanels.config';
 
     .legend-title {
         grid-column: 1 / -1;
-        color: var(--color-blue-50);
+        color: var(--lxj-color-text-strong);
         font-size: var(--lxj-font-body);
         font-weight: var(--lxj-font-weight-Semibold);
         line-height: base(21px);
@@ -51,11 +51,11 @@ import { RISK_LEGEND } from './bottomPanels.config';
     }
 
     .legend-label {
-        color: var(--color-blue-300);
+        color: var(--lxj-color-text-primary);
     }
 
     .legend-range {
-        color: var(--color-blue-500);
+        color: var(--lxj-color-text-secondary);
     }
 }
 </style>

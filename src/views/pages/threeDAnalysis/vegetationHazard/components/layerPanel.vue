@@ -77,14 +77,14 @@ function resetDefault(): void {
     .panel-title {
         flex-shrink: 0;
         margin: base(2px) 0 base(8px);
-        border-bottom: 1px solid rgba(0, 150, 220, 0.18);
+        border-bottom: 1px solid var(--lxj-color-border-divider);
     }
 
     .panel-extra {
         padding: base(2px) base(8px);
-        border: 1px solid rgba(0, 150, 220, 0.18);
+        border: 1px solid var(--lxj-color-border-divider);
         border-radius: base(4px);
-        color: var(--color-blue-300);
+        color: var(--lxj-color-text-primary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
     }
@@ -108,8 +108,8 @@ function resetDefault(): void {
 
 .group-title {
     padding-bottom: base(8px);
-    border-bottom: 1px solid rgba(0, 200, 255, 0.12);
-    color: var(--color-white);
+    border-bottom: 1px solid var(--lxj-color-border-divider-soft);
+    color: var(--lxj-color-text-desc);
     font-size: font(16px);
     font-weight: var(--lxj-font-weight-Semibold);
     line-height: base(22px);
@@ -126,15 +126,16 @@ function resetDefault(): void {
         --el-checkbox-input-width: #{base(14px)};
         --el-checkbox-input-height: #{base(14px)};
         --el-checkbox-border-radius: #{base(2px)};
-        --el-checkbox-bg-color: var(--color-white);
+        --el-checkbox-bg-color: var(--lxj-color-text-desc);
+        /* 设计稿取值:未选中描边/选中蓝（无对应语义色，按原值保留） */
         --el-checkbox-input-border: 1px solid #767676;
-        --el-checkbox-text-color: var(--color-blue-300);
+        --el-checkbox-text-color: var(--lxj-color-text-primary);
         --el-checkbox-font-size: #{font(16px)};
         --el-checkbox-font-weight: var(--lxj-font-weight);
         --el-checkbox-checked-bg-color: #159bea;
         --el-checkbox-checked-input-border-color: #159bea;
-        --el-checkbox-checked-text-color: var(--color-blue-300);
-        --el-checkbox-checked-icon-color: var(--color-white);
+        --el-checkbox-checked-text-color: var(--lxj-color-text-primary);
+        --el-checkbox-checked-icon-color: var(--lxj-color-text-desc);
     }
 
     :deep(.el-checkbox__label) {
@@ -151,7 +152,7 @@ function resetDefault(): void {
 
     .footer-tip {
         flex: 1;
-        color: var(--color-blue-500);
+        color: var(--lxj-color-text-secondary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
     }
@@ -162,25 +163,26 @@ function resetDefault(): void {
         padding: 0 base(11px);
         border: 1px solid var(--lxj-color-border-primary-light);
         border-radius: base(3px);
-        background: rgba(0, 200, 255, 0.06);
-        color: var(--color-blue-300);
+        background: color-mix(in srgb, var(--lxj-color-primary) 6%, transparent);
+        color: var(--lxj-color-text-primary);
         font-size: var(--lxj-font-body);
 
         &:hover,
         &:focus {
             border-color: var(--lxj-color-border-primary-light);
-            background: rgba(0, 200, 255, 0.12);
-            color: var(--color-white);
+            background: color-mix(in srgb, var(--lxj-color-primary) 12%, transparent);
+            color: var(--lxj-color-text-desc);
         }
 
         &.is-default {
+            /* 设计稿取值:默认按钮蓝（无对应语义色，按原值保留） */
             background: #078edb;
-            color: var(--color-white);
+            color: var(--lxj-color-text-desc);
 
             &:hover,
             &:focus {
                 background: color-mix(in srgb, #078edb 85%, var(--color-white));
-                color: var(--color-white);
+                color: var(--lxj-color-text-desc);
             }
         }
     }

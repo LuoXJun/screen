@@ -81,14 +81,14 @@ function onHandle(): void {
     .panel-title {
         flex-shrink: 0;
         margin: base(2px) 0 base(8px);
-        border-bottom: 1px solid rgba(0, 150, 220, 0.18);
+        border-bottom: 1px solid var(--lxj-color-border-divider);
     }
 
     .panel-extra {
         padding: base(2px) base(8px);
-        border: 1px solid rgba(0, 150, 220, 0.18);
+        border: 1px solid var(--lxj-color-border-divider);
         border-radius: base(4px);
-        color: var(--color-blue-300);
+        color: var(--lxj-color-text-primary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
     }
@@ -115,13 +115,13 @@ function onHandle(): void {
     gap: base(12px);
     height: base(36px);
     margin-top: base(4px);
-    border-top: 1px solid rgba(0, 150, 220, 0.18);
+    border-top: 1px solid var(--lxj-color-border-divider);
 
     .legend-item {
         display: flex;
         align-items: center;
         gap: base(5px);
-        color: var(--color-blue-500);
+        color: var(--lxj-color-text-secondary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
         white-space: nowrap;

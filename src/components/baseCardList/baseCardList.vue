@@ -1,7 +1,7 @@
 <template>
     <div class="baseCardList">
         <div v-for="it in list" :key="it.name" class="baseCardListItem">
-            <img class="arc" src="@/assets/images/arc.svg" alt="" />
+            <img class="arc" :src="arcIcon" alt="" />
             <img class="icon" :src="getImageWidthName(it.imgName)" alt="" />
             <div>
                 <div class="name">{{ it.name }}</div>
@@ -22,6 +22,9 @@ import type { BaseCardListItem } from './baseCardList';
 defineProps<{
     list: BaseCardListItem[];
 }>();
+
+/** 组件内置资产（经 getAssets 解析，同项目图片引用约定） */
+const arcIcon = getImageWidthName('arc.svg');
 </script>
 
 <style scoped lang="scss">
@@ -39,18 +42,16 @@ defineProps<{
         width: base(142px);
         min-height: base(54px);
         flex: 49% 0 0;
-        border: 1px solid #395170;
+        border: 1px solid var(--lxj-color-border-card);
         margin-top: base(10px);
         font-size: var(--lxj-font-desc);
-        background:
-            linear-gradient(270deg, rgba(16, 48, 84, 0) 0%, #103054 100%),
-            linear-gradient(270deg, rgba(9, 29, 53, 0.2) 0%, #091d35 100%);
+        background: var(--lxj-bg-card-strong);
 
         .name {
-            color: #dce9f7;
+            color: var(--lxj-color-text-soft);
         }
         .desc {
-            color: #aacdf3;
+            color: var(--lxj-color-text-muted);
         }
         .arc {
             position: absolute;

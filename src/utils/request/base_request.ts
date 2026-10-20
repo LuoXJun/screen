@@ -60,7 +60,7 @@ class BaseRequest {
     // 共有响应拦截
     private commonResponseInterceptor = () => {
         this.instance.interceptors.response.use(
-            (res: AxiosResponse<ResponseDataType<any>>) => {
+            (res: AxiosResponse<ResponseDataType<unknown>>) => {
                 if (res.request.responseType == 'blob') {
                     const size = res.headers['content-length'];
                     let name = res.headers['content-disposition'] ?? '';
@@ -92,7 +92,7 @@ class BaseRequest {
     request<T>(config: IbaseInstanceConfig): AxiosPromise<ResponseDataType<T>> {
         // 发送请求时控制是否显示加载框
         this.isLoading = config.isLoading ?? true;
-        let loading: any;
+        let loading: ReturnType<typeof ElLoading.service> | undefined;
         // 发起请求时调用加载
         if (this.isLoading) {
             loading = ElLoading.service({

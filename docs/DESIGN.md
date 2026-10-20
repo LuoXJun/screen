@@ -23,18 +23,26 @@
 | 名称               | 取值      |     | 名称                | 取值      |
 | ------------------ | --------- | --- | ------------------- | --------- |
 | `--color-white`    | `#ffffff` |     | `--color-blue-50`   | `#e8f4ff` |
-| `--color-gray-100` | `#f2f3f5` |     | `--color-blue-100`  | `#e2e8f0` |
+| `--color-black`    | `#000000` |     | `--color-blue-100`  | `#e2e8f0` |
+| `--color-gray-100` | `#f2f3f5` |     | `--color-blue-150`  | `#dce9f7` |
 | `--color-gray-200` | `#dcdfe6` |     | `--color-blue-200`  | `#c3e2fa` |
-| `--color-gray-300` | `#c0c4cc` |     | `--color-blue-300`  | `#7ab8d4` |
-| `--color-gray-400` | `#909399` |     | `--color-blue-400`  | `#0266f0` |
-| `--color-gray-500` | `#a8abb2` |     | `--color-blue-500`  | `#4a7a9b` |
-| `--color-gray-700` | `#606266` |     | `--color-blue-700`  | `#334155` |
-| `--color-gray-900` | `#303133` |     | `--color-blue-750`  | `#0d2458` |
-| `--color-green-400` | `#00e080` |    | `--color-blue-800`  | `#081940` |
-| `--color-orange-400` | `#ffc840` |   | `--color-blue-900`  | `#071428` |
-| `--color-orange-450` | `#f5a623` |   | `--color-red-400`   | `#ff6060` |
-| `--color-orange-500` | `#ff8904` |   | `--color-red-500`   | `#e03030` |
-| `--color-cyan-400`  | `#00c8ff` |    |                     |           |
+| `--color-gray-300` | `#c0c4cc` |     | `--color-blue-250`  | `#aacdf3` |
+| `--color-gray-400` | `#909399` |     | `--color-blue-300`  | `#7ab8d4` |
+| `--color-gray-500` | `#a8abb2` |     | `--color-blue-400`  | `#0266f0` |
+| `--color-gray-700` | `#606266` |     | `--color-blue-450`  | `#1060b0` |
+| `--color-gray-900` | `#303133` |     | `--color-blue-500`  | `#4a7a9b` |
+| `--color-green-350` | `#37f2a8` |    | `--color-blue-550`  | `#395170` |
+| `--color-green-400` | `#00e080` |    | `--color-blue-650`  | `#103054` |
+| `--color-orange-400` | `#ffc840` |   | `--color-blue-700`  | `#334155` |
+| `--color-orange-450` | `#f5a623` |   | `--color-blue-750`  | `#0d2458` |
+| `--color-orange-500` | `#ff8904` |   | `--color-blue-800`  | `#081940` |
+| `--color-cyan-300`  | `#44caff` |    | `--color-blue-850`  | `#091d35` |
+| `--color-cyan-350`  | `#00feed` |    | `--color-blue-900`  | `#071428` |
+| `--color-cyan-400`  | `#00c8ff` |    | `--color-red-350`   | `#ff5d6e` |
+| `--color-green-450` | `#00d889` |    | `--color-red-400`   | `#ff6060` |
+| `--color-yellow-400` | `#e8c629` |   | `--color-red-450`   | `#ff4058` |
+| `--color-orange-350` | `#ff7a22` |   | `--color-red-500`   | `#e03030` |
+| `--color-purple-400` | `#c26cff` |   |                     |           |
 
 ### 语义色（`--lxj-*`，业务只引用这一层）
 
@@ -45,25 +53,46 @@
 | `--lxj-color-warning`                   | `var(--color-orange-500)` → `#ff8904`            |
 | `--lxj-color-danger`                    | `var(--color-red-400)` → `#ff6060`               |
 | `--lxj-color-info`                      | `var(--color-gray-400)` → `#909399`              |
+| `--lxj-color-text-strong`               | `var(--color-blue-50)` → `#e8f4ff`               |
+| `--lxj-color-text-soft`                 | `var(--color-blue-150)` → `#dce9f7`              |
+| `--lxj-color-text-muted`                | `var(--color-blue-250)` → `#aacdf3`              |
 | `--lxj-color-text-primary`              | `var(--color-blue-300)` → `#7ab8d4`              |
+| `--lxj-color-text-secondary`            | `var(--color-blue-500)` → `#4a7a9b`              |
 | `--lxj-color-text-desc`                 | `var(--color-white)` → `#ffffff`                 |
 | `--lxj-color-text-active`               | `var(--color-cyan-400)` → `#00c8ff`              |
 | `--lxj-color-text-placeholder`          | `var(--color-gray-500)` → `#a8abb2`              |
 | `--lxj-color-text-disabled`             | `var(--color-gray-300)` → `#c0c4cc`              |
+| `--lxj-color-status-online`             | `var(--color-green-350)` → `#37f2a8`             |
+| `--lxj-color-status-offline`            | `var(--color-red-500)` → `#e03030`               |
+| `--lxj-color-accent-orange`             | `var(--color-orange-450)` → `#f5a623`            |
+| `--lxj-color-accent-cyan`               | `var(--color-cyan-300)` → `#44caff`              |
+| `--lxj-color-danger-soft`               | `var(--color-red-350)` → `#ff5d6e`               |
+| `--lxj-color-risk-safe`                 | `var(--color-green-450)` → `#00d889`             |
+| `--lxj-color-risk-normal`               | `var(--color-yellow-400)` → `#e8c629`            |
+| `--lxj-color-risk-high`                 | `var(--color-orange-350)` → `#ff7a22`            |
+| `--lxj-color-risk-serious`              | `var(--color-red-450)` → `#ff4058`               |
+| `--lxj-color-risk-manmade`              | `var(--color-purple-400)` → `#c26cff`            |
 | `--lxj-bg-bar`                          | `var(--color-blue-800)` → `#081940`              |
 | `--lxj-bg-page`                         | `var(--color-blue-800)` → `#081940`              |
 | `--lxj-bg-card`                         | `color-mix(in srgb, var(--color-blue-750) 40%, transparent)` |
+| `--lxj-bg-card-strong`                  | 双层深蓝渐变（blue-650 → transparent / blue-850 20% → blue-850） |
 | `--lxj-bg-panel`                        | `var(--color-white)` → `#ffffff`                 |
 | `--lxj-bg-overlay`                      | `var(--color-white)` → `#ffffff`                 |
 | `--lxj-bg-hover`                        | `var(--color-gray-100)` → `#f2f3f5`              |
 | `--lxj-bg-active`                       | `color-mix(in srgb, var(--lxj-color-primary) 10%, var(--color-white))` |
 | `--lxj-bg-mask`                         | `rgb(from var(--color-blue-900) r g b / 85%)`    |
+| `--lxj-panel-bg`                        | `rgb(from var(--color-blue-900) r g b / 85%)`    |
+| `--lxj-menu-active-bg-color`            | `color-mix(in srgb, var(--lxj-color-primary) 5%, transparent)` |
 | `--lxj-fill-blank`                      | `var(--color-white)` → `#ffffff`                 |
 | `--lxj-color-border`                    | `var(--color-gray-200)` → `#dcdfe6`              |
 | `--lxj-color-border-primary`            | `var(--lxj-color-primary)` → `#00c8ff`           |
 | `--lxj-color-border-primary-light`      | `color-mix(in srgb, var(--lxj-color-primary) 30%, transparent)` |
 | `--lxj-color-border-light`              | `color-mix(in srgb, var(--color-white) 40%, transparent)` |
 | `--lxj-color-border-strong`             | `var(--color-gray-300)` → `#c0c4cc`              |
+| `--lxj-color-border-divider`            | `color-mix(in srgb, var(--lxj-color-primary) 18%, transparent)` |
+| `--lxj-color-border-card`               | `var(--color-blue-550)` → `#395170`              |
+| `--lxj-color-num-cyan`                  | `var(--color-cyan-350)` → `#00feed`              |
+| `--lxj-color-border-divider-soft`       | `color-mix(in srgb, var(--lxj-color-primary) 12%, transparent)` |
 | `--lxj-shadow-panel`                    | `0 1px 4px rgb(0 0 0 / 8%)`                      |
 | `--lxj-shadow-overlay`                  | `0 8px 24px rgb(0 0 0 / 12%)`                    |
 

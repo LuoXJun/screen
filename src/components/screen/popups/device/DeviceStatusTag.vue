@@ -24,15 +24,15 @@ defineProps<{
 
     /* 设计稿取值:在线绿系 */
     &.is-online {
-        color: #37f2a8;
-        background: rgba(55, 242, 168, 0.2);
-        border: 1px solid #37f2a8;
+        color: var(--lxj-color-status-online);
+        background: color-mix(in srgb, var(--lxj-color-status-online) 20%, transparent);
+        border: 1px solid var(--lxj-color-status-online);
     }
 
     &.is-offline {
-        color: #e03030;
-        background: rgba(224, 48, 48, 0.2);
-        border: 1px solid #e03030;
+        color: var(--lxj-color-status-offline);
+        background: color-mix(in srgb, var(--lxj-color-status-offline) 20%, transparent);
+        border: 1px solid var(--lxj-color-status-offline);
     }
 }
 </style>

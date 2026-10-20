@@ -80,8 +80,8 @@ export {
     renderLabelPinImage,
     type LabelPinOptions,
     type LabelPinBillboardOptions
-} from './core/labelPinDraw';
-export { addLabelPinSiteEntity, setLabelPinHighlight } from './core/labelPin';
+} from './core/labelPin/labelPinDraw';
+export { addLabelPinSiteEntity, setLabelPinHighlight } from './core/labelPin/labelPin';
 export { createHandler, clearHandler, clearHandlers } from './core/event';
 export { MapPopup } from './core/popup';
 export {

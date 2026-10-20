@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
     height: base(40px);
     padding: 0 base(6px);
     border-radius: var(--lxj-radius-small);
-    background: rgba(7, 20, 40, 0.85);
+    background: var(--lxj-panel-bg);
     border: 1px solid var(--lxj-color-border-primary-light);
     /* 页面层(.screen)默认禁用指针事件，控件需自行开启 */
     pointer-events: all;
@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
         border-radius: base(3px);
 
         &:hover {
-            background: rgba(0, 200, 255, 0.15);
+            background: color-mix(in srgb, var(--lxj-color-primary) 15%, transparent);
         }
 
         &.isActive {
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
             width: base(16px);
             height: base(16px);
             border-radius: base(2px);
-            background: red;
+            background: color-mix(in srgb, var(--lxj-color-info) 40%, transparent);
         }
 
         .tool-label {
@@ -111,10 +111,10 @@ onBeforeUnmount(() => {
             white-space: nowrap;
             padding: base(2px) base(6px);
             border-radius: base(2px);
-            background: rgba(7, 20, 40, 0.9);
+            background: rgb(from var(--color-blue-900) r g b / 90%);
             border: 1px solid var(--lxj-color-border-primary-light);
             font-size: base(12px);
-            color: #fff;
+            color: var(--lxj-color-text-desc);
         }
     }
 }

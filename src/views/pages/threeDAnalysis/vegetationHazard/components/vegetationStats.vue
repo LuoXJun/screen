@@ -77,7 +77,7 @@ onMounted(() => {
     .panel-title {
         flex-shrink: 0;
         margin: base(2px) 0 base(8px);
-        border-bottom: 1px solid rgba(0, 150, 220, 0.18);
+        border-bottom: 1px solid var(--lxj-color-border-divider);
     }
 }
 
@@ -106,20 +106,20 @@ onMounted(() => {
         gap: base(7px);
 
         .number {
-            color: var(--color-white);
+            color: var(--lxj-color-text-desc);
             font-size: font(26px);
             font-weight: var(--lxj-font-weight-Semibold);
             line-height: 1.5;
         }
 
         .unit {
-            color: var(--color-blue-500);
+            color: var(--lxj-color-text-secondary);
             font-size: var(--lxj-font-body);
         }
     }
 
     .total-label {
-        color: var(--color-white);
+        color: var(--lxj-color-text-desc);
         font-size: var(--lxj-font-body);
     }
 }
@@ -138,7 +138,7 @@ onMounted(() => {
     flex-direction: column;
     height: base(58px);
     padding: base(6px) base(7px);
-    background: rgba(255, 255, 255, 0.02);
+    background: color-mix(in srgb, var(--color-white) 2%, transparent);
     border-left: base(2px) solid var(--level-color);
 
     .level-label {
@@ -161,7 +161,7 @@ onMounted(() => {
         }
 
         .unit {
-            color: var(--color-blue-500);
+            color: var(--lxj-color-text-secondary);
             font-size: var(--lxj-font-body);
         }
     }

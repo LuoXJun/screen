@@ -1,32 +1,32 @@
-export function getType(val: any) {
+export function getType(val: unknown) {
     return Object.prototype.toString.call(val).slice(8, -1);
 }
 
-export function isFunction(val: any) {
+export function isFunction(val: unknown) {
     return getType(val) === 'Function';
 }
 
-export function isString(val: any) {
+export function isString(val: unknown) {
     return getType(val) === 'String';
 }
 
-export function isNumber(val: any) {
+export function isNumber(val: unknown) {
     return getType(val) === 'Number';
 }
 
-export function isUndefined(val: any) {
+export function isUndefined(val: unknown) {
     return getType(val) === 'Undefined';
 }
 
-export function isArray(val: any) {
+export function isArray(val: unknown) {
     return getType(val) === 'Array';
 }
 
-export function isObject(val: any) {
+export function isObject(val: unknown) {
     return getType(val) === 'Object';
 }
 
-export function isNull(val: any) {
+export function isNull(val: unknown) {
     return getType(val) === 'Null';
 }
 

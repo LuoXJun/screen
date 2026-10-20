@@ -1,9 +1,6 @@
 @use '../../../tokens/functions' as *;
 
 .el-menu {
-    // 自定义变量
-    --lxj-menu-active-bg-color: color-mix(in srgb, var(--lxj-color-primary) 5%, transparent);
-
     --el-menu-bg-color: var(--lxj-bg-bar);
     --el-menu-text-color: var(--lxj-color-text-primary);
     --el-menu-active-color: var(--lxj-color-text-active);

@@ -37,9 +37,9 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import baseDialog from '@/components/baseDialog/baseDialog.vue';
 import BaseChart from '@/components/baseChart/BaseChart.vue';
 import type { BaseDialogButton } from '@/components/baseDialog/baseDialog';
-import DeviceInfo from './DeviceInfo.vue';
-import DeviceStatusTag from './DeviceStatusTag.vue';
-import type { DeviceInfoItem } from './DeviceInfo';
+import DeviceInfo from '../device/DeviceInfo.vue';
+import DeviceStatusTag from '../device/DeviceStatusTag.vue';
+import type { DeviceInfoItem } from '../device/DeviceInfo';
 import { buildFiberTrendOption } from './fiberTrend.config';
 import type { FiberData, FiberTempStatus } from './FiberPopup';
 
@@ -106,11 +106,10 @@ onBeforeUnmount(() => {
 .fiberPopup {
     .temp-card,
     .trend-card {
-        /* 设计稿取值:浅青底 + 微描边 */
         margin-top: base(10px);
         padding: base(12px);
-        background: rgba(0, 200, 255, 0.05);
-        border: 1px solid rgba(0, 200, 255, 0.12);
+        background: color-mix(in srgb, var(--lxj-color-primary) 5%, transparent);
+        border: 1px solid var(--lxj-color-border-divider-soft);
         border-radius: base(5px);
     }
 
@@ -134,24 +133,23 @@ onBeforeUnmount(() => {
             font-size: font(30px);
             font-weight: var(--lxj-font-weight-Semibold);
 
-            /* 设计稿取值:正常绿/预警橙/超温红 */
             &.is-normal {
-                color: #37f2a8;
+                color: var(--lxj-color-status-online);
             }
 
             &.is-warning {
-                color: #f5a623;
+                color: var(--lxj-color-accent-orange);
             }
 
             &.is-overheat {
-                color: #e03030;
+                color: var(--lxj-color-status-offline);
             }
 
             .temp-unit {
                 margin-left: base(4px);
-                color: var(--color-blue-300);
+                color: var(--lxj-color-text-primary);
                 font-size: font(18px);
-                font-weight: var(--font-weight-400);
+                font-weight: var(--lxj-font-weight);
             }
         }
 
@@ -164,27 +162,42 @@ onBeforeUnmount(() => {
             font-size: font(16px);
 
             &.is-normal {
-                color: #37f2a8;
-                background: rgba(55, 242, 168, 0.15);
-                border: 1px solid rgba(55, 242, 168, 0.4);
+                color: var(--lxj-color-status-online);
+                background: color-mix(
+                    in srgb,
+                    var(--lxj-color-status-online) 15%,
+                    transparent
+                );
+                border: 1px solid
+                    color-mix(in srgb, var(--lxj-color-status-online) 40%, transparent);
             }
 
             &.is-warning {
-                color: #f5a623;
-                background: rgba(245, 166, 35, 0.15);
-                border: 1px solid rgba(245, 166, 35, 0.4);
+                color: var(--lxj-color-accent-orange);
+                background: color-mix(
+                    in srgb,
+                    var(--lxj-color-accent-orange) 15%,
+                    transparent
+                );
+                border: 1px solid
+                    color-mix(in srgb, var(--lxj-color-accent-orange) 40%, transparent);
             }
 
             &.is-overheat {
-                color: #e03030;
-                background: rgba(224, 48, 48, 0.15);
-                border: 1px solid rgba(224, 48, 48, 0.4);
+                color: var(--lxj-color-status-offline);
+                background: color-mix(
+                    in srgb,
+                    var(--lxj-color-status-offline) 15%,
+                    transparent
+                );
+                border: 1px solid
+                    color-mix(in srgb, var(--lxj-color-status-offline) 40%, transparent);
             }
         }
 
         .temp-threshold {
             margin: base(6px) 0 0;
-            color: #4a7a9b;
+            color: var(--lxj-color-text-secondary);
             font-size: font(16px);
         }
     }

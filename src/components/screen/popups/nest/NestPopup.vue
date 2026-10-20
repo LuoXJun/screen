@@ -44,9 +44,9 @@
 import { computed } from 'vue';
 import baseDialog from '@/components/baseDialog/baseDialog.vue';
 import type { BaseDialogButton } from '@/components/baseDialog/baseDialog';
-import DeviceInfo from './DeviceInfo.vue';
-import DeviceStatusTag from './DeviceStatusTag.vue';
-import type { DeviceInfoItem } from './DeviceInfo';
+import DeviceInfo from '../device/DeviceInfo.vue';
+import DeviceStatusTag from '../device/DeviceStatusTag.vue';
+import type { DeviceInfoItem } from '../device/DeviceInfo';
 import type { NestData } from './NestPopup';
 
 /** 状态单元格 */
@@ -116,15 +116,14 @@ const statusCells = computed<StatusCell[]>(() => [
             flex: 1 1 30%;
             min-height: base(80px);
             padding: base(12px);
-            /* 设计稿取值:浅青底 + 微描边 */
-            background: rgba(0, 200, 255, 0.05);
-            border: 1px solid rgba(0, 200, 255, 0.12);
+            background: color-mix(in srgb, var(--lxj-color-primary) 5%, transparent);
+            border: 1px solid var(--lxj-color-border-divider-soft);
             border-radius: base(5px);
             box-sizing: border-box;
 
             .cell-label {
                 margin: 0;
-                color: #4a7a9b;
+                color: var(--lxj-color-text-secondary);
                 font-size: font(16px);
             }
 
@@ -136,45 +135,45 @@ const statusCells = computed<StatusCell[]>(() => [
 
                 .cell-dot {
                     flex-shrink: 0;
-                    border-radius: var(--radius-half);
+                    border-radius: var(--lxj-radius-circle);
 
                     /* 设计稿取值:舱门红点(大)/网络绿点(小) */
                     &.is-alert {
                         width: base(9px);
                         height: base(9px);
-                        background: #e03030;
+                        background: var(--lxj-color-status-offline);
                     }
 
                     &.is-success {
                         width: base(6px);
                         height: base(6px);
-                        background: #37f2a8;
+                        background: var(--lxj-color-status-online);
                     }
                 }
 
                 .cell-text {
                     min-width: 0;
-                    color: #e8f4ff;
+                    color: var(--lxj-color-text-strong);
                     font-size: font(17px);
                     font-weight: var(--lxj-font-weight-Semibold);
                     overflow-wrap: anywhere;
 
                     &.is-online {
-                        color: #37f2a8;
-                        font-weight: var(--font-weight-400);
+                        color: var(--lxj-color-status-online);
+                        font-weight: var(--lxj-font-weight);
                     }
 
                     &.is-offline {
-                        color: #e03030;
-                        font-weight: var(--font-weight-400);
+                        color: var(--lxj-color-status-offline);
+                        font-weight: var(--lxj-font-weight);
                     }
                 }
 
                 .cell-suffix {
                     margin-left: base(4px);
-                    color: #e8f4ff;
+                    color: var(--lxj-color-text-strong);
                     font-size: font(12px);
-                    font-weight: var(--font-weight-400);
+                    font-weight: var(--lxj-font-weight);
                 }
             }
         }
@@ -183,8 +182,8 @@ const statusCells = computed<StatusCell[]>(() => [
     .task-bar {
         margin-top: base(50px);
         padding: base(14px) base(18px);
-        border-top: 1px solid rgba(0, 200, 255, 0.1);
-        border-bottom: 1px solid rgba(0, 200, 255, 0.1);
+        border-top: 1px solid color-mix(in srgb, var(--lxj-color-primary) 10%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--lxj-color-primary) 10%, transparent);
 
         .task-head {
             display: flex;
@@ -194,7 +193,7 @@ const statusCells = computed<StatusCell[]>(() => [
 
         .task-title {
             margin: 0;
-            color: #4a7a9b;
+            color: var(--lxj-color-text-secondary);
             font-size: font(16px);
 
             .task-no {
@@ -211,17 +210,17 @@ const statusCells = computed<StatusCell[]>(() => [
         .task-track {
             height: base(7px);
             margin-top: base(9px);
-            background: rgba(255, 255, 255, 0.08);
+            background: color-mix(in srgb, var(--color-white) 8%, transparent);
             border-radius: base(3.5px);
             overflow: hidden;
 
             .task-fill {
                 display: block;
                 height: 100%;
-                /* 设计稿取值:蓝→青渐变 + 发光 */
-                background: linear-gradient(90deg, #0060ff 0%, #00c8ff 100%);
+                /* 设计稿取值:蓝→青渐变（起点无对应语义色，按原值保留） */
+                background: linear-gradient(90deg, #0060ff 0%, var(--lxj-color-primary) 100%);
                 border-radius: base(3.5px);
-                box-shadow: 0 0 base(9px) rgba(0, 200, 255, 0.5);
+                box-shadow: 0 0 base(9px) color-mix(in srgb, var(--lxj-color-primary) 50%, transparent);
             }
         }
     }

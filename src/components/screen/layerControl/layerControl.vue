@@ -46,10 +46,10 @@ withDefaults(
             --el-checkbox-input-height: #{base(10px)};
             --el-checkbox-border-radius: #{base(2px)};
             --el-checkbox-bg-color: transparent;
-            --el-checkbox-input-border: 1px solid var(--color-blue-500);
-            --el-checkbox-text-color: var(--color-blue-300);
+            --el-checkbox-input-border: 1px solid var(--lxj-color-text-secondary);
+            --el-checkbox-text-color: var(--lxj-color-text-primary);
             --el-checkbox-font-size: var(--lxj-font-body);
-            --el-checkbox-font-weight: var(--font-weight-400);
+            --el-checkbox-font-weight: var(--lxj-font-weight);
             --el-checkbox-checked-bg-color: color-mix(
                 in srgb,
                 var(--lxj-color-primary) 30%,

@@ -20,8 +20,8 @@ import { computed } from 'vue';
 import { getImageWidthName } from '@/utils/getAssets';
 import baseDialog from '@/components/baseDialog/baseDialog.vue';
 import type { BaseDialogButton } from '@/components/baseDialog/baseDialog';
-import DeviceInfo from './DeviceInfo.vue';
-import type { DeviceInfoItem } from './DeviceInfo';
+import DeviceInfo from '../device/DeviceInfo.vue';
+import type { DeviceInfoItem } from '../device/DeviceInfo';
 import type { CameraData, CameraStatus } from './CameraPopup';
 
 const props = defineProps<{

@@ -8,6 +8,7 @@
 :root {
     // ---- 色板(纯颜色,换品牌色只改这里) ----
     --color-white: #ffffff;
+    --color-black: #000000;
 
     --color-gray-100: #f2f3f5;
     --color-gray-200: #dcdfe6;
@@ -19,24 +20,41 @@
 
     --color-blue-50: #e8f4ff;
     --color-blue-100: #e2e8f0;
+    --color-blue-150: #dce9f7;
     --color-blue-200: #c3e2fa;
+    --color-blue-250: #aacdf3;
     --color-blue-300: #7ab8d4;
     --color-blue-400: #0266f0;
+    --color-blue-450: #1060b0;
     --color-blue-500: #4a7a9b;
+    --color-blue-550: #395170;
+    --color-blue-650: #103054;
     --color-blue-700: #334155;
     --color-blue-750: #0d2458;
     --color-blue-800: #081940;
+    --color-blue-850: #091d35;
     --color-blue-900: #071428;
 
+    --color-green-350: #37f2a8;
     --color-green-400: #00e080;
+    --color-green-450: #00d889;
 
+    --color-yellow-400: #e8c629;
+
+    --color-orange-350: #ff7a22;
     --color-orange-400: #ffc840;
     --color-orange-450: #f5a623;
     --color-orange-500: #ff8904;
 
+    --color-red-350: #ff5d6e;
     --color-red-400: #ff6060;
+    --color-red-450: #ff4058;
     --color-red-500: #e03030;
 
+    --color-purple-400: #c26cff;
+
+    --color-cyan-300: #44caff;
+    --color-cyan-350: #00feed;
     --color-cyan-400: #00c8ff;
 
     // ---- 字体 ----

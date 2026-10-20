@@ -34,7 +34,7 @@ const selected = defineModel<string[]>({ default: () => [] });
         width: auto;
         margin-right: 0;
         padding: base(4px) base(8px);
-        border: 1px solid color-mix(in srgb, var(--lxj-color-primary) 18%, transparent); /* 设计稿 rgba(0,150,220,.18),取主青近似 */
+        border: 1px solid var(--lxj-color-border-divider);
         border-radius: var(--lxj-radius-small);
         background: var(--color-blue-750); /* 设计稿 #0d2458 */
 
@@ -49,13 +49,13 @@ const selected = defineModel<string[]>({ default: () => [] });
             padding-left: 0;
             font-size: var(--lxj-font-body);
             line-height: base(20px);
-            color: var(--color-blue-500); /* 设计稿 #4a7a9b */
+            color: var(--lxj-color-text-secondary);
         }
 
         /* 计数:设计稿 #ff8904(orange-500),Semibold */
         .typeCount {
             font-weight: var(--lxj-font-weight-Semibold);
-            color: var(--color-orange-500);
+            color: var(--lxj-color-warning);
         }
 
         /* 悬浮(设计稿未出样张,按面板交互语言推导):名称提亮一档 + 描边 18% → 30% */

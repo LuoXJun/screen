@@ -1,5 +1,5 @@
 import type { BaseStatListItem } from '@/components/baseStatList/baseStatList';
-import type { BaseTabItem } from '@/components/baseTab/baseTab';
+import type { BaseTabItem } from '@/components/baseTabs/baseTabs';
 
 /** 无人机巡检指标（设计稿数据，待接接口；icon 为 assets/images 下文件名） */
 export const INSPECT_STATS: BaseStatListItem[] = [

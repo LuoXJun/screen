@@ -62,7 +62,7 @@ export function buildMonitorPanelData(device: CameraDevice): MonitorPanelData {
                 value: `● ${CAMERA_STATUS_MAP[device.status]}`,
                 color: CAMERA_STATUS_TONE[device.status]
             },
-            { label: '最近告警', value: '无', color: 'var(--color-white)' }
+            { label: '最近告警', value: '无', color: 'var(--lxj-color-text-desc)' }
         ]
     };
 }

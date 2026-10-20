@@ -10,8 +10,8 @@
         <div v-if="item.time" class="card-foot">
             <span class="card-time">{{ item.time }}</span>
             <span class="card-actions">
-                <el-button class="card-btn" @click="emits('view', item)">查看</el-button>
-                <el-button class="card-btn" @click="emits('handle', item)">处理</el-button>
+                <el-button class="btn-cyan-ghost" @click="emits('view', item)">查看</el-button>
+                <el-button class="btn-cyan-ghost" @click="emits('handle', item)">处理</el-button>
             </span>
         </div>
     </div>
@@ -81,7 +81,7 @@ const toneVars = computed(() => {
     .card-location {
         margin: 0;
         padding-top: base(4px);
-        color: #4a7a9b;
+        color: var(--lxj-color-text-secondary);
         font-size: var(--lxj-font-body);
         line-height: base(21px);
     }
@@ -89,14 +89,14 @@ const toneVars = computed(() => {
     .card-desc {
         margin: 0;
         padding-top: base(4px);
-        color: #7ab8d4;
+        color: var(--lxj-color-text-primary);
         font-size: var(--lxj-font-body);
         line-height: 1.4;
     }
 
     /* 已处理卡的末行为状态提示（设计稿绿字） */
     &.is-done .card-desc {
-        color: var(--color-green-400);
+        color: var(--lxj-color-success);
     }
 
     .card-foot {
@@ -106,7 +106,7 @@ const toneVars = computed(() => {
         padding-top: base(6px);
 
         .card-time {
-            color: #4a7a9b;
+            color: var(--lxj-color-text-secondary);
             font-size: var(--lxj-font-body);
             line-height: base(21px);
         }
@@ -121,22 +121,5 @@ const toneVars = computed(() => {
         }
     }
 
-    /* 查看/处理按钮:青底描边小按钮(hover/active 随变量联动) */
-    .card-btn {
-        height: auto;
-        padding: base(2px) base(8px);
-        font-size: var(--lxj-font-body);
-        line-height: base(21px);
-        border-radius: base(3px);
-        --el-button-bg-color: rgba(0, 200, 255, 0.1);
-        --el-button-border-color: rgba(0, 200, 255, 0.3);
-        --el-button-text-color: var(--lxj-color-primary);
-        --el-button-hover-bg-color: rgba(0, 200, 255, 0.2);
-        --el-button-hover-border-color: var(--lxj-color-primary);
-        --el-button-hover-text-color: var(--lxj-color-primary);
-        --el-button-active-bg-color: rgba(0, 200, 255, 0.24);
-        --el-button-active-border-color: var(--lxj-color-primary);
-        --el-button-active-text-color: var(--lxj-color-primary);
-    }
 }
 </style>

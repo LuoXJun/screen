@@ -47,7 +47,7 @@ const list = ref<BaseCardListItem[]>(
     display: flex;
     flex-direction: column;
     .people {
-        color: #4a7a9b;
+        color: var(--lxj-color-text-secondary);
         margin-bottom: base(5px);
         display: flex;
         align-items: center;
@@ -58,13 +58,17 @@ const list = ref<BaseCardListItem[]>(
         }
     }
     .progress {
-        background: rgba(255, 255, 255, 0.1);
+        background: color-mix(in srgb, var(--color-white) 10%, transparent);
         height: base(4px);
         border-radius: var(--lxj-radius-small);
         .el-col {
             border-radius: var(--lxj-radius-small);
-            background: linear-gradient(90deg, #00c8ff 0%, #00e080 100%);
-            box-shadow: 0 0 6px 0 rgba(0, 224, 128, 0.5);
+            background: linear-gradient(
+                90deg,
+                var(--lxj-color-primary) 0%,
+                var(--lxj-color-success) 100%
+            );
+            box-shadow: 0 0 base(6px) 0 color-mix(in srgb, var(--lxj-color-success) 50%, transparent);
         }
     }
     .card-box {
@@ -76,7 +80,7 @@ const list = ref<BaseCardListItem[]>(
             overflow-y: scroll;
         }
         .num {
-            color: #aacdf3;
+            color: var(--lxj-color-text-muted);
             font-family: var(--lxj-font-family);
             font-weight: var(--lxj-font-weight-Medium);
             font-size: var(--lxj-font-desc);
@@ -87,8 +91,12 @@ const list = ref<BaseCardListItem[]>(
 
                 // 字体渐变
                 display: inline-block;
-                /* 从上到下：白 → 绿 */
-                background-image: linear-gradient(to bottom, #ffffff 23.5%, #00feed 100%);
+                /* 从上到下：白 → 青 */
+                background-image: linear-gradient(
+                    to bottom,
+                    var(--color-white) 23.5%,
+                    var(--lxj-color-num-cyan) 100%
+                );
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent; /* 标准写法 */

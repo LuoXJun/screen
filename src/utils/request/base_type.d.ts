@@ -17,7 +17,7 @@ declare global {
 
         responseIntercepter?: (
             res: AxiosResponse<ResponseDataType>
-        ) => AxiosResponse<ResponseDataType>;
+        ) => AxiosResponse<ResponseDataType> | Promise<never>;
 
         requestIntercepterCatch?: (err: any) => any;
 

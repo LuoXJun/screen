@@ -46,8 +46,8 @@ const data = computed(() => buildMonitorPanelData(props.device));
     transform: translateX(-50%);
 
     .panel-frame {
-        background: rgba(13, 36, 88, 0.4);
-        border: 1px solid rgba(0, 200, 255, 0.3);
+        background: var(--lxj-bg-card);
+        border: 1px solid var(--lxj-color-border-primary-light);
         border-radius: base(4px);
     }
 
@@ -55,7 +55,7 @@ const data = computed(() => buildMonitorPanelData(props.device));
         display: flex;
         gap: base(4px);
         padding: base(8px) base(12px);
-        border-bottom: 1px solid rgba(0, 150, 220, 0.18);
+        border-bottom: 1px solid var(--lxj-color-border-divider);
 
         .side-col {
             display: flex;

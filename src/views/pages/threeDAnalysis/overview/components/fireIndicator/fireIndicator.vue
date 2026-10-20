@@ -3,10 +3,7 @@
         <basePanelTitle title="防火指标" />
         <basePanelCard class="panel-card">
             <header class="indicator-header">
-                <div class="title-wrap">
-                    <i class="title-bar"></i>
-                    <span class="title-text">防火告警趋势</span>
-                </div>
+                <baseSectionTitle title="防火告警趋势" size="desc" />
                 <div class="range-switch">
                     <el-button
                         v-for="item in RANGE_OPTIONS"
@@ -25,15 +22,12 @@
         </basePanelCard>
         <basePanelCard class="panel-card">
             <header class="indicator-header">
-                <div class="title-wrap">
-                    <i class="title-bar"></i>
-                    <span class="title-text">隐患类型占比</span>
-                </div>
+                <baseSectionTitle title="隐患类型占比" size="desc" />
             </header>
             <div class="hazard-body">
                 <div class="hazard-chart-wrap">
                     <BaseChart ref="hazardChartRef" :option="hazardOption" />
-                    <img class="ring-core" src="@/assets/images/pie-circle.png" alt="" />
+                    <img class="ring-core" :src="ringCoreIcon" alt="" />
                 </div>
                 <ul class="hazard-legend">
                     <li v-for="item in HAZARD_ITEMS" :key="item.name" class="legend-row">
@@ -57,6 +51,8 @@ import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import BaseChart from '@/components/baseChart/BaseChart.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import basePanelCard from '@/components/basePanel/basePanelCard.vue';
+import baseSectionTitle from '@/components/baseSectionTitle/baseSectionTitle.vue';
+import { getImageWidthName } from '@/utils/getAssets';
 import { RANGE_OPTIONS, buildIndicatorOption, type RangeValue } from './fireIndicator.config';
 import { HAZARD_ITEMS, buildHazardOption } from './hazardRatio.config';
 
@@ -65,6 +61,9 @@ import { HAZARD_ITEMS, buildHazardOption } from './hazardRatio.config';
  * 标题栏按设计稿自有样式实现（青色竖条 + 文字 + 右侧切换），未走 basePanelTitle。
  */
 const range = ref<RangeValue>('7d');
+
+/** 组件内置资产（经 getAssets 解析，同项目图片引用约定） */
+const ringCoreIcon = getImageWidthName('pie-circle.png');
 
 /** 初始配置（近7天）；切换区间由 watch 调 setOption 更新 */
 const chartOption = buildIndicatorOption('7d');
@@ -108,27 +107,6 @@ onBeforeUnmount(() => {
     justify-content: space-between;
     height: base(26px);
     margin-bottom: base(8px);
-
-    .title-wrap {
-        display: flex;
-        align-items: center;
-        gap: base(6px);
-
-        .title-bar {
-            width: base(3px);
-            height: base(14px);
-            border-radius: base(2px);
-            background: var(--lxj-color-primary);
-            box-shadow: 0 0 base(10px) color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
-        }
-
-        .title-text {
-            color: var(--lxj-color-primary);
-            font-size: var(--lxj-font-desc);
-            font-weight: var(--font-weight-600);
-            letter-spacing: 0.05em;
-        }
-    }
 
     .range-switch {
         display: flex;
@@ -207,7 +185,7 @@ onBeforeUnmount(() => {
             left: 17.5%;
             width: 65%;
             height: 65%;
-            border-radius: 50%;
+            border-radius: var(--lxj-radius-circle);
             pointer-events: none;
         }
     }

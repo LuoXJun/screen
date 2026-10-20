@@ -40,11 +40,11 @@ const list = ref<BaseCardListItem[]>(
     display: flex;
     flex-direction: column;
     .people {
-        color: #4a7a9b;
+        color: var(--lxj-color-text-secondary);
         margin-bottom: base(5px);
     }
     .text {
-        color: #e8f4ff;
+        color: var(--lxj-color-text-strong);
         .el-col {
             margin-bottom: base(5px);
             &:nth-child(2n) {
@@ -53,7 +53,7 @@ const list = ref<BaseCardListItem[]>(
             }
         }
         .el-col:last-child {
-            color: #e03030;
+            color: var(--lxj-color-status-offline);
         }
     }
     .card-box {

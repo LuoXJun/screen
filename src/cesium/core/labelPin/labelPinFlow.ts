@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium';
-import { getViewer } from './viewer';
+import { getViewer } from '../viewer';
 
 /**
  * 标签牌流光层：屏幕空间 DOM/SVG 覆盖层,高亮时绕标签条跑一道流光。

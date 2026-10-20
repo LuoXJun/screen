@@ -1,5 +1,5 @@
 <template>
-    <div class="baseSectionTitle">
+    <div class="baseSectionTitle" :class="{ 'is-desc': size === 'desc' }">
         <i class="title-bar"></i>
         <span class="title-text">{{ title }}</span>
         <span v-if="extra" class="title-extra">{{ extra }}</span>
@@ -13,6 +13,8 @@ defineProps<{
     title: string;
     /** 右侧附加文本（橙色） */
     extra?: string;
+    /** 字号档位：默认 body / desc 紧凑（设计稿 12px） */
+    size?: 'desc';
 }>();
 </script>
 
@@ -41,9 +43,15 @@ defineProps<{
     /* 设计稿取值:附加文本橙色 */
     .title-extra {
         margin-left: auto;
-        color: #f5a623;
+        color: var(--lxj-color-accent-orange);
         font-size: var(--lxj-font-body);
         font-weight: var(--lxj-font-weight-Semibold);
+    }
+
+    /* 紧凑档：设计稿 12px + 0.05em 字距 */
+    &.is-desc .title-text {
+        font-size: var(--lxj-font-desc);
+        letter-spacing: 0.05em;
     }
 }
 </style>

@@ -32,7 +32,7 @@ const toggle = () => {
     --lxj-panel-space-y: var(--lxj-space-top);
 
     border-radius: var(--lxj-radius-small);
-    background: var(--lxj-bg-mask); /* blue-900/85%,与把手同源(原为同值硬编码) */
+    background: var(--lxj-panel-bg); /* blue-900/85%,与把手同源 */
     border: 1px solid var(--lxj-color-border-primary-light);
     pointer-events: all;
     padding: var(--lxj-panel-space-y) var(--lxj-space-panel);

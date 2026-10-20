@@ -69,7 +69,7 @@ function onHandle(): void {
 
         /* 未处理计数:红字（设计稿为 PingFang 常规体,单独覆写标题的优设字体） */
         .panel-extra {
-            color: var(--color-red-400);
+            color: var(--lxj-color-danger);
             font-family: var(--lxj-font-family);
             font-size: var(--lxj-font-body);
         }

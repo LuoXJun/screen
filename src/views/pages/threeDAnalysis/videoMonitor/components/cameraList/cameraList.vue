@@ -115,7 +115,7 @@ const emits = defineEmits<{
         .sub-title {
             margin: 0;
             padding: base(4px) base(8px);
-            color: var(--color-blue-300);
+            color: var(--lxj-color-text-primary);
             font-size: var(--lxj-font-body);
             font-weight: var(--lxj-font-weight-Medium);
             line-height: base(21px);

@@ -1,10 +1,15 @@
 <template>
-    <div class="deviceInfo">
+    <div class="deviceInfo" :class="{ 'is-grid': variant === 'grid' }">
         <div v-for="item in items" :key="item.label" class="info-item">
-            <img class="info-icon" :src="ICON_MAP[item.icon]" alt="" />
+            <img v-if="showIcon && item.icon" class="info-icon" :src="ICON_MAP[item.icon]" alt="" />
             <p class="info-text">
                 <span class="info-label">{{ item.label }}:</span>
-                <span class="info-value" :class="item.valueClass" :title="item.value">
+                <span
+                    class="info-value"
+                    :class="item.valueClass"
+                    :style="{ color: item.valueColor }"
+                    :title="item.value"
+                >
                     {{ item.value }}
                 </span>
             </p>
@@ -16,10 +21,17 @@
 import { getImageWidthName } from '@/utils/getAssets';
 import type { DeviceInfoIcon, DeviceInfoItem } from './DeviceInfo';
 
-defineProps<{
-    /** 设备信息项（双列网格渲染） */
-    items: DeviceInfoItem[];
-}>();
+withDefaults(
+    defineProps<{
+        /** 设备信息项（双列网格渲染） */
+        items: DeviceInfoItem[];
+        /** 是否渲染图标（默认 true；面板内紧凑网格可关闭） */
+        showIcon?: boolean;
+        /** 布局变体：grid = 面板内两列紧凑网格 */
+        variant?: 'grid';
+    }>(),
+    { showIcon: true, variant: undefined }
+);
 
 /* 图标集（经 getAssets 解析，同项目图片引用约定） */
 const ICON_MAP: Record<DeviceInfoIcon, string> = {
@@ -60,21 +72,51 @@ const ICON_MAP: Record<DeviceInfoIcon, string> = {
             overflow-wrap: anywhere;
 
             .info-label {
-                color: var(--color-blue-300);
+                color: var(--lxj-color-text-primary);
             }
 
             .info-value {
-                color: var(--color-white);
+                color: var(--lxj-color-text-desc);
 
                 /* 设计稿取值:在线绿/离线红 */
                 &.is-online {
-                    color: #37f2a8;
+                    color: var(--lxj-color-status-online);
                 }
 
                 &.is-offline {
-                    color: #e03030;
+                    color: var(--lxj-color-status-offline);
+                }
+
+                &.is-strong {
+                    font-weight: var(--lxj-font-weight-Semibold);
                 }
             }
+        }
+    }
+
+    /* 面板内两列紧凑网格（原 deviceInfoPanel 信息区） */
+    &.is-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: base(6px);
+        padding-top: base(8px);
+
+        .info-item {
+            min-width: 0;
+            gap: 0;
+            overflow: hidden;
+            font-size: var(--lxj-font-body);
+            line-height: base(21px);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .info-text {
+            font-size: var(--lxj-font-body);
+        }
+
+        .info-value {
+            color: var(--lxj-color-text-strong);
         }
     }
 }

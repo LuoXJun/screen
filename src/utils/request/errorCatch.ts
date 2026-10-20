@@ -10,8 +10,12 @@ export const errorMessages = {
 };
 
 // 默认获取错误消息的工具函数
-export const getErrorMessage = (err: any) => {
-    return err?.response?.data?.message ?? err?.message ?? err;
+export const getErrorMessage = (err: unknown) => {
+    const error = err as {
+        response?: { data?: { message?: string } };
+        message?: string;
+    };
+    return error?.response?.data?.message ?? error?.message ?? err;
 };
 
 /** 刷新期间挂起的请求：刷新成功后按原 config 重放，失败时统一 reject */
@@ -29,12 +33,12 @@ const rejectPending = (reason: unknown): void => {
     pendingRequests.splice(0).forEach((pending) => pending.reject(reason));
 };
 
-export const handleUnauthorizedError = async (err: any, instance: AxiosInstance) => {
+export const handleUnauthorizedError = async (err: unknown, instance: AxiosInstance) => {
     /* 登录页的 401（多为账号密码错误）不做 token 刷新,直接 reject 交由调用方处理 */
     if (location.hash.includes('login')) {
         return Promise.reject(err);
     }
-    const { config } = err;
+    const { config } = err as { config: InternalAxiosRequestConfig };
 
     if (isRefreshing) {
         /* 刷新进行中：当前请求挂起,待刷新完成后统一结算 */

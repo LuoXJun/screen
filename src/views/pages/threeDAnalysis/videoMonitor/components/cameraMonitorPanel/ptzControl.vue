@@ -4,13 +4,17 @@
         <div class="ptz-body">
             <!-- 方向控制（上/左/3D/右/下） -->
             <div class="dir-pad">
-                <el-button class="dir-btn" @click="onPtzCommand('up')">▲</el-button>
+                <el-button class="dir-btn btn-cyan-ghost" @click="onPtzCommand('up')">▲</el-button>
                 <div class="dir-row">
-                    <el-button class="dir-btn" @click="onPtzCommand('left')">◀</el-button>
+                    <el-button class="dir-btn btn-cyan-ghost" @click="onPtzCommand('left')">
+                        ◀
+                    </el-button>
                     <el-button class="dir-center" @click="onPtzCommand('3d')">3D</el-button>
-                    <el-button class="dir-btn" @click="onPtzCommand('right')">▶</el-button>
+                    <el-button class="dir-btn btn-cyan-ghost" @click="onPtzCommand('right')">
+                        ▶
+                    </el-button>
                 </div>
-                <el-button class="dir-btn" @click="onPtzCommand('down')">▼</el-button>
+                <el-button class="dir-btn btn-cyan-ghost" @click="onPtzCommand('down')">▼</el-button>
             </div>
             <!-- 参数控制（变倍/变焦 +/−）与画面锁定 -->
             <div class="ptz-params">
@@ -69,9 +73,8 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
     min-height: 0;
     flex-direction: column;
     padding: base(10px);
-    /* 设计稿取值:深蓝半透明底 + 微青描边 */
-    background: rgba(13, 36, 88, 0.4);
-    border: 1px solid rgba(0, 200, 255, 0.3);
+    background: var(--lxj-bg-card);
+    border: 1px solid var(--lxj-color-border-primary-light);
     border-radius: base(4px);
 
     .ptz-body {
@@ -86,7 +89,7 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
         margin-left: 0;
     }
 
-    /* 方向键:半透明青底方按钮(变量随状态联动) */
+    /* 方向键:尺寸覆写（配色见 btn-cyan-ghost 变体） */
     .dir-btn {
         width: base(28px);
         height: base(28px);
@@ -94,15 +97,6 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
         font-size: var(--lxj-font-body);
         line-height: 1;
         border-radius: base(4px);
-        --el-button-bg-color: rgba(0, 200, 255, 0.1);
-        --el-button-border-color: rgba(0, 200, 255, 0.3);
-        --el-button-text-color: #00c8ff;
-        --el-button-hover-bg-color: rgba(0, 200, 255, 0.2);
-        --el-button-hover-border-color: #00c8ff;
-        --el-button-hover-text-color: #00c8ff;
-        --el-button-active-bg-color: rgba(0, 200, 255, 0.24);
-        --el-button-active-border-color: #00c8ff;
-        --el-button-active-text-color: #00c8ff;
     }
 
     /* 中心 3D:青渐变圆钮(渐变超出变量能力,属性规则补充) */
@@ -110,22 +104,26 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
         width: base(36px);
         height: base(36px);
         padding: 0;
-        color: var(--color-white);
+        color: var(--lxj-color-text-desc);
         font-size: var(--lxj-font-body);
         font-weight: var(--lxj-font-weight-Semibold);
         line-height: 1;
         border-radius: base(18px);
-        background-image: linear-gradient(135deg, #1060b0 0%, #00c8ff 100%);
-        box-shadow: 0 0 base(5px) rgba(0, 200, 255, 0.4);
+        background-image: linear-gradient(
+            135deg,
+            var(--color-blue-450) 0%,
+            var(--lxj-color-primary) 100%
+        );
+        box-shadow: 0 0 base(5px) color-mix(in srgb, var(--lxj-color-primary) 40%, transparent);
         --el-button-bg-color: transparent;
         --el-button-border-color: transparent;
-        --el-button-text-color: var(--color-white);
+        --el-button-text-color: var(--lxj-color-text-desc);
         --el-button-hover-bg-color: transparent;
         --el-button-hover-border-color: transparent;
-        --el-button-hover-text-color: var(--color-white);
+        --el-button-hover-text-color: var(--lxj-color-text-desc);
         --el-button-active-bg-color: transparent;
         --el-button-active-border-color: transparent;
-        --el-button-active-text-color: var(--color-white);
+        --el-button-active-text-color: var(--lxj-color-text-desc);
     }
 
     .dir-pad {
@@ -157,7 +155,7 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
             min-height: base(22px);
 
             .param-label {
-                color: #7ab8d4;
+                color: var(--lxj-color-text-primary);
                 font-size: var(--lxj-font-body);
                 line-height: base(21px);
             }
@@ -177,8 +175,12 @@ const minusIcon = getImageWidthName('camera-ptz-minus.svg');
 
     /* 锁定开关:40×22 胶囊 + 白点(尺寸 EP 无变量,属性规则覆盖) */
     .lock-switch {
-        --el-switch-on-color: var(--color-green-400);
-        --el-switch-off-color: rgba(74, 122, 155, 0.5);
+        --el-switch-on-color: var(--lxj-color-success);
+        --el-switch-off-color: color-mix(
+            in srgb,
+            var(--lxj-color-text-secondary) 50%,
+            transparent
+        );
 
         :deep(.el-switch__core) {
             height: base(22px);

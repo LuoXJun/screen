@@ -57,12 +57,13 @@ function glow(key: 'wide' | 'mid' | 'core' | 'side'): string {
     height: base(32px);
     overflow: hidden;
     border-radius: base(3px);
+    /* 设计稿取值:站点按钮深底（无对应语义色，按原值保留） */
     background: #0b1a2d;
     cursor: pointer;
 
     &.is-active {
         .label {
-            color: var(--color-white);
+            color: var(--lxj-color-text-desc);
         }
 
         .inner-shadow {
@@ -74,6 +75,7 @@ function glow(key: 'wide' | 'mid' | 'core' | 'side'): string {
 
     &.is-dim {
         .label {
+            /* 设计稿取值:未选中态文字（无对应语义色，按原值保留） */
             color: #bbcee5;
         }
 
