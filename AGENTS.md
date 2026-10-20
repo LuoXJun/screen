@@ -56,6 +56,12 @@
 5. 交付后同步规范资产，只更新现有文件、不新建：本页新引入的组件追加到 `docs/COMPONENTS.md`；新出现的语义化样式值追加到 `docs/DESIGN.md`；新暴露的约束追加到本文件。若实现推翻了既有规范，先改规范再交付，并在交付说明中列出被推翻的条目。
 6. 遗留暂缓：`basePopover` / `baseMessageBox` 仍为浅色 TDesign 皮肤，暂无对应弹窗设计，统一深色主题待设计稿（2026-10 裁决）。
 
+## 重复内容检查
+
+1. **默认轻量**：新功能先查 `docs/COMPONENTS.md` 与 `src/components/`，再针对当前功能做定向 grep（相似 class 名、配置字段、模板结构），仅命中时读对应文件；不做全仓扫描。
+2. **抽取判据**：同一片段第 2 次出现时，在实现计划中标注「可复用 / 拟抽 / 暂不抽及理由」；第 3 次出现必须抽成组件、变体类或 composable。相似但未来变化方向不同时不强行合并。
+3. **全量审查**：只在里程碑或规范资产更新时执行，不随每次功能开发进行；交付前以 `pnpm lint`（knip）与 `pnpm analyze` 的摘要代替人工全量阅读。
+
 ## 证据索引
 
 package.json · vite.config.ts · eslint.config.ts · src/router/index.ts · src/styles/** · src/components/** · docs/styles-规范.md
