@@ -1,7 +1,13 @@
 <template>
     <asidePanel class="temperature-panel" title="箱变实时温度">
         <basePanelCard class="list-card">
-            <ul class="temperature-list">
+            <!-- 设备数据依赖网络：未返回时列表区以空状态占位 -->
+            <baseEmpty
+                v-if="!devices.length"
+                title="暂无箱变设备"
+                description="设备数据加载中，请稍后重试"
+            />
+            <ul v-else class="temperature-list">
                 <li
                     v-for="item in devices"
                     :key="item.id"
@@ -21,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import baseEmpty from '@/components/baseEmpty/baseEmpty.vue';
 import basePanelCard from '@/components/basePanel/basePanelCard.vue';
 import type { BoxTransformerDevice } from '@/config/devices';
 import asidePanel from '../shared/asidePanel.vue';

@@ -12,8 +12,14 @@
             </div>
         </template>
         <template #right>
-            <!-- 右栏：选中箱变的测温详情（9 路测温点 + 48h 曲线 + 历史极值） -->
+            <!-- 右栏：选中箱变的测温详情；未选中（设备数据未到/尚未点选）时以空状态占位 -->
             <detailPanel v-if="selectedDevice" :device="selectedDevice" />
+            <asidePanel v-else class="detail-empty" title="箱变温度详情">
+                <baseEmpty
+                    title="暂未选择箱变"
+                    description="请在地图或左侧列表中选择一台箱变"
+                />
+            </asidePanel>
         </template>
     </baseOverlay>
 </template>
@@ -29,12 +35,14 @@ import {
     sampleGroundHeights,
     TERRAIN_READY
 } from '@/cesium';
+import baseEmpty from '@/components/baseEmpty/baseEmpty.vue';
 import baseOverlay from '@/components/baseOverlay/baseOverlay.vue';
 import { listBoxTransformers, type BoxTransformerDevice } from '@/config/devices';
 import { useSiteStore } from '@/stores/site';
 import deviceStats from './components/left/deviceStats.vue';
 import temperatureList from './components/left/temperatureList.vue';
 import detailPanel from './components/right/detailPanel.vue';
+import asidePanel from './components/shared/asidePanel.vue';
 import { useBoxTransformerAreas } from './composables/useBoxTransformerAreas';
 import { useBoxTransformerFocus } from './composables/useBoxTransformerFocus';
 import { BOX_VIEW } from './config';
@@ -43,10 +51,11 @@ const siteStore = useSiteStore();
 /** 当前站点箱变（全局设备注册表；页面随站点切换重建,初始化取一次） */
 const devices = listBoxTransformers(siteStore.activeSite);
 
-/* ---- 选中状态（列表 / 地图 / 右侧详情同一来源） ---- */
+/* ---- 选中状态（列表 / 地图 / 右侧详情同一来源） ----
+   默认选中第一项须在设备数据就绪后执行；数据未到（接口慢/失败）时保持空选中,右栏显示占位 */
 const selectedBoxId = ref(devices[0]?.id ?? '');
-const selectedDevice = computed(
-    () => devices.find((device) => device.id === selectedBoxId.value) ?? devices[0]
+const selectedDevice = computed(() =>
+    devices.find((device) => device.id === selectedBoxId.value)
 );
 
 /** 进入视角是否已接管（含列表聚焦；避免迟到的进入视角覆盖用户聚焦） */
@@ -143,5 +152,11 @@ onBeforeUnmount(() => {
     min-height: 0;
     flex-direction: column;
     gap: var(--lxj-gap);
+}
+
+/* 未选中占位面板撑满右栏,占位区才有完整高度 */
+.detail-empty {
+    flex: 1;
+    min-height: 0;
 }
 </style>

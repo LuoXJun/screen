@@ -25,20 +25,19 @@
                 </div>
             </div>
 
-            <!-- 未选中隐患点位:虚线占位 -->
-            <div v-else class="drone-empty">
-                <span class="empty-icon">
-                    <img src="@/assets/images/drone-empty.svg" alt="" />
-                </span>
-                <p class="empty-title">暂未选择隐患点位</p>
-                <p class="empty-desc">请在地图、隐患清单或右侧列表中选择一条记录</p>
-            </div>
+            <!-- 未选中隐患点位:空状态占位 -->
+            <baseEmpty
+                v-else
+                title="暂未选择隐患点位"
+                description="请在地图、隐患清单或右侧列表中选择一条记录"
+            />
         </div>
     </basePanelMask>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import baseEmpty from '@/components/baseEmpty/baseEmpty.vue';
 import basePanelMask from '@/components/basePanel/basePanelMask.vue';
 import basePanelTitle from '@/components/basePanel/basePanelTitle.vue';
 import { HAZARD_LEVEL_COLORS } from '../../config';
@@ -83,51 +82,6 @@ const levelColor = computed(() =>
     border: 1px solid var(--lxj-color-border-divider);
     /* 设计稿取值:无人机画面底色渐变（无对应语义色，按原值保留） */
     background: linear-gradient(157.29deg, #225b75 6.17%, #3b7090 45.62%, #28546b 93.83%);
-}
-
-.drone-empty {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: base(8px);
-    border: 1px dashed color-mix(in srgb, var(--lxj-color-primary) 25%, transparent);
-    background:
-        radial-gradient(
-            ellipse at center,
-            color-mix(in srgb, var(--lxj-color-primary) 6%, transparent) 0%,
-            color-mix(in srgb, var(--lxj-color-primary) 0%, transparent) 58%
-        ),
-        /* 设计稿取值:画面暗底（无对应语义色，按原值保留） */
-        rgba(2, 16, 36, 0.46);
-
-    .empty-icon {
-        display: flex;
-        width: base(54px);
-        height: base(54px);
-        align-items: center;
-        justify-content: center;
-        border: 1px solid color-mix(in srgb, var(--lxj-color-primary) 28%, transparent);
-        border-radius: var(--lxj-radius-circle);
-        background: color-mix(in srgb, var(--lxj-color-primary) 6%, transparent);
-
-        img {
-            width: base(25px);
-            height: base(25px);
-        }
-    }
-
-    .empty-title {
-        color: var(--lxj-color-text-primary);
-        font-size: font(18px);
-        font-weight: var(--lxj-font-weight-Semibold);
-    }
-
-    .empty-desc {
-        color: var(--lxj-color-text-secondary);
-        font-size: var(--lxj-font-body);
-    }
 }
 
 .scene {

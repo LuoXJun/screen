@@ -15,6 +15,7 @@ declare module 'vue' {
     BaseCesium: typeof import('./../components/baseCesium/BaseCesium.vue')['default']
     BaseChart: typeof import('./../components/baseChart/BaseChart.vue')['default']
     BaseDialog: typeof import('./../components/baseDialog/baseDialog.vue')['default']
+    BaseEmpty: typeof import('./../components/baseEmpty/baseEmpty.vue')['default']
     BaseMenu: typeof import('./../components/baseMenu/baseMenu.vue')['default']
     BaseMenuHorizontalAside: typeof import('./../components/baseMenu/baseMenuHorizontalAside.vue')['default']
     BaseOverlay: typeof import('./../components/baseOverlay/baseOverlay.vue')['default']

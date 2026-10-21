@@ -29,6 +29,7 @@ export function useBoxTransformerFocus(
     /** 即将执行列表聚焦时通知页面接管视角（取消迟到的进入视角） */
     onTakeOver: () => void
 ) {
+    /* 数据就绪后默认选中第一项，与页面选中态一致 */
     let currentId = devices[0]?.id;
     let disposed = false;
     let markerSeq = 0;

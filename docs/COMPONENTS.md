@@ -28,6 +28,7 @@
 | baseStatList      | `src/components/baseStatList/baseStatList.vue`  | 统计指标条                 | `list?` / `rows?`：`BaseStatListItem[]`（`label` / `icon?` / `value` / `unit` / `valueColor` / `note` / `noteType`）；`variant?: 'grid'`；`divider?`（分隔图文件名） | 单行用 `list`，多行/两排用 `rows` + `variant="grid"`；`icon` 缺省不渲染；`noteType: 'trend'` 时显示上升箭头（`'todo'` 为待办样式） |
 | baseSectionTitle  | `src/components/baseSectionTitle/baseSectionTitle.vue` | 区块标题（青色竖条） | `title`；`extra?`；`size?: 'desc' \| 'lg'`                                         | `extra` 为右侧橙色附加文本（如「总计 5」）；`size="desc"` 为 12px 紧凑档，`size="lg"` 为 16px 详情档 |
 | basePanelCard     | `src/components/basePanel/basePanelCard.vue`    | 面板卡片容器               | 默认插槽                                                                          | 背景 `--lxj-bg-card`、描边 `--lxj-color-border-primary-light`，勿在页面重复实现 |
+| baseEmpty         | `src/components/baseEmpty/baseEmpty.vue`        | 面板空状态占位             | `title`；`description?`；`icon?`（assets 图片名，默认 `drone-empty.svg`）          | 撑满父级内容区；未选中/无数据时替换面板内容，勿逐页复制虚线占位样式      |
 
 ## 面板与菜单
 

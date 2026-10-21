@@ -39,6 +39,7 @@
 2. **禁止页面内重复实现已有组件**：表格 → baseTable、分页 → basePagination、页签 → baseTabs、确认 → messageBox、图表 → BaseChart、地图 → BaseCesium。禁止在页面直接写 `el-table` / `el-tabs` / `ElMessageBox.confirm`。词表见 `docs/COMPONENTS.md`。
    - 青底描边小按钮统一用补丁变体类 `.btn-cyan-ghost`（`styles/elementplus/patch/base/_button.scss`），不再逐页复制 `--el-button-*`。
    - EP 组件的局部 scoped `--el-*` 变量覆盖属于允许的定制手段（E05），但应收敛在组件封装或变体类内，不散落页面。
+   - 面板空状态（未选中/无数据）统一用 `baseEmpty`，不再逐页实现虚线占位块。
 3. **禁止修改**：
    - `src/types/autoImport.d.ts`、`src/types/components.d.ts`（unplugin 自动生成）
    - `dist/`（构建产物）
