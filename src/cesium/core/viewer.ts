@@ -16,7 +16,10 @@ const DEFAULT_VIEWER_OPTIONS: Cesium.Viewer.ConstructorOptions = {
     fullscreenButton: false,
     infoBox: false,
     selectionIndicator: false,
-    requestRenderMode: true
+    /* 关闭受控渲染：requestRenderMode 需所有场景变更路径显式请求渲染,遗漏即出现
+       "entity 显隐要动鼠标才生效";持续渲染保证实体/图层/纹理变更下一帧自动呈现。
+       现有 requestRender 调用保留（无害,兼作未来恢复受控渲染的兜底） */
+    requestRenderMode: false
 };
 
 let viewer: Cesium.Viewer | null = null;
